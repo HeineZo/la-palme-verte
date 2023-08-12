@@ -1,6 +1,8 @@
+'use client'
+
 import { atom, useAtom } from "jotai";
 
-const AnimeApp = () => {
+export default function JotaiTest () {
   const countAtom = atom(0);
 
   const countryAtom = atom("Japan");
