@@ -1,27 +1,26 @@
-'use client'
+"use client";
 
 import { atom, useAtom } from "jotai";
 
-export default function JotaiTest () {
-  const countAtom = atom(0);
+const countAtom = atom(0);
 
-  const countryAtom = atom("Japan");
+const countryAtom = atom("Japan");
 
-  const citiesAtom = atom(["Tokyo", "Kyoto", "Osaka"]);
+const citiesAtom = atom(["Tokyo", "Kyoto", "Osaka"]);
 
-  const animeAtom = atom([
-    {
-      title: "Ghost in the Shell",
-      year: 1995,
-      watched: true,
-    },
-    {
-      title: "Serial Experiments Lain",
-      year: 1998,
-      watched: false,
-    },
-  ]);
-
+const animeAtom = atom([
+  {
+    title: "Ghost in the Shell",
+    year: 1995,
+    watched: true,
+  },
+  {
+    title: "Serial Experiments Lain",
+    year: 1998,
+    watched: false,
+  },
+]);
+export default function JotaiTest() {
   const progressAtom = atom((get) => {
     const anime = get(animeAtom);
     return anime.filter((item) => item.watched).length / anime.length;
@@ -37,6 +36,7 @@ export default function JotaiTest () {
         ))}
       </ul>
       <button
+        className="btn btn-primary"
         onClick={() => {
           setAnime((anime) => [
             ...anime,
@@ -50,6 +50,14 @@ export default function JotaiTest () {
       >
         Add Cowboy Bebop
       </button>
+      <button
+        className="btn btn-secondary"
+        onClick={() => {
+          setAnime((anime) => anime.slice(0, anime.length - 1));
+        }}
+      >
+        Remove
+      </button>
     </>
   );
-};
+}
