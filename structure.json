@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Accueil",
+    "path": "/"
+  },
+  {
+    "label": "L'association",
+    "path": "/association"
+  },
+  {
+    "label": "Blog",
+    "path": "/blog"
+  },
+  {
+    "label": "Photos",
+    "path": "/photos"
+  },
+  {
+    "label": "Espace membre",
+    "path": "/membre"
+  }
+]
