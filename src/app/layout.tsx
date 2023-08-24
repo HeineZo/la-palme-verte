@@ -2,8 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
-import Navbar from "@shared/Navbar.component";
+import Navbar from "@/shared/Navbar.component";
 import { Providers } from "./providers";
+import Breakpoint from "@/shared/Breakpoint.component";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Breakpoint />
         </Providers>
       </body>
     </html>

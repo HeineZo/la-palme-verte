@@ -23,8 +23,8 @@ export default function Home() {
         <main className="h-screen">
             <JotaiTest postsSent={initialPosts} />
 			<Button color="primary" endContent={<IconChevronRight />}>
-        Découvrir plus
-      </Button>
+        		Découvrir plus
+      		</Button>
         </main>
     );
 }
