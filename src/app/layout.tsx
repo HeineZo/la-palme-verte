@@ -1,27 +1,39 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Navbar from '../components/Navbar.component';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Archivo } from "next/font/google";
+import localFont from "next/font/local";
+import Navbar from "@shared/Navbar.component";
+import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ['latin'] });
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
+});
+
+const clashDisplay = localFont({
+  src: "../../public/fonts/ClashDisplay-Regular.otf",
+  variable: "--font-clash-display",
+});
 
 export const metadata: Metadata = {
-	title: 'La Palme Verte',
-	description:
-		"Association étudiante de plongée sous-marine fondée en 2005 à l'UBS",
+  title: "La Palme Verte",
+  description:
+    "Association étudiante de plongée sous-marine fondée en 2005 à l'UBS",
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<html lang='fr' data-theme='default'>
-			<body className={inter.className}>
-				<Navbar />
-				{children}
-			</body>
-		</html>
-	);
+  return (
+    <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
+      <body className="font-body">
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
 }

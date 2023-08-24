@@ -1,0 +1,24 @@
+{
+  "pages": {
+    "accueil": {
+      "label": "Accueil",
+      "path": "/"
+    },
+    "association": {
+      "label": "L'association",
+      "path": "/association"
+    },
+    "blog": {
+      "label": "Blog",
+      "path": "/blog"
+    },
+    "photos": {
+      "label": "Photos",
+      "path": "/photos"
+    },
+    "membre": {
+      "label": "Espace membre",
+      "path": "/membre"
+    }
+  }
+}

@@ -2,3 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-6xl font-heading font-bold;
+  }
+
+  h2 {
+    @apply text-5xl font-heading font-bold;
+  }
+
+  h3 {
+    @apply text-4xl font-heading font-bold;
+  }
+
+  h4 {
+    @apply text-3xl font-heading font-bold;
+  }
+
+  h5 {
+    @apply text-2xl font-heading font-bold;
+  }
+
+  h6 {
+    @apply text-xl font-heading font-bold;
+  }
+
+  p {
+    @apply text-base font-body;
+  }
+}

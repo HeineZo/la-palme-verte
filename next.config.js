@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    env: {
-        siteName: "La Palme Verte"
-    }
-}
+  env: {
+    siteName: "La Palme Verte",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
