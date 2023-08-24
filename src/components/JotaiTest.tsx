@@ -1,63 +1,54 @@
 "use client";
 
 import { atom, useAtom } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 
-const countAtom = atom(0);
+export type Post = {
+    title: string;
+    watched: boolean;
+};
 
-const countryAtom = atom("Japan");
+const posts = atom<Post[]>([]);
 
-const citiesAtom = atom(["Tokyo", "Kyoto", "Osaka"]);
+export default function JotaiTest({ postsSent }: { postsSent: Post[] }) {
+    useHydrateAtoms([[posts, postsSent]]);
 
-const animeAtom = atom([
-  {
-    title: "Ghost in the Shell",
-    year: 1995,
-    watched: true,
-  },
-  {
-    title: "Serial Experiments Lain",
-    year: 1998,
-    watched: false,
-  },
-]);
-export default function JotaiTest() {
-  const progressAtom = atom((get) => {
-    const anime = get(animeAtom);
-    return anime.filter((item) => item.watched).length / anime.length;
-  });
+    const progressAtom = atom((get) => {
+        const post = get(posts);
+        return post.filter((item) => item.watched).length / post.length;
+    });
 
-  const [anime, setAnime] = useAtom(animeAtom);
+    const [post, setPost] = useAtom(posts);
 
-  return (
-    <>
-      <ul>
-        {anime.map((item) => (
-          <li key={item.title}>{item.title}</li>
-        ))}
-      </ul>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          setAnime((anime) => [
-            ...anime,
-            {
-              title: "Cowboy Bebop",
-              year: 1998,
-              watched: false,
-            },
-          ]);
-        }}
-      >
-        Add Cowboy Bebop
-      </button>
-      <button
-        className="btn btn-secondary"
-        onClick={() => {
-          setAnime((anime) => anime.slice(0, anime.length - 1));
-        }}
-      >
-        Remove
-      </button>
-    </>
-  );
+    return (
+        <>
+            <ul>
+                {post.map((item) => (
+                    <li key={item.title}>{item.title}</li>
+                ))}
+            </ul>
+            <button
+                className="btn btn-primary"
+                onClick={() => {
+                    setPost((post) => [
+                        ...post,
+                        {
+                            title: "Post " + (post.length + 1).toString(),
+                            watched: false,
+                        },
+                    ]);
+                }}
+            >
+                Add Post
+            </button>
+            <button
+                className="btn btn-secondary"
+                onClick={() => {
+                    setPost((post) => post.slice(0, post.length - 1));
+                }}
+            >
+                Remove
+            </button>
+        </>
+    );
 }
