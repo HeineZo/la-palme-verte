@@ -14,9 +14,5 @@
   {
     "label": "Photos",
     "path": "/photos"
-  },
-  {
-    "label": "Espace membre",
-    "path": "/membre"
   }
 ]

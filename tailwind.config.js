@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { nextui } from "@nextui-org/react";
 
 /** @type {import('tailwindcss').Config} */
@@ -22,6 +23,7 @@ const config = {
   },
   darkMode: "class",
   plugins: [
+    require("@tailwindcss/typography"),
     nextui({
       themes: {
         light: {
@@ -57,16 +59,16 @@ const config = {
               foreground: "#ffffff",
             },
             accent: {
-              100: "#EEFAE8",
-              200: "#DBF5D2",
-              300: "#B9E1B1",
-              400: "#93C38F",
-              500: "#649B64",
-              600: "#49854E",
-              700: "#326F3D",
-              800: "#1F592E",
-              900: "#134A26",
-              DEFAULT: "#649B64",
+              100: "#e8f0e8",
+              200: "#d2e1d1",
+              300: "#adc9ac",
+              400: "#7fa97f",
+              500: "#5e8a5d",
+              600: "#466c46",
+              700: "#3c593c",
+              800: "#324933",
+              900: "#2b3c2c",
+              DEFAULT: "#466c46",
               foreground: "#ffffff",
             },
             success: {

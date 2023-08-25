@@ -2,9 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
-import Navbar from "@/shared/Navbar.component";
+import Navigation from "@/shared/Navbar.component";
 import { Providers } from "./providers";
 import Breakpoint from "@/shared/Breakpoint.component";
+import Footer from "@/shared/Footer.component";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -31,9 +32,10 @@ export default function RootLayout({
     <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
       <body className="font-body">
         <Providers>
-          <Navbar />
+          <Navigation />
           {children}
           <Breakpoint />
+          <Footer />
         </Providers>
       </body>
     </html>
