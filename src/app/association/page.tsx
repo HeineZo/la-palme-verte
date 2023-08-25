@@ -1,6 +1,12 @@
+import { EmblaCarousel } from "@/components/EmblaCarousel";
 import TimelineMark from "@/components/TimelineMark";
+import { EmblaOptionsType } from "embla-carousel-react";
 
 export default async function Page() {
+    const options: EmblaOptionsType = {};
+    const slide_count = 3;
+    const slides = Array.from(Array(slide_count).keys());
+
     return (
         <div className="flex flex-col gap-20 px-32 pt-12">
             <div className="flex justify-between">
@@ -110,6 +116,7 @@ export default async function Page() {
                         </div>
                     </div>
                 </div>
+                <EmblaCarousel slides={slides} options={options} />
             </div>
         </div>
     );
