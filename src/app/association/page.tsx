@@ -79,6 +79,38 @@ export default async function Page() {
                     </div>
                 </div>
             </div>
+            <div className="flex justify-between">
+                <div className="w-5/12">
+                    <p>Informations</p>
+                    <h1>Quelques chiffres</h1>
+                    <p>
+                        Depuis la création de l’association, nous ne cessons de
+                        réaliser des événements et des ateliers pour permettre
+                        de sensibiliser à la protection de l’environnement
+                        marin.
+                    </p>
+                    <div className="grid grid-cols-2 gap-6 mt-12">
+                        <div>
+                            <h1>+20</h1>
+                            <p>Ateliers réalisés</p>
+                        </div>
+                        <div>
+                            <h1>18</h1>
+                            <p>Années d'expérience</p>
+                        </div>
+                        <div>
+                            <h1>300€</h1>
+                            <p>
+                                Récoltés pour la protection de la faune maritime
+                            </p>
+                        </div>
+                        <div>
+                            <h1>15</h1>
+                            <p>Adhérents</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
