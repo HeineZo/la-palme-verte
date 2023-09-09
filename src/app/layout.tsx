@@ -13,9 +13,31 @@ const archivo = Archivo({
 });
 
 const clashDisplay = localFont({
-  src: "../../public/fonts/ClashDisplay-Regular.otf",
+  src: "../../public/fonts/ClashDisplay-Bold.otf",
   variable: "--font-clash-display",
 });
+
+// const clashDisplay = localFont({
+//   src: [
+//     {
+//       path: '../../public/fonts/ClashDisplay-Regular.otf',
+//       weight: '400',
+//       variable: "--font-clash-display",
+//     },
+//     {
+//       path: './Roboto-Italic.woff2',
+//       weight: '400',
+//     },
+//     {
+//       path: './Roboto-Bold.woff2',
+//       weight: '700',
+//     },
+//     {
+//       path: './Roboto-BoldItalic.woff2',
+//       weight: '700',
+//     },
+//   ],
+// })
 
 export const metadata: Metadata = {
   title: "La Palme Verte",

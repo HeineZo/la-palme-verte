@@ -17,9 +17,8 @@ import { getYear } from "date-fns";
 export default function Footer() {
   const pathname = usePathname();
   return (
-    <section className="px-16 py-10 bg-accent w-full flex flex-col gap-14 text-white">
+    <div className="px-16 py-10 bg-accent w-full flex flex-col gap-14 text-white">
       <div className="flex flex-wrap flex-col md:flex-row justify-between items-center gap-5">
-
         {/* Logo */}
         <Image
           src="/logo-white.svg"
@@ -32,6 +31,7 @@ export default function Footer() {
         <div className=" gap-8 h-fit md:flex">
           {pages.map((page) => (
             <Link
+              key={page.path}
               isBlock
               href={page.path}
               className={`${pathname === page.path && "font-bold"} text-white`}
@@ -70,11 +70,20 @@ export default function Footer() {
 
       {/* Légal */}
       <div className="border-t-1 border-white flex flex-wrap items-end justify-center gap-6 pt-8">
-        <p>{getYear(new Date())} {process.env.NEXT_PUBLIC_SITE_NAME}. Tout droit réservé.</p>
-        <Link as={NextLink} underline="always" className="text-white" href="#">Politique de confidentialité</Link>
-        <Link as={NextLink} underline="always" className="text-white" href="#">Conditions d'utilisation</Link>
-        <Link as={NextLink} underline="always" className="text-white" href="#">Paramètre des cookies</Link>
+        <p>
+          {getYear(new Date())} {process.env.NEXT_PUBLIC_SITE_NAME}. Tout droit
+          réservé.
+        </p>
+        <Link as={NextLink} underline="always" className="text-white" href="#">
+          Politique de confidentialité
+        </Link>
+        <Link as={NextLink} underline="always" className="text-white" href="#">
+          Conditions d'utilisation
+        </Link>
+        <Link as={NextLink} underline="always" className="text-white" href="#">
+          Paramètre des cookies
+        </Link>
       </div>
-    </section>
+    </div>
   );
 }
