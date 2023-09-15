@@ -1,11 +1,56 @@
+import PhotoMosaic from "@/shared/layout/PhotoMosaic.component";
+import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.component";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
-import { IconChevronRight } from "@tabler/icons-react";
+import {
+  IconChevronRight,
+  IconScubaMask,
+  IconCalendarHeart,
+  IconUsersGroup,
+} from "@tabler/icons-react";
+import LastArticles from "./blog/components/LastArticles.layout";
 
+/**
+ * Page d'accueil 
+ */
 export default function Home() {
+  const actionsRow: Row[] = [
+    {
+      icon: <IconScubaMask size={48} stroke={3} />,
+      title: "Une multitude d’ateliers",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      icon: <IconCalendarHeart size={48} />,
+      title: "Des événements caritatifs",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      icon: <IconUsersGroup size={48} />,
+      title: "Fédérer une communauté",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+  ];
+
+  // placeholders en attendant la mise en place de la galerie photo
+  const photos = [
+    "https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    "https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80",
+    "https://images.unsplash.com/photo-1506434304575-afbb92660c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    "https://images.unsplash.com/photo-1606043580455-bd22074d1e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    "https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
+    "https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
+    "https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80",
+    "https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+  ];
+
   return (
-    <main className="">
-      <div className="flex gap-20 py-28 px-16 items-center justify-around">
+    <div>
+      {/* Hero section */}
+      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-3xl">
         <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
           <h1>Plongez au coeur de l'action</h1>
           <p>
@@ -15,7 +60,7 @@ export default function Home() {
           </p>
           <Button
             color="primary"
-            endContent={<IconChevronRight />}
+            endContent={<IconChevronRight size={16} />}
             className="w-fit"
           >
             Découvrir l'association
@@ -54,6 +99,27 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+
+      {/* Adhérer */}
+      <div className="h-[500px]"></div>
+
+      {/* Nos actions */}
+      <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
+        <h3 className="text-center">Nos actions</h3>
+        <InlineBlocks rows={actionsRow} />
+      </div>
+
+      {/* Les photos */}
+      <div className="flex flex-col gap-6 items-center section">
+        <h2 className="text-center">Une image vaut mieux que mille mots</h2>
+        <p className="text-center">
+          Les dernières photos publiées par nos adhérents
+        </p>
+        <PhotoMosaic photos={photos} />
+      </div>
+
+      {/* Blog */}
+      <LastArticles />
+    </div>
   );
 }

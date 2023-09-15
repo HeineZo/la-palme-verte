@@ -25,12 +25,17 @@ const config = {
   plugins: [
     require("@tailwindcss/typography"),
     nextui({
+      layout: {
+        radius: {
+          medium: "24px",
+        },
+      },
       themes: {
         light: {
           colors: {
-            background: "#E9F1E9",
             foreground: "#1C1C1C",
             focus: "#649B64",
+            highlight: "#E9F1E9",
 
             primary: {
               100: "#EFFBE8",

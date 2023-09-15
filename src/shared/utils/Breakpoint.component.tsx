@@ -2,6 +2,7 @@ import React from "react";
 
 /**
  * Affiche la taille de l'écran actuel (seulement en développement)
+ * @todo Supprimer ce composant en production
  */
 export default function Breakpoint() {
   return (
