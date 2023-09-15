@@ -1,17 +1,18 @@
-import PhotoMosaic from "@/shared/layout/PhotoMosaic.component";
-import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.component";
+import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.layout";
+import PhotoMosaic from "@/shared/layout/PhotoMosaic.layout";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
 import {
+  IconCalendarHeart,
   IconChevronRight,
   IconScubaMask,
-  IconCalendarHeart,
   IconUsersGroup,
 } from "@tabler/icons-react";
 import LastArticles from "./blog/components/LastArticles.layout";
+import FAQ from "@/shared/layout/FAQ.layout";
 
 /**
- * Page d'accueil 
+ * Page d'accueil
  */
 export default function Home() {
   const actionsRow: Row[] = [
@@ -47,10 +48,39 @@ export default function Home() {
     "https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   ];
 
+  const questions = [
+    {
+      title: "Pourquoi avoir choisi ce nom ?",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      title: "Comment adhérer à l'association ?",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      title: "Comment participer aux ateliers ?",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      title: "Pourquoi l'adhésion n'est-elle pas gratuite ?",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+    {
+      title:
+        "J'habite dans un autre pays, est-il tout de même possible d'adhérer ?",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+    },
+  ];
+
   return (
-    <div>
+    <div className="flex flex-col items-center">
       {/* Hero section */}
-      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-3xl">
+      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-full">
         <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
           <h1>Plongez au coeur de l'action</h1>
           <p>
@@ -120,6 +150,9 @@ export default function Home() {
 
       {/* Blog */}
       <LastArticles />
+
+      {/* FAQ */}
+      <FAQ questions={questions} />
     </div>
   );
 }
