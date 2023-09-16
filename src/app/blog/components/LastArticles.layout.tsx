@@ -40,9 +40,9 @@ export default function LastArticles() {
   ];
   return (
     <div className="section flex flex-col justify-center items-center gap-16">
-      <div className="flex flex-col justify-center items-center gap-6">
-        <h2 className="text-center">Nos derniers articles</h2>
-        <p className="text-center">
+      <div className="flex flex-col justify-center items-center gap-6 text-center">
+        <h2>Nos derniers articles</h2>
+        <p>
           En tant qu’adhérant vous avez la possibilité de rédiger des articles
           pour notre blog, voici les derniers articles de la communauté
         </p>

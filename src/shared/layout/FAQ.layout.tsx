@@ -16,6 +16,10 @@ interface FAQProps {
 
 /**
  * Questions fréquemment posés
+ * @param questions Questions à afficher
+ * @param title Titre de la section *(optionnel)*
+ * @param description Description de la section
+ * @param className Classe tailwind à ajouter *(optionnel)*
  */
 export default function FAQ({
   questions,
@@ -25,9 +29,9 @@ export default function FAQ({
 }: FAQProps) {
   return (
     <div className={cn("section flex flex-col py-16 gap-14 max-w-7xl w-full", className)}>
-      <div className="flex flex-col gap-4 items-center">
-        <h2 className="text-center">{title}</h2>
-        <p className="text-center">{description}</p>
+      <div className="flex flex-col gap-4 items-center text-center">
+        <h2>{title}</h2>
+        <p>{description}</p>
       </div>
 
       <Accordion variant="bordered">
@@ -44,11 +48,11 @@ export default function FAQ({
       </Accordion>
 
       <div className="flex flex-col gap-6 items-center">
-        <div className="flex flex-col gap-4">
-          <h4 className="text-center">
+        <div className="flex flex-col gap-4 text-center">
+          <h4>
             Encore des questions ?
           </h4>
-          <p className="text-center">
+          <p>
             Envoyez-nous un message, nous vous répondrons dans les plus brefs
             délais
           </p>

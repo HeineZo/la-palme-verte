@@ -1,6 +1,6 @@
 import { Image } from "@nextui-org/image";
 import React from "react";
-import PhotoCarrousel from "../images/PhotoCarrousel.component";
+import PhotoCarrousel from "../image/PhotoCarrousel.component";
 import { Button } from "@nextui-org/button";
 
 interface PhotoMosaicProps {
@@ -9,7 +9,7 @@ interface PhotoMosaicProps {
 
 /**
  * Mosaïque de photos
- * @prop photos Photos à afficher dans la mosaïque
+ * @param photos Photos à afficher dans la mosaïque
  * @todo Afficher les informations de la photo au hover (on pourrait limite créer un composant Photo)
  */
 export default function PhotoMosaic({ photos }: PhotoMosaicProps) {

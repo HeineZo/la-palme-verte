@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import LastArticles from "./blog/components/LastArticles.layout";
 import FAQ from "@/shared/layout/FAQ.layout";
+import BecomeMember from "@/app/adhesion/components/BecomeMember.component";
 
 /**
  * Page d'accueil
@@ -131,7 +132,7 @@ export default function Home() {
       </div>
 
       {/* Adhérer */}
-      <div className="h-[500px]"></div>
+      <BecomeMember />
 
       {/* Nos actions */}
       <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
@@ -140,11 +141,9 @@ export default function Home() {
       </div>
 
       {/* Les photos */}
-      <div className="flex flex-col gap-6 items-center section">
-        <h2 className="text-center">Une image vaut mieux que mille mots</h2>
-        <p className="text-center">
-          Les dernières photos publiées par nos adhérents
-        </p>
+      <div className="flex flex-col gap-6 items-center section text-center">
+        <h2>Une image vaut mieux que mille mots</h2>
+        <p>Les dernières photos publiées par nos adhérents</p>
         <PhotoMosaic photos={photos} />
       </div>
 

@@ -21,7 +21,7 @@ interface PhotoCarrouselProps {
 /**
  * Carrousel permettant de faire défiler des images
  * @param photos Photos à afficher dans le carrousel
- * @param className Style à appliquer au carrousel
+ * @param className Style à appliquer au carrousel *(optionnel)*
  */
 export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProps) {
   // API du carrousel

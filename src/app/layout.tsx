@@ -17,7 +17,6 @@ const clashDisplay = localFont({
   variable: "--font-clash-display",
 });
 
-
 export const metadata: Metadata = {
   title: "La Palme Verte",
   description:
