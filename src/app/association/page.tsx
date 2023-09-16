@@ -70,6 +70,7 @@ export default async function Page() {
                     />
                     <div className="flex h-44">
                         <div className="w-1/12">
+                            {/* <div className="rounded-full bg-black"></div> */}
                             <svg>
                                 <circle cx="20" cy="20" r="20" fill="green" />
                             </svg>
