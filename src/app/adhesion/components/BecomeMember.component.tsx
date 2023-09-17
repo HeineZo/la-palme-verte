@@ -16,8 +16,9 @@ interface BecomeMemberProps {
 export default function BecomeMember({ className }: BecomeMemberProps) {
   return (
     <div className={cn("py-16 text-center justify-center flex flex-col gap-16", className)}>
-      <div>
-        <h4>Devenez adhérent pour rejoindre une communauté grandissante</h4>
+      <div className="px-10 md:px-16">
+        <h4 className="hidden md:block">Devenez adhérent pour rejoindre une communauté grandissante</h4>
+        <h4 className="block md:hidden">Devenez adhérent</h4>
         <p>
           En adhérant à l'association, vous pourrez participer à nos actions et
           nous aider à protéger la biodiversité marine.

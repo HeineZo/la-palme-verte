@@ -2,6 +2,7 @@ import { Image } from "@nextui-org/image";
 import React from "react";
 import PhotoCarrousel from "@/shared/components/PhotoCarrousel.component";
 import { Button } from "@/shared/theme/Button";
+import Reveal from "../utils/Reveal.component";
 
 interface PhotoMosaicProps {
   photos: string[];
@@ -16,8 +17,10 @@ export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="hidden md:block w-full max-w-7xl mx-auto gap-8 space-y-8 columns-3">
-        {photos?.map((photo) => (
-          <Image src={photo} alt="Photo de la gallerie photo" />
+        {photos?.map((photo, index) => (
+          <Reveal key={index} index={index}>
+            <Image src={photo} alt="Photo de la gallerie photo" />
+          </Reveal>
         ))}
       </div>
       <PhotoCarrousel photos={photos} className="md:hidden" />
