@@ -1,8 +1,8 @@
 "use client";
-import { Button } from "@nextui-org/button";
+import { Button } from "@/shared/theme/Button";
 import { Avatar } from "@nextui-org/avatar";
 import React from "react";
-import InfiniteLoop from "@/shared/InfiniteLoop.component";
+import InfiniteLoop from "@/shared/components/InfiniteLoop.component";
 import { cn } from "@nextui-org/react";
 
 interface BecomeMemberProps {

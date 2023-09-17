@@ -1,5 +1,6 @@
-import { Button } from "@nextui-org/button";
-import Article from "./Article.component";
+import Article from "../components/Article.component";
+import Reveal from "@/shared/utils/Reveal.component";
+import { Button } from "@/shared/theme/Button";
 
 /**
  * Affiche les derniers articles en ligne
@@ -38,6 +39,7 @@ export default function LastArticles() {
         "https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80",
     },
   ];
+
   return (
     <div className="section flex flex-col justify-center items-center gap-16">
       <div className="flex flex-col justify-center items-center gap-6 text-center">
@@ -48,8 +50,10 @@ export default function LastArticles() {
         </p>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {placeholderArticles.map((article) => (
-          <Article article={article} key={article.titre} />
+        {placeholderArticles.map((article, index) => (
+          <Reveal index={index} key={article.titre}>
+            <Article article={article} />
+          </Reveal>
         ))}
       </div>
       <Button color="secondary" className="text-accent w-fit">

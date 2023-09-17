@@ -3,8 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { flushSync } from "react-dom";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { Button } from "@nextui-org/react";
-import Image from "next/image";
+import { Button } from "@/shared/theme/Button";
 
 const TWEEN_FACTOR = 1.2;
 

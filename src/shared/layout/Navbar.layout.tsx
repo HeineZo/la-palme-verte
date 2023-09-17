@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
 import pages from "structure.json";
@@ -17,6 +16,7 @@ import {
   Tab,
   Link as UILink,
 } from "@nextui-org/react";
+import { Button } from "@/shared/theme/Button";
 
 /**
  * Barre de navigation
@@ -38,7 +38,7 @@ export default function Navigation() {
       <NavbarContent className="hidden sm:flex gap-8" justify="center">
         <Tabs
           variant="light"
-          color="primary"
+          color="secondary"
           selectedKey={pathname}
           onSelectionChange={(targetPath) => router.push(targetPath as string)}
           classNames={{

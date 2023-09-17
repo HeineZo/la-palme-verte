@@ -1,6 +1,6 @@
 import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.layout";
 import PhotoMosaic from "@/shared/layout/PhotoMosaic.layout";
-import { Button } from "@nextui-org/button";
+import { Button } from "@/shared/theme/Button";
 import { Image } from "@nextui-org/image";
 import {
   IconCalendarHeart,
@@ -8,9 +8,10 @@ import {
   IconScubaMask,
   IconUsersGroup,
 } from "@tabler/icons-react";
-import LastArticles from "./blog/components/LastArticles.layout";
+import LastArticles from "./blog/layout/LastArticles.layout";
 import FAQ from "@/shared/layout/FAQ.layout";
 import BecomeMember from "@/app/adhesion/components/BecomeMember.component";
+import Reveal from "@/shared/utils/Reveal.component";
 
 /**
  * Page d'accueil
@@ -83,19 +84,25 @@ export default function Home() {
       {/* Hero section */}
       <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-full">
         <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
-          <h1>Plongez au coeur de l'action</h1>
-          <p>
-            De 2005 à aujourd’hui, La Palme Verte n’a cessé de se réinventer et
-            de sensibiliser le public sur l’importance de la préservation de nos
-            fond-marins.
-          </p>
-          <Button
-            color="primary"
-            endContent={<IconChevronRight size={16} />}
-            className="w-fit"
-          >
-            Découvrir l'association
-          </Button>
+          <Reveal>
+            <h1>Plongez au coeur de l'action</h1>
+          </Reveal>
+          <Reveal index={2}>
+            <p>
+              De 2005 à aujourd’hui, La Palme Verte n’a cessé de se réinventer
+              et de sensibiliser le public sur l’importance de la préservation
+              de nos fond-marins.
+            </p>
+          </Reveal>
+          <Reveal index={3}>
+            <Button
+              color="primary"
+              endContent={<IconChevronRight size={16} />}
+              className="w-fit"
+            >
+              Découvrir l'association
+            </Button>
+          </Reveal>
         </div>
         <div className="hidden lg:flex gap-3">
           <div className="flex flex-col gap-7">

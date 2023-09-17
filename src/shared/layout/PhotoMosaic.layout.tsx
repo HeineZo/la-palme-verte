@@ -1,7 +1,7 @@
 import { Image } from "@nextui-org/image";
 import React from "react";
-import PhotoCarrousel from "../image/PhotoCarrousel.component";
-import { Button } from "@nextui-org/button";
+import PhotoCarrousel from "@/shared/components/PhotoCarrousel.component";
+import { Button } from "@/shared/theme/Button";
 
 interface PhotoMosaicProps {
   photos: string[];

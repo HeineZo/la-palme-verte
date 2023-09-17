@@ -1,9 +1,6 @@
 "use client";
-import {
-  Button,
-  Chip,
-  Image,
-} from "@nextui-org/react";
+import { Chip, Image } from "@nextui-org/react";
+import { Button } from "@/shared/theme/Button";
 
 interface ArticleProps {
   article: any; // TODO: type Article
@@ -15,7 +12,7 @@ interface ArticleProps {
  */
 export default function Article({ article }: ArticleProps) {
   return (
-    <div className="flex flex-col min-w-[350px] gap-6 flex-1 p-6 rounded-medium relative shadow-medium hover:scale-105 transition-all">
+    <div className="flex flex-col min-w-[350px] max-w-xl gap-6 flex-1 p-6 rounded-medium relative shadow-medium hover:scale-105 transition-all">
       <Image
         src={article.photo}
         width="100%"

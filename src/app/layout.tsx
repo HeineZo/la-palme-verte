@@ -2,10 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
-import Navigation from "@/shared/Navbar.component";
+import Navigation from "@/shared/layout/Navbar.layout";
 import { Providers } from "./providers";
 import Breakpoint from "@/shared/utils/Breakpoint.component";
-import Footer from "@/shared/Footer.component";
+import Footer from "@/shared/layout/Footer.layout";
 
 const archivo = Archivo({
   subsets: ["latin"],
