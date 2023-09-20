@@ -19,18 +19,33 @@ const config = {
         "4xl": ["2.5rem"],
         "3xl": ["2em"],
       },
+      keyframes: {
+        "infinite-scroll-x": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        "infinite-scroll-x": "infinite-scroll-x 30s linear infinite",
+        "infinite-scroll-x-reverse": "infinite-scroll-x 30s linear infinite reverse -3s",
+      },
     },
   },
   darkMode: "class",
   plugins: [
     require("@tailwindcss/typography"),
     nextui({
+      layout: {
+        radius: {
+          medium: "24px",
+        },
+      },
       themes: {
         light: {
           colors: {
-            background: "#E9F1E9",
             foreground: "#1C1C1C",
             focus: "#649B64",
+            highlight: "#E9F1E9",
 
             primary: {
               100: "#EFFBE8",

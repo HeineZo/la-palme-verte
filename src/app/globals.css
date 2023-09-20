@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --slide-spacing: 1rem;
+    --slide-size: 80%;
+    --slide-height: 19rem;
+  }
+
   h1 {
     @apply text-6xl font-heading font-bold;
   }
@@ -20,7 +26,7 @@
   }
 
   h5 {
-    @apply text-2xl font-heading font-bold;
+    @apply text-2xl font-heading font-normal;
   }
 
   h6 {
@@ -29,5 +35,9 @@
 
   p {
     @apply text-base font-body;
+  }
+
+  .section {
+    @apply px-10 md:px-16 py-16;
   }
 }
