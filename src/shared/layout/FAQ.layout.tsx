@@ -24,7 +24,7 @@ interface FAQProps {
  */
 export default function FAQ({
   questions,
-  title = "Vous avez des questions ?",
+  title = "F.A.Q",
   description = "Les questions que l'on nous pose le plus souvent",
   className,
 }: FAQProps) {
