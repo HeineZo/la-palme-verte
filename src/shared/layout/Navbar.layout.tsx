@@ -55,7 +55,7 @@ export default function Navigation() {
       <NavbarContent justify="end">
         {/* CTA */}
         <NavbarItem>
-          <Button as={Link} color="primary" href="#">
+          <Button color="primary" onClick={() => router.push('/adherent')}>
             Devenir adhérent
           </Button>
         </NavbarItem>

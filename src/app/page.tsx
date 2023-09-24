@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react";
 import LastArticles from "./blog/layout/LastArticles.layout";
 import FAQ from "@/shared/layout/FAQ.layout";
-import BecomeMember from "@/app/adhesion/components/BecomeMember.component";
+import BecomeMember from "@/app/adherent/components/BecomeMember.component";
 import Reveal from "@/shared/utils/Reveal.component";
 
 /**
