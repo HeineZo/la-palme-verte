@@ -3,7 +3,8 @@ import Image from "next/image";
 import React from "react";
 import pages from "structure.json";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@nextui-org/react";
+import NextLink from "next/link";
 import {
   Navbar,
   NavbarBrand,
@@ -25,7 +26,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+  
   return (
     <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
 
@@ -46,7 +47,7 @@ export default function Navigation() {
             cursor: "bg-accent",
           }}
         >
-          {pages.map((page) => (
+          {pages.main.map((page) => (
             <Tab key={page.path} title={page.label} />
           ))}
         </Tabs>
@@ -55,8 +56,8 @@ export default function Navigation() {
       <NavbarContent justify="end">
         {/* CTA */}
         <NavbarItem>
-          <Button color="primary" onClick={() => router.push('/adherent')}>
-            Devenir adhérent
+          <Button color="primary" as={Link} href={pages.adherent.path}>
+            {pages.adherent.label}
           </Button>
         </NavbarItem>
 
@@ -69,7 +70,7 @@ export default function Navigation() {
 
       {/* Menu déroulant mobile */}
       <NavbarMenu>
-        {pages.map((page) => {
+        {pages.main.map((page) => {
           const isActive = pathname === page.path;
           return (
             <NavbarMenuItem key={page.path}>
