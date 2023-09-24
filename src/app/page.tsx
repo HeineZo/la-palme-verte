@@ -139,7 +139,15 @@ export default function Home() {
       </div>
 
       {/* Adhérer */}
-      <BecomeMember />
+      <BecomeMember 
+        title="Devenez adhérent pour rejoindre une communauté grandissante"
+        shortTitle="Devenez adhérent"
+        subtitle="Devenez adhérent"
+      >
+        <Button color="primary" className="w-fit">Devenir adhérent</Button>
+        <Button color="secondary" className="w-fit text-accent">En savoir plus</Button>
+      </BecomeMember>
+
 
       {/* Nos actions */}
       <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
@@ -158,7 +166,10 @@ export default function Home() {
       <LastArticles />
 
       {/* FAQ */}
-      <FAQ questions={questions} />
+      <FAQ questions={questions} 
+        title="Vous avez des questions ?"
+        description="Les questions que l'on nous pose le plus souvent"
+      />
     </div>
   );
 }
