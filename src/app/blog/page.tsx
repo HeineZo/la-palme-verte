@@ -9,11 +9,14 @@ import {
 import React from "react";
 import { Button } from "@/shared/theme/Button";
 
+/**
+ * Page Adhérent
+ */
 export default function page() {
 
   const actionsRow: Row[] = [
     {
-      icon: <IconBrandHipchat size={48} stroke={3} />,
+      icon: <IconPencilHeart size={48} stroke={3} />,
       title: "Accès à la rédaction d’articles",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
@@ -25,7 +28,7 @@ export default function page() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
     },
     {
-      icon: <IconPencilHeart size={48} />,
+      icon: <IconBrandHipchat  size={48} />,
       title: "Participation à de nombreuses activités",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
@@ -62,33 +65,33 @@ export default function page() {
   ];
 
   return (
-    <div>
+    <section>
 
-    <section className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16">
+    <article className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16">
       {/* Nos actions */}
-      <div className="flex flex-col justify-center text-center gap-6 p-16 rounded-3xl section">
+      <div className="flex flex-col justify-center text-center gap-6 rounded-3xl section"> 
         <h3>Pourquoi devenir adhérent ?</h3>
         <p> Adhérer à La Palme Verte ce n’est pas seulement soutenir l’association </p>
       </div>
       <InlineBlocks rows={actionsRow} />
-    </section>
+    </article>
       
     {/* Carrousel des membres */}
-    <section className="bg-highlight">
+    <article className="bg-highlight">
       <BecomeMember
-        title={'84 personnes ont déjà rejoint l’association'}
-        subtitle={'Pourquoi pas vous ?'}
+        title='84 personnes ont déjà rejoint l’association'
+        subtitle='Pourquoi pas vous ?'
       >
         <Button color="primary" className="w-fit">Rejoindre la communauté</Button>
       </BecomeMember>
-    </section>
-    <section className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16">
+    </article>
+    <article className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16 section">
       <FAQ 
         questions={questions}
         title='Vous avez des questions ?'
         description='Les questions les plus fréquentes sur l’adhésion à l’association'
       />
+    </article>
     </section>
-    </div>
   )
 }

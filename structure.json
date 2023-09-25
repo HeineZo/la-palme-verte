@@ -17,8 +17,10 @@
       "path": "/photos"
     }
   ],
-  "adherent": {
-    "label": "Adhérent",
-    "path": "/adherent"
+  "other": {
+    "adherent": {
+      "label": "Devenir adhérent",
+      "path": "/adherent"
+    }
   }
 }

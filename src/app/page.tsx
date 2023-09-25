@@ -142,7 +142,8 @@ export default function Home() {
       <BecomeMember 
         title="Devenez adhérent pour rejoindre une communauté grandissante"
         shortTitle="Devenez adhérent"
-        subtitle="Devenez adhérent"
+        subtitle="En adhérant à l'association, vous pourrez participer à nos actions et
+        nous aider à protéger la biodiversité marine."
       >
         <Button color="primary" className="w-fit">Devenir adhérent</Button>
         <Button color="secondary" className="w-fit text-accent">En savoir plus</Button>

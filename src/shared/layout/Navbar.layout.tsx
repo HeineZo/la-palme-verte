@@ -56,8 +56,8 @@ export default function Navbar() {
       <NavbarContent justify="end">
         {/* CTA */}
         <NavbarItem>
-          <Button color="primary" as={Link} href={pages.adherent.path}>
-            {pages.adherent.label}
+          <Button color="primary" as={Link} href={pages.other.adherent.path}>
+            {pages.other.adherent.label}
           </Button>
         </NavbarItem>
 

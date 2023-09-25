@@ -15,6 +15,10 @@ type BecomeMemberProps = {
 /**
  * Affiche un bloc permettant d'inciter les utilisateurs à devenir adhérent
  * @param className Classe tailwind à ajouter *(optionnel)*
+ * @param title titre à afficher *(optionnel)*
+ * @param shortTitle titre à affichier sur petit écran *(optionnel)*
+ * @param subtitle Description de la section *(optionnel)*
+ * @param children element html à afficher *(optionnel)*
  */
 
 export default function BecomeMember({className, title, shortTitle, subtitle, children}: BecomeMemberProps) {
