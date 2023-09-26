@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
-import Navigation from "@/shared/layout/Navbar.layout";
+import Navbar from "@/shared/layout/Navbar.layout";
 import { Providers } from "./providers";
 import Breakpoint from "@/shared/utils/Breakpoint.component";
 import Footer from "@/shared/layout/Footer.layout";
@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
       <body className="font-body">
         <Providers>
-          <Navigation />
+          <Navbar />
           {children}
           <Breakpoint />
           <Footer />
