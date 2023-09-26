@@ -1,4 +1,6 @@
+/* eslint-disable global-require */
 import { nextui } from "@nextui-org/react";
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
@@ -17,17 +19,33 @@ const config = {
         "4xl": ["2.5rem"],
         "3xl": ["2em"],
       },
+      keyframes: {
+        "infinite-scroll-x": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+      },
+      animation: {
+        "infinite-scroll-x": "infinite-scroll-x 30s linear infinite",
+        "infinite-scroll-x-reverse": "infinite-scroll-x 30s linear infinite reverse -3s",
+      },
     },
   },
   darkMode: "class",
   plugins: [
+    require("@tailwindcss/typography"),
     nextui({
+      layout: {
+        radius: {
+          medium: "24px",
+        },
+      },
       themes: {
         light: {
           colors: {
-            background: "#E9F1E9",
             foreground: "#1C1C1C",
             focus: "#649B64",
+            highlight: "#E9F1E9",
 
             primary: {
               100: "#EFFBE8",
@@ -56,16 +74,16 @@ const config = {
               foreground: "#ffffff",
             },
             accent: {
-              100: "#EEFAE8",
-              200: "#DBF5D2",
-              300: "#B9E1B1",
-              400: "#93C38F",
-              500: "#649B64",
-              600: "#49854E",
-              700: "#326F3D",
-              800: "#1F592E",
-              900: "#134A26",
-              DEFAULT: "#649B64",
+              100: "#e8f0e8",
+              200: "#d2e1d1",
+              300: "#adc9ac",
+              400: "#7fa97f",
+              500: "#5e8a5d",
+              600: "#466c46",
+              700: "#3c593c",
+              800: "#324933",
+              900: "#2b3c2c",
+              DEFAULT: "#466c46",
               foreground: "#ffffff",
             },
             success: {

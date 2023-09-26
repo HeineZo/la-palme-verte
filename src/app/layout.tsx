@@ -2,8 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
-import Navbar from "@shared/Navbar.component";
+import Navigation from "@/shared/layout/Navbar.layout";
 import { Providers } from "./providers";
+import Breakpoint from "@/shared/utils/Breakpoint.component";
+import Footer from "@/shared/layout/Footer.layout";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -11,7 +13,7 @@ const archivo = Archivo({
 });
 
 const clashDisplay = localFont({
-  src: "../../public/fonts/ClashDisplay-Regular.otf",
+  src: "../../public/fonts/ClashDisplay-Bold.otf",
   variable: "--font-clash-display",
 });
 
@@ -30,8 +32,10 @@ export default function RootLayout({
     <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
       <body className="font-body">
         <Providers>
-          <Navbar />
+          <Navigation />
           {children}
+          <Breakpoint />
+          <Footer />
         </Providers>
       </body>
     </html>
