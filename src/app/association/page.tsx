@@ -1,11 +1,78 @@
-import { EmblaCarousel } from "@/components/EmblaCarousel";
-import TimelineMark from "@/components/TimelineMark";
+"use client";
+
+import PhotoCarrousel from "@/shared/components/PhotoCarrousel.component";
+import TimelineMark from "@/app/adherent/components/TimelineMark";
 import { EmblaOptionsType } from "embla-carousel-react";
+import BecomeMember from "../adherent/components/BecomeMember.component";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
+import {
+  IconBrandInstagram,
+  IconBrandX,
+  IconBrandLinkedin,
+  IconMail
+} from "@tabler/icons-react";
+
+type StaffMember = {
+  name: string;
+  role: string;
+  photo: string;
+  links?: {
+    url: string;
+    icon: React.ReactNode;
+  }[];
+};
 
 export default async function Page() {
   const options: EmblaOptionsType = {};
   const slide_count = 3;
   const slides = Array.from(Array(slide_count).keys());
+
+  const staffMembers: StaffMember[] = [
+    {
+      name: "Lilou",
+      role: "Graphiste",
+      photo: "https://picsum.photos/200/300",
+      links: [
+        {
+          url: "https://www.instagram.com/",
+          icon: <IconBrandInstagram />,
+        },
+        {
+          url: "https://twitter.com/",
+          icon: <IconBrandX />,
+        },
+        {
+          url: "mailto: ",
+          icon: <IconMail />,
+        }
+      ]
+    },
+    {
+      name: "Myriam",
+      role: "Responsable communication",
+      photo: "https://picsum.photos/200/300",
+    },
+    {
+      name: "Louann",
+      role: "Responsable",
+      photo: "https://picsum.photos/200/300",
+    },
+    {
+      name: "Côme",
+      role: "Responsable communication",
+      photo: "https://picsum.photos/200/300",
+    },
+    {
+      name: "Mélissandre",
+      role: "Responsable",
+      photo: "https://picsum.photos/200/300",
+    },
+    {
+      name: "Valentine",
+      role: "Responsable",
+      photo: "https://picsum.photos/200/300",
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-20 px-32 pt-12">
@@ -111,7 +178,41 @@ export default async function Page() {
             </div>
           </div>
         </div>
-        <EmblaCarousel slides={slides} options={options} />
+        {/* <PhotoCarrousel className="w-2/4" photos={slides} options={options} /> */}
+      </div>
+      <div className="flex-col text-center justify-center">
+        <h1>L'équipe</h1>
+        <p>
+          Le coeur de l'association bat au rythme des membres d'une jeune équipe
+          talentueuse s'investissant dans la sensibilisation du public sur les
+          enjeux de la protection de notre environnement sous-marin.
+        </p>
+        <div className="grid grid-cols-3 gap-6 mt-12 w-full max-w-7xl ">
+          {staffMembers.map((member) => (
+            <Card className="py-4">
+              <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+                <p className="text-tiny uppercase font-bold">{member.name}</p>
+                <small className="text-default-500">{member.role}</small>
+              </CardHeader>
+              <CardBody className="overflow-visible py-2">
+              </CardBody>
+              <CardFooter className="flex justify-center gap-3">
+                {member.links?.map((link) => (
+                  <a href={link.url} target="_blank" rel="noreferrer">
+                    {link.icon}
+                  </a>
+                ))}
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+        <BecomeMember
+          title="Vous souhaitez nous rejoindre ?"
+          subtitle="Faites nous part de votre candidature et rejoignez une communauté grandissante"
+          showInfiniteLoop={false}
+          buttonTitle="Candidater"
+        />
+
       </div>
     </div>
   );
