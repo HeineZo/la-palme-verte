@@ -1,18 +1,26 @@
-[
-  {
-    "label": "Accueil",
-    "path": "/"
-  },
-  {
-    "label": "L'association",
-    "path": "/association"
-  },
-  {
-    "label": "Blog",
-    "path": "/blog"
-  },
-  {
-    "label": "Photos",
-    "path": "/photos"
+{
+  "main": [
+    {
+      "label": "Accueil",
+      "path": "/"
+    },
+    {
+      "label": "L'association",
+      "path": "/association"
+    },
+    {
+      "label": "Blog",
+      "path": "/blog"
+    },
+    {
+      "label": "Photos",
+      "path": "/photos"
+    }
+  ],
+  "other": {
+    "adherent": {
+      "label": "Devenir adhérent",
+      "path": "/adherent"
+    }
   }
-]
+}

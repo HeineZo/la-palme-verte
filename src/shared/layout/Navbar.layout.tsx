@@ -5,7 +5,7 @@ import pages from "structure.json";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
-  Navbar,
+  Navbar as NavbarUI,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -13,22 +13,21 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   Tabs,
-  Tab,
   Link as UILink,
 } from "@nextui-org/react";
+import { Tab } from "@nextui-org/tabs";
 import { Button } from "@/shared/theme/Button";
 
 /**
  * Barre de navigation
  */
-export default function Navigation() {
+export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
-
+    <NavbarUI shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
       {/* Logo */}
       <NavbarBrand as={Link} href="/">
         <Image src="/logo.svg" width={50} height={50} alt="La Palme Verte" />
@@ -40,14 +39,16 @@ export default function Navigation() {
           variant="light"
           color="secondary"
           selectedKey={pathname}
-          onSelectionChange={(targetPath) => router.push(targetPath as string)}
           classNames={{
             tabList: "gap-8",
             cursor: "bg-accent",
           }}
         >
-          {pages.map((page) => (
-            <Tab key={page.path} title={page.label} />
+          {pages.main.map((page) => (
+            <Tab
+              key={page.path}
+              title={<Link href={page.path}>{page.label}</Link>}
+            />
           ))}
         </Tabs>
       </NavbarContent>
@@ -55,8 +56,8 @@ export default function Navigation() {
       <NavbarContent justify="end">
         {/* CTA */}
         <NavbarItem>
-          <Button as={Link} color="primary" href="#">
-            Devenir adhérent
+          <Button color="primary" as={Link} href={pages.other.adherent.path}>
+            {pages.other.adherent.label}
           </Button>
         </NavbarItem>
 
@@ -69,7 +70,7 @@ export default function Navigation() {
 
       {/* Menu déroulant mobile */}
       <NavbarMenu>
-        {pages.map((page) => {
+        {pages.main.map((page) => {
           const isActive = pathname === page.path;
           return (
             <NavbarMenuItem key={page.path}>
@@ -85,6 +86,6 @@ export default function Navigation() {
           );
         })}
       </NavbarMenu>
-    </Navbar>
+    </NavbarUI>
   );
 }

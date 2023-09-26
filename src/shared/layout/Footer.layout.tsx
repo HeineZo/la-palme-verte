@@ -29,7 +29,7 @@ export default function Footer() {
 
         {/* Pages du site */}
         <div className=" gap-8 h-fit md:flex">
-          {pages.map((page) => (
+          {pages.main.map((page) => (
             <Link
               key={page.path}
               isBlock
