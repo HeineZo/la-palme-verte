@@ -139,13 +139,13 @@ export default function Home() {
       </div>
 
       {/* Adhérer */}
-      <BecomeMember 
+      <BecomeMember
         title="Devenez adhérent pour rejoindre une communauté grandissante"
         shortTitle="Devenez adhérent"
         subtitle="En adhérant à l'association, vous pourrez participer à nos actions et
         nous aider à protéger la biodiversité marine."
+        buttonTitle="Devenir adhérent"
       >
-        <Button color="primary" className="w-fit">Devenir adhérent</Button>
         <Button color="secondary" className="w-fit text-accent">En savoir plus</Button>
       </BecomeMember>
 
@@ -167,7 +167,7 @@ export default function Home() {
       <LastArticles />
 
       {/* FAQ */}
-      <FAQ questions={questions} 
+      <FAQ questions={questions}
         title="Vous avez des questions ?"
         description="Les questions que l'on nous pose le plus souvent"
       />
