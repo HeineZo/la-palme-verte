@@ -18,7 +18,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { Key } from 'react';
 import pages from 'structure.json';
 
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 
 /**
  * Barre de navigation

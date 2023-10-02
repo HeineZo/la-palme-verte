@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Accordion, AccordionItem, cn } from '@nextui-org/react';
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 
 // TODO: Faire un fichier de type dédié
 type QuestionFAQ = {

@@ -1,7 +1,7 @@
 'use client';
 
 import { Chip, Image } from '@nextui-org/react';
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 
 interface ArticleProps {
   article: any; // TODO: type Article

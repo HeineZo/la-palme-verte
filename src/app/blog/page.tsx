@@ -7,7 +7,7 @@ import React from 'react';
 import InlineBlocks, { Row } from '@/shared/layout/InlineBlocks.layout';
 import BecomeMember from '../adherent/components/BecomeMember.component';
 import FAQ from '@/shared/layout/FAQ.layout';
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 
 /**
  * Page Adhérent

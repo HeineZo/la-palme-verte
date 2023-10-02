@@ -7,7 +7,7 @@ import {
 } from '@tabler/icons-react';
 import InlineBlocks, { Row } from '@/shared/layout/InlineBlocks.layout';
 import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 import LastArticles from './blog/layout/LastArticles.layout';
 import FAQ from '@/shared/layout/FAQ.layout';
 import BecomeMember from '@/app/adherent/components/BecomeMember.component';

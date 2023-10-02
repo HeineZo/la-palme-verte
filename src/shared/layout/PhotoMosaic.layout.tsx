@@ -1,7 +1,7 @@
 import { Image } from '@nextui-org/image';
 import React from 'react';
 import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
-import { Button } from '@/shared/theme/Button';
+import Button from '@/shared/theme/Button';
 import Reveal from '../utils/Reveal.component';
 
 interface PhotoMosaicProps {
