@@ -23,7 +23,7 @@ import { Button } from '@/shared/theme/Button';
 /**
  * Barre de navigation
  */
-export default function () {
+export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

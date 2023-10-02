@@ -1,9 +1,10 @@
-"use client";
-import React, { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { flushSync } from "react-dom";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { Button } from "@/shared/theme/Button";
+'use client';
+
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { flushSync } from 'react-dom';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { Button } from '@/shared/theme/Button';
 
 const TWEEN_FACTOR = 1.2;
 
@@ -14,7 +15,7 @@ interface ArrowProps {
 
 interface PhotoCarrouselProps {
   photos: string[];
-  className?: React.ComponentProps<"div">["className"];
+  className?: React.ComponentProps<'div'>['className'];
 }
 
 /**
@@ -22,7 +23,10 @@ interface PhotoCarrouselProps {
  * @param photos Photos à afficher dans le carrousel
  * @param className Style à appliquer au carrousel *(optionnel)*
  */
-export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProps) {
+export default function PhotoCarrousel({
+  photos,
+  className,
+}: PhotoCarrouselProps) {
   // API du carrousel
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [tweenValues, setTweenValues] = useState<number[]>([]);
@@ -68,23 +72,23 @@ export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProp
    */
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
   /**
    * Elément suivant
    */
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
     if (!emblaApi) return;
     onScroll();
-    emblaApi.on("scroll", () => {
+    emblaApi.on('scroll', () => {
       flushSync(() => onScroll());
     });
-    emblaApi.on("reInit", onScroll);
+    emblaApi.on('reInit', onScroll);
   }, [emblaApi, onScroll]);
 
   return (
