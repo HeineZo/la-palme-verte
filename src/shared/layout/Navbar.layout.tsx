@@ -1,30 +1,40 @@
-"use client";
-import Image from "next/image";
-import React from "react";
-import pages from "structure.json";
-import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+'use client';
+
 import {
+  Link as UILink,
   Navbar as NavbarUI,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  NavbarMenuToggle,
   Tabs,
-  Link as UILink,
-} from "@nextui-org/react";
-import { Tab } from "@nextui-org/tabs";
-import { Button } from "@/shared/theme/Button";
+} from '@nextui-org/react';
+import { Tab } from '@nextui-org/tabs';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { Key } from 'react';
+import pages from 'structure.json';
+
+import { Button } from '@/shared/theme/Button';
 
 /**
  * Barre de navigation
  */
-export default function Navbar() {
+export default function () {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  /**
+   * Dirige l'utilisateur vers la page cible
+   * @param targetPath Chemin de la page cible
+   */
+  const handleNavigation = (targetPath: Key) => {
+    router.push(targetPath as string);
+  };
 
   return (
     <NavbarUI shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
@@ -38,17 +48,20 @@ export default function Navbar() {
         <Tabs
           variant="light"
           color="secondary"
-          selectedKey={pathname}
+          // Pour éviter la redirection lorsqu'on est dans une page autre que celles du menu
+          selectedKey={
+            pages.main.some((page) => page.path === pathname)
+              ? pathname
+              : undefined
+          }
+          onSelectionChange={handleNavigation}
           classNames={{
-            tabList: "gap-8",
-            cursor: "bg-accent",
+            tabList: 'gap-8',
+            cursor: 'bg-accent',
           }}
         >
           {pages.main.map((page) => (
-            <Tab
-              key={page.path}
-              title={<Link href={page.path}>{page.label}</Link>}
-            />
+            <Tab key={page.path} title={page.label} />
           ))}
         </Tabs>
       </NavbarContent>
@@ -63,7 +76,7 @@ export default function Navbar() {
 
         {/* Menu mobile */}
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           className="sm:hidden"
         />
       </NavbarContent>
@@ -76,7 +89,7 @@ export default function Navbar() {
             <NavbarMenuItem key={page.path}>
               <UILink
                 color="foreground"
-                className={`w-full ${isActive && "text-accent"}`}
+                className={`w-full ${isActive && 'text-accent'}`}
                 size="lg"
                 href={page.path}
               >
