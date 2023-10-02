@@ -32,8 +32,8 @@
 ## ✨ Roadmap
 
 * [X] Navbar & Footer ✅
-* [ ] Page d'accueil ⏳
-* [ ] Page d'adhésion ⏳
+* [X] Page d'accueil ✅
+* [X] Page d'adhésion ✅
 * [ ] Page de présentation de l'association ⏳
 
 ## 🛠️ Participer au développement
