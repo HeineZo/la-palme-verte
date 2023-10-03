@@ -1,5 +1,5 @@
 import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.layout";
-import BecomeMember from "../adherent/components/BecomeMember.component";
+import BecomeMember from "@/shared/components/BecomeMember.component";
 import FAQ from "@/shared/layout/FAQ.layout";
 import {
   IconBrandHipchat,
