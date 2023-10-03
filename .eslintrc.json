@@ -40,6 +40,7 @@
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
     "@typescript-eslint/no-use-before-define" : "off",
+    "@typescript-eslint/no-explicit-any": "warn",
     "jsx-a11y/img-redundant-alt": "off",
     "react/button-has-type": "off",
     "no-param-reassign": "off"

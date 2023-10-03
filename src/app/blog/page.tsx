@@ -36,28 +36,28 @@ export default function page() {
 
   const questions = [
     {
-      title: 'Est-ce que je peux donner l’argent de l’adhésion en liquide ?',
+      label: 'Est-ce que je peux donner l’argent de l’adhésion en liquide ?',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title: 'J’aimerai adhérer à l’association, comment faire ?',
+      label: 'J’aimerai adhérer à l’association, comment faire ?',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title:
+      label:
         'Je viens de souscrire à une adhésion, comment rédiger un article ?',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title: 'Pourquoi l’adhésion n’est-elle pas gratuite ?',
+      label: 'Pourquoi l’adhésion n’est-elle pas gratuite ?',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title:
+      label:
         'J’habite dans un autre pays, est-ce quand même possible d’adhérer ?',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
@@ -71,10 +71,8 @@ export default function page() {
         <div className="flex flex-col justify-center text-center gap-6 rounded-3xl section">
           <h3>Pourquoi devenir adhérent ?</h3>
           <p>
-            {' '}
             Adhérer à La Palme Verte ce n’est pas seulement soutenir
             l’association
-{' '}
           </p>
         </div>
         <InlineBlocks rows={actionsRow} />
