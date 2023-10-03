@@ -1,5 +1,5 @@
-import React from "react";
-import Reveal from "../utils/Reveal.component";
+import React from 'react';
+import Reveal from '../utils/Reveal.component';
 
 export interface Row {
   title: string;

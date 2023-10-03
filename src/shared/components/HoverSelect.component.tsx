@@ -1,6 +1,7 @@
-"use client";
-import { motion } from "framer-motion";
-import { useState } from "react";
+'use client';
+
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface HoverSelectProps {
   children: JSX.Element | JSX.Element[];
@@ -17,14 +18,14 @@ export default function HoverSelect({ children }: HoverSelectProps) {
    */
   const handleOnMouseEnter = () => {
     setIsHovering(true);
-  }
+  };
 
   /**
    * Lorsque la souris quitte l'élément
    */
   const handleOnMouseLeave = () => {
     setIsHovering(false);
-  }
+  };
 
   return (
     <div
@@ -36,7 +37,7 @@ export default function HoverSelect({ children }: HoverSelectProps) {
         <motion.span
           layoutId="hover-select"
           className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
-          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
         />
       )}
 

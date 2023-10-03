@@ -1,13 +1,14 @@
-"use client";
-import { Avatar } from "@nextui-org/avatar";
-import React from "react";
-import InfiniteLoop from "@/shared/components/InfiniteLoop.component";
-import { cn } from "@nextui-org/react";
+'use client';
+
+import { Avatar } from '@nextui-org/avatar';
+import React from 'react';
+import { cn } from '@nextui-org/react';
+import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
 
 type BecomeMemberProps = {
-  className?: React.ComponentProps<"div">["className"];
+  className?: React.ComponentProps<'div'>['className'];
   title?: string;
-  shortTitle?: string,
+  shortTitle?: string;
   subtitle?: string;
   children?: React.ReactNode;
 };
@@ -20,17 +21,28 @@ type BecomeMemberProps = {
  * @param subtitle Description de la section *(optionnel)*
  * @param children element html à afficher *(optionnel)*
  */
-
-export default function BecomeMember({className, title, shortTitle, subtitle, children}: BecomeMemberProps) {
+export default function BecomeMember({
+  className,
+  title,
+  shortTitle,
+  subtitle,
+  children,
+}: BecomeMemberProps) {
   if (shortTitle === undefined) {
     shortTitle = title;
   }
-    return (
-    <div className={cn("py-16 text-center justify-center flex flex-col gap-16", className)}>
+
+  return (
+    <div
+      className={cn(
+        'py-16 text-center justify-center flex flex-col gap-16',
+        className,
+      )}
+    >
       <div className="px-10 md:px-16">
-        <h4 className="hidden md:block"> { title } </h4>
-        <h4 className="block md:hidden"> { shortTitle } </h4>
-        <p> { subtitle } </p>
+        <h4 className="hidden md:block"> {title} </h4>
+        <h4 className="block md:hidden"> {shortTitle} </h4>
+        <p> {subtitle} </p>
       </div>
 
       <InfiniteLoop
@@ -42,9 +54,7 @@ export default function BecomeMember({className, title, shortTitle, subtitle, ch
         ))}
       />
 
-      <div className="flex gap-6 justify-center">
-        {children}
-      </div>
+      <div className="flex gap-6 justify-center">{children}</div>
     </div>
   );
 }
