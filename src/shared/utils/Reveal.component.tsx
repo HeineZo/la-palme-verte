@@ -1,6 +1,7 @@
-"use client";
-import { motion } from "framer-motion";
-import React from "react";
+'use client';
+
+import { motion } from 'framer-motion';
+import React from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ interface Props {
 export default function Reveal({ children, index }: Props) {
   const fadeIn = {
     hidden: { opacity: 0, y: 100 },
-    visible: (index: number) => ({
+    visible: () => ({
       opacity: 1,
       y: 0,
       transition: {
@@ -30,7 +31,6 @@ export default function Reveal({ children, index }: Props) {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      custom={index}
     >
       {children}
     </motion.div>

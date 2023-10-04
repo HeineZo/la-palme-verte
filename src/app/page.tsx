@@ -1,17 +1,17 @@
-import InlineBlocks, { Row } from "@/shared/layout/InlineBlocks.layout";
-import PhotoMosaic from "@/shared/layout/PhotoMosaic.layout";
-import { Button } from "@/shared/theme/Button";
-import { Image } from "@nextui-org/image";
+import { Image } from '@nextui-org/image';
 import {
   IconCalendarHeart,
   IconChevronRight,
   IconScubaMask,
   IconUsersGroup,
-} from "@tabler/icons-react";
-import LastArticles from "./blog/layout/LastArticles.layout";
-import FAQ from "@/shared/layout/FAQ.layout";
-import BecomeMember from "@/shared/components/BecomeMember.component";
-import Reveal from "@/shared/utils/Reveal.component";
+} from '@tabler/icons-react';
+import InlineBlocks, { Row } from '@/shared/layout/InlineBlocks.layout';
+import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
+import Button from '@/shared/theme/Button';
+import LastArticles from './blog/layout/LastArticles.layout';
+import FAQ from '@/shared/layout/FAQ.layout';
+import BecomeMember from '@/shared/components/BecomeMember.component';
+import Reveal from '@/shared/utils/Reveal.component';
 
 /**
  * Page d'accueil
@@ -20,62 +20,62 @@ export default function Home() {
   const actionsRow: Row[] = [
     {
       icon: <IconScubaMask size={48} stroke={3} />,
-      title: "Une multitude d’ateliers",
+      title: 'Une multitude d’ateliers',
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       icon: <IconCalendarHeart size={48} />,
-      title: "Des événements caritatifs",
+      title: 'Des événements caritatifs',
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       icon: <IconUsersGroup size={48} />,
-      title: "Fédérer une communauté",
+      title: 'Fédérer une communauté',
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
   ];
 
   // placeholders en attendant la mise en place de la galerie photo
   const photos = [
-    "https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-    "https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80",
-    "https://images.unsplash.com/photo-1506434304575-afbb92660c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-    "https://images.unsplash.com/photo-1606043580455-bd22074d1e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
-    "https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
-    "https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80",
-    "https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80",
-    "https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    'https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
+    'https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80',
+    'https://images.unsplash.com/photo-1506434304575-afbb92660c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
+    'https://images.unsplash.com/photo-1606043580455-bd22074d1e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+    'https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
+    'https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
+    'https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80',
+    'https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   ];
 
   const questions = [
     {
-      title: "Pourquoi avoir choisi ce nom ?",
+      label: 'Pourquoi avoir choisi ce nom ?',
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title: "Comment adhérer à l'association ?",
+      label: "Comment adhérer à l'association ?",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title: "Comment participer aux ateliers ?",
+      label: 'Comment participer aux ateliers ?',
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title: "Pourquoi l'adhésion n'est-elle pas gratuite ?",
+      label: "Pourquoi l'adhésion n'est-elle pas gratuite ?",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      title:
+      label:
         "J'habite dans un autre pays, est-il tout de même possible d'adhérer ?",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...",
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
   ];
 
@@ -146,9 +146,10 @@ export default function Home() {
         nous aider à protéger la biodiversité marine."
         buttonTitle="Devenir adhérent"
       >
-        <Button color="secondary" className="w-fit text-accent">En savoir plus</Button>
+        <Button color="secondary" className="w-fit text-accent">
+          En savoir plus
+        </Button>
       </BecomeMember>
-
 
       {/* Nos actions */}
       <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
@@ -167,7 +168,8 @@ export default function Home() {
       <LastArticles />
 
       {/* FAQ */}
-      <FAQ questions={questions}
+      <FAQ
+        questions={questions}
         title="Vous avez des questions ?"
         description="Les questions que l'on nous pose le plus souvent"
       />

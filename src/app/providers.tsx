@@ -1,15 +1,11 @@
-'use client'
+'use client';
 
-import {NextUIProvider} from '@nextui-org/react'
+import { NextUIProvider } from '@nextui-org/react';
 
 /**
  * Fournit les providers de l'application (Theme, etc...)
  * @param children Contenu du site
  */
-export function Providers({children}: { children: React.ReactNode }) {
-  return (
-    <NextUIProvider>
-      {children}
-    </NextUIProvider>
-  )
+export default function Providers({ children }: { children: React.ReactNode }) {
+  return <NextUIProvider>{children}</NextUIProvider>;
 }
