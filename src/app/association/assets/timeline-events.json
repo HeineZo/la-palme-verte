@@ -1,0 +1,28 @@
+[
+  {
+    "date": "2005",
+    "title": "Création de l'association",
+    "description": "Un groupe d'étudiants de l'UBS de Vannes décide de créer une association pour sensibiliser le public à la protection des fonds marins. La Palme Verte est née."
+  },
+  {
+    "date": "2008",
+    "title": "L'équipe s'agrandit",
+    "description": "5 nouveaux membres rejoignent l'association."
+  },
+  {
+    "date": "2009",
+    "title": "Premier site web",
+    "description": "L'association se dote d'un site web pour étendre sa visibilité. Créé par Alain, il est toujours en ligne aujourd'hui."
+  },
+  {
+    "date": "2015",
+    "title": "Plus de 20 adhérents",
+    "description": "L'association franchit le cap des 20 adhérents. Elle est désormais reconnue dans le milieu associatif local."
+  },
+  {
+    "date": "2023",
+    "title": "Refonte graphique",
+    "description": "La Palme Verte fait peau neuve avec son nouveau logo et un site internet réimmaginé.",
+    "active": true
+  }
+]
