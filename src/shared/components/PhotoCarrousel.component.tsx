@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { flushSync } from 'react-dom';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import Button from '@/shared/theme/Button';
+import { cn } from '@nextui-org/react';
 
 const TWEEN_FACTOR = 1.2;
 
@@ -15,6 +16,7 @@ interface ArrowProps {
 
 interface PhotoCarrouselProps {
   photos: string[];
+  height?: React.ComponentProps<'img'>['className'];
   className?: React.ComponentProps<'div'>['className'];
 }
 
@@ -26,6 +28,7 @@ interface PhotoCarrouselProps {
 export default function PhotoCarrousel({
   photos,
   className,
+  height = 'h-[500px]',
 }: PhotoCarrouselProps) {
   // API du carrousel
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -92,7 +95,7 @@ export default function PhotoCarrousel({
   }, [emblaApi, onScroll]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={cn('relative', className)}>
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y ml-[calc(var(--slide-spacing)_*_-1)]">
           {photos.map((photo, index: number) => (
@@ -110,7 +113,10 @@ export default function PhotoCarrousel({
                   }}
                 >
                   <img
-                    className="block h-[var(--slide-height)] object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]"
+                    className={cn(
+                      'block object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]',
+                      height,
+                    )}
                     src={photo}
                     alt="Photo de la gallerie photo"
                   />

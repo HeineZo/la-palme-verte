@@ -9,135 +9,76 @@ import {
 import { Image } from '@nextui-org/image';
 import Timeline from '@/shared/layout/Timeline.layout';
 import timelineEvents from './assets/timeline-events.json';
-
-type StaffMember = {
-  name: string;
-  role: string;
-  photo: string;
-  links?: {
-    url: string;
-    icon: React.ReactNode;
-  }[];
-};
+import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
+import Counter from '@/shared/utils/Counter.component';
+import Reveal from '@/shared/utils/Reveal.component';
+import { Link } from '@nextui-org/link';
+import MemberCard, { Member } from '@/shared/components/MemberCard.component';
 
 /**
  * Page de présentation de l'association
  */
 export default async function Page() {
-  const staffMembers: StaffMember[] = [
+  const staffMembers: Member[] = [
     {
       name: 'Lilou',
       role: 'Graphiste',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        linkedin: 'https://www.linkedin.com/',
+      },
     },
     {
       name: 'Myriam',
       role: 'Responsable communication',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        mail: 'mailto:',
+      },
     },
     {
       name: 'Louann',
       role: 'Responsable',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        mail: 'mailto:',
+      },
     },
     {
       name: 'Côme',
       role: 'Responsable communication',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        mail: 'mailto:',
+      },
     },
     {
       name: 'Mélissandre',
       role: 'Responsable',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        mail: 'mailto:',
+      },
     },
     {
       name: 'Valentine',
       role: 'Responsable',
-      photo: 'https://picsum.photos/200/300',
-      links: [
-        {
-          url: 'https://www.instagram.com/',
-          icon: <IconBrandInstagram />,
-        },
-        {
-          url: 'https://twitter.com/',
-          icon: <IconBrandX />,
-        },
-        {
-          url: 'mailto: ',
-          icon: <IconMail />,
-        },
-      ],
+      avatar: 'https://picsum.photos/200/300',
+      socials: {
+        facebook: 'https://www.facebook.com/',
+        twitter: 'https://twitter.com/',
+        mail: 'mailto:',
+      },
     },
   ];
 
@@ -177,45 +118,79 @@ export default async function Page() {
           alt="Photo de groupe"
         />
       </section>
-      <div className="flex justify-between section gap-20 flex-col lg:flex-row">
+      <section className="flex justify-between section gap-20 flex-col lg:flex-row">
         <div>
           <small>Chronologie</small>
-          <h1>... Qui traverse les générations</h1>
+          <h1>...Qui traverse les générations</h1>
         </div>
-        <div className="flex flex-col lg:w-1/2">
+        <div className="lg:w-1/2">
           <Timeline events={timelineEvents} />
         </div>
-      </div>
-      <div className="flex justify-between section">
-        <div className="w-5/12">
-          <p>Informations</p>
-          <h1>Quelques chiffres</h1>
-          <p>
-            Depuis la création de l’association, nous ne cessons de réaliser des
-            événements et des ateliers pour permettre de sensibiliser à la
-            protection de l’environnement marin.
-          </p>
-          <div className="grid grid-cols-2 gap-6 mt-12">
-            <div>
-              <h1>+20</h1>
-              <p>Ateliers réalisés</p>
+      </section>
+      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium ring-2 ring-primary">
+        <div className="flex flex-col gap-10 lg:w-1/2">
+          <div>
+            <small>Informations</small>
+            <h1>Quelques chiffres</h1>
+            <p>
+              Depuis la création de l’association, nous ne cessons de réaliser
+              des événements et des ateliers pour permettre de sensibiliser à la
+              protection de l’environnement marin.
+            </p>
+          </div>
+          <div className="flex flex-col gap-10">
+            <div className="flex gap-6 w-full justify-between">
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  value={20}
+                  fontStyle="text-5xl font-heading font-bold"
+                />
+                <Reveal>
+                  <p>Ateliers réalisés</p>
+                </Reveal>
+              </span>
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  value={18}
+                  fontStyle="text-5xl font-heading font-bold"
+                />
+                <Reveal>
+                  <p>Années d'expérience</p>
+                </Reveal>
+              </span>
             </div>
-            <div>
-              <h1>18</h1>
-              <p>Années d'expérience</p>
-            </div>
-            <div>
-              <h1>300€</h1>
-              <p>Récoltés pour la protection de la faune maritime</p>
-            </div>
-            <div>
-              <h1>15</h1>
-              <p>Adhérents</p>
+            <div className="flex gap-6 w-full justify-between">
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  value={300}
+                  fontStyle="text-5xl font-heading font-bold"
+                  suffix="€"
+                />
+                <Reveal>
+                  <p>Récoltés pour la protection de la faune maritime</p>
+                </Reveal>
+              </span>
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  value={15}
+                  fontStyle="text-5xl font-heading font-bold"
+                />
+                <Reveal>
+                  <p>Adhérents</p>
+                </Reveal>
+              </span>
             </div>
           </div>
         </div>
-        {/* <PhotoCarrousel className="w-2/4" photos={slides} options={options} /> */}
-      </div>
+        <PhotoCarrousel
+          className="lg:w-1/2"
+          height="h-[500px]"
+          photos={[
+            'https://images.unsplash.com/photo-1574802406791-ef6898f311d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
+            'https://images.unsplash.com/photo-1574802406791-ef6898f311d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
+          ]}
+        />
+      </section>
       <div className="section flex flex-col text-center items-center gap-20">
         <div className="flex flex-col gap-6">
           <h1>L'équipe</h1>
@@ -225,70 +200,60 @@ export default async function Page() {
           </p>
         </div>
         <div className="flex flex-wrap gap-12 justify-center">
-          {staffMembers.map((member) => (
-            <div className="flex flex-col items-center py-6 gap-5 w-[400px] bg-accent-100 rounded-medium">
-              <Avatar src={member.photo} size="lg" />
-              <div>
-                <p className="text-xl font-bold">{member.name}</p>
-                <p>{member.role}</p>
-              </div>
-              <div className="flex gap-4 justify-center">
-                {member.links?.map((link) => (
-                  <a href={link.url} target="_blank" rel="noreferrer">
-                    {link.icon}
-                  </a>
-                ))}
-              </div>
-            </div>
+          {staffMembers.map((member, index) => (
+            <MemberCard member={member} key={index} />
           ))}
         </div>
         <BecomeMember
           title="Vous souhaitez nous rejoindre ?"
-          subtitle="Faites nous part de votre candidature et rejoignez une communauté grandissante"
+          subtitle="Faites nous part de votre candidature et participez à une association dynamique"
           showInfiniteLoop={false}
           buttonTitle="Candidater"
         />
       </div>
-      <div className="flex justify-between section">
-        <div className="flex-col">
-          <div className="mb-8">
-            <div>
-              <h1>Contactez-nous</h1>
-              <p>
-                Une question, une remarque, un avis ? Venez-nous en parler par
-                message ou en personne !
-              </p>
-            </div>
+      <div className="flex justify-between flex-col lg:flex-row section gap-5">
+        <div className="flex flex-col gap-10 mb-10">
+          <div>
+            <h1>Contactez-nous</h1>
+            <p className="break-word">
+              Une question, une remarque, un avis ? Venez-nous en parler par
+              message ou en personne !
+            </p>
           </div>
-          <div className="flex mb-8 gap-3">
+          <div className="flex gap-4">
             <IconMapPin />
             <div>
-              <h1 className="text-xl">Email</h1>
-              <span className="align-middle">
-                <a
-                  className="underline"
-                  href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
-                >
-                  lapalmeverte.association@gmail.com
-                </a>
-              </span>
+              <h6>Email</h6>
+              <Link
+                color="foreground"
+                underline="hover"
+                href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
+              >
+                lapalmeverte.association@gmail.com
+              </Link>
             </div>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <IconMail />
             <div>
-              <h1 className="text-xl">Localisation</h1>
-              <p>Université Bretagne Sud - Vannes 56000</p>
+              <h6>Localisation</h6>
+              <Link
+                isExternal
+                showAnchorIcon
+                href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10752.05926845766!2d-2.7461428!3d47.6452789!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48101e9be97d2849%3A0xd866b9dbcd1c8418!2sUniversit%C3%A9%20de%20Bretagne%20Sud%20UBS!5e0!3m2!1sfr!2sfr!4v1696194379296!5m2!1sfr!2sfr"
+              >
+                Université Bretagne Sud - Vannes 56000
+              </Link>
             </div>
           </div>
         </div>
-        <div>
+        <div className="w-full lg:w-1/2">
           <iframe
             title="Où sommes-nous ?"
             className="rounded-medium"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10752.05926845766!2d-2.7461428!3d47.6452789!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48101e9be97d2849%3A0xd866b9dbcd1c8418!2sUniversit%C3%A9%20de%20Bretagne%20Sud%20UBS!5e0!3m2!1sfr!2sfr!4v1696194379296!5m2!1sfr!2sfr"
-            width="1000"
-            height="600"
+            width="100%"
+            height="500"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />

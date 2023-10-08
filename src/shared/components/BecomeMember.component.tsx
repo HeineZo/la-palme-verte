@@ -44,6 +44,7 @@ export default function BecomeMember({
       className={cn(
         'py-16 text-center justify-center flex flex-col gap-16',
         className,
+        !showInfiniteLoop && 'gap-6',
       )}
     >
       <div className="px-10 md:px-16">
