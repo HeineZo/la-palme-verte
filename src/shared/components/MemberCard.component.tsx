@@ -28,10 +28,20 @@ type Props = {
   member: Member;
 };
 
+/**
+ * Affiche une carte du membre passé en paramètre
+ * @param member Membre à afficher
+ */
 export default function MemberCard({ member }: Props) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  /**
+   * Anime le fond du composant en fonction de la position de la souris
+   * @param currentTarget Element HTML sur lequel l'évènement a été déclenché
+   * @param clientX Position X de la souris
+   * @param clientY Position Y de la souris
+   */
   const handleMouseMove = ({ currentTarget, clientX, clientY }: MouseEvent) => {
     const { left, top } = currentTarget.getBoundingClientRect();
 
@@ -39,6 +49,11 @@ export default function MemberCard({ member }: Props) {
     mouseY.set(clientY - top);
   };
 
+  /**
+   * Retourne un logo en fonction du réseau social fourni
+   * @param socialName Nom du réseau social
+   * @returns Logo du réseau social
+   */
   const getSocialIcon = (socialName: string) => {
     switch (socialName) {
       case 'facebook':

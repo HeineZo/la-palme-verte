@@ -1,11 +1,5 @@
 import BecomeMember from '@/shared/components/BecomeMember.component';
-import { Avatar } from '@nextui-org/avatar';
-import {
-  IconBrandInstagram,
-  IconBrandX,
-  IconMail,
-  IconMapPin,
-} from '@tabler/icons-react';
+import { IconMail, IconMapPin } from '@tabler/icons-react';
 import { Image } from '@nextui-org/image';
 import Timeline from '@/shared/layout/Timeline.layout';
 import timelineEvents from './assets/timeline-events.json';
@@ -21,9 +15,10 @@ import MemberCard, { Member } from '@/shared/components/MemberCard.component';
 export default async function Page() {
   const staffMembers: Member[] = [
     {
-      name: 'Lilou',
-      role: 'Graphiste',
-      avatar: 'https://picsum.photos/200/300',
+      name: 'Killian',
+      role: 'Trésorier',
+      avatar:
+        'https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',
@@ -31,9 +26,10 @@ export default async function Page() {
       },
     },
     {
-      name: 'Myriam',
-      role: 'Responsable communication',
-      avatar: 'https://picsum.photos/200/300',
+      name: 'Chloé',
+      role: 'Secrétaire',
+      avatar:
+        'https://images.unsplash.com/photo-1615538785945-6625ccdb4b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',
@@ -42,8 +38,9 @@ export default async function Page() {
     },
     {
       name: 'Louann',
-      role: 'Responsable',
-      avatar: 'https://picsum.photos/200/300',
+      role: 'Graphiste',
+      avatar:
+        'https://images.unsplash.com/photo-1614436201459-156d322d38c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',
@@ -53,7 +50,8 @@ export default async function Page() {
     {
       name: 'Côme',
       role: 'Responsable communication',
-      avatar: 'https://picsum.photos/200/300',
+      avatar:
+        'https://images.unsplash.com/photo-1541290431335-1f4c2152e899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',
@@ -61,9 +59,10 @@ export default async function Page() {
       },
     },
     {
-      name: 'Mélissandre',
-      role: 'Responsable',
-      avatar: 'https://picsum.photos/200/300',
+      name: 'Mélisande',
+      role: 'Responsable animation',
+      avatar:
+        'https://images.unsplash.com/photo-1526510747491-58f928ec870f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',
@@ -71,9 +70,10 @@ export default async function Page() {
       },
     },
     {
-      name: 'Valentine',
-      role: 'Responsable',
-      avatar: 'https://picsum.photos/200/300',
+      name: 'Eva',
+      role: 'Organisatrice événements',
+      avatar:
+        'https://images.unsplash.com/photo-1619799087179-061f19622476?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
         twitter: 'https://twitter.com/',

@@ -3,7 +3,7 @@
 import { Avatar } from '@nextui-org/avatar';
 import React from 'react';
 import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
-import { cn } from '@nextui-org/react';
+import { cn } from '@nextui-org/system';
 import Button from '@/shared/theme/Button';
 
 type BecomeMemberProps = {
@@ -18,7 +18,7 @@ type BecomeMemberProps = {
 
 /**
  * Affiche un bloc permettant d'inciter les utilisateurs à devenir adhérent
- * @param className Classe tailwind à ajouter *(optionnel)*
+ * @param className Style tailwind à ajouter *(optionnel)*
  * @param title titre à afficher *(optionnel)*
  * @param shortTitle titre à affichier sur petit écran *(optionnel)*
  * @param subtitle Description de la section *(optionnel)*
@@ -39,6 +39,7 @@ export default function BecomeMember({
   if (shortTitle === undefined) {
     shortTitle = title;
   }
+
   return (
     <div
       className={cn(
@@ -64,9 +65,11 @@ export default function BecomeMember({
         />
       )}
       <div className="flex gap-6 justify-center">
-        <Button color="primary" className="w-fit">
-          {buttonTitle}
-        </Button>
+        {buttonTitle && (
+          <Button color="primary" className="w-fit">
+            {buttonTitle}
+          </Button>
+        )}
         {children}
       </div>
     </div>

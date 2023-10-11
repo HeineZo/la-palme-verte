@@ -27,7 +27,6 @@ export default function Timeline({ events }: Props) {
       selectionMode="multiple"
       showDivider={false}
       disableIndicatorAnimation
-      hideIndicator
     >
       {events?.map((event, index) => (
         <AccordionItem

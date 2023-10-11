@@ -7,7 +7,6 @@ import {
   IconPencilHeart,
 } from '@tabler/icons-react';
 import React from 'react';
-import Button from '@/shared/theme/Button';
 
 /**
  * Page Adhérent
@@ -66,36 +65,33 @@ export default function page() {
 
   return (
     <main>
-      <article className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16">
+      <section className="flex flex-col gap-20 items-center section py-28">
         {/* Nos actions */}
-        <div className="flex flex-col justify-center text-center gap-6 rounded-3xl section">
-          <h3>Pourquoi devenir adhérent ?</h3>
+        <div className="flex flex-col justify-center text-center gap-6">
+          <h1>Pourquoi devenir adhérent ?</h1>
           <p>
             Adhérer à La Palme Verte ce n’est pas seulement soutenir
             l’association
           </p>
         </div>
         <InlineBlocks rows={actionsRow} />
-      </article>
+      </section>
 
       {/* Carrousel des membres */}
-      <article className="bg-highlight">
+      <section className="bg-highlight">
         <BecomeMember
           title="84 personnes ont déjà rejoint l’association"
           subtitle="Pourquoi pas vous ?"
-        >
-          <Button color="primary" className="w-fit">
-            Rejoindre la communauté
-          </Button>
-        </BecomeMember>
-      </article>
-      <article className="flex flex-col gap-20 items-center mt-28 mb-28 ml-16 mr-16 section">
+          buttonTitle="Rejoindre la communauté"
+        />
+      </section>
+      <section className="flex flex-col gap-20 items-center section">
         <FAQ
           questions={questions}
           title="Vous avez des questions ?"
           description="Les questions les plus fréquentes sur l’adhésion à l’association"
         />
-      </article>
+      </section>
     </main>
   );
 }
