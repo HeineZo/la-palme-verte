@@ -71,7 +71,7 @@ export default function MemberCard({ member }: Props) {
 
   return (
     <div
-      className="group relative max-w-md w-full rounded-medium bg-highlight border border-white px-8 py-16"
+      className="group relative max-w-md w-full rounded-medium bg-highlight border border-white px-8 py-12"
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -98,7 +98,7 @@ export default function MemberCard({ member }: Props) {
               key={index}
               href={member.socials[social as keyof typeof member.socials]}
               as={NextLink}
-              className="text-black h-fit"
+              className={`text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white`}
             >
               {getSocialIcon(social)}
             </Link>

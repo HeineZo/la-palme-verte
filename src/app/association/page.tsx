@@ -87,7 +87,7 @@ export default async function Page() {
       <section className="section flex justify-between section gap-20 mt-28 flex-col lg:flex-row">
         <div>
           <small>Introduction</small>
-          <h1>Une association...</h1>
+          <h1>Une association ...</h1>
         </div>
         <div className="flex flex-col gap-6 lg:w-1/2">
           <p>
@@ -121,13 +121,13 @@ export default async function Page() {
       <section className="flex justify-between section gap-20 flex-col lg:flex-row">
         <div>
           <small>Chronologie</small>
-          <h1>...Qui traverse les générations</h1>
+          <h1>... qui traverse les générations</h1>
         </div>
         <div className="lg:w-1/2">
           <Timeline events={timelineEvents} />
         </div>
       </section>
-      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium ring-2 ring-primary">
+      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100">
         <div className="flex flex-col gap-10 lg:w-1/2">
           <div>
             <small>Informations</small>
@@ -240,7 +240,7 @@ export default async function Page() {
               <Link
                 isExternal
                 showAnchorIcon
-                href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10752.05926845766!2d-2.7461428!3d47.6452789!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48101e9be97d2849%3A0xd866b9dbcd1c8418!2sUniversit%C3%A9%20de%20Bretagne%20Sud%20UBS!5e0!3m2!1sfr!2sfr!4v1696194379296!5m2!1sfr!2sfr"
+                href='https://www.google.com/maps?ll=47.645279,-2.746143&z=14&t=m&hl=fr&gl=FR&mapclient=embed&cid=15593355113507095576'
               >
                 Université Bretagne Sud - Vannes 56000
               </Link>
