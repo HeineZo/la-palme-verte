@@ -10,18 +10,14 @@ import {
   IconBrandLinkedin as Linkedin,
   IconMail as Mail,
 } from '@tabler/icons-react';
+import { SocialMedia } from '@/utils/type';
 
 export type Member = {
   name: string;
   role: string;
   avatar: string;
   description?: string;
-  socials: {
-    facebook?: string;
-    twitter?: string;
-    linkedin?: string;
-    mail?: string;
-  };
+  socials: SocialMedia;
 };
 
 type Props = {
@@ -54,11 +50,11 @@ export default function MemberCard({ member }: Props) {
    * @param socialName Nom du réseau social
    * @returns Logo du réseau social
    */
-  const getSocialIcon = (socialName: string) => {
+  const getSocialIcon = (socialName: keyof SocialMedia) => {
     switch (socialName) {
       case 'facebook':
         return <Facebook />;
-      case 'twitter':
+      case 'x':
         return <X />;
       case 'linkedin':
         return <Linkedin />;
@@ -96,11 +92,11 @@ export default function MemberCard({ member }: Props) {
           {Object.keys(member.socials).map((social, index) => (
             <Link
               key={index}
-              href={member.socials[social as keyof typeof member.socials]}
+              href={member.socials[social as keyof SocialMedia]}
               as={NextLink}
-              className={`text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white`}
+              className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
             >
-              {getSocialIcon(social)}
+              {getSocialIcon(social as keyof SocialMedia)}
             </Link>
           ))}
         </div>

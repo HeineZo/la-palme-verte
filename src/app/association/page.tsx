@@ -21,7 +21,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         linkedin: 'https://www.linkedin.com/',
       },
     },
@@ -32,7 +32,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1615538785945-6625ccdb4b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         mail: 'mailto:',
       },
     },
@@ -43,7 +43,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1614436201459-156d322d38c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         mail: 'mailto:',
       },
     },
@@ -54,7 +54,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1541290431335-1f4c2152e899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         mail: 'mailto:',
       },
     },
@@ -65,7 +65,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1526510747491-58f928ec870f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         mail: 'mailto:',
       },
     },
@@ -76,7 +76,7 @@ export default async function Page() {
         'https://images.unsplash.com/photo-1619799087179-061f19622476?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
         facebook: 'https://www.facebook.com/',
-        twitter: 'https://twitter.com/',
+        x: 'https://twitter.com/',
         mail: 'mailto:',
       },
     },
@@ -240,7 +240,7 @@ export default async function Page() {
               <Link
                 isExternal
                 showAnchorIcon
-                href='https://www.google.com/maps?ll=47.645279,-2.746143&z=14&t=m&hl=fr&gl=FR&mapclient=embed&cid=15593355113507095576'
+                href="https://www.google.com/maps?ll=47.645279,-2.746143&z=14&t=m&hl=fr&gl=FR&mapclient=embed&cid=15593355113507095576"
               >
                 Université Bretagne Sud - Vannes 56000
               </Link>
