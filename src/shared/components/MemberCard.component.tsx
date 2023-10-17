@@ -11,6 +11,7 @@ import {
   IconMail as Mail,
 } from '@tabler/icons-react';
 import { SocialMedia } from '@/utils/type';
+import { EsocialMedia } from '@/utils/enums';
 
 export type Member = {
   name: string;
@@ -52,13 +53,13 @@ export default function MemberCard({ member }: Props) {
    */
   const getSocialIcon = (socialName: keyof SocialMedia) => {
     switch (socialName) {
-      case 'facebook':
+      case EsocialMedia.FACEBOOK:
         return <Facebook />;
-      case 'x':
+      case EsocialMedia.X:
         return <X />;
-      case 'linkedin':
+      case EsocialMedia.LINKEDIN:
         return <Linkedin />;
-      case 'mail':
+      case EsocialMedia.MAIL:
         return <Mail />;
       default:
         return null;
