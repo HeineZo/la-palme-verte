@@ -138,18 +138,19 @@ export default function PhotoCarrousel({
  * @param disabled Etat du bouton
  */
 export function LeftArrow({ onClick, disabled }: ArrowProps) {
+  if (!disabled) {
+    return null;
+  }
   return (
-    !disabled && (
-      <Button
-        isIconOnly
-        className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
-        color="primary"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        <IconChevronLeft size={24} />
-      </Button>
-    )
+    <Button
+      isIconOnly
+      className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
+      color="primary"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <IconChevronLeft size={24} />
+    </Button>
   );
 }
 
@@ -159,17 +160,18 @@ export function LeftArrow({ onClick, disabled }: ArrowProps) {
  * @param disabled Etat du bouton
  */
 export function RightArrow({ onClick, disabled }: ArrowProps) {
+  if (!disabled) {
+    return null;
+  }
   return (
-    !disabled && (
-      <Button
-        isIconOnly
-        className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
-        color="primary"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        <IconChevronRight size={24} />
-      </Button>
-    )
+    <Button
+      isIconOnly
+      className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
+      color="primary"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <IconChevronRight size={24} />
+    </Button>
   );
 }

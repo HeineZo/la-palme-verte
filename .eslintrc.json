@@ -49,6 +49,7 @@
 
     "import/no-extraneous-dependencies": "off",
     "import/order": "off",
+    "import/prefer-default-export": "warn",
 
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -58,6 +59,8 @@
     "no-param-reassign": "off",
     "max-len": "off",
     "operator-linebreak": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "linebreak-style": "off"
+    
   }
 }
