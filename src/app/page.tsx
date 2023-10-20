@@ -10,7 +10,7 @@ import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
 import Button from '@/shared/theme/Button';
 import LastArticles from './blog/layout/LastArticles.layout';
 import FAQ from '@/shared/layout/FAQ.layout';
-import BecomeMember from '@/app/adherent/components/BecomeMember.component';
+import BecomeMember from '@/shared/components/BecomeMember.component';
 import Reveal from '@/shared/utils/Reveal.component';
 
 /**
@@ -144,10 +144,8 @@ export default function Home() {
         shortTitle="Devenez adhérent"
         subtitle="En adhérant à l'association, vous pourrez participer à nos actions et
         nous aider à protéger la biodiversité marine."
+        buttonTitle="Devenir adhérent"
       >
-        <Button color="primary" className="w-fit">
-          Devenir adhérent
-        </Button>
         <Button color="secondary" className="w-fit text-accent">
           En savoir plus
         </Button>

@@ -6,7 +6,6 @@
   :root {
     --slide-spacing: 1rem;
     --slide-size: 80%;
-    --slide-height: 19rem;
   }
 
   h1 {
@@ -26,11 +25,11 @@
   }
 
   h5 {
-    @apply text-2xl font-heading font-normal;
+    @apply text-2xl font-heading;
   }
 
   h6 {
-    @apply text-xl font-heading font-bold;
+    @apply text-xl font-heading;
   }
 
   p {

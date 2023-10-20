@@ -14,8 +14,8 @@ import {
 import { Tab } from '@nextui-org/tabs';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { Key } from 'react';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import pages from 'structure.json';
 
 import Button from '@/shared/theme/Button';
@@ -25,16 +25,7 @@ import Button from '@/shared/theme/Button';
  */
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  /**
-   * Dirige l'utilisateur vers la page cible
-   * @param targetPath Chemin de la page cible
-   */
-  const handleNavigation = (targetPath: Key) => {
-    router.push(targetPath as string);
-  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <NavbarUI shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
@@ -48,20 +39,20 @@ export default function Navbar() {
         <Tabs
           variant="light"
           color="secondary"
-          // Pour éviter la redirection lorsqu'on est dans une page autre que celles du menu
-          selectedKey={
-            pages.main.some((page) => page.path === pathname)
-              ? pathname
-              : undefined
-          }
-          onSelectionChange={handleNavigation}
+          selectedKey={pathname}
           classNames={{
             tabList: 'gap-8',
             cursor: 'bg-accent',
           }}
         >
           {pages.main.map((page) => (
-            <Tab key={page.path} title={page.label} />
+            <Tab
+              key={page.path}
+              title={page.label}
+              as={Link}
+              // @ts-ignore
+              href={page.path}
+            />
           ))}
         </Tabs>
       </NavbarContent>
