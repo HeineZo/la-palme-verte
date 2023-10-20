@@ -85,10 +85,7 @@ export default async function Page() {
   return (
     <main>
       <section className="section flex justify-between section gap-20 mt-28 flex-col lg:flex-row">
-        <div>
-          <small>Introduction</small>
-          <h1>Une association ...</h1>
-        </div>
+        <h1>Une association ...</h1>
         <div className="flex flex-col gap-6 lg:w-1/2">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
@@ -119,10 +116,7 @@ export default async function Page() {
         />
       </section>
       <section className="flex justify-between section gap-20 flex-col lg:flex-row">
-        <div>
-          <small>Chronologie</small>
-          <h1>... qui traverse les générations</h1>
-        </div>
+        <h1>... qui traverse les générations</h1>
         <div className="lg:w-1/2">
           <Timeline events={timelineEvents} />
         </div>
@@ -130,7 +124,6 @@ export default async function Page() {
       <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100">
         <div className="flex flex-col gap-10 lg:w-1/2">
           <div>
-            <small>Informations</small>
             <h1>Quelques chiffres</h1>
             <p>
               Depuis la création de l’association, nous ne cessons de réaliser
