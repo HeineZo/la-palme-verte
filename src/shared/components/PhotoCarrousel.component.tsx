@@ -1,9 +1,11 @@
-"use client";
-import React, { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { flushSync } from "react-dom";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { Button } from "@/shared/theme/Button";
+'use client';
+
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { flushSync } from 'react-dom';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import Button from '@/shared/theme/Button';
+import { cn } from '@nextui-org/react';
 
 const TWEEN_FACTOR = 1.2;
 
@@ -14,7 +16,8 @@ interface ArrowProps {
 
 interface PhotoCarrouselProps {
   photos: string[];
-  className?: React.ComponentProps<"div">["className"];
+  height?: React.ComponentProps<'img'>['className'];
+  className?: React.ComponentProps<'div'>['className'];
 }
 
 /**
@@ -22,7 +25,11 @@ interface PhotoCarrouselProps {
  * @param photos Photos à afficher dans le carrousel
  * @param className Style à appliquer au carrousel *(optionnel)*
  */
-export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProps) {
+export default function PhotoCarrousel({
+  photos,
+  className,
+  height = 'h-[500px]',
+}: PhotoCarrouselProps) {
   // API du carrousel
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [tweenValues, setTweenValues] = useState<number[]>([]);
@@ -68,27 +75,27 @@ export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProp
    */
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
+    [emblaApi],
   );
   /**
    * Elément suivant
    */
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
     if (!emblaApi) return;
     onScroll();
-    emblaApi.on("scroll", () => {
+    emblaApi.on('scroll', () => {
       flushSync(() => onScroll());
     });
-    emblaApi.on("reInit", onScroll);
+    emblaApi.on('reInit', onScroll);
   }, [emblaApi, onScroll]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={cn('relative', className)}>
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y ml-[calc(var(--slide-spacing)_*_-1)]">
           {photos.map((photo, index: number) => (
@@ -106,7 +113,10 @@ export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProp
                   }}
                 >
                   <img
-                    className="block h-[var(--slide-height)] object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]"
+                    className={cn(
+                      'block object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]',
+                      height,
+                    )}
                     src={photo}
                     alt="Photo de la gallerie photo"
                   />
@@ -128,18 +138,19 @@ export default function PhotoCarrousel({ photos, className }: PhotoCarrouselProp
  * @param disabled Etat du bouton
  */
 export function LeftArrow({ onClick, disabled }: ArrowProps) {
+  if (!disabled) {
+    return null;
+  }
   return (
-    !disabled && (
-      <Button
-        isIconOnly
-        className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
-        color="primary"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        <IconChevronLeft size={24} />
-      </Button>
-    )
+    <Button
+      isIconOnly
+      className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
+      color="primary"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <IconChevronLeft size={24} />
+    </Button>
   );
 }
 
@@ -149,17 +160,18 @@ export function LeftArrow({ onClick, disabled }: ArrowProps) {
  * @param disabled Etat du bouton
  */
 export function RightArrow({ onClick, disabled }: ArrowProps) {
+  if (!disabled) {
+    return null;
+  }
   return (
-    !disabled && (
-      <Button
-        isIconOnly
-        className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
-        color="primary"
-        onClick={onClick}
-        disabled={disabled}
-      >
-        <IconChevronRight size={24} />
-      </Button>
-    )
+    <Button
+      isIconOnly
+      className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
+      color="primary"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <IconChevronRight size={24} />
+    </Button>
   );
 }

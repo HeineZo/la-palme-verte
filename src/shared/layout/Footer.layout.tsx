@@ -1,15 +1,16 @@
-"use client";
-import Image from "next/image";
-import { Link } from "@nextui-org/react";
-import NextLink from "next/link";
-import pages from "structure.json";
-import { usePathname, useRouter } from "next/navigation";
+'use client';
+
+import Image from 'next/image';
+import { Link } from '@nextui-org/react';
+import NextLink from 'next/link';
+import pages from 'structure.json';
+import { usePathname } from 'next/navigation';
 import {
   IconBrandInstagram,
   IconBrandX,
   IconBrandLinkedin,
-} from "@tabler/icons-react";
-import { getYear } from "date-fns";
+} from '@tabler/icons-react';
+import { getYear } from 'date-fns';
 
 /**
  * Pied de page
@@ -29,12 +30,12 @@ export default function Footer() {
 
         {/* Pages du site */}
         <div className=" gap-8 h-fit md:flex">
-          {pages.map((page) => (
+          {pages.main.map((page) => (
             <Link
               key={page.path}
               isBlock
               href={page.path}
-              className={`${pathname === page.path && "font-bold"} text-white`}
+              className={`${pathname === page.path && 'font-bold'} text-white`}
               as={NextLink}
             >
               {page.label}
@@ -74,13 +75,13 @@ export default function Footer() {
           {getYear(new Date())} {process.env.NEXT_PUBLIC_SITE_NAME}. Tout droit
           réservé.
         </p>
-        <Link as={NextLink} underline="always" className="text-white" href="#">
+        <Link as={NextLink} underline="always" className="text-white" href="/">
           Politique de confidentialité
         </Link>
-        <Link as={NextLink} underline="always" className="text-white" href="#">
+        <Link as={NextLink} underline="always" className="text-white" href="/">
           Conditions d'utilisation
         </Link>
-        <Link as={NextLink} underline="always" className="text-white" href="#">
+        <Link as={NextLink} underline="always" className="text-white" href="/">
           Paramètre des cookies
         </Link>
       </div>

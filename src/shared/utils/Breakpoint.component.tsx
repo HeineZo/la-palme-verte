@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 /**
  * Affiche la taille de l'écran actuel (seulement en développement)
