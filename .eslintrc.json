@@ -1,66 +1,67 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "settings": {
-    "import/resolver": {
-      "typescript": {}
-    }
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": "./",
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "airbnb",
-    "airbnb-typescript"
-  ],
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier"
-  ],
-  "rules": {
-    "prettier/prettier": "error",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".tsx"
-        ]
-      }
+    "settings": {
+        "import/resolver": {
+            "typescript": {}
+        }
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "tsconfigRootDir": "./",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:prettier/recommended",
+        "airbnb",
+        "airbnb-typescript"
     ],
-    "react/react-in-jsx-scope": "off",
-    "react/require-default-props": "off",
-    "react/no-array-index-key": "off",
-    "react/no-unescaped-entities": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/jsx-wrap-multilines": "off",
-    "react/button-has-type": "off",
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto",
+                "tabWidth": 4
+            }
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".tsx"]
+            }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/require-default-props": "off",
+        "react/no-array-index-key": "off",
+        "react/no-unescaped-entities": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-wrap-multilines": "off",
+        "react/button-has-type": "off",
 
-    "import/no-extraneous-dependencies": "off",
-    "import/order": "off",
-    "import/prefer-default-export": "warn",
+        "import/no-extraneous-dependencies": "off",
+        "import/order": "off",
+        "import/prefer-default-export": "warn",
 
-    "@typescript-eslint/no-use-before-define": "off",
-    "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
 
-    "jsx-a11y/img-redundant-alt": "off",
-    
-    "no-param-reassign": "off",
-    "max-len": "off",
-    "operator-linebreak": "off",
-    "object-curly-newline": "off",
-    "linebreak-style": "off"
-    
-  }
+        "jsx-a11y/img-redundant-alt": "off",
+
+        "no-param-reassign": "off",
+        "max-len": "off",
+        "operator-linebreak": "off",
+        "object-curly-newline": "off",
+        "linebreak-style": "off",
+        "no-tabs": "off",
+        "@typescript-eslint/indent": "off"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier"]
 }

@@ -41,37 +41,37 @@ export default function BecomeMember({
   }
 
   return (
-    <div
-      className={cn(
-        'py-16 text-center justify-center flex flex-col gap-16',
-        className,
-        !showInfiniteLoop && 'gap-6',
-      )}
-    >
-      <div className="px-10 md:px-16">
-        <h4 className="hidden md:block"> {title} </h4>
-        <h4 className="block md:hidden"> {shortTitle} </h4>
-        <p> {subtitle} </p>
-      </div>
+  <div
+  className={cn(
+			  'py-16 text-center justify-center flex flex-col gap-16',
+			  className,
+			  !showInfiniteLoop && 'gap-6',
+			)}
+		>
+  <div className="px-10 md:px-16">
+  <h4 className="hidden md:block"> {title} </h4>
+  <h4 className="block md:hidden"> {shortTitle} </h4>
+  <p> {subtitle} </p>
+			</div>
 
-      {showInfiniteLoop && (
-        <InfiniteLoop
-          firstRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
-          ))}
-          secondRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
-          ))}
-        />
-      )}
-      <div className="flex gap-6 justify-center">
-        {buttonTitle && (
-          <Button color="primary" className="w-fit">
-            {buttonTitle}
-          </Button>
-        )}
-        {children}
-      </div>
-    </div>
+  {showInfiniteLoop && (
+				<InfiniteLoop
+    firstRow={Array.from({ length: 20 }).map((_, i) => (
+  <Avatar key={i} className="w-20 h-20 text-white" />
+					))}
+    secondRow={Array.from({ length: 20 }).map((_, i) => (
+  <Avatar key={i} className="w-20 h-20 text-white" />
+					))}
+  />
+			)}
+  <div className="flex gap-6 justify-center">
+  {buttonTitle && (
+					<Button color="primary" className="w-fit">
+    {buttonTitle}
+  </Button>
+				)}
+  {children}
+			</div>
+		</div>
   );
 }

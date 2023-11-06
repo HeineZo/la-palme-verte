@@ -39,8 +39,8 @@ export default function PhotoCarrousel({
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   /**
-   * A chaque changement d'image
-   */
+	 * A chaque changement d'image
+	 */
   const onScroll = useCallback(() => {
     if (!emblaApi) return;
 
@@ -60,8 +60,10 @@ export default function PhotoCarrousel({
           const target = loopItem.target();
           if (index === loopItem.index && target !== 0) {
             const sign = Math.sign(target);
-            if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-            if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+            if (sign === -1)
+							diffToTarget = scrollSnap - (1 + scrollProgress);
+            if (sign === 1)
+							diffToTarget = scrollSnap + (1 - scrollProgress);
           }
         });
       }
@@ -71,15 +73,15 @@ export default function PhotoCarrousel({
   }, [emblaApi, setTweenValues]);
 
   /**
-   * Elément précédent
-   */
+	 * Elément précédent
+	 */
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi],
   );
   /**
-   * Elément suivant
-   */
+	 * Elément suivant
+	 */
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
     [emblaApi],
@@ -95,40 +97,40 @@ export default function PhotoCarrousel({
   }, [emblaApi, onScroll]);
 
   return (
-    <div className={cn('relative', className)}>
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y ml-[calc(var(--slide-spacing)_*_-1)]">
-          {photos.map((photo, index: number) => (
-            <div
-              className="flex-[0_0_var(--slide-size)] min-w-0 pl-[var(--slide-spacing)] relative"
-              key={index}
-            >
-              <div className="h-full overflow-hidden rounded-medium">
-                <div
-                  className="relative h-full w-full"
-                  style={{
-                    ...(tweenValues.length && {
-                      transform: `translateX(${tweenValues[index]}%)`,
-                    }),
-                  }}
-                >
-                  <img
-                    className={cn(
-                      'block object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]',
-                      height,
-                    )}
-                    src={photo}
-                    alt="Photo de la gallerie photo"
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <LeftArrow onClick={scrollPrev} disabled={prevBtnDisabled} />
-      <RightArrow onClick={scrollNext} disabled={nextBtnDisabled} />
-    </div>
+  <div className={cn('relative', className)}>
+  <div className="overflow-hidden" ref={emblaRef}>
+  <div className="flex touch-pan-y ml-[calc(var(--slide-spacing)_*_-1)]">
+  {photos.map((photo, index: number) => (
+  <div
+  className="flex-[0_0_var(--slide-size)] min-w-0 pl-[var(--slide-spacing)] relative"
+  key={index}
+						>
+  <div className="h-full overflow-hidden rounded-medium">
+  <div
+  className="relative h-full w-full"
+  style={{
+									  ...(tweenValues.length && {
+									    transform: `translateX(${tweenValues[index]}%)`,
+									  }),
+									}}
+								>
+  <img
+  className={cn(
+										  'block object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]',
+										  height,
+										)}
+  src={photo}
+  alt="Photo de la gallerie photo"
+									/>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+  <LeftArrow onClick={scrollPrev} disabled={prevBtnDisabled} />
+  <RightArrow onClick={scrollNext} disabled={nextBtnDisabled} />
+		</div>
   );
 }
 
@@ -142,15 +144,15 @@ export function LeftArrow({ onClick, disabled }: ArrowProps) {
     return null;
   }
   return (
-    <Button
-      isIconOnly
-      className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
-      color="primary"
-      onClick={onClick}
-      disabled={disabled}
-    >
-      <IconChevronLeft size={24} />
-    </Button>
+  <Button
+  isIconOnly
+  className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
+  color="primary"
+  onClick={onClick}
+  disabled={disabled}
+		>
+  <IconChevronLeft size={24} />
+		</Button>
   );
 }
 
@@ -164,14 +166,14 @@ export function RightArrow({ onClick, disabled }: ArrowProps) {
     return null;
   }
   return (
-    <Button
-      isIconOnly
-      className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
-      color="primary"
-      onClick={onClick}
-      disabled={disabled}
-    >
-      <IconChevronRight size={24} />
-    </Button>
+  <Button
+  isIconOnly
+  className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
+  color="primary"
+  onClick={onClick}
+  disabled={disabled}
+		>
+  <IconChevronRight size={24} />
+		</Button>
   );
 }

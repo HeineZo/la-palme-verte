@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
-    "lint:fix": "eslint ./ --ext js,jsx,ts,tsx --fix"
+    "lint:fix": "eslint ./ --ext js,jsx,ts,tsx --fix",
+    "db:push": "dotenv -e .env.local -- npx prisma db push"
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.5",
+    "@prisma/client": "^5.5.0",
     "@tabler/icons-react": "^2.32.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
@@ -19,11 +21,13 @@
     "@vercel/analytics": "^1.1.1",
     "autoprefixer": "10.4.14",
     "date-fns": "^2.30.0",
+    "dotenv-cli": "^7.3.0",
     "embla-carousel-react": "^8.0.0-rc12",
     "framer-motion": "^10.16.1",
     "jotai": "^2.2.2",
     "next": "^13.3.4",
     "postcss": "^8.4.31",
+    "prisma": "^5.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3"

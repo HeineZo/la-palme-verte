@@ -28,14 +28,14 @@ export default function Reveal({ children, index, className }: Props) {
     }),
   };
   return (
-    <motion.div
-      className={cn('w-fit', className)}
-      variants={fadeIn}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {children}
-    </motion.div>
+  <motion.div
+  className={cn('w-fit', className)}
+  variants={fadeIn}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+		>
+  {children}
+		</motion.div>
   );
 }

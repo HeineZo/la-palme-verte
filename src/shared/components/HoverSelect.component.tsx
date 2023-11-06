@@ -14,34 +14,34 @@ export default function HoverSelect({ children }: HoverSelectProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   /**
-   * Lorsque la souris entre dans l'élément
-   */
+	 * Lorsque la souris entre dans l'élément
+	 */
   const handleOnMouseEnter = () => {
     setIsHovering(true);
   };
 
   /**
-   * Lorsque la souris quitte l'élément
-   */
+	 * Lorsque la souris quitte l'élément
+	 */
   const handleOnMouseLeave = () => {
     setIsHovering(false);
   };
 
   return (
-    <div
-      className="w-fit h-fit relative p-6"
-      onMouseEnter={handleOnMouseEnter}
-      onMouseLeave={handleOnMouseLeave}
-    >
-      {isHovering && (
-        <motion.span
-          layoutId="hover-select"
-          className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
-          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-        />
-      )}
+  <div
+  className="w-fit h-fit relative p-6"
+  onMouseEnter={handleOnMouseEnter}
+  onMouseLeave={handleOnMouseLeave}
+		>
+  {isHovering && (
+				<motion.span
+    layoutId="hover-select"
+    className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
+    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+  />
+			)}
 
-      {children}
-    </div>
+  {children}
+		</div>
   );
 }

@@ -36,34 +36,34 @@ export default function Counter({
   const isVisible = useIsVisible(ref);
 
   /**
-   * Affiche les chiffres du compteur
-   * @returns Chiffres du compteur à afficher
-   */
+	 * Affiche les chiffres du compteur
+	 * @returns Chiffres du compteur à afficher
+	 */
   const displayNumbers = () => {
     const ret: React.ReactNode[] = [];
     for (let i = 1; i <= value; i *= 10) {
       ret.push(
-        <Digit
-          place={i}
-          key={i}
-          value={isVisible ? value : 0}
-          className={fontStyle}
-        />,
+  <Digit
+  place={i}
+  key={i}
+  value={isVisible ? value : 0}
+  className={fontStyle}
+				/>,
       );
     }
     return ret.reverse();
   };
 
   return (
-    <div
-      ref={ref}
-      style={{ fontSize }}
-      className={cn('flex overflow-hidden rounded', className)}
-    >
-      <small>{prefix}</small>
-      {displayNumbers()}
-      <small>{suffix}</small>
-    </div>
+  <div
+  ref={ref}
+  style={{ fontSize }}
+  className={cn('flex overflow-hidden rounded', className)}
+		>
+  <small>{prefix}</small>
+  {displayNumbers()}
+  <small>{suffix}</small>
+		</div>
   );
 }
 
@@ -88,14 +88,14 @@ function Digit({ place, value, className }: DigitProps) {
   }, [animatedValue, valueRoundedToPlace]);
 
   return (
-    <div
-      style={{ height }}
-      className={cn('relative w-[1ch] tabular-nums', className)}
-    >
-      {Array.from({ length: 10 }, (_, i) => (
-        <Number key={i} mv={animatedValue} number={i} />
-      ))}
-    </div>
+  <div
+  style={{ height }}
+  className={cn('relative w-[1ch] tabular-nums', className)}
+		>
+  {Array.from({ length: 10 }, (_, i) => (
+  <Number key={i} mv={animatedValue} number={i} />
+			))}
+		</div>
   );
 }
 
@@ -124,11 +124,11 @@ function Number({ mv, number }: NumberProps) {
   });
 
   return (
-    <motion.span
-      style={{ y }}
-      className="absolute inset-0 flex items-center justify-center"
-    >
-      {number}
-    </motion.span>
+  <motion.span
+  style={{ y }}
+  className="absolute inset-0 flex items-center justify-center"
+		>
+  {number}
+		</motion.span>
   );
 }
