@@ -42,7 +42,7 @@ Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [G
 
 ```bash
 # Clôner le projet
-$ git clone https://github.com/elucas0/la-palme-verte
+$ git clone https://github.com/HeineZo/la-palme-verte
 
 # Se déplacer dans le projet
 $ cd la-palme-verte
