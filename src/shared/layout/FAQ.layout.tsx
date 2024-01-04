@@ -59,8 +59,7 @@ export default function FAQ({
         <div className="flex flex-col gap-4 text-center">
           <h4>Encore des questions ?</h4>
           <p>
-            Envoyez-nous un message, nous vous répondrons dans les plus brefs
-            délais
+            Envoyez-nous un message, on tentera de vous répondre le plus vite possible.
           </p>
         </div>
         <Button color="secondary" className="text-accent w-fit">

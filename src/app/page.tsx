@@ -22,19 +22,19 @@ export default function Home() {
       icon: <IconScubaMask size={48} stroke={3} />,
       title: 'Une multitude d’ateliers',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Nous proposons une multitude d’activités diversifiées éco-citoyenne et subaquatiques.',
     },
     {
       icon: <IconCalendarHeart size={48} />,
       title: 'Des événements caritatifs',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'L’association propose des événements caritatifs en se mettant au services d’organismes contribuant à la préservation des mers et des océans.',
     },
     {
       icon: <IconUsersGroup size={48} />,
-      title: 'Fédérer une communauté',
+      title: 'Une association universitaire',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Aujourd’hui présente sur le campus de Tohannic, à l’Université Bretagne Sud de Vannes, notre association est accessible pour tous les étudiants, peu importe leur parcours.',
     },
   ];
 
