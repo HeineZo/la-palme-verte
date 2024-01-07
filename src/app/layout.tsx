@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import { Archivo } from 'next/font/google';
 import localFont from 'next/font/local';
 import Navbar from '@/shared/layout/Navbar.layout';
-import Providers from './providers';
 import Breakpoint from '@/shared/utils/Breakpoint.component';
 import Footer from '@/shared/layout/Footer.layout';
+import Providers from './providers';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
+    <html className={`${archivo.variable} ${clashDisplay.variable}`} lang="fr">
       <body className="font-body">
         <Providers>
           <Navbar />

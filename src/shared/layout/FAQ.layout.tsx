@@ -5,17 +5,17 @@ import { Accordion, AccordionItem, cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
 
 // TODO: Faire un fichier de type dédié
-type QuestionFAQ = {
+interface QuestionFAQ {
   label: string;
   content: string;
-};
+}
 
-type FAQProps = {
+interface FAQProps {
   questions: QuestionFAQ[];
   title?: string;
   description?: string;
   className?: React.ComponentProps<'div'>['className'];
-};
+}
 
 /**
  * Questions fréquemment posés
@@ -45,10 +45,10 @@ export default function FAQ({
       <Accordion variant="bordered">
         {questions.map(({ label, content }, index) => (
           <AccordionItem
-            key={index}
             aria-label={`Accordion ${index}`}
-            title={label}
             classNames={{ title: 'font-body', indicator: 'text-medium' }}
+            key={index}
+            title={label}
           >
             {content}
           </AccordionItem>
@@ -63,7 +63,7 @@ export default function FAQ({
             délais
           </p>
         </div>
-        <Button color="secondary" className="text-accent w-fit">
+        <Button className="text-accent w-fit" color="secondary">
           Contactez-nous
         </Button>
       </div>

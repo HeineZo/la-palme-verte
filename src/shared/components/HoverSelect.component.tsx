@@ -33,13 +33,13 @@ export default function HoverSelect({ children }: HoverSelectProps) {
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
-      {isHovering && (
+      {isHovering ? (
         <motion.span
-          layoutId="hover-select"
           className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
+          layoutId="hover-select"
           transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
         />
-      )}
+      ) : null}
 
       {children}
     </div>

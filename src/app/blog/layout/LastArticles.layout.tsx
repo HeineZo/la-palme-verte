@@ -1,6 +1,6 @@
-import Article from '../components/Article.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Button from '@/shared/theme/Button';
+import Article from '../components/Article.component';
 
 /**
  * Affiche les derniers articles en ligne
@@ -56,7 +56,7 @@ export default function LastArticles() {
           </Reveal>
         ))}
       </div>
-      <Button color="secondary" className="text-accent w-fit">
+      <Button className="text-accent w-fit" color="secondary">
         Voir plus
       </Button>
     </div>

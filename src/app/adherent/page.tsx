@@ -1,12 +1,13 @@
-import InlineBlocks, { Row } from '@/shared/layout/InlineBlocks.layout';
-import BecomeMember from '@/shared/components/BecomeMember.component';
-import FAQ from '@/shared/layout/FAQ.layout';
 import {
   IconBrandHipchat,
   IconConfetti,
   IconPencilHeart,
 } from '@tabler/icons-react';
 import React from 'react';
+import type { Row } from '@/shared/layout/InlineBlocks.layout';
+import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
+import BecomeMember from '@/shared/components/BecomeMember.component';
+import FAQ from '@/shared/layout/FAQ.layout';
 
 /**
  * Page Adhérent
@@ -80,16 +81,16 @@ export default function page() {
       {/* Carrousel des membres */}
       <section className="bg-highlight">
         <BecomeMember
-          title="84 personnes ont déjà rejoint l’association"
-          subtitle="Pourquoi pas vous ?"
           buttonTitle="Rejoindre la communauté"
+          subtitle="Pourquoi pas vous ?"
+          title="84 personnes ont déjà rejoint l’association"
         />
       </section>
       <section className="flex flex-col gap-20 items-center section">
         <FAQ
+          description="Les questions les plus fréquentes sur l’adhésion à l’association"
           questions={questions}
           title="Vous avez des questions ?"
-          description="Les questions les plus fréquentes sur l’adhésion à l’association"
         />
       </section>
     </main>
