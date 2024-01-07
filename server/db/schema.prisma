@@ -1,11 +1,11 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -13,13 +13,13 @@ model User {
   name           String
   description    String?
   email          String       @unique
-  socials        SocialMedia? @relation(fields: [socialMediaId], references: [id])
   role           Role         @default(Adherent)
   profilePicture String?
-  posts          BlogPost[]
   socialMediaId  Int?
+  socials        SocialMedia? @relation(fields: [socialMediaId], references: [id])
+  posts          BlogPost[]
   Album          Album[]
-  Image          Image[]
+  Image          Photo[]
 
   @@index([socialMediaId])
 }
@@ -36,15 +36,15 @@ model SocialMedia {
 model BlogPost {
   id         Int        @id @default(autoincrement())
   title      String
-  author     User       @relation(fields: [authorId], references: [id])
   authorId   Int
   readTime   Int?
   imageCover String?
   content    String?
-  categories Category[]
   published  Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime?  @updatedAt
+  author     User       @relation(fields: [authorId], references: [id])
+  categories Category[]
 
   @@index([authorId])
 }
@@ -59,30 +59,39 @@ model Album {
   id          Int       @id @default(autoincrement())
   title       String
   description String?
-  author      User      @relation(fields: [authorId], references: [id])
   authorId    Int
   imageCover  String?
-  images      Image[]
   location    String?
   published   Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  images      Photo[]
 
   @@index([authorId])
 }
 
-model Image {
+model Photo {
   id        Int       @id @default(autoincrement())
-  author    User      @relation(fields: [authorId], references: [id])
   authorId  Int
-  url     String?
-  album     Album     @relation(fields: [albumId], references: [id])
+  url       String?
   albumId   Int
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  author    User      @relation(fields: [authorId], references: [id])
+  album     Album     @relation(fields: [albumId], references: [id])
 
   @@index([authorId])
   @@index([albumId])
+}
+
+model BlogPostToCategory {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_BlogPostToCategory_AB_unique")
+  @@index([B], map: "_BlogPostToCategory_B_index")
+  @@map("_BlogPostToCategory")
 }
 
 enum Role {
