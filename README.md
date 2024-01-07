@@ -31,13 +31,15 @@
 
 ## ✨ Roadmap
 
-* [X] Navbar & Footer ✅
-* [X] Page d'accueil ✅
-* [X] Page d'adhésion ✅
-* [ ] Page de présentation de l'association ⏳
+- [x] Navbar & Footer ✅
+- [x] Page d'accueil ✅
+- [x] Page d'adhésion ✅
+- [ ] Page de présentation de l'association ⏳
 
 ## 🛠️ Participer au développement
+
 ### Code
+
 Pour clôner le projet et lancer l'application, vous aurez besoin d'installer [Git](https://git-scm.com) et [Node.js](https://nodejs.org/en/download/) (qui installe [npm](http://npmjs.com)). Depuis votre terminal:
 
 ```bash
@@ -55,11 +57,12 @@ $ npm run dev
 ```
 
 ### Design
+
 Pour participer au design de l'application, faites une demande pour modifier le fichier Figma 👇
 
 <a href="https://www.figma.com/file/1AKuvHZ7jYKJrlArmCRgyQ/Maquette?type=design&node-id=719%3A268&mode=design&t=Uxi76OzU7h8sE62j-1">
     <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
-</a> 
+</a>
 
 ## 🕹️ Outils utilisés
 
@@ -136,4 +139,3 @@ Pour participer au design de l'application, faites une demande pour modifier le 
 ## © Licence
 
 [MIT](LICENSE)
-

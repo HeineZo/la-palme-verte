@@ -3,10 +3,10 @@
 import { atom, useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 
-export type Post = {
+export interface Post {
   title: string;
   watched: boolean;
-};
+}
 
 const posts = atom<Post[]>([]);
 

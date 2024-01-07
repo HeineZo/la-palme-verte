@@ -1,21 +1,22 @@
 'use client';
 
-import useIsVisible from '@/hook/useIsVisible.hook';
 import { cn } from '@nextui-org/react';
-import { MotionValue, motion, useSpring, useTransform } from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
+import { motion, useSpring, useTransform } from 'framer-motion';
 import React, { useEffect, useRef } from 'react';
+import useIsVisible from '@/hook/useIsVisible.hook';
 
 const fontSize = 30;
 const padding = 15;
 const height = fontSize + padding;
 
-type CounterProps = {
+interface CounterProps {
   value: number;
   fontStyle?: React.ComponentProps<'h1'>['className'];
   className?: React.ComponentProps<'div'>['className'];
   prefix?: string;
   suffix?: string;
-};
+}
 
 /**
  * Affiche un compteur de chiffre animé
@@ -43,35 +44,35 @@ export default function Counter({
     const ret: React.ReactNode[] = [];
     for (let i = 1; i <= value; i *= 10) {
       ret.push(
-  <Digit
-  place={i}
-  key={i}
-  value={isVisible ? value : 0}
-  className={fontStyle}
-				/>,
+        <Digit
+          className={fontStyle}
+          key={i}
+          place={i}
+          value={isVisible ? value : 0}
+        />,
       );
     }
     return ret.reverse();
   };
 
   return (
-  <div
-  ref={ref}
-  style={{ fontSize }}
-  className={cn('flex overflow-hidden rounded', className)}
-		>
-  <small>{prefix}</small>
-  {displayNumbers()}
-  <small>{suffix}</small>
-		</div>
+    <div
+      className={cn('flex overflow-hidden rounded', className)}
+      ref={ref}
+      style={{ fontSize }}
+    >
+      <small>{prefix}</small>
+      {displayNumbers()}
+      <small>{suffix}</small>
+    </div>
   );
 }
 
-type DigitProps = {
+interface DigitProps {
   place: number;
   value: number;
   className?: React.ComponentProps<'h1'>['className'];
-};
+}
 
 /**
  * Créer une case pour afficher un chiffre dans le compteur
@@ -88,21 +89,21 @@ function Digit({ place, value, className }: DigitProps) {
   }, [animatedValue, valueRoundedToPlace]);
 
   return (
-  <div
-  style={{ height }}
-  className={cn('relative w-[1ch] tabular-nums', className)}
-		>
-  {Array.from({ length: 10 }, (_, i) => (
-  <Number key={i} mv={animatedValue} number={i} />
-			))}
-		</div>
+    <div
+      className={cn('relative w-[1ch] tabular-nums', className)}
+      style={{ height }}
+    >
+      {Array.from({ length: 10 }, (_, i) => (
+        <Number key={i} mv={animatedValue} number={i} />
+      ))}
+    </div>
   );
 }
 
-type NumberProps = {
+interface NumberProps {
   mv: MotionValue;
   number: number;
-};
+}
 
 /**
  * Affiche un chiffre dans le compteur
@@ -124,11 +125,11 @@ function Number({ mv, number }: NumberProps) {
   });
 
   return (
-  <motion.span
-  style={{ y }}
-  className="absolute inset-0 flex items-center justify-center"
-		>
-  {number}
-		</motion.span>
+    <motion.span
+      className="absolute inset-0 flex items-center justify-center"
+      style={{ y }}
+    >
+      {number}
+    </motion.span>
   );
 }

@@ -5,13 +5,14 @@ import {
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import InlineBlocks, { Row } from '@/shared/layout/InlineBlocks.layout';
+import type { Row } from '@/shared/layout/InlineBlocks.layout';
+import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
 import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
 import Button from '@/shared/theme/Button';
-import LastArticles from './blog/layout/LastArticles.layout';
 import FAQ from '@/shared/layout/FAQ.layout';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import Reveal from '@/shared/utils/Reveal.component';
+import LastArticles from './blog/layout/LastArticles.layout';
 
 /**
  * Page d'accueil
@@ -79,76 +80,76 @@ export default function Home() {
   ];
 
   return (
-  <div className="flex flex-col items-center">
-  {/* Hero section */}
-  <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-full">
-  <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
-  <Reveal>
-  <h1>Plongez au coeur de l'action</h1>
-					</Reveal>
-  <Reveal index={2}>
-  <p>
-  De 2005 à aujourd’hui, La Palme Verte n’a cessé de
-  se réinventer et de sensibiliser le public sur
-  l’importance de la préservation de nos fond-marins.
-                        </p>
-					</Reveal>
-  <Reveal index={3}>
-  <Button
-  color="primary"
-  endContent={<IconChevronRight size={16} />}
-  className="w-fit"
-						>
-  Découvrir l'association
-						</Button>
-					</Reveal>
-				</div>
-  <div className="hidden lg:flex gap-3">
-  <div className="flex flex-col gap-7">
-  <Image
-  isZoomed
-  width={200}
-  height={270}
-  alt="Image de fond marin"
-  src="https://images.unsplash.com/photo-1559825481-12a05cc00344?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
-						/>
-  <Image
-  isZoomed
-  width={200}
-  height={300}
-  alt="Image de fond marin"
-  src="https://images.unsplash.com/photo-1565214975484-3cfa9e56f914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80"
-						/>
-					</div>
-  <div className="flex flex-col gap-7">
-  <Image
-  isZoomed
-  width={290}
-  alt="Image de fond marin"
-  src="https://images.unsplash.com/photo-1682687981603-ae874bf432f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-						/>
-  <Image
-  isZoomed
-  width={290}
-  alt="Image de fond marin"
-  src="https://images.unsplash.com/photo-1628630500614-1c8924c99c3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-						/>
-					</div>
-				</div>
-			</div>
+    <div className="flex flex-col items-center">
+      {/* Hero section */}
+      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-full">
+        <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
+          <Reveal>
+            <h1>Plongez au coeur de l'action</h1>
+          </Reveal>
+          <Reveal index={2}>
+            <p>
+              De 2005 à aujourd’hui, La Palme Verte n’a cessé de se réinventer
+              et de sensibiliser le public sur l’importance de la préservation
+              de nos fond-marins.
+            </p>
+          </Reveal>
+          <Reveal index={3}>
+            <Button
+              className="w-fit"
+              color="primary"
+              endContent={<IconChevronRight size={16} />}
+            >
+              Découvrir l'association
+            </Button>
+          </Reveal>
+        </div>
+        <div className="hidden lg:flex gap-3">
+          <div className="flex flex-col gap-7">
+            <Image
+              alt="Image de fond marin"
+              height={270}
+              isZoomed
+              src="https://images.unsplash.com/photo-1559825481-12a05cc00344?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
+              width={200}
+            />
+            <Image
+              alt="Image de fond marin"
+              height={300}
+              isZoomed
+              src="https://images.unsplash.com/photo-1565214975484-3cfa9e56f914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80"
+              width={200}
+            />
+          </div>
+          <div className="flex flex-col gap-7">
+            <Image
+              alt="Image de fond marin"
+              isZoomed
+              src="https://images.unsplash.com/photo-1682687981603-ae874bf432f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+              width={290}
+            />
+            <Image
+              alt="Image de fond marin"
+              isZoomed
+              src="https://images.unsplash.com/photo-1628630500614-1c8924c99c3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+              width={290}
+            />
+          </div>
+        </div>
+      </div>
 
-  {/* Adhérer */}
-  <BecomeMember
-  title="Devenez adhérent pour rejoindre une communauté grandissante"
-  shortTitle="Devenez adhérent"
-  subtitle="En adhérant à l'association, vous pourrez participer à nos actions et
+      {/* Adhérer */}
+      <BecomeMember
+        buttonTitle="Devenir adhérent"
+        shortTitle="Devenez adhérent"
+        subtitle="En adhérant à l'association, vous pourrez participer à nos actions et
         nous aider à protéger la biodiversité marine."
-  buttonTitle="Devenir adhérent"
-			>
-  <Button color="secondary" className="w-fit text-accent">
-  En savoir plus
-                </Button>
-			</BecomeMember>
+        title="Devenez adhérent pour rejoindre une communauté grandissante"
+      >
+        <Button className="w-fit text-accent" color="secondary">
+          En savoir plus
+        </Button>
+      </BecomeMember>
 
   {/* Nos actions */}
   <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
@@ -166,12 +167,12 @@ export default function Home() {
   {/* Blog */}
   <LastArticles />
 
-  {/* FAQ */}
-  <FAQ
-  questions={questions}
-  title="Vous avez des questions ?"
-  description="Les questions que l'on nous pose le plus souvent"
-			/>
-		</div>
+      {/* FAQ */}
+      <FAQ
+        description="Les questions que l'on nous pose le plus souvent"
+        questions={questions}
+        title="Vous avez des questions ?"
+      />
+    </div>
   );
 }

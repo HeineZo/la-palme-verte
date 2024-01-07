@@ -1,6 +1,6 @@
-export type SocialMedia = {
+export interface SocialMedia {
   facebook?: string;
   x?: string;
   linkedin?: string;
   mail?: string;
-};
+}

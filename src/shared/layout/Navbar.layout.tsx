@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import pages from 'structure.json';
-
 import Button from '@/shared/theme/Button';
 
 /**
@@ -28,51 +27,40 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-  <NavbarUI shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
-  {/* Logo */}
-  <NavbarBrand as={Link} href="/">
-  <Image
-  src="/logo.svg"
-  width={50}
-  height={50}
-  alt="La Palme Verte"
-				/>
-			</NavbarBrand>
+    <NavbarUI onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll>
+      {/* Logo */}
+      <NavbarBrand as={Link} href="/">
+        <Image alt="La Palme Verte" height={50} src="/logo.svg" width={50} />
+      </NavbarBrand>
 
-  {/* Pages du site */}
-  <NavbarContent className="hidden sm:flex gap-8" justify="center">
-  <Tabs
-  variant="light"
-  color="secondary"
-  selectedKey={pathname}
-  classNames={{
-					  tabList: 'gap-8',
-					  cursor: 'bg-accent',
-					}}
-				>
-  {pages.main.map((page) => (
-  <Tab
-  key={page.path}
-  title={page.label}
-  as={Link}
-							// @ts-ignore
-  href={page.path}
-						/>
-					))}
-				</Tabs>
-			</NavbarContent>
+      {/* Pages du site */}
+      <NavbarContent className="hidden sm:flex gap-8" justify="center">
+        <Tabs
+          classNames={{
+            tabList: 'gap-8',
+            cursor: 'bg-accent',
+          }}
+          color="secondary"
+          selectedKey={pathname}
+          variant="light"
+        >
+          {pages.main.map((page) => (
+            <Tab
+              key={page.path}
+              title={page.label}
+              href={page.path}
+            />
+          ))}
+        </Tabs>
+      </NavbarContent>
 
-  <NavbarContent justify="end">
-  {/* CTA */}
-  <NavbarItem>
-  <Button
-  color="primary"
-  as={Link}
-  href={pages.other.adherent.path}
-					>
-  {pages.other.adherent.label}
-					</Button>
-				</NavbarItem>
+      <NavbarContent justify="end">
+        {/* CTA */}
+        <NavbarItem>
+          <Button as={Link} color="primary" href={pages.other.adherent.path}>
+            {pages.other.adherent.label}
+          </Button>
+        </NavbarItem>
 
   {/* Menu mobile */}
   <NavbarMenuToggle
@@ -81,26 +69,24 @@ export default function Navbar() {
 				/>
 			</NavbarContent>
 
-  {/* Menu déroulant mobile */}
-  <NavbarMenu>
-  {pages.main.map((page) => {
-				  const isActive = pathname === page.path;
-				  return (
-  <NavbarMenuItem key={page.path}>
-  <UILink
-  color="foreground"
-  className={`w-full ${
-								  isActive && 'text-accent'
-								}`}
-  size="lg"
-  href={page.path}
-							>
-  {page.label}
-							</UILink>
-						</NavbarMenuItem>
-				  );
-				})}
-			</NavbarMenu>
-		</NavbarUI>
+      {/* Menu déroulant mobile */}
+      <NavbarMenu>
+        {pages.main.map((page) => {
+          const isActive = pathname === page.path;
+          return (
+            <NavbarMenuItem key={page.path}>
+              <UILink
+                className={`w-full ${isActive && 'text-accent'}`}
+                color="foreground"
+                href={page.path}
+                size="lg"
+              >
+                {page.label}
+              </UILink>
+            </NavbarMenuItem>
+          );
+        })}
+      </NavbarMenu>
+    </NavbarUI>
   );
 }

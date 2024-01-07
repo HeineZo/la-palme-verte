@@ -29,20 +29,16 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return (
-		<html
-			lang="fr"
-			className={`${archivo.variable} ${clashDisplay.variable}`}
-		>
-			<body className="font-body">
-				<Providers>
-					<Navbar />
-					{children}
-					<Analytics />
-					<Breakpoint />
-					<Footer />
-  </Providers>
-  </body>
-  </html>
-	);
+  return (
+    <html className={`${archivo.variable} ${clashDisplay.variable}`} lang="fr">
+      <body className="font-body">
+        <Providers>
+          <Navbar />
+          {children}
+          <Breakpoint />
+          <Footer />
+        </Providers>
+      </body>
+    </html>
+  );
 }

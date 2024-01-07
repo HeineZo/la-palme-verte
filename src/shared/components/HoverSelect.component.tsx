@@ -28,18 +28,18 @@ export default function HoverSelect({ children }: HoverSelectProps) {
   };
 
   return (
-  <div
-  className="w-fit h-fit relative p-6"
-  onMouseEnter={handleOnMouseEnter}
-  onMouseLeave={handleOnMouseLeave}
-		>
-  {isHovering && (
-				<motion.span
-    layoutId="hover-select"
-    className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
-    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-  />
-			)}
+    <div
+      className="w-fit h-fit relative p-6"
+      onMouseEnter={handleOnMouseEnter}
+      onMouseLeave={handleOnMouseLeave}
+    >
+      {isHovering ? (
+        <motion.span
+          className="absolute inset-0 -z-10 bg-highlight ring-2 ring-primary rounded-medium"
+          layoutId="hover-select"
+          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+        />
+      ) : null}
 
   {children}
 		</div>
