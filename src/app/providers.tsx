@@ -3,6 +3,7 @@
 import { NextUIProvider } from '@nextui-org/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 /**
  * Fournit les providers de l'application (Theme, etc...)
@@ -13,7 +14,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NextUIProvider>{children}</NextUIProvider>
+      <NextUIProvider>
+        <Analytics />
+        {children}
+      </NextUIProvider>
     </QueryClientProvider>
   );
 }

@@ -3,10 +3,9 @@ import type { Metadata } from 'next';
 import { Archivo } from 'next/font/google';
 import localFont from 'next/font/local';
 import Navbar from '@/shared/layout/Navbar.layout';
-import Providers from './providers';
-import { Analytics } from '@vercel/analytics/react';
 import Breakpoint from '@/shared/utils/Breakpoint.component';
 import Footer from '@/shared/layout/Footer.layout';
+import Providers from './providers';
 
 const archivo = Archivo({
 	subsets: ['latin'],
