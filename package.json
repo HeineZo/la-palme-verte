@@ -12,10 +12,10 @@
   },
   "prettier": "@vercel/style-guide/prettier",
   "dependencies": {
-    "@prisma/client": "^5.5.0",
+    "@prisma/client": "^5.7.1",
     "@vercel/analytics": "^1.1.1",
     "dotenv-cli": "^7.3.0",
-    "prisma": "^5.5.0",
+    "prisma": "^5.7.1",
     "@next/eslint-plugin-next": "^14.0.4",
     "@nextui-org/image": "^2.0.24",
     "@nextui-org/react": "^2.2.9",
