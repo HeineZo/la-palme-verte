@@ -2,7 +2,7 @@
 
 import { Avatar, Link } from '@nextui-org/react';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import NextLink from 'next/link';
 import {
   IconBrandFacebook as Facebook,
@@ -10,26 +10,26 @@ import {
   IconBrandLinkedin as Linkedin,
   IconMail as Mail,
 } from '@tabler/icons-react';
-import { SocialMedia } from '@/utils/type';
+import type { SocialMedia } from '@/utils/type';
 import { EsocialMedia } from '@/utils/enums';
 
-export type Member = {
+export interface Member {
   name: string;
   role: string;
   avatar: string;
   description?: string;
   socials: SocialMedia;
-};
+}
 
-type Props = {
+interface MemberCardProps {
   member: Member;
-};
+}
 
 /**
  * Affiche une carte du membre passé en paramètre
  * @param member Membre à afficher
  */
-export default function MemberCard({ member }: Props) {
+export default function MemberCard({ member }: MemberCardProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -84,7 +84,7 @@ export default function MemberCard({ member }: Props) {
         }}
       />
       <div className="flex flex-col items-center gap-5">
-        <Avatar src={member.avatar} size="lg" className="w-20 h-20" />
+        <Avatar className="w-20 h-20" size="lg" src={member.avatar} />
         <div className="text-center">
           <p className="font-bold">{member.name}</p>
           <p>{member.role}</p>
@@ -92,10 +92,10 @@ export default function MemberCard({ member }: Props) {
         <div className="flex gap-4 flex-wrap justify-center">
           {Object.keys(member.socials).map((social, index) => (
             <Link
-              key={index}
-              href={member.socials[social as keyof SocialMedia]}
               as={NextLink}
               className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
+              href={member.socials[social as keyof SocialMedia]}
+              key={index}
             >
               {getSocialIcon(social as keyof SocialMedia)}
             </Link>

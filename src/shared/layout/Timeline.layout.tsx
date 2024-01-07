@@ -1,37 +1,36 @@
-/* eslint-disable react/no-unstable-nested-components */
-
 'use client';
 
 import React from 'react';
 import { Accordion, AccordionItem, Divider, cn } from '@nextui-org/react';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
 
-export type TimelineEvent = {
+export interface TimelineEvent {
   date: string;
   title: string;
   description: string;
   active?: boolean;
-};
+}
 
-type Props = {
+interface TimelineProps {
   events: TimelineEvent[];
-};
+}
 
 /**
  * Affiche une liste d'événements sous forme de timeline
  * @param events Liste des événements à ajouter
  */
-export default function Timeline({ events }: Props) {
+export default function Timeline({ events }: TimelineProps) {
   return (
     <Accordion
+      disableIndicatorAnimation
       selectionMode="multiple"
       showDivider={false}
-      disableIndicatorAnimation
     >
-      {events?.map((event, index) => (
+      {events.map((event, index) => (
         <AccordionItem
-          key={index}
           indicator={({ isOpen }) => (isOpen ? <IconMinus /> : <IconPlus />)}
+          key={index}
+          textValue={event.description}
           title={
             <div className="flex gap-10 p-5 rounded-medium hover:bg-default-50 transition-all">
               <div className="flex flex-col items-center">
@@ -50,7 +49,7 @@ export default function Timeline({ events }: Props) {
                   />
                 </span>
                 {index + 1 < events.length && (
-                  <Divider orientation="vertical" className="h-full" />
+                  <Divider className="h-full" orientation="vertical" />
                 )}
               </div>
               <div className="flex flex-col gap-4">
@@ -59,7 +58,6 @@ export default function Timeline({ events }: Props) {
               </div>
             </div>
           }
-          textValue={event.description}
         >
           <p className="ml-24">{event.description}</p>
         </AccordionItem>

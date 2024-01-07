@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import pages from 'structure.json';
-
 import Button from '@/shared/theme/Button';
 
 /**
@@ -28,29 +27,27 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <NavbarUI shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
+    <NavbarUI onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll>
       {/* Logo */}
       <NavbarBrand as={Link} href="/">
-        <Image src="/logo.svg" width={50} height={50} alt="La Palme Verte" />
+        <Image alt="La Palme Verte" height={50} src="/logo.svg" width={50} />
       </NavbarBrand>
 
       {/* Pages du site */}
       <NavbarContent className="hidden sm:flex gap-8" justify="center">
         <Tabs
-          variant="light"
-          color="secondary"
-          selectedKey={pathname}
           classNames={{
             tabList: 'gap-8',
             cursor: 'bg-accent',
           }}
+          color="secondary"
+          selectedKey={pathname}
+          variant="light"
         >
           {pages.main.map((page) => (
             <Tab
               key={page.path}
               title={page.label}
-              as={Link}
-              // @ts-ignore
               href={page.path}
             />
           ))}
@@ -60,7 +57,7 @@ export default function Navbar() {
       <NavbarContent justify="end">
         {/* CTA */}
         <NavbarItem>
-          <Button color="primary" as={Link} href={pages.other.adherent.path}>
+          <Button as={Link} color="primary" href={pages.other.adherent.path}>
             {pages.other.adherent.label}
           </Button>
         </NavbarItem>
@@ -79,10 +76,10 @@ export default function Navbar() {
           return (
             <NavbarMenuItem key={page.path}>
               <UILink
-                color="foreground"
                 className={`w-full ${isActive && 'text-accent'}`}
-                size="lg"
+                color="foreground"
                 href={page.path}
+                size="lg"
               >
                 {page.label}
               </UILink>
