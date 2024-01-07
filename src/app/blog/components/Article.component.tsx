@@ -2,9 +2,10 @@
 
 import { Chip, Image } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
+import { BlogPost } from '@prisma/client';
 
 interface ArticleProps {
-  article: any; // TODO: type Article
+  article: BlogPost;
 }
 
 /**
@@ -16,7 +17,7 @@ export default function Article({ article }: ArticleProps) {
     <div className="flex flex-col min-w-[350px] max-w-xl gap-6 flex-1 p-6 rounded-medium relative shadow-medium hover:scale-105 transition-all">
       <Image
         className="object-cover h-[300px]"
-        src={article.photo}
+        src={article.imageCover ?? undefined}
         width="100%"
       />
       <div className="flex gap-2">
@@ -27,8 +28,8 @@ export default function Article({ article }: ArticleProps) {
         ))}
       </div>
       <div className="flex flex-col gap-2">
-        <h5>{article.titre}</h5>
-        <p className="line-clamp-2">{article.description}</p>
+        <h5>{article.title}</h5>
+        <p className="line-clamp-2">{article.content}</p>
       </div>
       <Button className="w-fit" color="primary" variant="light">
         Lire plus

@@ -63,7 +63,7 @@ model Album {
   imageCover  String?
   location    String?
   published   Boolean   @default(false)
-  createdAt   DateTime  @default(now())
+  createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
   author      User      @relation(fields: [authorId], references: [id])
   images      Photo[]
