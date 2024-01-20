@@ -4,3 +4,13 @@ export enum EsocialMedia {
   LINKEDIN = 'linkedin',
   MAIL = 'mail',
 }
+
+export enum EArticleCategory {
+  NATURE = 'Nature',
+  OCEAN = 'Océan',
+  SOCIAL = 'social',
+  POLLUTION = 'Polution',
+  INFORMATION = 'Information',
+  PRESENTATION = 'Présentation',
+  NEWS = 'Nouveauté',
+}

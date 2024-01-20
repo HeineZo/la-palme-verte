@@ -85,6 +85,15 @@ model Photo {
   @@index([albumId])
 }
 
+model BlogPostToCategory {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_BlogPostToCategory_AB_unique")
+  @@index([B], map: "_BlogPostToCategory_B_index")
+  @@map("_BlogPostToCategory")
+}
+
 enum Role {
   Membre
   Admin
