@@ -30,7 +30,7 @@ export default function page() {
         'https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80',
       content: 'Selon un rapport de l’ONG Haereticus Environmental Laboratory, 14 000 tonnes de crème solaire se déversent chaque année dans les océans, et 25% de ces produits contiennent des substances toxiques pour les coraux.',
       published: false,
-      createdAt: new Date('13/08/2023'),
+      createdAt: new Date('08/13/2023'),
       updatedAt: null,
     },
     {
@@ -42,7 +42,7 @@ export default function page() {
         'https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80',
       content: 'Moi et quelques amis avons décidé de partir en voyage pour découvrir les plus beaux spots de plongée du monde. Voici notre top 5.',
       published: false,
-      createdAt: new Date('24/09/2022'),
+      createdAt: new Date('09/24/2022'),
       updatedAt: null,
     },
   ];

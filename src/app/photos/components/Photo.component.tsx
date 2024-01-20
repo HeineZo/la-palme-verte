@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { getPhotos, deleteAll } from 'server/photo';
 import Button from '@/shared/theme/Button';
+import Zoom from "smooth-zoom";
+import ZoomableImage from './ZoomableImage.component';
 
 export default function Photo() {
   const { data, error, isFetched } = useQuery({
@@ -15,8 +17,7 @@ export default function Photo() {
   if (data?.data) {
     return (
       <div>
-        <h2>Composant photo</h2>
-        <Button
+        {/* <Button
           onClick={() => {
             void (async () => {
               await deleteAll();
@@ -24,9 +25,10 @@ export default function Photo() {
           }}
         >
           Supprimer
-        </Button>
+        </Button> */}
         {data.data.map((photo) => (
-          <Image key={photo.id} src={photo.url ?? undefined} />
+          // <Image key={photo.id} src={photo.url ?? undefined} />
+          <ZoomableImage key={photo.id} src={photo.url ?? undefined}></ZoomableImage>
         ))}
       </div>
     );
