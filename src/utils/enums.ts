@@ -8,7 +8,7 @@ export enum EsocialMedia {
 export enum EArticleCategory {
   NATURE = 'Nature',
   OCEAN = 'Océan',
-  SOCIAL = 'social',
+  SOCIAL = 'Social',
   POLLUTION = 'Polution',
   INFORMATION = 'Information',
   PRESENTATION = 'Présentation',
