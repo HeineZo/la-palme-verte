@@ -37,9 +37,9 @@ export default function Counter({
   const isVisible = useIsVisible(ref);
 
   /**
-   * Affiche les chiffres du compteur
-   * @returns Chiffres du compteur à afficher
-   */
+	 * Affiche les chiffres du compteur
+	 * @returns Chiffres du compteur à afficher
+	 */
   const displayNumbers = () => {
     const ret: React.ReactNode[] = [];
     for (let i = 1; i <= value; i *= 10) {

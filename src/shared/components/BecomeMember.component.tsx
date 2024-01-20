@@ -37,18 +37,18 @@ export default function BecomeMember({
   buttonTitle,
 }: BecomeMemberProps) {
   return (
-    <div
-      className={cn(
-        'py-16 text-center justify-center flex flex-col gap-16',
-        className,
-        !showInfiniteLoop && 'gap-6',
-      )}
-    >
-      <div className="px-10 md:px-16">
-        <h4 className="hidden md:block"> {title} </h4>
-        <h4 className="block md:hidden"> {shortTitle} </h4>
-        <p> {subtitle} </p>
-      </div>
+  <div
+  className={cn(
+			  'py-16 text-center justify-center flex flex-col gap-16',
+			  className,
+			  !showInfiniteLoop && 'gap-6',
+			)}
+		>
+  <div className="px-10 md:px-16">
+  <h4 className="hidden md:block"> {title} </h4>
+  <h4 className="block md:hidden"> {shortTitle} </h4>
+  <p> {subtitle} </p>
+			</div>
 
       {showInfiniteLoop ? (
         <InfiniteLoop

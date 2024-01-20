@@ -45,11 +45,7 @@ export default function Navbar() {
           variant="light"
         >
           {pages.main.map((page) => (
-            <Tab
-              key={page.path}
-              title={page.label}
-              href={page.path}
-            />
+            <Tab key={page.path} title={page.label} href={page.path} />
           ))}
         </Tabs>
       </NavbarContent>

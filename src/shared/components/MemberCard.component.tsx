@@ -8,21 +8,13 @@ import {
   IconBrandFacebook as Facebook,
   IconBrandX as X,
   IconBrandLinkedin as Linkedin,
-  IconMail as Mail,
+  IconBrandInstagram as Instagram,
 } from '@tabler/icons-react';
-import type { SocialMedia } from '@/utils/type';
-import { EsocialMedia } from '@/utils/enums';
-
-export interface Member {
-  name: string;
-  role: string;
-  avatar: string;
-  description?: string;
-  socials: SocialMedia;
-}
+import { SocialMedia } from '@prisma/client';
+import { FullUser } from '@/utils/type';
 
 interface MemberCardProps {
-  member: Member;
+  member: FullUser;
 }
 
 /**
@@ -53,14 +45,14 @@ export default function MemberCard({ member }: MemberCardProps) {
    */
   const getSocialIcon = (socialName: keyof SocialMedia) => {
     switch (socialName) {
-      case EsocialMedia.FACEBOOK:
+      case 'facebook':
         return <Facebook />;
-      case EsocialMedia.X:
+      case 'x':
         return <X />;
-      case EsocialMedia.LINKEDIN:
+      case 'linkedin':
         return <Linkedin />;
-      case EsocialMedia.MAIL:
-        return <Mail />;
+      case 'instagram':
+        return <Instagram />;
       default:
         return null;
     }
@@ -84,23 +76,32 @@ export default function MemberCard({ member }: MemberCardProps) {
         }}
       />
       <div className="flex flex-col items-center gap-5">
-        <Avatar className="w-20 h-20" size="lg" src={member.avatar} />
+        <Avatar
+          className="w-20 h-20"
+          size="lg"
+          src={member.profilePicture ?? undefined}
+        />
         <div className="text-center">
           <p className="font-bold">{member.name}</p>
           <p>{member.role}</p>
         </div>
-        <div className="flex gap-4 flex-wrap justify-center">
-          {Object.keys(member.socials).map((social, index) => (
-            <Link
-              as={NextLink}
-              className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
-              href={member.socials[social as keyof SocialMedia]}
-              key={index}
-            >
-              {getSocialIcon(social as keyof SocialMedia)}
-            </Link>
-          ))}
-        </div>
+        {member.socials && (
+          <div className="flex gap-4 flex-wrap justify-center">
+            {Object.entries(member.socials).map(
+              ([key, value]) =>
+                typeof value === 'string' && (
+                  <Link
+                    as={NextLink}
+                    className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
+                    href={value}
+                    key={key}
+                  >
+                    {getSocialIcon(key as keyof SocialMedia)}
+                  </Link>
+                ),
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

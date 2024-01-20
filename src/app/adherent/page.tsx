@@ -18,19 +18,19 @@ export default function page() {
       icon: <IconPencilHeart size={48} stroke={3} />,
       title: 'Accès à la rédaction d’articles',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       icon: <IconConfetti size={48} />,
       title: 'Accès au canal privé de la communauté',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       icon: <IconBrandHipchat size={48} />,
       title: 'Participation à de nombreuses activités',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
   ];
 
@@ -38,45 +38,43 @@ export default function page() {
     {
       label: 'Est-ce que je peux donner l’argent de l’adhésion en liquide ?',
       content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       label: 'J’aimerai adhérer à l’association, comment faire ?',
       content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      label:
-        'Je viens de souscrire à une adhésion, comment rédiger un article ?',
+      label: 'Je viens de souscrire à une adhésion, comment rédiger un article ?',
       content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
       label: 'Pourquoi l’adhésion n’est-elle pas gratuite ?',
       content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
     {
-      label:
-        'J’habite dans un autre pays, est-ce quand même possible d’adhérer ?',
+      label: 'J’habite dans un autre pays, est-ce quand même possible d’adhérer ?',
       content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
   ];
 
   return (
-    <main>
-      <section className="flex flex-col gap-20 items-center section py-28">
-        {/* Nos actions */}
-        <div className="flex flex-col justify-center text-center gap-6">
-          <h1>Pourquoi devenir adhérent ?</h1>
-          <p>
-            Adhérer à La Palme Verte ce n’est pas seulement soutenir
-            l’association
-          </p>
-        </div>
-        <InlineBlocks rows={actionsRow} />
-      </section>
+  <main>
+  <section className="flex flex-col gap-20 items-center section py-28">
+  {/* Nos actions */}
+  <div className="flex flex-col justify-center text-center gap-6">
+  <h1>Pourquoi devenir adhérent ?</h1>
+  <p>
+  Adhérer à La Palme Verte ce n’est pas seulement soutenir
+  l’association
+                    </p>
+				</div>
+  <InlineBlocks rows={actionsRow} />
+			</section>
 
       {/* Carrousel des membres */}
       <section className="bg-highlight">

@@ -31,16 +31,16 @@ export default function FAQ({
   className,
 }: FAQProps) {
   return (
-    <div
-      className={cn(
-        'section flex flex-col py-16 gap-14 max-w-7xl w-full',
-        className,
-      )}
-    >
-      <div className="flex flex-col gap-4 items-center text-center">
-        <h2>{title}</h2>
-        <p>{description}</p>
-      </div>
+  <div
+  className={cn(
+			  'section flex flex-col py-16 gap-14 max-w-7xl w-full',
+			  className,
+			)}
+		>
+  <div className="flex flex-col gap-4 items-center text-center">
+  <h2>{title}</h2>
+  <p>{description}</p>
+			</div>
 
       <Accordion variant="bordered">
         {questions.map(({ label, content }, index) => (

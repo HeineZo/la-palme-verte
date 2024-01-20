@@ -26,5 +26,8 @@ module.exports = {
       'tsdoc/syntax': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       'import/no-extraneous-dependencies': 'off',
+      '@typescript-eslint/consistent-type-imports': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'import/order': 'off',
     },
 }

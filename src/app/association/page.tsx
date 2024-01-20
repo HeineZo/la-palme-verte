@@ -6,80 +6,122 @@ import Counter from '@/shared/utils/Counter.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Timeline from '@/shared/layout/Timeline.layout';
 import BecomeMember from '@/shared/components/BecomeMember.component';
-import type { Member } from '@/shared/components/MemberCard.component';
 import MemberCard from '@/shared/components/MemberCard.component';
 import timelineEvents from './assets/timeline-events.json';
+import { FullUser } from '@/utils/type';
 
 /**
  * Page de présentation de l'association
  */
 export default function Page() {
-  const staffMembers: Member[] = [
+  const staffMembers: FullUser[] = [
     {
+      id: 0,
       name: 'Killian',
-      role: 'Trésorier',
-      avatar:
+      role: 'Admin',
+      description: "J'aime le ski",
+      profilePicture:
         'https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1925&q=80',
       socials: {
+        id: 0,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
         linkedin: 'https://www.linkedin.com/',
+        instagram: 'https://www.instagram.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 0,
     },
     {
+      id: 1,
       name: 'Chloé',
-      role: 'Secrétaire',
-      avatar:
+      description: "J'aime les sacs Hermès",
+      role: 'Admin',
+      profilePicture:
         'https://images.unsplash.com/photo-1615538785945-6625ccdb4b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
+        id: 1,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
-        mail: 'mailto:',
+        instagram: 'https://www.instagram.com/',
+        linkedin: 'https://www.linkedin.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 1,
     },
     {
+      id: 2,
       name: 'Louann',
-      role: 'Graphiste',
-      avatar:
+      description: "J'aime les crêpes",
+      role: 'Admin',
+      profilePicture:
         'https://images.unsplash.com/photo-1614436201459-156d322d38c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
+        id: 2,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
-        mail: 'mailto:',
+        instagram: 'https://www.instagram.com/',
+        linkedin: 'https://www.linkedin.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 2,
     },
     {
+      id: 3,
       name: 'Côme',
-      role: 'Responsable communication',
-      avatar:
+      description: "J'aime les pâtes",
+      role: 'Admin',
+      profilePicture:
         'https://images.unsplash.com/photo-1541290431335-1f4c2152e899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
+        id: 3,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
-        mail: 'mailto:',
+        instagram: 'https://www.instagram.com/',
+        linkedin: 'https://www.linkedin.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 3,
     },
     {
+      id: 4,
       name: 'Mélisande',
-      role: 'Responsable animation',
-      avatar:
+      description: "J'aime les chats",
+      role: 'Admin',
+      profilePicture:
         'https://images.unsplash.com/photo-1526510747491-58f928ec870f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
+        id: 4,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
-        mail: 'mailto:',
+        instagram: 'https://www.instagram.com/',
+        linkedin: 'https://www.linkedin.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 4,
     },
     {
+      id: 5,
       name: 'Eva',
-      role: 'Organisatrice événements',
-      avatar:
+      description: "J'aime les chiens",
+      role: 'Admin',
+      profilePicture:
         'https://images.unsplash.com/photo-1619799087179-061f19622476?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
       socials: {
+        id: 5,
         facebook: 'https://www.facebook.com/',
         x: 'https://twitter.com/',
-        mail: 'mailto:',
+        instagram: 'https://www.instagram.com/',
+        linkedin: 'https://www.linkedin.com/',
       },
+      posts: [],
+      email: '',
+      socialMediaId: 5,
     },
   ];
 

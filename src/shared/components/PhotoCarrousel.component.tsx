@@ -39,8 +39,8 @@ export default function PhotoCarrousel({
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   /**
-   * A chaque changement d'image
-   */
+	 * A chaque changement d'image
+	 */
   const onScroll = useCallback(() => {
     if (!emblaApi) return;
 
@@ -60,8 +60,10 @@ export default function PhotoCarrousel({
           const target = loopItem.target();
           if (index === loopItem.index && target !== 0) {
             const sign = Math.sign(target);
-            if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-            if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+            if (sign === -1)
+							diffToTarget = scrollSnap - (1 + scrollProgress);
+            if (sign === 1)
+							diffToTarget = scrollSnap + (1 - scrollProgress);
           }
         });
       }

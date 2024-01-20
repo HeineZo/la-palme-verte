@@ -5,8 +5,8 @@ import React from 'react';
  */
 export default function page() {
   return (
-    <main>
-      <h3>Page de blog</h3>
-    </main>
+  <main>
+  <h3>Page de blog</h3>
+		</main>
   );
 }

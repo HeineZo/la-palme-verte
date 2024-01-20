@@ -14,15 +14,15 @@ export default function HoverSelect({ children }: HoverSelectProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   /**
-   * Lorsque la souris entre dans l'élément
-   */
+	 * Lorsque la souris entre dans l'élément
+	 */
   const handleOnMouseEnter = () => {
     setIsHovering(true);
   };
 
   /**
-   * Lorsque la souris quitte l'élément
-   */
+	 * Lorsque la souris quitte l'élément
+	 */
   const handleOnMouseLeave = () => {
     setIsHovering(false);
   };
@@ -41,7 +41,7 @@ export default function HoverSelect({ children }: HoverSelectProps) {
         />
       ) : null}
 
-      {children}
-    </div>
+  {children}
+		</div>
   );
 }
