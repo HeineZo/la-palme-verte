@@ -1,15 +1,15 @@
 "use server"
-import { db } from "./db"
+import { db } from "./db/client"
 
 /**
  * Récupérer tous les articles
  * @returns Articles
  */
-export async function getArticles() {
+export function getArticles() {
     try {
         const data = '';
         return { data }
     } catch (error) {
-        return { error: error }
+        return { error }
     }
 }
