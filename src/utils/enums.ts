@@ -16,7 +16,7 @@ export enum EArticleCategory {
 }
 
 export enum ERole {
-  MEMBRE = 'membre',
+  MEMBRE = 'Membre',
   ADMIN = 'Admin',
   ADHERENT = 'Adherent',
 }
