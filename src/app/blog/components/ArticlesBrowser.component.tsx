@@ -15,8 +15,8 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
   const tags: Tag[] = ['Tous', 'Algues', 'Consommation', 'Plage', 'Voyage'];
 
   return (
-    <>
-      <div className="md:flex mt-10 justify-between">
+    <section className="flex flex-col gap-10">
+      <div className="md:flex justify-between">
         <Tabs
           variant="light"
           color="secondary"
@@ -30,22 +30,24 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
             <Tab key={tag} title={tag} />
           ))}
         </Tabs>
-        <Searchbar />
+        <div className='max-w-[400px] w-full'>
+          <Searchbar />
+        </div>
       </div>
-      <div className="flex w-full flex-wrap gap-8 mt-10 justify-around">
+      <div className="flex w-full flex-wrap gap-8">
         {articles.map((article, index) => (
           <Reveal index={index} key={article.titre}>
             <Article article={article} />
           </Reveal>
         ))}
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center">
         <Pagination
           initialPage={1}
           // total={articles.length / 9}
           total={3}
         />
       </div>
-    </>
+    </section>
   );
 }

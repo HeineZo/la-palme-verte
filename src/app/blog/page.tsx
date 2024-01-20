@@ -42,7 +42,7 @@ export default function page() {
   ];
 
   return (
-    <main>
+    <main className=' flex justify-center'>
       <section className="section flex gap-5 mt-28 flex-col">
         <h1>Nos derniers articles</h1>
         <p>
