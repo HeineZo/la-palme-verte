@@ -4,9 +4,10 @@ import { Tabs, Tab, Pagination } from '@nextui-org/react';
 import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
+import { BlogPost } from '@prisma/client';
 
 interface ArticleBrowerProps {
-  articles: any[]; // TODO: type Article
+  articles: BlogPost[]; // TODO: type Article
 }
 
 export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
@@ -34,7 +35,7 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
       </div>
       <div className="flex w-full flex-wrap gap-8 mt-10 justify-around">
         {articles.map((article, index) => (
-          <Reveal index={index} key={article.titre}>
+          <Reveal index={index} key={article.title}>
             <Article article={article} />
           </Reveal>
         ))}
