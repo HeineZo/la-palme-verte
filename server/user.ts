@@ -9,7 +9,7 @@ import { db } from './db/client';
  * Récupérer tous les Utilisateurs
  * @returns {Promise<ApiResponse<User>>}
  */
-export async function getArticles(): Promise<ApiResponse<User>> {
+export async function getUsers(): Promise<ApiResponse<User>> {
   try {
     const users: User[] | null = await db.user.findMany();
     return {
@@ -38,7 +38,7 @@ export async function getArticles(): Promise<ApiResponse<User>> {
  * @param {User.id} id
  * @returns {Promise<ApiResponse<User>>}
  */
-export async function getArticleById(
+export async function getUserById(
   id: number,
 ): Promise<ApiResponse<User>> {
   try {
@@ -73,7 +73,7 @@ export async function getArticleById(
  * @param {'Admin' | 'Membre' | 'Adherent'} role
  * @returns {Promise<ApiResponse<User>>}
  */
-export async function getArticleByRole(
+export async function getUsersByRole(
   role: 'Admin' | 'Membre' | 'Adherent',
 ): Promise<ApiResponse<User>> {
   try {
