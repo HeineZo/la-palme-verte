@@ -14,3 +14,9 @@ export enum EArticleCategory {
   PRESENTATION = 'Présentation',
   NEWS = 'Nouveauté',
 }
+
+export enum ERole {
+  MEMBRE = 'membre',
+  ADMIN = 'Admin',
+  ADHERENT = 'Adherent',
+}
