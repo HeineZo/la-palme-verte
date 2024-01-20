@@ -39,7 +39,12 @@ export default function Article({ article, isMain }: ArticleProps) {
           <p className="line-clamp-2">{article.description}</p>
         </div>
         <div className="flex items-center justify-between">
-          <Button variant="light" color="primary" className="w-fit">
+          <Button
+            variant="light"
+            color="primary"
+            className="w-fit"
+            href="/blog/article-test"
+          >
             Lire plus
           </Button>
           <div className="flex items-center">

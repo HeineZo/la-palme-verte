@@ -15,6 +15,10 @@
     {
       "label": "Photos",
       "path": "/photos"
+    },
+    {
+      "label": "Test article",
+      "path": "/blog/articles"
     }
   ],
   "other": {
