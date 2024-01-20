@@ -10,21 +10,22 @@ interface PhotoMosaicProps {
 
 /**
  * Mosaïque de photos
- * @param photos Photos à afficher dans la mosaïque
- * @todo Afficher les informations de la photo au hover (on pourrait limite en faire un composant)
+ * @param photos - Photos à afficher dans la mosaïque
+ * 
+ * TODO: Afficher les informations de la photo au hover (on pourrait limite en faire un composant)
  */
 export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="hidden md:block w-full max-w-7xl mx-auto gap-8 space-y-8 columns-3">
-        {photos?.map((photo, index) => (
-          <Reveal key={index} index={index}>
-            <Image src={photo} alt="Photo de la gallerie photo" />
+        {photos.map((photo, index) => (
+          <Reveal index={index} key={index}>
+      <Image alt="Photo de la gallerie photo" src={photo} />
           </Reveal>
         ))}
       </div>
-      <PhotoCarrousel photos={photos} className="md:hidden" />
-      <Button color="secondary" className="text-accent w-fit">
+      <PhotoCarrousel className="md:hidden" photos={photos} />
+      <Button className="text-accent w-fit" color="secondary">
         Voir plus
       </Button>
     </div>

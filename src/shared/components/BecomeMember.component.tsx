@@ -2,11 +2,11 @@
 
 import { Avatar } from '@nextui-org/avatar';
 import React from 'react';
-import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
 import { cn } from '@nextui-org/system';
+import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
 import Button from '@/shared/theme/Button';
 
-type BecomeMemberProps = {
+interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
   title?: string;
   shortTitle?: string;
@@ -14,7 +14,7 @@ type BecomeMemberProps = {
   children?: React.ReactNode;
   showInfiniteLoop?: boolean;
   buttonTitle?: string;
-};
+}
 
 /**
  * Affiche un bloc permettant d'inciter les utilisateurs à devenir adhérent
@@ -30,46 +30,42 @@ type BecomeMemberProps = {
 export default function BecomeMember({
   className,
   title,
-  shortTitle,
+  shortTitle = title,
   subtitle,
   children,
   showInfiniteLoop = true,
   buttonTitle,
 }: BecomeMemberProps) {
-  if (shortTitle === undefined) {
-    shortTitle = title;
-  }
-
   return (
-    <div
-      className={cn(
-        'py-16 text-center justify-center flex flex-col gap-16',
-        className,
-        !showInfiniteLoop && 'gap-6',
-      )}
-    >
-      <div className="px-10 md:px-16">
-        <h4 className="hidden md:block"> {title} </h4>
-        <h4 className="block md:hidden"> {shortTitle} </h4>
-        <p> {subtitle} </p>
-      </div>
+  <div
+  className={cn(
+			  'py-16 text-center justify-center flex flex-col gap-16',
+			  className,
+			  !showInfiniteLoop && 'gap-6',
+			)}
+		>
+  <div className="px-10 md:px-16">
+  <h4 className="hidden md:block"> {title} </h4>
+  <h4 className="block md:hidden"> {shortTitle} </h4>
+  <p> {subtitle} </p>
+			</div>
 
-      {showInfiniteLoop && (
+      {showInfiniteLoop ? (
         <InfiniteLoop
           firstRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
+            <Avatar className="w-20 h-20 text-white" key={i} />
           ))}
           secondRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
+            <Avatar className="w-20 h-20 text-white" key={i} />
           ))}
         />
-      )}
+      ) : null}
       <div className="flex gap-6 justify-center">
-        {buttonTitle && (
-          <Button color="primary" className="w-fit">
+        {buttonTitle ? (
+          <Button className="w-fit" color="primary">
             {buttonTitle}
           </Button>
-        )}
+        ) : null}
         {children}
       </div>
     </div>

@@ -2,9 +2,10 @@
 
 import { Avatar, Chip, Image } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
+import { BlogPost } from '@prisma/client';
 
 interface ArticleProps {
-  article: any; // TODO: type Article
+  article: BlogPost;
   isMain?: boolean;
 }
 

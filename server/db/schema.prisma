@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id             Int          @id @default(autoincrement())
+  name           String
+  description    String?
+  email          String       @unique
+  role           Role         @default(Adherent)
+  profilePicture String?
+  socialMediaId  Int?
+  socials        SocialMedia? @relation(fields: [socialMediaId], references: [id])
+  posts          BlogPost[]
+  Album          Album[]
+  Image          Photo[]
+
+  @@index([socialMediaId])
+}
+
+model SocialMedia {
+  id        Int     @id @default(autoincrement())
+  x         String?
+  instagram String?
+  facebook  String?
+  linkedin  String?
+  User      User[]
+}
+
+model BlogPost {
+  id         Int        @id @default(autoincrement())
+  title      String
+  authorId   Int
+  readTime   Int?
+  imageCover String?
+  content    String?
+  published  Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime?  @updatedAt
+  author     User       @relation(fields: [authorId], references: [id])
+  categories Category[]
+
+  @@index([authorId])
+}
+
+model Category {
+  id    Int        @id @default(autoincrement())
+  name  String
+  posts BlogPost[]
+}
+
+model Album {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  authorId    Int
+  imageCover  String?
+  location    String?
+  published   Boolean   @default(false)
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  images      Photo[]
+
+  @@index([authorId])
+}
+
+model Photo {
+  id        Int       @id @default(autoincrement())
+  authorId  Int
+  url       String?
+  albumId   Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  author    User      @relation(fields: [authorId], references: [id])
+  album     Album     @relation(fields: [albumId], references: [id])
+
+  @@index([authorId])
+  @@index([albumId])
+}
+
+enum Role {
+  Membre
+  Admin
+  Adherent
+}

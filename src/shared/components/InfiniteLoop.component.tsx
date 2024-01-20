@@ -19,14 +19,14 @@ export default function InfiniteLoop({
 }: InfiniteLoopProps) {
   return (
     <ScrollShadow
-      orientation="horizontal"
       className="flex flex-col self-center w-screen gap-6 overflow-hidden"
+      orientation="horizontal"
     >
       <div className="flex gap-12 animate-infinite-scroll-x">
         <div className="flex gap-12">{firstRow.map((element) => element)}</div>
         <div className="flex gap-12">{firstRow.map((element) => element)}</div>
       </div>
-      {secondRow && (
+      {secondRow ? (
         <div className="flex gap-12 animate-infinite-scroll-x-reverse">
           <div className="flex gap-12">
             {secondRow.map((element) => element)}
@@ -35,7 +35,7 @@ export default function InfiniteLoop({
             {secondRow.map((element) => element)}
           </div>
         </div>
-      )}
+      ) : null}
     </ScrollShadow>
   );
 }
