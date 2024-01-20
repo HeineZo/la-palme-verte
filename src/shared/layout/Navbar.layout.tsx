@@ -45,11 +45,7 @@ export default function Navbar() {
           variant="light"
         >
           {pages.main.map((page) => (
-            <Tab
-              key={page.path}
-              title={page.label}
-              href={page.path}
-            />
+            <Tab key={page.path} title={page.label} href={page.path} />
           ))}
         </Tabs>
       </NavbarContent>
@@ -62,12 +58,12 @@ export default function Navbar() {
           </Button>
         </NavbarItem>
 
-  {/* Menu mobile */}
-  <NavbarMenuToggle
-  aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-  className="sm:hidden"
-				/>
-			</NavbarContent>
+        {/* Menu mobile */}
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden"
+        />
+      </NavbarContent>
 
       {/* Menu déroulant mobile */}
       <NavbarMenu>

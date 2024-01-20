@@ -1,21 +1,21 @@
 import Reveal from '@/shared/utils/Reveal.component';
 import Button from '@/shared/theme/Button';
 import Article from '../components/Article.component';
-import { BlogPost } from '@prisma/client';
+import { FullBlogPost } from '@/utils/type';
 
 /**
  * Affiche les derniers articles en ligne
  */
 export default function LastArticles() {
   // TODO: récupérer les articles depuis l'API
-  const placeholderArticles: BlogPost[] = [
+  const placeholderArticles: FullBlogPost[] = [
     {
       title: 'Top 5 des algues les plus rares',
       content:
 				'Après quelques recherches sur le web, nous avons pu établir un top 5 des algues les plus rares à trouver en plongée sous-marine.',
-      categories: [{ name: 'Plongée' }],
+      categories: [{ id: 1, name: 'Plongée' }],
       createdAt: new Date(),
-      auteur: 'Jean',
+      author: { id: 1, name: 'Parzival' },
       photo: 'https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
     },
     {

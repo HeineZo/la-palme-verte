@@ -14,3 +14,16 @@ export async function getPhotos() {
     return { error };
   }
 }
+
+/**
+ * Supprime toutes les photos
+ * @returns Résultat de la requête
+ */
+export async function deleteAll() {
+  try {
+    const data = await db.photo.deleteMany();
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+}

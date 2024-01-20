@@ -21,11 +21,11 @@ export default function Article({ article }: ArticleProps) {
         width="100%"
       />
       <div className="flex gap-2">
-        {article.categories.map((categorie: string) => (
+        {/* {article.categories.map((categorie: string) => (
           <Chip color="primary" key={categorie} variant="flat">
             {categorie}
           </Chip>
-        ))}
+        ))} */}
       </div>
       <div className="flex flex-col gap-2">
         <h5>{article.title}</h5>

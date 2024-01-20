@@ -7,7 +7,6 @@
     "dev": "next dev",
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
     "lint:fix": "eslint ./ --ext js,jsx,ts,tsx --fix",
-    "db:push": "dotenv -e .env.local -- npx prisma db push",
     "start": "next start"
   },
   "prettier": "@vercel/style-guide/prettier",

@@ -13,6 +13,7 @@ export default async function page() {
     queryKey: ['photo'],
     queryFn: getPhotos,
   });
+
   return (
     <main>
       <h1>Photos</h1>
