@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 
-const FullBlogPost = Prisma.validator<Prisma.BlogPostArgs>()({
+const FullBlogPost = Prisma.validator<Prisma.BlogPostDefaultArgs>()({
   include: {
     categories: true,
     author: true,
