@@ -2,11 +2,12 @@
 
 import { Avatar, Chip, Image } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
-import { BlogPost } from '@prisma/client';
 import { format, isDate } from 'date-fns';
+import { FullBlogPost } from '@/utils/type';
+import { Category } from '@prisma/client';
 
 interface ArticleProps {
-  article: BlogPost;
+  article: FullBlogPost;
   isMain?: boolean;
 }
 
@@ -31,12 +32,11 @@ export default function Article({ article, isMain }: ArticleProps) {
       />
       <div className="flex flex-col gap-5 mt-5">
         <div className="flex gap-2">
-          {/* TODO: jointure avec la table categories pour récupérer les catégories liées à l'article */}
-          {/* {article.categories.map((categorie: string) => (
-            <Chip key={categorie} color="primary" variant="flat">
-              {categorie}
+          {article.categories.map((categorie: Category) => (
+            <Chip key={categorie.id} color="primary" variant="flat">
+              {categorie.name}
             </Chip>
-          ))} */}
+          ))}
         </div>
         <div className="flex flex-col gap-2">
           <h5>{article.title}</h5>
@@ -54,9 +54,7 @@ export default function Article({ article, isMain }: ArticleProps) {
           <div className="flex items-center">
             <Avatar />
             <div className="flex flex-col ml-2 mr-6">
-              {/* TODO: jointure avec la table User lors de la requête de l'article */}
-              {/* <p className="text-sm font-bold">{article.author.name}</p> */}
-              <p className="text-sm font-bold">{article.authorId}</p>
+              <p className="text-sm font-bold">{article.author.name}</p>
               <p>
                 {isDate(article.createdAt) ?
                   `${format(article.createdAt, 'dd/MM/yyyy')} ${article.readTime

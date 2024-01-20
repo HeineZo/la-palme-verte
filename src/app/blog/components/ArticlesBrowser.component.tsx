@@ -1,13 +1,13 @@
 'use client';
 
-import { Tabs, Tab, Pagination } from '@nextui-org/react';
+import { Tabs, Tab, Pagination, ScrollShadow } from '@nextui-org/react';
 import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
-import { BlogPost } from '@prisma/client';
+import { FullBlogPost } from '@/utils/type';
 
 interface ArticleBrowerProps {
-  articles: BlogPost[]; // TODO: type Article
+  articles: FullBlogPost[];
 }
 
 export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
@@ -16,22 +16,24 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
   const tags: Tag[] = ['Tous', 'Algues', 'Consommation', 'Plage', 'Voyage'];
 
   return (
-    <section className="flex flex-col gap-10">
-      <div className="md:flex justify-between">
-        <Tabs
-          variant="light"
-          color="secondary"
-          radius="full"
-          classNames={{
-            tabList: 'gap-6',
-            cursor: 'bg-accent',
-          }}
-        >
-          {tags.map((tag) => (
-            <Tab key={tag} title={tag} />
-          ))}
-        </Tabs>
-        <div className='max-w-[400px] w-full'>
+    <section className="flex flex-col gap-10 section w-full">
+      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden ">
+        <ScrollShadow orientation='horizontal' className='flex items-center h-16'>
+          <Tabs
+            variant="light"
+            color="secondary"
+            radius="full"
+            classNames={{
+              tabList: 'gap-6',
+              cursor: 'bg-accent',
+            }}
+          >
+            {tags.map((tag) => (
+              <Tab key={tag} title={tag} />
+            ))}
+          </Tabs>
+        </ScrollShadow>
+        <div className="max-w-[400px] w-full">
           <Searchbar />
         </div>
       </div>
