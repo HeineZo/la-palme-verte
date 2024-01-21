@@ -13,11 +13,14 @@ import FAQ from '@/shared/layout/FAQ.layout';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import LastArticles from './blog/layout/LastArticles.layout';
+import { QueryClient } from '@tanstack/react-query';
+import { getPhotos } from 'server/photo';
 
 /**
  * Page d'accueil
  */
 export default function Home() {
+
   const actionsRow: Row[] = [
     {
       icon: <IconScubaMask size={48} stroke={3} />,

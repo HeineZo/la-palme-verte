@@ -2,22 +2,25 @@
 
 import { Image } from '@nextui-org/image';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getPhotos, deleteAll } from 'server/photo';
 import Button from '@/shared/theme/Button';
 import Zoom from "smooth-zoom";
 import ZoomableImage from './ZoomableImage.component';
+import { Photo } from '@prisma/client';
 
-export default function Photo() {
-  const { data, error, isFetched } = useQuery({
-    queryKey: ['photos'],
-    queryFn: async () => getPhotos(),
-  });
-  if (error) return <div>{error.message}</div>;
-  if (data?.data) {
-    return (
-      <div>
-        {/* <Button
+interface PhotoProps {
+  photo: Photo
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+export default function Photo({photo, title, description, className}: PhotoProps) {
+
+  return (
+    <div className='relative'>
+      {/* <Button
           onClick={() => {
             void (async () => {
               await deleteAll();
@@ -26,11 +29,14 @@ export default function Photo() {
         >
           Supprimer
         </Button> */}
-        {data.data.map((photo) => (
-          // <Image key={photo.id} src={photo.url ?? undefined} />
-          <ZoomableImage key={photo.id} src={photo.url ?? undefined}></ZoomableImage>
-        ))}
-      </div>
-    );
-  }
+      {/* // <Image key={photo.id} src={photo.url ?? undefined} /> */}
+      <ZoomableImage className={`rounded-medium ${className}`} key={photo.id} src={photo.url ?? undefined}></ZoomableImage>
+      {(title && description) && (
+        <div className="absolute bottom-7 left-7 text-white w-3/4">
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+      )}
+    </div>
+  );
 }
