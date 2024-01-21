@@ -123,13 +123,13 @@ export async function getArticleByCategories(
  * @returns {Promise<ApiResponse<BlogPost>>}
  */
 export async function getArticleByAuthorID(
-  AuthorId: number,
+  authorId: number,
 ): Promise<ApiResponse<BlogPost>> {
   try {
     const articleByCategories: BlogPost[] = await db.blogPost.findMany({
       where: {
         author: {
-          id: AuthorId,
+          id: authorId,
         },
       },
     });
@@ -272,7 +272,7 @@ export async function postArticle(
     return {
       data: newArticle,
       code: 201,
-      message: 'Article créé',
+      message: "L'article a été créé avec succès",
     };
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
