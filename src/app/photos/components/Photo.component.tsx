@@ -31,6 +31,7 @@ export default function Photo({photo, title, description, className}: PhotoProps
         </Button> */}
       {/* // <Image key={photo.id} src={photo.url ?? undefined} /> */}
       <ZoomableImage className={`rounded-medium ${className}`} key={photo.id} src={photo.url ?? undefined}></ZoomableImage>
+      {/* TODO: make text responsive */}
       {(title && description) && (
         <div className="absolute bottom-7 left-7 text-white w-3/4">
           <h3>{title}</h3>
