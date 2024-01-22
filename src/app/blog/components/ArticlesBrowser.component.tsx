@@ -17,6 +17,7 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
 
   return (
     <section className="flex flex-col gap-10 section w-full">
+      {/* <h3>Découvrir</h3> */}
       <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden ">
         <ScrollShadow orientation='horizontal' className='flex items-center h-16'>
           <Tabs

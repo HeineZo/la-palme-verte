@@ -81,9 +81,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <main>
       {/* Hero section */}
-      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-full">
+      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-screen">
         <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
           <Reveal>
             <h1>Plongez au coeur de l'action</h1>
@@ -153,7 +153,7 @@ export default function Home() {
       </BecomeMember>
 
       {/* Nos actions */}
-      <div className="flex flex-col gap-10 p-16 rounded-3xl bg-highlight section">
+      <div className="flex flex-col gap-10 px-10 rounded-3xl bg-highlight section">
         <h3 className="text-center">Nos actions</h3>
         <InlineBlocks rows={actionsRow} />
       </div>
@@ -174,6 +174,6 @@ export default function Home() {
         questions={questions}
         title="Vous avez des questions ?"
       />
-    </div>
+    </main>
   );
 }

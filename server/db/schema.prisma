@@ -36,17 +36,12 @@ model SocialMedia {
 model BlogPost {
   id         Int        @id @default(autoincrement())
   title      String
-  authorId   Int
-  readTime   Int?
   imageCover String?
   content    String?
-  published  Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime?  @updatedAt
-  author     User       @relation(fields: [authorId], references: [id])
+  authors    User[]
   categories Category[]
-
-  @@index([authorId])
 }
 
 model Category {

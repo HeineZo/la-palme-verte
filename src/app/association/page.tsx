@@ -9,6 +9,7 @@ import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
 import timelineEvents from './assets/timeline-events.json';
 import { FullUser } from '@/utils/type';
+import { differenceInCalendarYears } from 'date-fns';
 
 /**
  * Page de présentation de l'association
@@ -153,9 +154,11 @@ export default function Page() {
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="flex justify-between gap-20 flex-col lg:flex-row">
-        <h1 className="lg:w-1/2">Une association qui traverse les générations</h1>
-        <div>
+      <section className="flex justify-between gap-20 flex-col lg:flex-row section">
+        <h1 className="">
+          Une association qui traverse les générations
+        </h1>
+        <div className='lg:w-1/2'>
           <Timeline events={timelineEvents} />
         </div>
       </section>
@@ -183,7 +186,10 @@ export default function Page() {
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
-                  value={18}
+                  value={differenceInCalendarYears(
+                    new Date(),
+                    new Date(2005, 1, 1),
+                  )}
                 />
                 <Reveal>
                   <p>Années d'expérience</p>
@@ -195,7 +201,7 @@ export default function Page() {
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
                   suffix="€"
-                  value={300}
+                  value={200}
                 />
                 <Reveal>
                   <p>Récoltés pour la protection de la faune maritime</p>
@@ -204,7 +210,7 @@ export default function Page() {
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
-                  value={15}
+                  value={59} //TODO: rempalcer par une méthode getAdherentCount()
                 />
                 <Reveal>
                   <p>Adhérents</p>

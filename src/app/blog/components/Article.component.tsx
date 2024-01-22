@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, Chip, Image } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Chip, Image, cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
 import { format, isDate } from 'date-fns';
 import { FullBlogPost } from '@/utils/type';
@@ -18,17 +18,18 @@ interface ArticleProps {
 export default function Article({ article, isMain }: ArticleProps) {
   return (
     <div
-      className={`${isMain
-        ? 'lg:flex items-center gap-16'
-        : 'rounded-medium shadow-medium hover:scale-105 max-w-xl'
-        } min-w-[350px] p-6 relative transition-all`}
+      className={cn(
+        isMain
+          ? 'lg:flex items-center gap-16 w-full rounded-medium shadow-medium'
+          : 'rounded-medium shadow-medium hover:scale-105 max-w-xl',
+        'min-w-[350px] p-6 relative transition-all',
+      )}
     >
       <Image
         // TODO: mettre une image placeholder correcte
         src={article.imageCover ?? undefined}
         width="100%"
-        className={`object-cover ${isMain ? 'h-[500px]' : 'h-[300px]'
-          }`}
+        className={cn('object-cover aspect-video', isMain && 'aspect-auto max-w-4xl')}
       />
       <div className="flex flex-col gap-5 mt-5">
         <div className="flex gap-2">
@@ -44,7 +45,6 @@ export default function Article({ article, isMain }: ArticleProps) {
         </div>
         <div className="flex items-center justify-between">
           <Button
-            variant="light"
             color="primary"
             className="w-fit"
             href="/blog/article-test"
@@ -52,17 +52,20 @@ export default function Article({ article, isMain }: ArticleProps) {
             Lire plus
           </Button>
           <div className="flex items-center">
-            <Avatar />
+            <AvatarGroup max={2} total={article.authors.length - 2}>
+              {article.authors.map((author) => (
+                <Avatar
+                  key={author.id}
+                  src={author.profilePicture ?? undefined}
+                />
+              ))}
+            </AvatarGroup>
             <div className="flex flex-col ml-2 mr-6">
-              <p className="text-sm font-bold">{article.author.name}</p>
+              <p className="text-sm font-bold">{article.authors[0].name}</p>
               <p>
-                {isDate(article.createdAt) ?
-                  `${format(article.createdAt, 'dd/MM/yyyy')} ${article.readTime
-                    ? `• ${article.readTime} min de lecture`
-                    : ''
-                  }`
-                  : 'Date invalide'
-                }
+                {isDate(article.createdAt)
+                  ? format(article.createdAt, 'dd/MM/yyyy')
+                  : null}
               </p>
             </div>
           </div>
