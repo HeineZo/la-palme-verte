@@ -29,5 +29,6 @@ module.exports = {
       '@typescript-eslint/consistent-type-imports': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       'import/order': 'off',
+      'no-console': 'warn',
     },
 }
