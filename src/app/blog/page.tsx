@@ -2,11 +2,7 @@ import React from 'react';
 import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
 import DiscoverPhotos from './components/DiscoverPhotos.component';
-import { FullBlogPost } from '@/utils/type';
-import { getCategories, getPages } from '@/utils/notion';
-import Image from 'next/image';
-import { BlogPost } from '@/class/BlogPost.class';
-import { notFound } from 'next/navigation';
+import { getCategories, getPages } from 'server/blog';
 
 /**
  * Page Blog

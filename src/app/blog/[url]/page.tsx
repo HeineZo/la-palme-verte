@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- L'API de Notion est mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- L'API de Notion est mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- L'API de Notion est mal typé */
-import { getPageByUrl, getPageContent, notionClient } from '@/utils/notion';
+import { getPageByUrl, getPageContent, notionClient } from 'server/blog';
 import bookmarkPlugin from '@notion-render/bookmark-plugin';
 import { NotionRenderer } from '@notion-render/client';
 import hljsPlugin from '@notion-render/hljs-plugin';

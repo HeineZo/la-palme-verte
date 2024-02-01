@@ -15,7 +15,7 @@ export const notionClient = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-const database_id = process.env.NOTION_DATABASE_ID ?? '';
+const database_id = process.env.BLOG_DATABASE ?? '';
 
 /**
  * Récupère tous les articles de blog
