@@ -5,16 +5,14 @@ import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
 import { FullBlogPost } from '@/utils/type';
+import { BlogPost } from '@/class/BlogPost.class';
 
 interface ArticleBrowerProps {
-  articles: FullBlogPost[];
+  articles: BlogPost[];
+  categories: string[];
 }
 
-export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
-  type Tag = 'Tous' | 'Algues' | 'Consommation' | 'Plage' | 'Voyage';
-
-  const tags: Tag[] = ['Tous', 'Algues', 'Consommation', 'Plage', 'Voyage'];
-
+export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
   return (
     <section className="flex flex-col gap-10 section w-full">
       {/* <h3>Découvrir</h3> */}
@@ -29,7 +27,7 @@ export default function ArticlesBrowser({ articles }: ArticleBrowerProps) {
               cursor: 'bg-accent',
             }}
           >
-            {tags.map((tag) => (
+            {categories.map((tag) => (
               <Tab key={tag} title={tag} />
             ))}
           </Tabs>

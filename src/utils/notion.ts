@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- API de Notion mal typé */
+/* eslint-disable @typescript-eslint/no-unsafe-call -- API de Notion mal typé */
+/* eslint-disable @typescript-eslint/no-unsafe-return -- API de Notion mal typé */
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
 import { Client } from '@notionhq/client';
-import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import {
+  BlockObjectResponse,
+  PageObjectResponse,
+} from '@notionhq/client/build/src/api-endpoints';
+import { BlogPost } from '@/class/BlogPost.class';
 
 export const notionClient = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -18,14 +25,37 @@ export const getPages = async () => {
   const response = await notionClient.databases.query({
     filter: {
       property: 'État',
-      select: {
+      status: {
         equals: 'Publié',
       },
     },
     database_id,
   });
 
-  return response.results;
+  return response.results.map((result) => BlogPost.fromNotionPage(result));
+};
+
+/**
+ * Récupérer toutes les catégories des articles disponibles
+ */
+export const getCategories = async () => {
+  const response = await notionClient.databases.query({
+    filter: {
+      property: 'État',
+      status: {
+        equals: 'Publié',
+      },
+    },
+    database_id,
+  });
+
+  const categories = (response.results as PageObjectResponse[]).map((result) =>
+    (result.properties.Catégories as any).multi_select.map(
+      (category: any) => category.name,
+    ),
+  );
+
+  return Array.from(new Set(categories.flat()));
 };
 
 /**
@@ -57,5 +87,5 @@ export const getPageByUrl = async (url: string) => {
     database_id,
   });
 
-  return response.results[0] as PageObjectResponse | undefined;
+  return BlogPost.fromNotionPage(response.results[0]);
 };

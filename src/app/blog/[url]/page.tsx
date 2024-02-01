@@ -16,12 +16,16 @@ interface PageProps {
   };
 }
 
+/**
+ * Page d'articles
+ * @param params URL de la page
+ */
 export default async function Page({ params }: PageProps) {
   const post = await getPageByUrl(params.url);
 
-  if (!post) {
-    notFound();
-  }
+  // if (!post) {
+  //   notFound();
+  // }
 
   const content = await getPageContent(post.id);
   const notionRenderer = new NotionRenderer({
@@ -34,9 +38,9 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <ArticleContent
-      title={(post.properties.Titre as any).title[0].plain_text}
-      categories={(post.properties.Catégories as any).multi_select.map((c: any) => c.name)}
-      cover={(post.properties.Cover as any).url}
+      title={post.title}
+      categories={post.categories}
+      cover={post.cover}
       content={html}
     />
   );
