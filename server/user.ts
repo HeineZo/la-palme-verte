@@ -16,6 +16,6 @@ const database_id = process.env.USER_DATABASE ?? '';
  */
 export const getUser = async (id: string) => {
     const response = await notionClient.pages.retrieve({ page_id: id });
-    
-    return User.fromNotionUser(response);
+
+    return User.fromNotion(response);
 }

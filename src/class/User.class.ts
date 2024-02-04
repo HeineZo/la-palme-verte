@@ -21,7 +21,7 @@ export class User {
     this.linkedin = linkedin;
   }
 
-  static fromNotionUser(user: any) {
+  static fromNotion(user: any) {
     const id = user.id;
     const name = user.properties.Prénom.title[0].plain_text;
     const surname = user.properties.Nom.rich_text[0].text.content;

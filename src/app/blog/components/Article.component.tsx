@@ -16,6 +16,7 @@ interface ArticleProps {
  */
 export default function Article({ article, isMain }: ArticleProps) {
   const { title, description, cover, categories, authors } = article;
+
   return (
     <div
       className={cn(

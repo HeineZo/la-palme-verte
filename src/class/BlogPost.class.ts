@@ -35,13 +35,14 @@ export class BlogPost {
      * @param page Article que l'on veut transformer en `BlogPost`
      * @returns L'objet `BlogPost` correspondant
      */
-    static fromNotionPage(page: any) {
+    static async fromNotion(page: any) {
         const id = page.id;
         const title = page.properties.Titre.title[0].plain_text;
         const cover = page.cover.external.url;
         const description = page.properties.Description.rich_text[0].text.content;
         const categories = page.properties.Catégories.multi_select.map((category: any) => category.name);
-        const authors = page.properties.Auteurs.relation.map((author: any) => getUser(author.id));
+        const authorsPromises = page.properties.Auteurs.relation.map((author: any) => getUser(author.id));
+        const authors = await Promise.all(authorsPromises);
         const publicationDate = new Date(page.created_time);
         const url = page.properties.URL.rich_text[0].text.content;
 

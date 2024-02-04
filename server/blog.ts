@@ -28,7 +28,10 @@ export const getPages = async () => {
     database_id,
   });
 
-  return response.results.map((result) => BlogPost.fromNotionPage(result));
+  const blogPostsPromises = response.results.map((result) => BlogPost.fromNotion(result));
+  const blogPosts = await Promise.all(blogPostsPromises);
+  
+  return blogPosts;
 };
 
 /**
@@ -83,5 +86,5 @@ export const getPageByUrl = async (url: string) => {
     database_id,
   });
 
-  return BlogPost.fromNotionPage(response.results[0]);
+  return BlogPost.fromNotion(response.results[0]);
 };
