@@ -5,19 +5,31 @@
 export class User {
   id: string;
   name: string;
+  surname: string;
+  role: string;
   imageUrl: string;
+  instagram: string;
+  linkedin: string;
 
-  constructor(id: string, name: string, imageUrl: string) {
+  constructor(id: string, name: string, surname: string, role: string, imageUrl: string, instagram: string, linkedin: string,) {
     this.id = id;
     this.name = name;
+    this.surname = surname;
+    this.role = role;
     this.imageUrl = imageUrl;
+    this.instagram = instagram;
+    this.linkedin = linkedin;
   }
 
   static fromNotionUser(user: any) {
     const id = user.id;
-    const name = user.name;
-    const imageUrl = user.avatar_url;
+    const name = user.properties.Prénom.title[0].plain_text;
+    const surname = user.properties.Nom.rich_text[0].text.content;
+    const role = user.properties.Rôle.select.name;
+    const imageUrl = user.properties['Photo de profil'].files[0]?.file.url;
+    const instagram = user.properties.Instagram.url;
+    const linkedin = user.properties.Linkedin.url;
 
-    return new User(id, name, imageUrl);
+    return new User(id, name, surname, role, imageUrl, instagram, linkedin);
   }
 }

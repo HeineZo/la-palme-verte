@@ -4,16 +4,12 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
-import { Client } from '@notionhq/client';
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { BlogPost } from '@/class/BlogPost.class';
-
-export const notionClient = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
+import { notionClient } from './database';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
 

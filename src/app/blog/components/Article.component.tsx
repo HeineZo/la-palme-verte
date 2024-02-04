@@ -2,8 +2,6 @@
 import { Avatar, AvatarGroup, Chip, Image, cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
 import { format, isDate } from 'date-fns';
-import { FullBlogPost } from '@/utils/type';
-import { Category } from '@prisma/client';
 import { BlogPost } from '@/class/BlogPost.class';
 import Link from 'next/link';
 
