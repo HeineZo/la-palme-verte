@@ -1,9 +1,9 @@
-
 import { Avatar, AvatarGroup, Chip, Image, cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
 import { format, isDate } from 'date-fns';
 import { BlogPost } from '@/class/BlogPost.class';
 import Link from 'next/link';
+import { arrayToString } from '@/utils/utils';
 
 interface ArticleProps {
   article: BlogPost;
@@ -29,9 +29,12 @@ export default function Article({ article, isMain }: ArticleProps) {
       <Image
         src={cover}
         width="100%"
-        className={cn('object-cover aspect-video', isMain && 'aspect-auto max-w-4xl')}
+        className={cn(
+          'object-cover aspect-video',
+          isMain && 'aspect-auto max-w-4xl',
+        )}
       />
-      <div className="flex flex-col gap-5 mt-5 lg:w-2/3">
+      <div className={cn('flex flex-col gap-5 mt-5', isMain && 'lg:w-2/3')}>
         <div className="flex gap-2">
           {categories.map((categorie: string) => (
             <Chip key={categorie} color="primary" variant="flat">
@@ -42,6 +45,12 @@ export default function Article({ article, isMain }: ArticleProps) {
         <div className="flex flex-col gap-2">
           <h5>{title}</h5>
           <p className="line-clamp-2">{description}</p>
+          <small>
+            Publié le{' '}
+            {isDate(article.publicationDate)
+              ? format(article.publicationDate, 'dd/MM/yyyy')
+              : null}
+          </small>
         </div>
         <div className="flex items-center justify-between">
           <Button
@@ -55,18 +64,12 @@ export default function Article({ article, isMain }: ArticleProps) {
           <div className="flex items-center">
             <AvatarGroup max={2} total={authors.length - 2}>
               {authors.map((author) => (
-                <Avatar
-                  key={author.id}
-                  src={author.imageUrl}
-                />
+                <Avatar key={author.id} src={author.imageUrl} />
               ))}
             </AvatarGroup>
             <div className="flex flex-col ml-2 mr-6">
-              <p className="text-sm font-bold">{article.authors[0].name}</p>
-              <p>
-                {isDate(article.publicationDate)
-                  ? format(article.publicationDate, 'dd/MM/yyyy')
-                  : null}
+              <p className="text-sm font-bold">
+                {arrayToString(article.authors.map((author) => author.name))}
               </p>
             </div>
           </div>
