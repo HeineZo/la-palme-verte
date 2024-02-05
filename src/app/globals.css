@@ -36,7 +36,11 @@
     @apply text-base font-body;
   }
 
+  main {
+    @apply flex flex-col items-center justify-center min-h-screen 2xl:mx-32 mx-10;
+  }
+
   .section {
-    @apply px-10 md:px-16 py-16;
+    @apply md:px-16 py-16;
   }
 }

@@ -9,6 +9,7 @@ import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
 import timelineEvents from './assets/timeline-events.json';
 import { FullUser } from '@/utils/type';
+import { differenceInCalendarYears } from 'date-fns';
 
 /**
  * Page de présentation de l'association
@@ -128,39 +129,36 @@ export default function Page() {
   return (
     <main>
       <section className="section flex justify-between section gap-20 mt-28 flex-col lg:flex-row">
-        <h1>Une association ...</h1>
+        <h1>Qui sommes-nous ?</h1>
         <div className="flex flex-col gap-6 lg:w-1/2">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            varius faucibus massa sollicitudin amet augue. Nibh metus a semper
-            purus mauris duis. Lorem eu neque, tristique quis duis. Nibh
-            scelerisque ac adipiscing velit non nulla in amet pellentesque.
+            Notre aventure commence en 2005, à l’origine réservée au personnel
+            et aux anciens étudiants de l’UBS, nous sommes une association à but
+            non-lucratif dont l’objectif majeur est de favoriser la connaissance
+            de la biodiversité subaquatique par le biais de différentes
+            activités (soirées de bio marines, sorties ornithologiques,
+            plongées).
           </p>
           <p>
-            Sit turpis pretium eget maecenas. Vestibulum dolor mattis
-            consectetur eget commodo vitae. Amet pellentesque sit pulvinar lorem
-            mi a, euismod risus rhoncus. Elementum ullamcorper nec, habitasse
-            vulputate. Eget dictum quis est sed egestas tellus, a lectus. Quam
-            ullamcorper in fringilla arcu aliquet fames arcu.
-          </p>
-          <p>
-            Lacinia eget faucibus urna, nam risus nec elementum cras porta. Sed
-            elementum, sed dolor purus dolor dui. Ut dictum nulla pulvinar
-            vulputate sit sagittis in eleifend dignissim. Natoque mauris cras
-            molestie velit. Maecenas eget adipiscing quisque viverra lectus
-            arcu, tincidunt ultrices pellentesque.
+            Nous souhaitons également intervenir dans différentes actions
+            d'éco-citoyenneté et sensibiliser le public à la protection de la
+            biodiversité marine (nettoyages de plages, soirées caritatives).
+            Aujourd’hui, nous sommes ouverts à tous les étudiants de l’UBS et
+            nous vous attendons avec impatience !
           </p>
         </div>
       </section>
-      <section className="section flex w-full justify-center items-center">
+      <section className="flex w-full justify-center items-center section">
         <Image
           alt="Photo de groupe"
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="flex justify-between section gap-20 flex-col lg:flex-row">
-        <h1>... qui traverse les générations</h1>
-        <div className="lg:w-1/2">
+      <section className="flex justify-between gap-20 flex-col lg:flex-row section">
+        <h1 className="">
+          Une association qui traverse les générations
+        </h1>
+        <div className='lg:w-1/2'>
           <Timeline events={timelineEvents} />
         </div>
       </section>
@@ -188,7 +186,10 @@ export default function Page() {
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
-                  value={18}
+                  value={differenceInCalendarYears(
+                    new Date(),
+                    new Date(2005, 1, 1),
+                  )}
                 />
                 <Reveal>
                   <p>Années d'expérience</p>
@@ -200,7 +201,7 @@ export default function Page() {
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
                   suffix="€"
-                  value={300}
+                  value={200}
                 />
                 <Reveal>
                   <p>Récoltés pour la protection de la faune maritime</p>
@@ -209,7 +210,7 @@ export default function Page() {
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
                   fontStyle="text-5xl font-heading font-bold"
-                  value={15}
+                  value={59} //TODO: rempalcer par une méthode getAdherentCount()
                 />
                 <Reveal>
                   <p>Adhérents</p>
