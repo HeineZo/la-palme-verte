@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- API Notion mal typé*/
 /* eslint-disable @typescript-eslint/no-unsafe-argument -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */

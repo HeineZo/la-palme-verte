@@ -1,7 +1,6 @@
 import Reveal from '@/shared/utils/Reveal.component';
 import Button from '@/shared/theme/Button';
 import Article from '../components/Article.component';
-import { FullBlogPost } from '@/utils/type';
 import { getPages } from 'server/blog';
 
 /**

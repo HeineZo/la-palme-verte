@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Avatar, AvatarGroup, Chip } from '@nextui-org/react';
 import { BlogPost } from '@/class/BlogPost.class';
-import { format, formatRelative, isDate, parseISO, subDays } from 'date-fns';
+import { format, isDate } from 'date-fns';
 import { fr } from 'date-fns/locale'
 
 interface ArticleContentProps {
