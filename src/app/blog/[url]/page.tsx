@@ -38,10 +38,8 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <ArticleContent
-      title={post.title}
-      categories={post.categories}
-      cover={post.cover}
-      content={html}
+      article={post}
+      htmlContent={html}
     />
   );
 }

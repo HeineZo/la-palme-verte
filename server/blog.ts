@@ -88,3 +88,5 @@ export const getPageByUrl = async (url: string) => {
 
   return BlogPost.fromNotion(response.results[0]);
 };
+export { notionClient };
+
