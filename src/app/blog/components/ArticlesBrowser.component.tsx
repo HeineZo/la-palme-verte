@@ -1,6 +1,6 @@
-'use client';
-
-import { Tabs, Tab, Pagination, ScrollShadow } from '@nextui-org/react';
+'use client'; 
+import { Pagination, ScrollShadow } from '@nextui-org/react';
+import { Tabs, Tab  } from '@nextui-org/tabs';
 import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
@@ -26,8 +26,8 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
               cursor: 'bg-accent',
             }}
           >
-            {categories.map((tag) => (
-              <Tab key={tag} title={tag} />
+            {categories.map((category) => (
+              <Tab key={category} title={category} />
             ))}
           </Tabs>
         </ScrollShadow>
