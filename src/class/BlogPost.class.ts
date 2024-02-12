@@ -31,9 +31,9 @@ export class BlogPost {
     }
 
     /**
-     * Transforme un article en type `BlogPost`
-     * @param page Article que l'on veut transformer en `BlogPost`
-     * @returns L'objet `BlogPost` correspondant
+     * Transforme un objet Notion en type simplifié
+     * @param page Objet Notion que l'on veut transformer en type simplifié
+     * @returns L'objet simplifié correspondant
      */
     static async fromNotion(page: any) {
         const id = page.id;
