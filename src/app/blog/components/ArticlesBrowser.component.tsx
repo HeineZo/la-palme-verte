@@ -4,7 +4,6 @@ import { Tabs, Tab, Pagination, ScrollShadow } from '@nextui-org/react';
 import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
-import { FullBlogPost } from '@/utils/type';
 import { BlogPost } from '@/class/BlogPost.class';
 
 interface ArticleBrowerProps {

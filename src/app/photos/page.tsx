@@ -1,10 +1,6 @@
-'use client';
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import BlogImage from './components/BlogImage.component';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import { Button } from '@nextui-org/react';
-import { getAlbums } from 'server/album';
 import AlbumTile from './components/AlbumTile.component';
 
 export default function page() {
@@ -29,7 +25,7 @@ export default function page() {
         </div>
       </section>
       <section className="section py-0 flex flex-col items-center">
-        <AlbumTile title='Clean Walk à Séné' cover={undefined} description=''/>
+        <AlbumTile title='Clean Walk à Séné' cover={undefined} description='' />
       </section>
       <BecomeMember
         buttonTitle="Devenir adhérent"

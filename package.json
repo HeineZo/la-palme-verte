@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "prisma generate && next build",
+    "build": "next build",
     "dev": "next dev",
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
     "lint:fix": "eslint ./ --ext js,jsx,ts,tsx --fix",
-    "start": "next start"
+    "start": "next build && next start"
   },
   "prettier": "@vercel/style-guide/prettier",
   "prisma": {
