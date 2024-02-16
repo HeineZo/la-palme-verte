@@ -1,69 +1,53 @@
-import { Album } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { ApiResponse } from './db/IApiResponse';
-import { db } from './db/client';
+/* eslint-disable camelcase -- Utilisation des attributs de Notion */
+import 'server-only';
 
-///// GET /////
+import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { notionClient } from './database';
+import { Album } from '@/class/Album.class';
+
+const database_id = process.env.ALBUM_DATABASE ?? '';
 
 /**
  * Récupérer tous les albums
  * @returns {Promise<ApiResponse<Album>>}
  */
-export async function getAlbums(): Promise<ApiResponse<Album>> {
-  try {
-    const albums: Album[] | null = await db.album.findMany();
-    return {
-      data: albums,
-      code: 200,
-      message: 'Albums trouvés',
-    };
-  } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError) {
-      return {
-        data: [],
-        code: parseInt(error.code),
-        message: error.message,
-      };
-    }
-    return {
-      data: null,
-      code: 500,
-      message: 'Erreur interne du serveur, inconnu',
-    };
-  }
-}
+export const getAlbums = async () => {
+  const response = await notionClient.databases.query({ database_id });
+  const albumsPromises = response.results.map((result) =>
+    Album.fromNotion(result),
+  );
+  const albums = await Promise.all(albumsPromises);
+
+  return albums;
+};
 
 /**
- * Récupérer un album par son identifiant
- * @param {Album.id} id
- * @returns {Promise<ApiResponse<Album>>}
+ * Récupérer les images d'un album
+ * @param albumId Identifiant de l'album
+ * @returns Liste des images
  */
-export async function getAlbumById(
-  id: number,
-): Promise<ApiResponse<Album>> {
-  try {
-    const album: Album | null = await db.album.findUnique({
-      where: {
-        id,
+export const getAlbumImages = async (albumId: string) => {
+  const response = await notionClient.blocks.children.list({
+    block_id: albumId,
+  });
+  return response.results as ImageBlockObjectResponse[];
+};
+
+/**
+ * Récupérer un album par son URL
+ * @param url URL de l'album
+ * @returns Album retrouvé
+ */
+export const getAlbumByUrl = async (url: string) => {
+  const response = await notionClient.databases.query({
+    filter: {
+      property: 'URL',
+      rich_text: {
+        equals: url,
       },
-    });
-    return {
-      data: album,
-      code: 200,
-      message: 'Album trouvé',
-    };
-  } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError) {
-      return {
-        data: null,
-        code: parseInt(error.code),
-        message: error.message,
-      };
-    }
-    return {
-      data: null,
-      code: 500,
-      message: 'Erreur interne du serveur, inconnu',
-    };
-  }
-}
+    },
+    database_id,
+  });
+
+  return Album.fromNotion(response.results[0]);
+};

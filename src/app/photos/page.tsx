@@ -2,17 +2,11 @@ import React from 'react';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import { Button } from '@nextui-org/react';
 import AlbumTile from './components/AlbumTile.component';
+import { getAlbums } from 'server/album';
 
-export default function page() {
+export default async function page() {
+  const albums = await getAlbums();
 
-  // const { data, error, isFetched } = useQuery({
-  //   queryKey: ['albums'],
-  //   queryFn: async () => getAlbums()
-  // });
-
-  // if (error) return <div>{error.message}</div>;
-
-  // if (data?.data) {
   return (
     <main>
       <section className="section flex gap-5 mt-12 flex-col">
@@ -25,7 +19,8 @@ export default function page() {
         </div>
       </section>
       <section className="section py-0 flex flex-col items-center">
-        <AlbumTile title='Clean Walk à Séné' cover={undefined} description='' />
+        <h1>{albums[0].title}</h1>
+        <AlbumTile title={albums[0].title} cover={undefined} description='' />
       </section>
       <BecomeMember
         buttonTitle="Devenir adhérent"
@@ -38,5 +33,4 @@ export default function page() {
       </BecomeMember>
     </main>
   )
-  // }
 }

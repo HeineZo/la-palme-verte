@@ -1,9 +1,7 @@
 'use client';
 
 import { Image } from '@nextui-org/image';
-import { useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
-import { getPhotos, deleteAll } from 'server/photo';
 import Button from '@/shared/theme/Button';
 import Zoom from "smooth-zoom";
 import ZoomableImage from './ZoomableImage.component';
