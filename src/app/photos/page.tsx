@@ -9,16 +9,16 @@ export default async function page() {
 
   return (
     <main>
-      <section className="section flex gap-5 mt-12 flex-col">
-        <div>
+      <section className="section flex flex-col">
+        <div className='mb-12'>
           <h1>Photos</h1>
           <p>
             Découvrez les albums des photos prises par nos adhérents lors de nos différents
             ateliers et interventions
           </p>
         </div>
+        <AlbumBrowser albums={albums} />
       </section>
-      <AlbumBrowser albums={albums} />
       <BecomeMember
         buttonTitle="Devenir adhérent"
         shortTitle="Devenez adhérent"

@@ -18,7 +18,7 @@ export const getAlbums = async () => {
   );
   const albums = await Promise.all(albumsPromises);
 
-  return albums;
+  return albums.reverse();
 };
 
 /**

@@ -1,5 +1,6 @@
 import { Album } from "@/class/Album.class";
 import AlbumTile from "./AlbumTile.component";
+import Reveal from "@/shared/utils/Reveal.component";
 
 interface AlbumBrowserProps {
     albums: Album[];
@@ -7,14 +8,14 @@ interface AlbumBrowserProps {
 
 export default function AlbumBrowser({ albums }: AlbumBrowserProps) {
 
-    return (<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {albums.map((album) => (
-            <div
-                key={album.id}
-                className="relative overflow-hidden aspect-w-1 aspect-h-1"
-            >
-                <AlbumTile cover={album.images[0].file.url} title={album.title} description={album.description} />
-            </div>
-        ))}
-    </div>)
+    return (
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            {albums.map((album, index) => (
+                <Reveal index={index} key={album.title}>
+                    <AlbumTile album={album} />
+                </Reveal>
+            ))
+            }
+        </div >
+    )
 }

@@ -14,12 +14,20 @@ export class Album {
   title: string;
   description: string;
   images: File[];
+  url: string;
 
-  constructor(id: string, title: string, description: string, images: File[]) {
+  constructor(
+    id: string,
+    title: string,
+    description: string,
+    images: File[],
+    url: string,
+  ) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.images = images;
+    this.url = url;
   }
 
   /**
@@ -32,7 +40,8 @@ export class Album {
     const title = album.properties.Titre.title[0]?.plain_text;
     const description = album.properties.Description.rich_text[0]?.text.content;
     const images = album.properties.Images.files;
+    const url = album.properties.URL.rich_text[0].text.content;
 
-    return new Album(id, title, description, images);
+    return new Album(id, title, description, images, url);
   }
 }
