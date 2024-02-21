@@ -13,7 +13,7 @@ export default function AlbumBrowser({ albums }: AlbumBrowserProps) {
                 key={album.id}
                 className="relative overflow-hidden aspect-w-1 aspect-h-1"
             >
-                <AlbumTile cover={album.images[0].external.url} title={album.title} description={album.description} />
+                <AlbumTile cover={album.images[0].file.url} title={album.title} description={album.description} />
             </div>
         ))}
     </div>)

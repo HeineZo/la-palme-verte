@@ -6,7 +6,7 @@
 interface File {
   name: string;
   type: string;
-  external: { url: string };
+  file: { url: string };
 }
 
 export class Album {
@@ -29,9 +29,9 @@ export class Album {
    */
   static fromNotion(album: any) {
     const id = album.id;
-    const title = album.properties.Titre.title[0].plain_text;
-    const description = album.properties.Description.rich_text[0].text.content;
-    const images = album.properties.Images.files[0];
+    const title = album.properties.Titre.title[0]?.plain_text;
+    const description = album.properties.Description.rich_text[0]?.text.content;
+    const images = album.properties.Images.files;
 
     return new Album(id, title, description, images);
   }
