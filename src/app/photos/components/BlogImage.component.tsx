@@ -4,11 +4,10 @@ import { Image } from '@nextui-org/image';
 import React, { useEffect } from 'react';
 import Button from '@/shared/theme/Button';
 import Zoom from "smooth-zoom";
-import ZoomableImage from './ZoomableImage.component';
-import { Photo } from '@prisma/client';
+import ZoomableImage from '../[url]/components/ZoomableImage.component';
 
 interface BlogImage {
-  photo?: Photo
+  photo?: string
   title?: string;
   description?: string;
   className?: string;
@@ -28,7 +27,7 @@ export default function BlogImage({ photo, title, description, className }: Blog
           Supprimer
         </Button> */}
       {/* // <Image key={photo.id} src={photo.url ?? undefined} /> */}
-      <ZoomableImage className={`rounded-medium ${className}`} key={photo?.id} src={photo?.url ?? undefined}></ZoomableImage>
+      <ZoomableImage className={`rounded-medium ${className}`} key={photo} src={photo ?? undefined}></ZoomableImage>
       {/* TODO: make text responsive */}
       {(title && description) && (
         <div className="absolute bottom-7 left-7 text-white w-3/4">

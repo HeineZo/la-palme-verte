@@ -1,8 +1,8 @@
 import React from 'react';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import { Button } from '@nextui-org/react';
-import AlbumTile from './components/AlbumTile.component';
 import { getAlbums } from 'server/album';
+import AlbumBrowser from './components/AlbumBrowser.component';
 
 export default async function page() {
   const albums = await getAlbums();
@@ -18,10 +18,7 @@ export default async function page() {
           </p>
         </div>
       </section>
-      <section className="section py-0 flex flex-col items-center">
-        <h1>{albums[0].title}</h1>
-        <AlbumTile title={albums[0].title} cover={undefined} description='' />
-      </section>
+      <AlbumBrowser albums={albums} />
       <BecomeMember
         buttonTitle="Devenir adhérent"
         shortTitle="Devenez adhérent"

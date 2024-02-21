@@ -31,8 +31,8 @@ export class Album {
     const id = album.id;
     const title = album.properties.Titre.title[0].plain_text;
     const description = album.properties.Description.rich_text[0].text.content;
-    // const images = album.properties.Images.files[0];
+    const images = album.properties.Images.files[0];
 
-    return new Album(id, title, description, []);
+    return new Album(id, title, description, images);
   }
 }
