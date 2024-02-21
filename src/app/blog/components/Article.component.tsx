@@ -1,39 +1,80 @@
-'use client';
-
-import { Chip, Image } from '@nextui-org/react';
+import { Avatar, AvatarGroup, Chip, Image, cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
-import { BlogPost } from '@prisma/client';
+import { format, isDate } from 'date-fns';
+import { BlogPost } from '@/class/BlogPost.class';
+import Link from 'next/link';
+import { arrayToString } from '@/utils/utils';
 
 interface ArticleProps {
   article: BlogPost;
+  isMain?: boolean;
 }
 
 /**
  * Vignette d'un article de blog
  * @param article Article à afficher
  */
-export default function Article({ article }: ArticleProps) {
+export default function Article({ article, isMain }: ArticleProps) {
+  const { title, description, cover, categories, authors } = article;
+
   return (
-    <div className="flex flex-col min-w-[350px] max-w-xl gap-6 flex-1 p-6 rounded-medium relative shadow-medium hover:scale-105 transition-all">
+    <div
+      className={cn(
+        isMain
+          ? 'lg:flex items-center gap-16 w-full rounded-medium shadow-medium'
+          : 'rounded-medium shadow-medium hover:scale-105 max-w-xl',
+        'min-w-[350px] p-6 relative transition-all',
+      )}
+    >
       <Image
-        className="object-cover h-[300px]"
-        src={article.imageCover ?? undefined}
+        src={cover}
         width="100%"
+        className={cn(
+          'object-cover aspect-video',
+          isMain && 'aspect-auto max-w-4xl',
+        )}
       />
-      <div className="flex gap-2">
-        {/* {article.categories.map((categorie: string) => (
-          <Chip color="primary" key={categorie} variant="flat">
-            {categorie}
-          </Chip>
-        ))} */}
+      <div className={cn('flex flex-col gap-5 mt-5', isMain && 'lg:w-2/3')}>
+        <div className="flex gap-2">
+          {categories.map((categorie: string) => (
+            <Chip key={categorie} color="primary" variant="flat">
+              {categorie}
+            </Chip>
+          ))}
+        </div>
+        <div className="flex flex-col gap-2">
+          <h5>{title}</h5>
+          <p className="line-clamp-2">{description}</p>
+          <small>
+            Publié le{' '}
+            {isDate(article.publicationDate)
+              ? format(article.publicationDate, 'dd/MM/yyyy')
+              : null}
+          </small>
+        </div>
+        <div className="flex items-center justify-between">
+          <Button
+            color="primary"
+            className="w-fit"
+            as={Link}
+            href={`/blog/${article.url}`}
+          >
+            Lire plus
+          </Button>
+          <div className="flex items-center">
+            <AvatarGroup max={2} total={authors.length - 2}>
+              {authors.map((author) => (
+                <Avatar key={author.id} src={author.imageUrl} />
+              ))}
+            </AvatarGroup>
+            <div className="flex flex-col ml-2 mr-6">
+              <p className="text-sm font-bold">
+                {arrayToString(article.authors.map((author) => author.name))}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <h5>{article.title}</h5>
-        <p className="line-clamp-2">{article.content}</p>
-      </div>
-      <Button className="w-fit" color="primary" variant="light">
-        Lire plus
-      </Button>
     </div>
   );
 }

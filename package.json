@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "prisma generate && next build",
+    "build": "next build",
     "dev": "next dev",
     "lint": "eslint ./ --ext js,jsx,ts,tsx",
     "lint:fix": "eslint ./ --ext js,jsx,ts,tsx --fix",
-    "start": "next start"
+    "start": "next build && next start"
   },
   "prettier": "@vercel/style-guide/prettier",
   "prisma": {
@@ -17,7 +17,11 @@
     "@next/eslint-plugin-next": "^14.0.4",
     "@nextui-org/image": "^2.0.24",
     "@nextui-org/react": "^2.2.9",
-    "@prisma/client": "^5.7.1",
+    "@notion-render/bookmark-plugin": "^0.0.2",
+    "@notion-render/client": "^0.0.2",
+    "@notion-render/hljs-plugin": "^0.0.2",
+    "@notionhq/client": "^2.2.14",
+    "@prisma/client": "^5.8.1",
     "@tabler/icons-react": "^2.45.0",
     "@tanstack/react-query": "^5.17.8",
     "@types/node": "20.10.6",
