@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- API de Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-call -- API de Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-return -- API de Notion mal typé */
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
