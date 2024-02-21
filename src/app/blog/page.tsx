@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment -- WIP */
 import React from 'react';
 import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
@@ -24,7 +25,7 @@ export default async function page() {
       <section className="section">
         {mainPost && <Article article={mainPost} isMain />}
       </section>
-      <ArticlesBrowser articles={posts} categories={categories} />
+      <ArticlesBrowser articles={JSON.parse(JSON.stringify(posts))} categories={categories} />
       <DiscoverPhotos />
     </main>
   );
