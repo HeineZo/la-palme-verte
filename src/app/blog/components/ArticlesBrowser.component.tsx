@@ -1,10 +1,11 @@
-'use client'; 
+'use client';
 import { Pagination, ScrollShadow } from '@nextui-org/react';
-import { Tabs, Tab  } from '@nextui-org/tabs';
+import { Tabs, Tab } from '@nextui-org/tabs';
 import Searchbar from './Searchbar.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import Article from './Article.component';
 import { BlogPost } from '@/class/BlogPost.class';
+import { Key, useState } from 'react';
 
 interface ArticleBrowerProps {
   articles: BlogPost[];
@@ -12,6 +13,16 @@ interface ArticleBrowerProps {
 }
 
 export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // État local pour stocker la catégorie sélectionnée
+
+  const handleCategorySelection = (category: string | null) => {
+    setSelectedCategory(category === "Tout" ? null : category);
+  };
+
+  const filteredArticles = selectedCategory ? articles.filter(article =>
+    article.categories.includes(selectedCategory)
+  ) : articles; // Filtrer les articles en fonction de la catégorie sélectionnée, si elle existe
+
   return (
     <section className="flex flex-col gap-10 section w-full">
       {/* <h3>Découvrir</h3> */}
@@ -25,9 +36,16 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
               tabList: 'gap-6',
               cursor: 'bg-accent',
             }}
+            onSelectionChange={(key: Key) => {
+              handleCategorySelection(key as string);
+            }}
           >
+            <Tab key={"Tout"} title={"Tout"} />
             {categories.map((category) => (
-              <Tab key={category} title={category} />
+              <Tab
+                key={category}
+                title={category}
+              />
             ))}
           </Tabs>
         </ScrollShadow>
@@ -36,7 +54,7 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {articles.map((article, index) => (
+        {filteredArticles.map((article, index) => (
           <Reveal index={index} key={article.title}>
             <Article article={article} />
           </Reveal>
