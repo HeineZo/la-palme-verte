@@ -15,6 +15,9 @@ interface ArticleBrowerProps {
 export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const articlesPerPage = 3;
+
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value.toLowerCase());
@@ -24,17 +27,27 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
     setSelectedCategory(category === "Tout" ? null : category);
   };
 
-  const filterArticles = (article: BlogPost) => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
-    const inCategory = !selectedCategory || article.categories.includes(selectedCategory);
-    const matchesQuery =
-      !searchQuery ||
-      article.title.toLowerCase().includes(lowerCaseQuery) ||
-      article.description.toLowerCase().includes(lowerCaseQuery);
-    return inCategory && matchesQuery;
+  const paginate = (pageNumber: number) => { setCurrentPage(pageNumber); };
+
+  const filterAndPaginateArticles = () => {
+    const filteredArticles = articles.filter(article => {
+      const lowerCaseQuery = searchQuery.toLowerCase();
+      const inCategory = !selectedCategory || article.categories.includes(selectedCategory);
+      const matchesQuery =
+        !searchQuery ||
+        article.title.toLowerCase().includes(lowerCaseQuery) ||
+        article.description.toLowerCase().includes(lowerCaseQuery);
+      return inCategory && matchesQuery;
+    });
+
+    const indexOfLastArticle = currentPage * articlesPerPage;
+    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+    const currentArticles = filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+
+    return currentArticles;
   };
 
-  const filteredArticles = articles.filter(filterArticles);
+  const currentArticles = filterAndPaginateArticles();
 
   return (
     <section className="flex flex-col gap-10 section w-full">
@@ -67,7 +80,7 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {filteredArticles.map((article, index) => (
+        {currentArticles.map((article, index) => (
           <Reveal index={index} key={article.title}>
             <Article article={article} />
           </Reveal>
@@ -76,8 +89,8 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
       <div className="flex justify-center">
         <Pagination
           initialPage={1}
-          // total={articles.length / 9}
-          total={3}
+          total={Math.ceil(currentArticles.length / articlesPerPage)}
+          onChange={paginate}
         />
       </div>
     </section>
