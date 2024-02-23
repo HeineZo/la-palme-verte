@@ -13,15 +13,28 @@ interface ArticleBrowerProps {
 }
 
 export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // État local pour stocker la catégorie sélectionnée
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value.toLowerCase());
+  };
 
   const handleCategorySelection = (category: string | null) => {
     setSelectedCategory(category === "Tout" ? null : category);
   };
 
-  const filteredArticles = selectedCategory ? articles.filter(article =>
-    article.categories.includes(selectedCategory)
-  ) : articles; // Filtrer les articles en fonction de la catégorie sélectionnée, si elle existe
+  const filterArticles = (article: BlogPost) => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const inCategory = !selectedCategory || article.categories.includes(selectedCategory);
+    const matchesQuery =
+      !searchQuery ||
+      article.title.toLowerCase().includes(lowerCaseQuery) ||
+      article.description.toLowerCase().includes(lowerCaseQuery);
+    return inCategory && matchesQuery;
+  };
+
+  const filteredArticles = articles.filter(filterArticles);
 
   return (
     <section className="flex flex-col gap-10 section w-full">
@@ -50,7 +63,7 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
           </Tabs>
         </ScrollShadow>
         <div className="max-w-[400px] w-full">
-          <Searchbar />
+          <Searchbar onSearchChange={handleSearchChange} />
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
