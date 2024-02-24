@@ -1,10 +1,11 @@
-'use client';
 
-import { Avatar } from '@nextui-org/avatar';
-import React from 'react';
-import { cn } from '@nextui-org/system';
 import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
 import Button from '@/shared/theme/Button';
+import { Avatar } from '@nextui-org/avatar';
+import { cn } from '@nextui-org/system';
+import React from 'react';
+import { getUsers } from 'server/user';
+import { Iuser } from '../interfaces/User';
 
 interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
@@ -27,7 +28,7 @@ interface BecomeMemberProps {
  * @param buttonTitle Titre du bouton *(optionnel)*
  */
 
-export default function BecomeMember({
+export default async function BecomeMember({
   className,
   title,
   shortTitle = title,
@@ -36,6 +37,9 @@ export default function BecomeMember({
   showInfiniteLoop = true,
   buttonTitle,
 }: BecomeMemberProps) {
+
+  const users: Iuser[] = await getUsers();
+  
   return (
   <div
   className={cn(
@@ -52,11 +56,11 @@ export default function BecomeMember({
 
       {showInfiniteLoop ? (
         <InfiniteLoop
-          firstRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar className="w-20 h-20 text-white" key={i} />
+          firstRow={users.slice(0, users.length / 2).map((user, i) => (
+            <Avatar src={user.imageUrl} name={user.name.charAt(0).toUpperCase() + user.surname.charAt(0).toUpperCase()} className="w-20 h-20 text-white text-xl" key={i} />
           ))}
-          secondRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar className="w-20 h-20 text-white" key={i} />
+          secondRow={users.slice(users.length / 2, users.length).map((user, i) => (
+            <Avatar src={user.imageUrl} name={user.name.charAt(0).toUpperCase() + user.surname.charAt(0).toUpperCase()} className="w-20 h-20 text-white text-xl" key={i} />
           ))}
         />
       ) : null}

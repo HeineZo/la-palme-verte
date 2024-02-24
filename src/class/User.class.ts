@@ -24,12 +24,13 @@ export class User {
 
   static fromNotion(user: any) {
     const id = user.id;
-    const name = user.properties.Prénom.title[0].plain_text;
-    const surname = user.properties.Nom.rich_text[0].text.content;
-    const role = user.properties.Rôle.select.name;
-    const imageUrl = user.properties['Photo de profil'].files[0]?.file.url;
-    const instagram = user.properties.Instagram.url;
-    const linkedin = user.properties.Linkedin.url;
+    const name = user.properties?.Prénom.title[0].text.content;
+    const surname = user.properties?.Nom.rich_text[0].text.content;
+    const role = user.properties?.Rôle.select.name;
+    const photoDeProfilProperty = user.properties?.['Photo de profil'];
+    const imageUrl = photoDeProfilProperty ? photoDeProfilProperty.files[0]?.file.url : undefined;
+    const instagram = user.properties?.Instagram.url;
+    const linkedin = user.properties?.Linkedin.url;
 
     return new User(id, name, surname, role, imageUrl, instagram, linkedin);
   }
