@@ -28,7 +28,7 @@ export class User {
     const surname = user.properties?.Nom.rich_text[0].text.content;
     const role = user.properties?.Rôle.select.name;
     const photoDeProfilProperty = user.properties?.['Photo de profil'];
-    const imageUrl = photoDeProfilProperty ? photoDeProfilProperty.files[0]?.file.url : undefined;
+    const imageUrl = photoDeProfilProperty ? photoDeProfilProperty.files[0]?.file?.url : undefined;
     const instagram = user.properties?.Instagram.url;
     const linkedin = user.properties?.Linkedin.url;
 

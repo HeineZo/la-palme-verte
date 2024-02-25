@@ -4,11 +4,11 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
+import { BlogPost } from '@/class/BlogPost.class';
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { BlogPost } from '@/class/BlogPost.class';
 import { notionClient } from './database';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
