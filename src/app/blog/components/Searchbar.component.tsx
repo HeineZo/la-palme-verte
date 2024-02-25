@@ -15,6 +15,11 @@ export default function Searchbar({ onSearchChange }: SearchbarProps) {
     onSearchChange(value);
   };
 
+  const handleClear = () => {
+    setSearchValue('');
+    onSearchChange('');
+  }
+
   return (
     <Input
       isClearable
@@ -22,6 +27,7 @@ export default function Searchbar({ onSearchChange }: SearchbarProps) {
       placeholder="Rechercher un article"
       value={searchValue}
       onChange={handleChange}
+      onClear={() => {handleClear()}}
       startContent={<IconSearch size={18} stroke={1.5} />}
     />
   );

@@ -1,11 +1,11 @@
 'use client';
-import { Pagination, ScrollShadow } from '@nextui-org/react';
-import { Tabs, Tab } from '@nextui-org/tabs';
-import Searchbar from './Searchbar.component';
-import Reveal from '@/shared/utils/Reveal.component';
-import Article from './Article.component';
 import { BlogPost } from '@/class/BlogPost.class';
+import Reveal from '@/shared/utils/Reveal.component';
+import { Pagination, ScrollShadow } from '@nextui-org/react';
+import { Tab, Tabs } from '@nextui-org/tabs';
 import { Key, useState } from 'react';
+import Article from './Article.component';
+import SearchbarAutocomplete from './SearchbarAutocomplete.component';
 
 interface ArticleBrowerProps {
   articles: BlogPost[];
@@ -17,7 +17,6 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const articlesPerPage = 3;
-
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value.toLowerCase());
@@ -76,10 +75,10 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
           </Tabs>
         </ScrollShadow>
         <div className="max-w-[400px] w-full">
-          <Searchbar onSearchChange={handleSearchChange} />
+          <SearchbarAutocomplete onSearchChange={handleSearchChange} searchList={currentArticles} />  
         </div>
       </div>
-      <div className="flex w-full flex-wrap gap-8">
+      <div className="flex w-full flex-wrap gap-8 justify-center">
         {currentArticles.map((article, index) => (
           <Reveal index={index} key={article.title}>
             <Article article={article} />
@@ -87,11 +86,13 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
         ))}
       </div>
       <div className="flex justify-center">
+      { currentArticles.length > 0 ? (
         <Pagination
           initialPage={1}
           total={Math.ceil(currentArticles.length / articlesPerPage)}
           onChange={paginate}
         />
+      ) : null}
       </div>
     </section>
   );

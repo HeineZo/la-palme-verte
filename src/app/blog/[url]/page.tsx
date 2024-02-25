@@ -1,8 +1,8 @@
-import { getPageByUrl, getPageContent } from 'server/blog';
-import { notionClient } from 'server/database';
 import bookmarkPlugin from '@notion-render/bookmark-plugin';
 import { NotionRenderer } from '@notion-render/client';
 import hljsPlugin from '@notion-render/hljs-plugin';
+import { getPageByUrl, getPageContent } from 'server/blog';
+import { notionClient } from 'server/database';
 import ArticleContent from './components/ArticleContent';
 
 interface PageProps {
