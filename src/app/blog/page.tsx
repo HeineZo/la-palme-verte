@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- WIP */
-import React from 'react';
+import { getCategories, getPages } from 'server/blog';
 import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
 import DiscoverPhotos from './components/DiscoverPhotos.component';
-import { getCategories, getPages } from 'server/blog';
 
 /**
  * Page Blog

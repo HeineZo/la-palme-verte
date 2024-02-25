@@ -4,11 +4,11 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
+import { BlogPost } from '@/class/BlogPost.class';
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { BlogPost } from '@/class/BlogPost.class';
 import { notionClient } from './database';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
@@ -50,11 +50,12 @@ export const getCategories = async () => {
 
   const categories = (response.results as PageObjectResponse[]).map((result) =>
     (result.properties.Catégories as any).multi_select.map(
-      (category: any) => category.name,
+      (category: { id : string, name: string, color: string}) => ({ name: category.name}),
     ),
   );
 
-  return Array.from(new Set(categories.flat()));
+  return Array.from(new Set(categories.flat().map((category) => category.name))) as string[];
+
 };
 
 /**
