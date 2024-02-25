@@ -36,10 +36,8 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {articles.map((article, index) => (
-          <Reveal index={index} key={article.title}>
-            <Article article={article} />
-          </Reveal>
+        {articles.map((article) => (
+            <Article article={article} key={article.title} />
         ))}
       </div>
       <div className="flex justify-center">

@@ -1,4 +1,11 @@
-import { Avatar, AvatarGroup, Chip, Image, cn } from '@nextui-org/react';
+import {
+  Avatar,
+  AvatarGroup,
+  Chip,
+  Image,
+  ScrollShadow,
+  cn,
+} from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
 import { format, isDate } from 'date-fns';
 import { BlogPost } from '@/class/BlogPost.class';
@@ -15,15 +22,15 @@ interface ArticleProps {
  * @param article Article à afficher
  */
 export default function Article({ article, isMain }: ArticleProps) {
-  const { title, description, cover, categories, authors } = article;
-
+  const { title, description, cover, categories, authors, publicationDate } =
+    article;
   return (
     <div
       className={cn(
         isMain
-          ? 'lg:flex items-center gap-16 w-full rounded-medium shadow-medium'
+          ? 'lg:flex items-center gap-16 rounded-medium shadow-medium'
           : 'rounded-medium shadow-medium hover:scale-105 max-w-xl',
-        'min-w-[350px] p-6 relative transition-all',
+        ' p-6 relative w-full transition-all',
       )}
     >
       <Image
@@ -34,23 +41,25 @@ export default function Article({ article, isMain }: ArticleProps) {
           isMain && 'aspect-auto max-w-4xl',
         )}
       />
-      <div className={cn('flex flex-col gap-5 mt-5', isMain && 'lg:w-2/3')}>
-        <div className="flex gap-2">
-          {categories.map((categorie: string) => (
-            <Chip key={categorie} color="primary" variant="flat">
-              {categorie}
-            </Chip>
-          ))}
-        </div>
-        <div className="flex flex-col gap-2">
-          <h5>{title}</h5>
-          <p className="line-clamp-2">{description}</p>
-          <small>
-            Publié le{' '}
-            {isDate(article.publicationDate)
-              ? format(article.publicationDate, 'dd/MM/yyyy')
-              : null}
-          </small>
+      <div className={cn('flex flex-col justify-between gap-5 mt-5', isMain && 'lg:w-2/3')}>
+        <div className='flex flex-col gap-5'>
+          <div className="flex gap-2 overflow-x-hidden">
+            <ScrollShadow
+              orientation="horizontal"
+              className="flex items-center gap-2 overflow-x-auto w-full"
+            >
+              {categories.map((categorie: string) => (
+                <Chip key={categorie} color="primary" variant="flat">
+                  {categorie}
+                </Chip>
+              ))}
+            </ScrollShadow>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h5 className="line-clamp-2">{title}</h5>
+            <p className="line-clamp-2">{description}</p>
+            <small>Publié le {format(publicationDate, 'dd/MM/yyyy')}</small>
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <Button
