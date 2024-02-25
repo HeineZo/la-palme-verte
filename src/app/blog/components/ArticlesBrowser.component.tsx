@@ -1,10 +1,11 @@
-'use client'; 
-import { Pagination, ScrollShadow } from '@nextui-org/react';
-import { Tabs, Tab  } from '@nextui-org/tabs';
-import Searchbar from './Searchbar.component';
-import Reveal from '@/shared/utils/Reveal.component';
-import Article from './Article.component';
+'use client';
+import SearchbarAutocomplete from '@/app/blog/components/SearchbarAutocomplete.component';
 import { BlogPost } from '@/class/BlogPost.class';
+import Reveal from '@/shared/utils/Reveal.component';
+import { Pagination, ScrollShadow } from '@nextui-org/react';
+import { Tab, Tabs } from '@nextui-org/tabs';
+import { Key, useState } from 'react';
+import Article from './Article.component';
 
 interface ArticleBrowerProps {
   articles: BlogPost[];
@@ -12,6 +13,41 @@ interface ArticleBrowerProps {
 }
 
 export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const articlesPerPage = 3;
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value.toLowerCase());
+  };
+
+  const handleCategorySelection = (category: string | null) => {
+    setSelectedCategory(category === "Tout" ? null : category);
+  };
+
+  const paginate = (pageNumber: number) => { setCurrentPage(pageNumber); };
+
+  const filterAndPaginateArticles = () => {
+    const filteredArticles = articles.filter(article => {
+      const lowerCaseQuery = searchQuery.toLowerCase();
+      const inCategory = !selectedCategory || article.categories.includes(selectedCategory);
+      const matchesQuery =
+        !searchQuery ||
+        article.title.toLowerCase().includes(lowerCaseQuery) ||
+        article.description.toLowerCase().includes(lowerCaseQuery);
+      return inCategory && matchesQuery;
+    });
+
+    const indexOfLastArticle = currentPage * articlesPerPage;
+    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+    const currentArticles = filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
+
+    return currentArticles;
+  };
+
+  const currentArticles = filterAndPaginateArticles();
+
   return (
     <section className="flex flex-col gap-10 section w-full">
       {/* <h3>Découvrir</h3> */}
@@ -25,14 +61,21 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
               tabList: 'gap-6',
               cursor: 'bg-accent',
             }}
+            onSelectionChange={(key: Key) => {
+              handleCategorySelection(key as string);
+            }}
           >
+            <Tab key={"Tout"} title={"Tout"} />
             {categories.map((category) => (
-              <Tab key={category} title={category} />
+              <Tab
+                key={category}
+                title={category}
+              />
             ))}
           </Tabs>
         </ScrollShadow>
         <div className="max-w-[400px] w-full">
-          <Searchbar />
+          <SearchbarAutocomplete onSearchChange={handleSearchChange} searchList={currentArticles} />  
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
@@ -41,11 +84,13 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
         ))}
       </div>
       <div className="flex justify-center">
+      { currentArticles.length > 0 ? (
         <Pagination
           initialPage={1}
-          // total={articles.length / 9}
-          total={3}
+          total={Math.ceil(currentArticles.length / articlesPerPage)}
+          onChange={paginate}
         />
+      ) : null}
       </div>
     </section>
   );
