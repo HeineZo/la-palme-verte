@@ -1,11 +1,11 @@
 'use client';
+import SearchbarAutocomplete from '@/app/blog/components/SearchbarAutocomplete.component';
 import { BlogPost } from '@/class/BlogPost.class';
 import Reveal from '@/shared/utils/Reveal.component';
 import { Pagination, ScrollShadow } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { Key, useState } from 'react';
 import Article from './Article.component';
-import SearchbarAutocomplete from './SearchbarAutocomplete.component';
 
 interface ArticleBrowerProps {
   articles: BlogPost[];
