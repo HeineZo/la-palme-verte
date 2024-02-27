@@ -1,8 +1,17 @@
 "use client";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
+/**
+ * Composant permettant de faire défiler des éléments JSX à l'infini 
+ * 
+ * @param row // JSX.Element[] : tableau d'éléments JSX à afficher, par exemple des <Avatar> ou des <MemberCard>  
+ * @param direction // "left" | "right" : direction de défilement des éléments
+ * @param speed // "fast" | "normal" | "slow" : vitesse de défilement des éléments
+ * @param className // string : classes tailwind à ajouter 
+ * @returns 
+ */
 export const InfiniteMovingCards = ({
   row,
   direction = "left",
@@ -17,6 +26,7 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
+  // procesus de démarrage de l'animation
   useEffect(() => {
     addAnimation();
   }, []);
@@ -52,6 +62,8 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
+  // fonction pour définir la vitesse de défilement en fonction de la pops speed passé en paramètre
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
@@ -67,7 +79,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >

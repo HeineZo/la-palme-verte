@@ -3,7 +3,6 @@ import 'server-only';
 
 
 import { User } from '@/class/User.class';
-import { Iuser } from '@/shared/interfaces/User';
 import { notionClient } from './database';
 
 const database_id = process.env.USER_DATABASE ?? '';
@@ -23,7 +22,7 @@ export const getUser = async (id: string) => {
  * @returns Liste des utilisateurs
  */
 export const getUsers = async () => {
-    const users: Iuser[] = [];
+    const users: User[] = [];
     const response = await notionClient.databases.query({
         database_id,
     });
@@ -31,3 +30,25 @@ export const getUsers = async () => {
     users.push(...response.results.map((result) => User.fromNotion(result)));
     return users;
 } 
+
+/**
+ * Récupère tous les utilisateurs
+ * @returns Liste des utilisateurs
+ */
+export const getStaffMembers = async () => {
+    const users: User[] = [];
+    const response = await notionClient.databases.query({
+        filter: {
+            property: 'Rôle',
+            select: {
+                does_not_equal: 'Membre',
+            },
+        },
+        database_id,
+    });
+
+    users.push(...response.results.map((result) => User.fromNotion(result)));
+    return users;
+} 
+
+

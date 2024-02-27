@@ -1,12 +1,12 @@
 
-import { InfiniteMovingCards } from "@/shared/components/infiniteMovingCards";
+import { User } from "@/class/User.class";
+import { InfiniteMovingCards } from "@/shared/components/InfiniteMovingCards";
 import Button from '@/shared/theme/Button';
+import { capitalizeFirstLetter } from "@/utils/utils";
 import { Avatar } from "@nextui-org/react";
 import { cn } from '@nextui-org/system';
 import React from 'react';
 import { getUsers } from 'server/user';
-import { Iuser } from '../interfaces/User';
-
 
 interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
@@ -39,7 +39,7 @@ export default async function BecomeMember({
   buttonTitle,
 }: BecomeMemberProps) {
 
-  const users: Iuser[] = await getUsers();
+  const users: User[] = await getUsers();
   
   return (
   <div
@@ -59,14 +59,14 @@ export default async function BecomeMember({
         <div className="flex flex-col gap-4">
         <InfiniteMovingCards
           row={users.slice(0, users.length / 2).map((user, i) => (
-            <Avatar src={user.imageUrl} name={user.name.charAt(0).toUpperCase() + user.surname.charAt(0).toUpperCase()} className="w-20 h-20 text-white text-xl" key={i} />
+            <Avatar src={user.imageUrl} name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} className="w-20 h-20 text-white text-xl" key={i} />
           ))}
           speed="slow"
           direction="left"
         />
         <InfiniteMovingCards
           row={users.slice(users.length / 2, users.length).map((user, i) => (
-            <Avatar src={user.imageUrl} name={user.name.charAt(0).toUpperCase() + user.surname.charAt(0).toUpperCase()} className="w-20 h-20 text-white text-xl" key={i} />
+            <Avatar src={user.imageUrl} name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} className="w-20 h-20 text-white text-xl" key={i} />
           ))}
           speed="slow"
           direction="right"

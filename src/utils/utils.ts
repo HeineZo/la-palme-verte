@@ -4,5 +4,9 @@ export function arrayToString(array: string[]): string {
     if (array.length === 1) return array[0];
     if (array.length === 2) return `${array[0]} et ${array[1]}`;
     return `${array.slice(0, -1).join(', ')}, et ${array[array.length - 1]}`;
+}
 
+export function capitalizeFirstLetter(string: string): string {
+    // Met la première lettre de la chaîne de caractères en majuscule
+    return string.charAt(0).toUpperCase();
 }
