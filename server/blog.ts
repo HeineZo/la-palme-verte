@@ -5,6 +5,8 @@
 import 'server-only';
 
 import { BlogPost } from '@/class/BlogPost.class';
+import { ApiResponse } from '@/shared/type/IApiResponse';
+import { APIResponseError } from '@notionhq/client';
 import {
   BlockObjectResponse,
   PageObjectResponse,
@@ -19,12 +21,6 @@ const database_id = process.env.BLOG_DATABASE ?? '';
  */
 export const getPages = async () => {
   const response = await notionClient.databases.query({
-    filter: {
-      property: 'État',
-      status: {
-        equals: 'Publié',
-      },
-    },
     database_id,
   });
 
@@ -90,3 +86,40 @@ export const getPageByUrl = async (url: string) => {
   return BlogPost.fromNotion(response.results[0]);
 };
 
+/**
+ * Récupere le dernier article publié
+ * @returns Dernier article publié
+ */
+export const getLatestArticle = async () => {
+  // Initialiser l'état initial
+  const  result: ApiResponse<BlogPost> = { results: [], code: 200, message: ''} ;
+
+  try {
+    const response = await notionClient.databases.query({
+      filter: {
+        property: 'État',
+        status: {
+          equals: 'Publié',
+        },
+      },
+      database_id,
+      sorts: [
+        {
+          property: 'Date de création',
+          direction: 'descending',
+        },
+      ],
+    });
+
+    result.results = await BlogPost.fromNotion(response.results[0]);
+    result.code = 200;
+    result.message = 'Dernier article récupéré avec succès';
+  } catch (error) {
+    if (error instanceof APIResponseError) {
+      return { result: { ...result, code: error.status, message: error.message } };
+    } 
+      return { result: { ...result, code: 400, message: 'Erreur inattendue lors de la récupération des données' } };
+  }
+  
+  return result;
+};

@@ -4,6 +4,7 @@ import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
 import DiscoverPhotos from './components/DiscoverPhotos.component';
 
+
 /**
  * Page Blog
  */
@@ -22,8 +23,9 @@ export default async function page() {
         </p>
       </section>
       <section className="section">
-        {mainPost && <Article article={mainPost} isMain />}
+          <Article article={mainPost} isMain loading={true} />
       </section>
+      {/* Rest of your components */}
       <ArticlesBrowser articles={JSON.parse(JSON.stringify(posts))} categories={categories} />
       <DiscoverPhotos />
     </main>

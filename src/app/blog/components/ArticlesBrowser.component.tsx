@@ -17,16 +17,29 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const articlesPerPage = 3;
+  const [totalPages, setTotalPages] = useState<number>(Math.ceil(articles.length / articlesPerPage));
+
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value.toLowerCase());
   };
 
+  function chunkArray(array: BlogPost[], chunkSize: number) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
+
   const handleCategorySelection = (category: string | null) => {
     setSelectedCategory(category === "Tout" ? null : category);
   };
 
-  const paginate = (pageNumber: number) => { setCurrentPage(pageNumber); };
+  const paginate = (pageNumber: number) => { 
+    setCurrentPage(pageNumber);
+    document.getElementById('tabs')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const filterAndPaginateArticles = () => {
     const filteredArticles = articles.filter(article => {
@@ -41,17 +54,15 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
 
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-    const currentArticles = filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
-
-    return currentArticles;
+    return filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
   };
 
   const currentArticles = filterAndPaginateArticles();
 
   return (
-    <section className="flex flex-col gap-10 section w-full">
+    <section className="flex flex-col gap-10 section w-full scroll-smooth" id='tabs'>
       {/* <h3>Découvrir</h3> */}
-      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden ">
+      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden" >
         <ScrollShadow orientation='horizontal' className='flex items-center h-16'>
           <Tabs
             variant="light"
@@ -81,7 +92,7 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
       <div className="flex w-full flex-wrap gap-8 justify-center">
         {currentArticles.map((article, index) => (
           <Reveal index={index} key={article.title}>
-            <Article article={article} />
+            <Article article={article} loading={true}/>
           </Reveal>
         ))}
       </div>
@@ -89,7 +100,7 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
       { currentArticles.length > 0 ? (
         <Pagination
           initialPage={1}
-          total={Math.ceil(currentArticles.length / articlesPerPage)}
+          total={totalPages}
           onChange={paginate}
         />
       ) : null}

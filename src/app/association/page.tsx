@@ -1,15 +1,15 @@
-import { IconMail, IconMapPin } from '@tabler/icons-react';
-import { Image } from '@nextui-org/image';
-import { Link } from '@nextui-org/link';
-import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
-import Counter from '@/shared/utils/Counter.component';
-import Reveal from '@/shared/utils/Reveal.component';
-import Timeline from '@/shared/layout/Timeline.layout';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
-import timelineEvents from './assets/timeline-events.json';
+import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
+import Timeline from '@/shared/layout/Timeline.layout';
+import Counter from '@/shared/utils/Counter.component';
+import Reveal from '@/shared/utils/Reveal.component';
 import { FullUser } from '@/utils/type';
+import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/link';
+import { IconMail, IconMapPin } from '@tabler/icons-react';
 import { differenceInCalendarYears } from 'date-fns';
+import timelineEvents from './assets/timeline-events.json';
 
 /**
  * Page de présentation de l'association

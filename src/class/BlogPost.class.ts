@@ -35,7 +35,7 @@ export class BlogPost {
      * @param page Article que l'on veut transformer en `BlogPost`
      * @returns L'objet `BlogPost` correspondant
      */
-    static async fromNotion(page: any) {
+    static async fromNotion(page: any): Promise<BlogPost>{
         const id = page.id;
         const title = page.properties?.Titre.title[0].plain_text;
         const cover = page.cover?.external?.url ?? '';
