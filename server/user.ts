@@ -39,10 +39,20 @@ export const getStaffMembers = async () => {
     const users: User[] = [];
     const response = await notionClient.databases.query({
         filter: {
-            property: 'Rôle',
-            select: {
-                does_not_equal: 'Membre',
-            },
+            and: [
+                {
+                    property: 'Rôle',
+                    select: {
+                        does_not_equal: 'Membre',
+                    },
+                },
+                {
+                    property: 'Rôle',
+                    select: {
+                        is_not_empty: true,
+                    },
+                },
+            ],
         },
         database_id,
     });

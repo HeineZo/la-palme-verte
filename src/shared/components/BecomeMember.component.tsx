@@ -58,15 +58,27 @@ export default async function BecomeMember({
       {showInfiniteLoop ? (
         <div className="flex flex-col gap-4">
         <InfiniteMovingCards
-          row={users.slice(0, users.length / 2).map((user, i) => (
-            <Avatar src={user.imageUrl} name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} className="w-20 h-20 text-white text-xl" key={i} />
+          row={users.slice(0, users.length / 2).map((user: User, i: number) => (
+            <Avatar 
+              src={user.imageUrl} 
+              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} 
+              className="w-20 h-20 text-white text-xl" 
+              key={i} 
+              imgProps={{ className: 'opacity-100' }}
+            /> 
           ))}
           speed="slow"
           direction="left"
         />
         <InfiniteMovingCards
-          row={users.slice(users.length / 2, users.length).map((user, i) => (
-            <Avatar src={user.imageUrl} name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} className="w-20 h-20 text-white text-xl" key={i} />
+          row={users.slice(users.length / 2, users.length).map((user: User, i: number) => (
+            <Avatar 
+              src={user.imageUrl} 
+              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)}
+              className="w-20 h-20 text-white text-xl"
+              key={i}
+              imgProps={{ className: 'opacity-100' }}
+            />
           ))}
           speed="slow"
           direction="right"
