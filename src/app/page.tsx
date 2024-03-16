@@ -13,14 +13,14 @@ import FAQ from '@/shared/layout/FAQ.layout';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import LastArticles from './blog/layout/LastArticles.layout';
-import { QueryClient } from '@tanstack/react-query';
-import { getPhotos } from 'server/photo';
-import Link from 'next/link';
+import { getBySection } from 'server/faq';
+import { clone } from '@/utils/utils';
 
 /**
  * Page d'accueil
  */
-export default function Home() {
+export default async function Home() {
+  const faq = await getBySection('Général');
 
   const actionsRow: Row[] = [
     {
@@ -43,7 +43,7 @@ export default function Home() {
     },
   ];
 
-  // placeholders en attendant la mise en place de la galerie photo
+  // TODO: placeholders en attendant la mise en place de la galerie photo
   const photos = [
     'https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
     'https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80',
@@ -53,35 +53,6 @@ export default function Home() {
     'https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
     'https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80',
     'https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-  ];
-
-  const questions = [
-    {
-      label: 'Pourquoi avoir choisi ce nom ?',
-      content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
-    },
-    {
-      label: "Comment adhérer à l'association ?",
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
-    },
-    {
-      label: 'Comment participer aux ateliers ?',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
-    },
-    {
-      label: "Pourquoi l'adhésion n'est-elle pas gratuite ?",
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
-    },
-    {
-      label:
-        "J'habite dans un autre pays, est-il tout de même possible d'adhérer ?",
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
-    },
   ];
 
   return (
@@ -175,7 +146,7 @@ export default function Home() {
       {/* FAQ */}
       <FAQ
         description="Les questions que l'on nous pose le plus souvent"
-        questions={questions}
+        faq={clone(faq)}
         title="Vous avez des questions ?"
       />
     </main>

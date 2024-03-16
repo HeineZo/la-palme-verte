@@ -19,10 +19,8 @@ export default async function LastArticles() {
         </p>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {posts.map((article, index) => (
-          <Reveal index={index} key={article.title}>
-            <Article article={article} />
-          </Reveal>
+        {posts.map((article) => (
+            <Article article={article} key={article.id} />
         ))}
       </div>
       <Button className="text-accent w-fit" color="secondary">
