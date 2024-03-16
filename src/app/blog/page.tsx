@@ -8,7 +8,7 @@ import { getCategories, getArticles } from 'server/blog';
  * Page Blog
  */
 export default async function page() {
-  const { articles, nextArticle } = await getArticles();
+  const { articles, hasMore, nextArticle } = await getArticles();
   const categories = await getCategories();
   const mainPost = articles.shift();
 
@@ -24,7 +24,11 @@ export default async function page() {
       <section className="section">
         {mainPost && <Article article={mainPost} isMain />}
       </section>
-      <ArticlesBrowser initialArticles={articles} categories={categories} initialNextArticle={nextArticle} />
+      <ArticlesBrowser
+        initialArticles={articles}
+        categories={categories}
+        articleParams={{ nextArticle, hasMore }}
+      />
       <DiscoverPhotos />
     </main>
   );

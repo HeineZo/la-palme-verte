@@ -4,31 +4,39 @@ import { BlogPost } from '@/class/BlogPost.class';
 import { ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { Key, useEffect, useState } from 'react';
-import Article from './Article.component';
-import { getArticles } from 'server/blog';
 import { useInView } from 'react-intersection-observer';
+import { getArticles, getArticlesByText } from 'server/blog';
+import Article from './Article.component';
+import { useRouter } from 'next/navigation';
 
 interface ArticleBrowerProps {
   initialArticles?: BlogPost[];
   categories: string[];
-  initialNextArticle?: string;
+  articleParams?: {
+    hasMore: boolean;
+    nextArticle: string | undefined;
+  };
 }
 
 export default function ArticlesBrowser({
   initialArticles,
   categories,
-  initialNextArticle,
+  articleParams,
 }: ArticleBrowerProps) {
   const [articles, setArticles] = useState<BlogPost[]>(initialArticles ?? []);
-  const [moreArticles, setHasMore] = useState<boolean>(true);
-  const [nextArticle, setNextArticle] = useState<string | undefined>(
-    initialNextArticle,
+  const [moreArticles, setHasMore] = useState<boolean>(
+    articleParams?.hasMore ?? false,
   );
-  const { ref, inView } = useInView();
+  const [nextArticle, setNextArticle] = useState<string | undefined>(
+    articleParams?.nextArticle,
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(initialArticles ?? []);
 
-  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { ref, inView } = useInView();
+  const router = useRouter();
+
   // const [searchQuery, setSearchQuery] = useState<string>('');
-  // const [currentPage, setCurrentPage] = useState<number>(1);
 
   // const handleSearchChange = (value: string) => {
   //   setSearchQuery(value.toLowerCase());
@@ -37,14 +45,6 @@ export default function ArticlesBrowser({
   // const changeCategory = (category: string | null) => {
   //   setSelectedCategory(category === 'Tout' ? null : category);
   // };
-
-  // const paginate = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber);
-  // };
-
-  // function fetchData() {
-  //   await getPage
-  // }
 
   // const filterAndPaginateArticles = () => {
   //   const filteredArticles = articles.filter((article) => {
@@ -71,21 +71,30 @@ export default function ArticlesBrowser({
 
   // const currentArticles = filterAndPaginateArticles();
 
+  /**
+   * Récupère les articles suivants
+   */
+  const fetchMore = async () => {
+    const {
+      articles: newArticles,
+      hasMore,
+      nextArticle: newNextArticle,
+    } = await getArticles(nextArticle);
+    setArticles((prevArticles) => [...prevArticles, ...newArticles]);
+    setHasMore(hasMore);
+    setNextArticle(newNextArticle);
+  };
+
+  const handleSearchChange = async (value: string) => {
+    const newArticles = await getArticlesByText(value);
+    setSearchedArticles(newArticles);
+  }
+
   useEffect(() => {
     if (inView && moreArticles) {
       void fetchMore();
     }
   }, [inView]);
-
-  /**
-   * Récupère les articles suivants
-   */
-  const fetchMore = async () => {
-    const { articles: newArticles, hasMore, nextArticle: newNextArticle } = await getArticles(nextArticle);
-    setArticles((prevArticles) => [...prevArticles, ...newArticles]);
-    setHasMore(hasMore);
-    setNextArticle(newNextArticle);
-  };
 
   return (
     <section className="flex flex-col gap-10 section w-full">
@@ -114,10 +123,11 @@ export default function ArticlesBrowser({
           </Tabs>
         </ScrollShadow>
         <div className="max-w-[400px] w-full">
-          {/* <SearchbarAutocomplete
-            onSearchChange={handleSearchChange}
-            searchList={loadedArticles}
-          /> */}
+          <SearchbarAutocomplete
+            onSearchChange={(text) => void handleSearchChange(text)}
+            onClick={(url) => { router.push(`/blog/${url}`); }}
+            searchList={searchedArticles}
+          />
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">

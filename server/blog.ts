@@ -41,6 +41,49 @@ export const getArticles = async (lastArticleId?: string) => {
 };
 
 /**
+ * Retourne les articles de blog correspondant à un texte
+ * @param text Texte à rechercher
+ * @returns Articles correspondant
+ */
+export const getArticlesByText = async (text: string) => {
+  const response = await notionClient.databases.query({
+    filter: {
+      and: [
+        {
+          property: "État",
+          status: {
+            equals: "Publié"
+          }
+        },
+        {
+          or: [
+            {
+              property: "Titre",
+              title: {
+                contains: text
+              }
+            },
+            {
+              property: "Description",
+              rich_text: {
+                contains: text
+              }
+            }
+          ]
+        }
+      ],
+    },
+    database_id,
+  });
+
+  const blogPostsPromises = response.results.map((result) =>
+    BlogPost.fromNotion(result),
+  );
+  const articles = clone(await Promise.all(blogPostsPromises));
+  return articles;
+}
+
+/**
  * Récupérer toutes les catégories des articles disponibles
  */
 export const getCategories = async () => {
