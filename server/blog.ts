@@ -15,18 +15,36 @@ const database_id = process.env.BLOG_DATABASE ?? '';
 
 /**
  * Récupère les articles de blog avec une pagination
+ * @param category Catégorie des articles à récupérer
  * @param lastArticleId Indice du dernier article à partir duquel récupérer le reste
  * @returns Liste des articles
  */
-export const getArticles = async (lastArticleId?: string) => {
+export const getArticles = async (
+  category?: string | null,
+  lastArticleId?: string,
+) => {
   const maxArticles = Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE ?? 10);
 
   const response = await notionClient.databases.query({
     filter: {
-      property: 'État',
-      status: {
-        equals: 'Publié',
-      },
+      and: [
+        {
+          property: 'État',
+          status: {
+            equals: 'Publié',
+          },
+        },
+        category
+          ? {
+              property: 'Catégories',
+              multi_select: {
+                contains: category,
+              },
+            }
+          : {
+              or: [],
+            },
+      ],
     },
     start_cursor: lastArticleId,
     page_size: maxArticles,
@@ -37,7 +55,11 @@ export const getArticles = async (lastArticleId?: string) => {
     BlogPost.fromNotion(result),
   );
   const articles = clone(await Promise.all(blogPostsPromises));
-  return { articles, hasMore: response.has_more, nextArticle: response.next_cursor ?? undefined};
+  return {
+    articles,
+    hasMore: response.has_more,
+    nextArticle: response.next_cursor ?? undefined,
+  };
 };
 
 /**
@@ -50,27 +72,27 @@ export const getArticlesByText = async (text: string) => {
     filter: {
       and: [
         {
-          property: "État",
+          property: 'État',
           status: {
-            equals: "Publié"
-          }
+            equals: 'Publié',
+          },
         },
         {
           or: [
             {
-              property: "Titre",
+              property: 'Titre',
               title: {
-                contains: text
-              }
+                contains: text,
+              },
             },
             {
-              property: "Description",
+              property: 'Description',
               rich_text: {
-                contains: text
-              }
-            }
-          ]
-        }
+                contains: text,
+              },
+            },
+          ],
+        },
       ],
     },
     database_id,
@@ -81,7 +103,7 @@ export const getArticlesByText = async (text: string) => {
   );
   const articles = clone(await Promise.all(blogPostsPromises));
   return articles;
-}
+};
 
 /**
  * Récupérer toutes les catégories des articles disponibles

@@ -31,68 +31,61 @@ export default function ArticlesBrowser({
     articleParams?.nextArticle,
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(initialArticles ?? []);
+  const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(
+    initialArticles ?? [],
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { ref, inView } = useInView();
   const router = useRouter();
 
-  // const [searchQuery, setSearchQuery] = useState<string>('');
+  const handleSearchChange = async (value: string) => {
+    const newArticles = await getArticlesByText(value);
+    setSearchedArticles(newArticles);
+  };
 
-  // const handleSearchChange = (value: string) => {
-  //   setSearchQuery(value.toLowerCase());
-  // };
+  /**
+   * Change la catégorie courante
+   * @param category Catégorie à afficher
+   */
+  const changeCategory = (category: string | null) => {
+    reset();
+    setIsLoading(true);
+    setSelectedCategory(category);
+    void fetchMore(category).then((newArticles) => {
+      setIsLoading(false);
+      setArticles(newArticles);
+    });
+  };
 
-  // const changeCategory = (category: string | null) => {
-  //   setSelectedCategory(category === 'Tout' ? null : category);
-  // };
-
-  // const filterAndPaginateArticles = () => {
-  //   const filteredArticles = articles.filter((article) => {
-  //     const lowerCaseQuery = searchQuery.toLowerCase();
-  //     const inCategory =
-  //       !selectedCategory || article.categories.includes(selectedCategory);
-  //     const matchesQuery =
-  //       !searchQuery ||
-  //       article.title.toLowerCase().includes(lowerCaseQuery) ||
-  //       article.description.toLowerCase().includes(lowerCaseQuery);
-  //     return inCategory && matchesQuery;
-  //   });
-
-  //   const indexOfLastArticle =
-  //     currentPage * process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE ?? 10;
-  //   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  //   const currentArticles = filteredArticles.slice(
-  //     indexOfFirstArticle,
-  //     indexOfLastArticle,
-  //   );
-
-  //   return currentArticles;
-  // };
-
-  // const currentArticles = filterAndPaginateArticles();
+  const reset = () => {
+    setArticles([]);
+    // setHasMore(false);
+    // setNextArticle(undefined);
+  }
 
   /**
    * Récupère les articles suivants
    */
-  const fetchMore = async () => {
+  const fetchMore = async (category: string | null , next?: string) => {
     const {
       articles: newArticles,
       hasMore,
       nextArticle: newNextArticle,
-    } = await getArticles(nextArticle);
-    setArticles((prevArticles) => [...prevArticles, ...newArticles]);
+    } = await getArticles(category, next);
     setHasMore(hasMore);
     setNextArticle(newNextArticle);
-  };
 
-  const handleSearchChange = async (value: string) => {
-    const newArticles = await getArticlesByText(value);
-    setSearchedArticles(newArticles);
-  }
+    return newArticles;
+  };
 
   useEffect(() => {
     if (inView && moreArticles) {
-      void fetchMore();
+      setIsLoading(true);
+      void fetchMore(selectedCategory, nextArticle).then((newArticles) => {
+        setArticles((prevArticles) => [...prevArticles, ...newArticles]);
+        setIsLoading(false);
+      });
     }
   }, [inView]);
 
@@ -113,7 +106,7 @@ export default function ArticlesBrowser({
               cursor: 'bg-accent',
             }}
             onSelectionChange={(key: Key) => {
-              // changeCategory(key as string);
+              changeCategory(key as string);
             }}
           >
             <Tab key="Tout" title="Tout" />
@@ -125,7 +118,9 @@ export default function ArticlesBrowser({
         <div className="max-w-[400px] w-full">
           <SearchbarAutocomplete
             onSearchChange={(text) => void handleSearchChange(text)}
-            onClick={(url) => { router.push(`/blog/${url}`); }}
+            onClick={(url) => {
+              router.push(`/blog/${url}`);
+            }}
             searchList={searchedArticles}
           />
         </div>
@@ -135,7 +130,7 @@ export default function ArticlesBrowser({
           <Article article={article} key={article.id} />
         ))}
       </div>
-      {moreArticles && <Spinner ref={ref} />}
+      {moreArticles  && <Spinner ref={ref} />}
     </section>
   );
 }
