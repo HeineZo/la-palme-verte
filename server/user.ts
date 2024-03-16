@@ -1,7 +1,4 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
-import 'server-only';
-
-
 import { notionClient } from './database';
 import { User } from '@/class/User.class';
 

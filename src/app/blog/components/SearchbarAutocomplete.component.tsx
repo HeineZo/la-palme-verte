@@ -1,3 +1,4 @@
+'use client'
 import { BlogPost } from '@/class/BlogPost.class';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 import { IconSearch } from '@tabler/icons-react';
