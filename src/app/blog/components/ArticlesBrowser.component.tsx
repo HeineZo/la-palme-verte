@@ -78,11 +78,9 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
           <SearchbarAutocomplete onSearchChange={handleSearchChange} searchList={currentArticles} />  
         </div>
       </div>
-      <div className="flex w-full flex-wrap gap-8 justify-center">
-        {currentArticles.map((article, index) => (
-          <Reveal index={index} key={article.title}>
-            <Article article={article} />
-          </Reveal>
+      <div className="flex w-full flex-wrap gap-8">
+        {articles.map((article) => (
+            <Article article={article} key={article.title} />
         ))}
       </div>
       <div className="flex justify-center">
