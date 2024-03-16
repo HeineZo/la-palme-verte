@@ -16,3 +16,10 @@ export function capitalizeFirstLetter(name: string): string {
     // Met la première lettre de la chaîne de caractères en majuscule
     return name.charAt(0).toUpperCase();
 }
+
+/**
+ * Clone une liste d'objets
+ */
+export function clone<T>(object: T[]): T[] {
+    return JSON.parse(JSON.stringify(object)) as T[];
+}
