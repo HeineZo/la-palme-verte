@@ -40,7 +40,7 @@ export class Album {
     const title = album.properties.Titre.title[0]?.plain_text;
     const description = album.properties.Description.rich_text[0]?.text.content;
     const images = album.properties.Images.files;
-    const url = album.properties.URL.rich_text[0].text.content;
+    const url = album.properties.URL.rich_text[0]?.text.content;
 
     return new Album(id, title, description, images, url);
   }

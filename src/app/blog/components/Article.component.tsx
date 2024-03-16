@@ -1,6 +1,7 @@
 import { BlogPost } from '@/class/BlogPost.class';
 import Button from '@/shared/theme/Button';
 import { arrayToString } from '@/utils/utils';
+import { Avatar, AvatarGroup, Chip, ScrollShadow, cn, Image } from '@nextui-org/react';
 import { format, isDate } from 'date-fns';
 import Link from 'next/link';
 
