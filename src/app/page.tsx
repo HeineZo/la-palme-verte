@@ -15,6 +15,7 @@ import Reveal from '@/shared/utils/Reveal.component';
 import LastArticles from './blog/layout/LastArticles.layout';
 import { getBySection } from 'server/faq';
 import { clone } from '@/utils/utils';
+import Link from 'next/link';
 
 /**
  * Page d'accueil
