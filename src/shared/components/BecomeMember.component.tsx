@@ -1,10 +1,12 @@
-'use client';
 
-import { Avatar } from '@nextui-org/avatar';
-import React from 'react';
-import { cn } from '@nextui-org/system';
-import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
+import { User } from "@/class/User.class";
+import { InfiniteMovingCards } from "@/shared/components/InfiniteMovingCards";
 import Button from '@/shared/theme/Button';
+import { capitalizeFirstLetter } from "@/utils/utils";
+import { Avatar } from "@nextui-org/react";
+import { cn } from '@nextui-org/system';
+import React from 'react';
+import { getUsers } from 'server/user';
 
 interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
@@ -27,7 +29,7 @@ interface BecomeMemberProps {
  * @param buttonTitle Titre du bouton *(optionnel)*
  */
 
-export default function BecomeMember({
+export default async function BecomeMember({
   className,
   title,
   shortTitle = title,
@@ -36,10 +38,13 @@ export default function BecomeMember({
   showInfiniteLoop = true,
   buttonTitle,
 }: BecomeMemberProps) {
+
+  const users: User[] = await getUsers();
+  
   return (
   <div
   className={cn(
-			  'py-16 text-center justify-center flex flex-col gap-16',
+			  'py-16 text-center justify-center flex flex-col gap-16 mx-auto w-full',
 			  className,
 			  !showInfiniteLoop && 'gap-6',
 			)}
@@ -51,14 +56,34 @@ export default function BecomeMember({
 			</div>
 
       {showInfiniteLoop ? (
-        <InfiniteLoop
-          firstRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar className="w-20 h-20 text-white" key={i} />
+        <div className="flex flex-col gap-4">
+        <InfiniteMovingCards
+          row={users.slice(0, users.length / 2).map((user: User, i: number) => (
+            <Avatar 
+              src={user.imageUrl} 
+              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} 
+              className="w-20 h-20 text-white text-xl" 
+              key={i} 
+              imgProps={{ className: 'opacity-100' }}
+            /> 
           ))}
-          secondRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar className="w-20 h-20 text-white" key={i} />
-          ))}
+          speed="slow"
+          direction="left"
         />
+        <InfiniteMovingCards
+          row={users.slice(users.length / 2, users.length).map((user: User, i: number) => (
+            <Avatar 
+              src={user.imageUrl} 
+              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)}
+              className="w-20 h-20 text-white text-xl"
+              key={i}
+              imgProps={{ className: 'opacity-100' }}
+            />
+          ))}
+          speed="slow"
+          direction="right"
+        />
+        </div>
       ) : null}
       <div className="flex gap-6 justify-center">
         {buttonTitle ? (

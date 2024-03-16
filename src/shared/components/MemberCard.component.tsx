@@ -1,20 +1,20 @@
 'use client';
 
+import { User } from '@/class/User.class';
+import { IsocialMedia } from '@/shared/types/SocialMedia';
 import { Avatar, Link } from '@nextui-org/react';
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import type { MouseEvent } from 'react';
-import NextLink from 'next/link';
 import {
   IconBrandFacebook as Facebook,
-  IconBrandX as X,
-  IconBrandLinkedin as Linkedin,
   IconBrandInstagram as Instagram,
+  IconBrandLinkedin as Linkedin,
+  IconBrandX as X,
 } from '@tabler/icons-react';
-import { SocialMedia } from '@prisma/client';
-import { FullUser } from '@/utils/type';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import NextLink from 'next/link';
+import type { MouseEvent } from 'react';
 
 interface MemberCardProps {
-  member: FullUser;
+  member: User;
 }
 
 /**
@@ -22,6 +22,7 @@ interface MemberCardProps {
  * @param member Membre à afficher
  */
 export default function MemberCard({ member }: MemberCardProps) {
+  const memberSocialsMedia = Object.entries(member).filter(([key, value]) => typeof value === 'string' && key === 'linkedin' || key === 'instagram' );
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -43,7 +44,7 @@ export default function MemberCard({ member }: MemberCardProps) {
    * @param socialName Nom du réseau social
    * @returns Logo du réseau social
    */
-  const getSocialIcon = (socialName: keyof SocialMedia) => {
+  const getSocialIcon = (socialName: keyof IsocialMedia) => {
     switch (socialName) {
       case 'facebook':
         return <Facebook />;
@@ -63,7 +64,7 @@ export default function MemberCard({ member }: MemberCardProps) {
       className="group relative max-w-md w-full rounded-medium bg-highlight border border-white px-8 py-12"
       onMouseMove={handleMouseMove}
     >
-      <motion.div
+            <motion.div
         className="pointer-events-none absolute -inset-px rounded-medium opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
@@ -79,15 +80,15 @@ export default function MemberCard({ member }: MemberCardProps) {
         <Avatar
           className="w-20 h-20"
           size="lg"
-          src={member.profilePicture ?? undefined}
+          src={member.imageUrl}
         />
         <div className="text-center">
           <p className="font-bold">{member.name}</p>
           <p>{member.role}</p>
         </div>
-        {member.socials && (
+        {(member.instagram !== '' || member.linkedin !== '' )  && (
           <div className="flex gap-4 flex-wrap justify-center">
-            {Object.entries(member.socials).map(
+            {(memberSocialsMedia).map(
               ([key, value]) =>
                 typeof value === 'string' && (
                   <Link
@@ -96,7 +97,7 @@ export default function MemberCard({ member }: MemberCardProps) {
                     href={value}
                     key={key}
                   >
-                    {getSocialIcon(key as keyof SocialMedia)}
+                    {getSocialIcon(key as keyof IsocialMedia)}
                   </Link>
                 ),
             )}

@@ -1,3 +1,10 @@
+import BecomeMember from '@/shared/components/BecomeMember.component';
+import FAQ from '@/shared/layout/FAQ.layout';
+import type { Row } from '@/shared/layout/InlineBlocks.layout';
+import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
+import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
+import Button from '@/shared/theme/Button';
+import Reveal from '@/shared/utils/Reveal.component';
 import { Image } from '@nextui-org/image';
 import {
   IconCalendarHeart,
@@ -5,13 +12,6 @@ import {
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import type { Row } from '@/shared/layout/InlineBlocks.layout';
-import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
-import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
-import Button from '@/shared/theme/Button';
-import FAQ from '@/shared/layout/FAQ.layout';
-import BecomeMember from '@/shared/components/BecomeMember.component';
-import Reveal from '@/shared/utils/Reveal.component';
 import LastArticles from './blog/layout/LastArticles.layout';
 import { getBySection } from 'server/faq';
 import { clone } from '@/utils/utils';

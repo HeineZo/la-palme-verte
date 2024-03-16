@@ -12,6 +12,11 @@ export function arrayToString(array: string[]): string {
     return `${array.slice(0, -1).join(', ')}, et ${array[array.length - 1]}`;
 }
 
+export function capitalizeFirstLetter(name: string): string {
+    // Met la première lettre de la chaîne de caractères en majuscule
+    return name.charAt(0).toUpperCase();
+}
+
 /**
  * Clone une liste d'objets
  */
