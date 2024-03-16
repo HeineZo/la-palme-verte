@@ -1,7 +1,7 @@
-import Reveal from '@/shared/utils/Reveal.component';
 import Button from '@/shared/theme/Button';
-import Article from '../components/Article.component';
 import { getArticles } from 'server/blog';
+import Article from '../components/Article.component';
+
 
 /**
  * Affiche les derniers articles en ligne
