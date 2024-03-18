@@ -30,13 +30,11 @@ export default function ArticlesBrowser({
   const [nextArticle, setNextArticle] = useState<string | undefined>(
     articleParams?.nextArticle,
   );
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(
     initialArticles ?? [],
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { ref, inView } = useInView();
   const router = useRouter();
 
   const handleSearchChange = async (value: string) => {
@@ -49,25 +47,22 @@ export default function ArticlesBrowser({
    * @param category Catégorie à afficher
    */
   const changeCategory = (category: string | null) => {
-    reset();
+    let currentCategory = category;
+    if (category === "Tout") {
+      currentCategory = null;
+    }
+
     setIsLoading(true);
-    setSelectedCategory(category);
-    void fetchMore(category).then((newArticles) => {
+    void getArticles(currentCategory).then((newArticles) => { 
       setIsLoading(false);
-      setArticles(newArticles);
+      setArticles(newArticles.articles); 
     });
   };
-
-  const reset = () => {
-    setArticles([]);
-    // setHasMore(false);
-    // setNextArticle(undefined);
-  }
 
   /**
    * Récupère les articles suivants
    */
-  const fetchMore = async (category: string | null , next?: string) => {
+  const fetchMore = async (category: string | null, next?: string) => {
     const {
       articles: newArticles,
       hasMore,
@@ -78,16 +73,6 @@ export default function ArticlesBrowser({
 
     return newArticles;
   };
-
-  useEffect(() => {
-    if (inView && moreArticles) {
-      setIsLoading(true);
-      void fetchMore(selectedCategory, nextArticle).then((newArticles) => {
-        setArticles((prevArticles) => [...prevArticles, ...newArticles]);
-        setIsLoading(false);
-      });
-    }
-  }, [inView]);
 
   return (
     <section className="flex flex-col gap-10 section w-full">
@@ -126,11 +111,11 @@ export default function ArticlesBrowser({
         </div>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {articles.map((article) => (
+        {!isLoading && articles.map((article) => (
           <Article article={article} key={article.id} />
         ))}
       </div>
-      {moreArticles  && <Spinner ref={ref} />}
+      {isLoading  && <Spinner />}
     </section>
   );
 }
