@@ -4,7 +4,6 @@ import { BlogPost } from '@/class/BlogPost.class';
 import { Button, ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { Key, useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { getArticles, getArticlesByText } from 'server/blog';
 import Article from './Article.component';
 import { useRouter } from 'next/navigation';
@@ -12,31 +11,24 @@ import { useRouter } from 'next/navigation';
 interface ArticleBrowerProps {
   initialArticles?: BlogPost[];
   categories: string[];
-  articleParams?: {
-    hasMore: boolean;
-    nextArticle: string | undefined;
-  };
+  nextArticle: string | undefined;
 }
 
 export default function ArticlesBrowser({
   initialArticles,
   categories,
-  articleParams,
+  nextArticle,
 }: ArticleBrowerProps) {
   const router = useRouter();
 
   const [articles, setArticles] = useState<BlogPost[]>(initialArticles ?? []);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
-  const [moreArticles, setHasMore] = useState<boolean>(
-    articleParams?.hasMore ?? false,
-  );
-  const [nextArticle, setNextArticle] = useState<string | undefined>(
-    articleParams?.nextArticle,
-  );
+  const [nextPost, setNextPost] = useState<string | undefined>(nextArticle);
   const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(
     initialArticles ?? [],
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
   /**
    * Recherche des articles correspondant à la valeur
@@ -58,17 +50,16 @@ export default function ArticlesBrowser({
     }
     setCurrentCategory(cat);
 
-    void fetchData(currentCategory, nextArticle).then((newArticles) => {
+    void fetchData(cat, nextPost).then((newArticles) => {
       setArticles(newArticles);
     });
   };
 
   /**
    * Récupère les articles suivants
-   * TODO: à implémenter
    */
   const loadMore = () => {
-    void fetchData(currentCategory, nextArticle).then((newArticles) => {
+    void fetchData(currentCategory, nextPost).then((newArticles) => {
       setArticles((prev) => [...prev, ...newArticles]);
     });
   };
@@ -80,18 +71,13 @@ export default function ArticlesBrowser({
    */
   const fetchData = async (category: string | null, next?: string) => {
     setIsLoading(true);
-    const {
-      articles: newArticles,
-      hasMore,
-      nextArticle: newNextArticle,
-    } = await getArticles(category, next);
-    setHasMore(hasMore);
-    setNextArticle(newNextArticle);
+    const { articles: newArticles, nextArticle: newNextArticle } =
+      await getArticles(category, next);
+    setNextPost(newNextArticle);
     setIsLoading(false);
 
     return newArticles;
   };
-
 
   return (
     <section className="flex flex-col gap-10 section w-full items-center">
@@ -136,7 +122,7 @@ export default function ArticlesBrowser({
           ))}
       </div>
       {isLoading && <Spinner />}
-      {/* {!isLoading && moreArticles && (
+      {!isLoading && nextPost && (
         <Button
           className="text-accent w-fit"
           color="secondary"
@@ -144,7 +130,7 @@ export default function ArticlesBrowser({
         >
           Charger plus
         </Button>
-      )} */}
+      )}
     </section>
   );
 }
