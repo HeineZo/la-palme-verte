@@ -1,3 +1,11 @@
+import BecomeMember from '@/shared/components/BecomeMember.component';
+import FAQ from '@/shared/layout/FAQ.layout';
+import type { Row } from '@/shared/layout/InlineBlocks.layout';
+import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
+import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
+import Button from '@/shared/theme/Button';
+import Reveal from '@/shared/utils/Reveal.component';
+import { clone } from '@/utils/utils';
 import { Image } from '@nextui-org/image';
 import {
   IconCalendarHeart,
@@ -5,23 +13,17 @@ import {
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import type { Row } from '@/shared/layout/InlineBlocks.layout';
-import InlineBlocks from '@/shared/layout/InlineBlocks.layout';
-import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
-import Button from '@/shared/theme/Button';
-import FAQ from '@/shared/layout/FAQ.layout';
-import BecomeMember from '@/shared/components/BecomeMember.component';
-import Reveal from '@/shared/utils/Reveal.component';
-import LastArticles from './blog/layout/LastArticles.layout';
-import { getBySection } from 'server/faq';
-import { clone } from '@/utils/utils';
 import Link from 'next/link';
+import { getLatestImages } from 'server/album';
+import { getBySection } from 'server/faq';
+import LastArticles from './blog/layout/LastArticles.layout';
 
 /**
  * Page d'accueil
  */
 export default async function Home() {
   const faq = await getBySection('Général');
+  const photos = await getLatestImages();
 
   const actionsRow: Row[] = [
     {
@@ -42,18 +44,6 @@ export default async function Home() {
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
     },
-  ];
-
-  // TODO: placeholders en attendant la mise en place de la galerie photo
-  const photos = [
-    'https://images.unsplash.com/photo-1500763702684-af70eba9a9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
-    'https://images.unsplash.com/photo-1655149000913-88f86c38593f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1970&q=80',
-    'https://images.unsplash.com/photo-1506434304575-afbb92660c28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
-    'https://images.unsplash.com/photo-1606043580455-bd22074d1e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-    'https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
-    'https://images.unsplash.com/photo-1450825404103-e02d63c0b624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
-    'https://images.unsplash.com/photo-1655149002351-132042bee905?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2022&q=80',
-    'https://images.unsplash.com/photo-1522055598936-5611c49b072f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   ];
 
   return (

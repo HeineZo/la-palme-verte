@@ -1,11 +1,24 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
 
+import { Album } from '@/class/Album.class';
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './database';
-import { Album } from '@/class/Album.class';
 
-const database_id = process.env.ALBUM_DATABASE ?? '';
+const database_id = process.env.GALLERY_DATABASE ?? '';
+const numberOfLatestImages: number = parseInt(
+  process.env.NUMBER_OF_LATEST_IMAGES || '-6',
+  10,
+);
+
+interface File {
+  name: string;
+  type: string;
+  file: {
+    url: string;
+    expiry_time: string;
+  };
+}
 
 /**
  * Récupérer tous les albums
@@ -50,4 +63,39 @@ export const getAlbumByUrl = async (url: string) => {
   });
 
   return Album.fromNotion(response.results[0]);
+};
+
+export const getLatestImages = async () => {
+  const response = await notionClient.databases.query({
+    sorts: [
+      {
+        timestamp: 'created_time',
+        direction: 'descending',
+      },
+    ],
+    database_id,
+  });
+
+  let index = 0;
+
+  const images: string[] = [];
+
+  while (
+    images.length < numberOfLatestImages &&
+    index < response.results.length
+  ) {
+    const files: File[] = response.results[index].properties.Images.files;
+
+    if (files && files.length > 0) {
+      images.push(
+        ...files
+          .slice(numberOfLatestImages * -1 - images.length)
+          .map((file: File) => file.file.url),
+      );
+    }
+
+    index++;
+  }
+
+  return images;
 };
