@@ -23,7 +23,7 @@ export const getArticles = async (
   category?: string | null,
   lastArticleId?: string,
 ) => {
-  const maxArticles = Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE ?? 10);
+  const maxArticles = Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE);
   const response = await notionClient.databases.query({
     filter: {
       and: [

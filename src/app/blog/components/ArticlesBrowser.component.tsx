@@ -1,7 +1,7 @@
 'use client';
 import SearchbarAutocomplete from '@/app/blog/components/SearchbarAutocomplete.component';
 import { BlogPost } from '@/class/BlogPost.class';
-import { ScrollShadow, Spinner } from '@nextui-org/react';
+import { Button, ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { Key, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -23,7 +23,10 @@ export default function ArticlesBrowser({
   categories,
   articleParams,
 }: ArticleBrowerProps) {
+  const router = useRouter();
+
   const [articles, setArticles] = useState<BlogPost[]>(initialArticles ?? []);
+  const [currentCategory, setCurrentCategory] = useState<string | null>(null);
   const [moreArticles, setHasMore] = useState<boolean>(
     articleParams?.hasMore ?? false,
   );
@@ -35,34 +38,48 @@ export default function ArticlesBrowser({
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const router = useRouter();
-
+  /**
+   * Recherche des articles correspondant à la valeur
+   * @param value Valeur à rechercher
+   */
   const handleSearchChange = async (value: string) => {
     const newArticles = await getArticlesByText(value);
     setSearchedArticles(newArticles);
   };
 
   /**
-   * Change la catégorie courante
+   * Change la catégorie courante et récupère les articles correspondants
    * @param category Catégorie à afficher
    */
   const changeCategory = (category: string | null) => {
-    let currentCategory = category;
-    if (category === "Tout") {
-      currentCategory = null;
+    let cat = category;
+    if (category === 'Tout') {
+      cat = null;
     }
+    setCurrentCategory(cat);
 
-    setIsLoading(true);
-    void getArticles(currentCategory).then((newArticles) => { 
-      setIsLoading(false);
-      setArticles(newArticles.articles); 
+    void fetchData(currentCategory, nextArticle).then((newArticles) => {
+      setArticles(newArticles);
     });
   };
 
   /**
    * Récupère les articles suivants
+   * TODO: à implémenter
    */
-  const fetchMore = async (category: string | null, next?: string) => {
+  const loadMore = () => {
+    void fetchData(currentCategory, nextArticle).then((newArticles) => {
+      setArticles((prev) => [...prev, ...newArticles]);
+    });
+  };
+
+  /**
+   * Récupère les articles
+   * @param category Catégorie à récupérer
+   * @param next Article suivant
+   */
+  const fetchData = async (category: string | null, next?: string) => {
+    setIsLoading(true);
     const {
       articles: newArticles,
       hasMore,
@@ -70,14 +87,16 @@ export default function ArticlesBrowser({
     } = await getArticles(category, next);
     setHasMore(hasMore);
     setNextArticle(newNextArticle);
+    setIsLoading(false);
 
     return newArticles;
   };
 
+
   return (
-    <section className="flex flex-col gap-10 section w-full">
+    <section className="flex flex-col gap-10 section w-full items-center">
       {/* <h3>Découvrir</h3> */}
-      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden ">
+      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden">
         <ScrollShadow
           orientation="horizontal"
           className="flex items-center h-16"
@@ -110,12 +129,22 @@ export default function ArticlesBrowser({
           />
         </div>
       </div>
-      <div className="flex w-full flex-wrap gap-8">
-        {!isLoading && articles.map((article) => (
-          <Article article={article} key={article.id} />
-        ))}
+      <div className="flex w-full flex-wrap gap-8 justify-center">
+        {!isLoading &&
+          articles.map((article) => (
+            <Article article={article} key={article.id} />
+          ))}
       </div>
-      {isLoading  && <Spinner />}
+      {isLoading && <Spinner />}
+      {/* {!isLoading && moreArticles && (
+        <Button
+          className="text-accent w-fit"
+          color="secondary"
+          onClick={loadMore}
+        >
+          Charger plus
+        </Button>
+      )} */}
     </section>
   );
 }
