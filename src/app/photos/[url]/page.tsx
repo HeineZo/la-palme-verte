@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import { IconPlayerPlayFilled } from '@tabler/icons-react';
-import { Button, Image } from '@nextui-org/react';
+import { Image } from '@nextui-org/react';
 import { getAlbumByUrl } from 'server/album';
 import ZoomableImage from './components/ZoomableImage.component';
-import Zoom from 'smooth-zoom';
 
 interface AlbumProps {
     params: {

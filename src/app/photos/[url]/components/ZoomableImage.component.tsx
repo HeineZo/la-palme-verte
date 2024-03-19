@@ -33,7 +33,7 @@ export default function ZoomableImage({ src, imageName }: ZoomableImageProps) {
     return (
         <div className={isZoomed ? 'image-container' : ''}>
             <img
-                className={`rounded-medium cursor-pointer ${isZoomed ? 'image-zoomed' : ''}`}
+                className={`rounded-medium ${isZoomed ? 'image-zoomed' : 'cursor-pointer'}`}
                 src={src}
                 alt={imageName}
                 ref={imageRef}

@@ -1,5 +1,4 @@
 import { Album } from "@/class/Album.class";
-import Reveal from "@/shared/utils/Reveal.component";
 import { Image } from "@nextui-org/react";
 
 interface AlbumTileProps {
