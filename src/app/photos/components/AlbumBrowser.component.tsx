@@ -11,7 +11,7 @@ export default function AlbumBrowser({ albums }: AlbumBrowserProps) {
     return (
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 2xl:grid-cols-3">
             {albums.map((album, index) => (
-                <Reveal index={index} key={album.title}>
+                <Reveal index={index} key={album.id}>
                     <AlbumTile album={album} />
                 </Reveal>
             ))
