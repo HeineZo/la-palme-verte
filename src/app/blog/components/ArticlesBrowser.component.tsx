@@ -23,12 +23,11 @@ export default function ArticlesBrowser({
 
   const [articles, setArticles] = useState<BlogPost[]>(initialArticles ?? []);
   const [currentCategory, setCurrentCategory] = useState<string | null>(null);
-  const [nextPost, setNextPost] = useState<string | undefined>(nextArticle);
+  const [nextPost, setNextPost] = useState<string | undefined>();
   const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(
     initialArticles ?? [],
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
 
   /**
    * Recherche des articles correspondant à la valeur
