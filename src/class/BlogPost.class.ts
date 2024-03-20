@@ -38,7 +38,7 @@ export class BlogPost {
     static async fromNotion(page: any) {
         const id = page.id;
         const title = page.properties.Titre.title[0].plain_text ?? "Titre non disponible";
-        const cover = page.cover?.external?.url ?? page.cover.file.url ?? '';
+        const cover = page.cover?.external?.url ?? page.cover.file?.url ?? '';
         const description = page.properties.Description.rich_text[0]?.text.content ?? '';
         const categories = page.properties.Catégories.multi_select?.map((category: {name: string}) => category.name);
         const authorsPromises = page.properties.Auteurs.relation?.map((author: {id: string}) => getUser(author.id)) ?? [];
