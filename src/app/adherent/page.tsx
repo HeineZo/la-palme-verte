@@ -22,19 +22,19 @@ export default async function page() {
       icon: <IconPencilHeart size={48} stroke={3} />,
       title: 'Accès à la rédaction d’articles',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'En tant qu’adhérent, vous avez la possibilité de rédiger des articles pour notre blog et de les partager avec la communauté',
     },
     {
       icon: <IconConfetti size={48} />,
       title: 'Accès au canal privé de la communauté',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Une fois adhérent, vous aurez accès au groupe Whatsapp où vous pourrez échanger avec les autres membres et être tenu au courant des activités',
     },
     {
       icon: <IconBrandHipchat size={48} />,
       title: 'Participation à de nombreuses activités',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        "De nombreuses activités sont organisées au cours de l'année, en tant qu’adhérent vous pourrez y participer et même proposer des idées d'activité",
     },
   ];
 
