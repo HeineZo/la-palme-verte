@@ -7,6 +7,7 @@ import {
   Button,
   useDisclosure,
   Image,
+  cn,
 } from '@nextui-org/react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useState } from 'react';
@@ -37,7 +38,7 @@ export default function Gallery({ images }: GalleryProps) {
 
   /**
    * Détermine s'il y a une image précédente avant l'image courante
-   * @returns True s'il y a une image précédente, sinon false 
+   * @returns True s'il y a une image précédente, sinon false
    */
   const hasPrevious = () => {
     const currentIndex = images.findIndex(
@@ -83,16 +84,18 @@ export default function Gallery({ images }: GalleryProps) {
 
   return (
     <section className="flex flex-col gap-4">
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className={`relative mx-auto flex gap-4 ${
-            index % 2 === 0 ? 'xl:flex-row' : 'xl:flex-row-reverse'
-          } flex-col`}
-        >
-          <div className="xl:w-1/2 relative">
+      <div className="grid grid-flow-row auto-rows-max grid-cols-4 gap-4">
+        {images.map((image, index) => (
+          <div
+            key={image.name}
+            className={cn(
+              index % 5 === 0
+                ? 'row-span-2 col-span-2'
+                : 'col-span-1 row-span-1',
+            )}
+          >
             <Image
-              className="rounded-medium"
+              className="rounded-medium cursor-zoom-in"
               src={image.file.url}
               alt={index === 0 ? "Couverture de l'album" : image.name}
               onClick={() => {
@@ -100,21 +103,8 @@ export default function Gallery({ images }: GalleryProps) {
               }}
             />
           </div>
-          <div className="xl:w-1/2 mt-4 lg:mt-0 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {images.slice(index + 1, index + 5).map((subImage, subIndex) => (
-              <Image
-                key={subIndex}
-                src={subImage.file.url}
-                alt={subImage.name}
-                className="rounded-medium"
-                onClick={() => {
-                  handleFullScreen(subImage);
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Mode plein écran */}
       <Modal
