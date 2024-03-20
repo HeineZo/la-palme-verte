@@ -28,21 +28,21 @@ export default async function Home() {
   const actionsRow: Row[] = [
     {
       icon: <IconScubaMask size={48} stroke={3} />,
-      title: 'Une multitude d’ateliers',
+      title: "Une multitude d'activités",
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Des activités éco-citoyennes et subaquatiques sont régulièrements mises en places pour permettre de dynamiser le campus',
     },
     {
       icon: <IconCalendarHeart size={48} />,
       title: 'Des événements caritatifs',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'De nombreux événements sont organisés chaque année pour récolter des fonds destinés à la protection de la faune marine',
     },
     {
       icon: <IconUsersGroup size={48} />,
-      title: 'Fédérer une communauté',
+      title: 'Une association étudiante',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Aujourd’hui présente sur le campus de Tohannic à l’Université Bretagne Sud de Vannes, notre association est accessible pour tous les étudiants, peu importe leur formation',
     },
   ];
 
