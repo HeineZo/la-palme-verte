@@ -95,7 +95,12 @@ export default async function BecomeMember({
       ) : null}
       <div className="flex gap-6 justify-center">
         {buttonTitle ? (
-          <Button className="w-fit" color="primary" as={Link} href="/adherent">
+          <Button
+            className="w-fit"
+            color="primary"
+            as={Link}
+            href={process.env.NEXT_PUBLIC_STRIPE_LINK}
+          >
             {buttonTitle}
           </Button>
         ) : null}
