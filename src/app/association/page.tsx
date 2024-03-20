@@ -16,10 +16,9 @@ import timelineEvents from './assets/timeline-events.json';
  * Page de présentation de l'association
  */
 export default async function Page() {
-
   const staffMembers: User[] = await getStaffMembers();
 
-  const staffMembersAsObjects = staffMembers.map(element => element.toJSON());  
+  const staffMembersAsObjects = staffMembers.map((element) => element.toJSON());
 
   return (
     <main>
@@ -50,10 +49,8 @@ export default async function Page() {
         />
       </section>
       <section className="flex justify-between gap-20 flex-col lg:flex-row section">
-        <h1 className="">
-          Une association qui traverse les générations
-        </h1>
-        <div className='lg:w-1/2'>
+        <h1 className="">Une association qui traverse les générations</h1>
+        <div className="lg:w-1/2">
           <Timeline events={timelineEvents} />
         </div>
       </section>
@@ -143,8 +140,8 @@ export default async function Page() {
           title="Vous souhaitez nous rejoindre ?"
         />
       </div>
-      <div className="flex justify-between flex-col lg:flex-row section gap-5">
-        <div className="flex flex-col gap-10 mb-10">
+      <div className="flex justify-between flex-col section gap-5">
+        <div className="flex justify-between flex-row gap-10 mb-10">
           <div>
             <h1>Contactez-nous</h1>
             <p className="break-word">
@@ -152,34 +149,36 @@ export default async function Page() {
               message ou en personne !
             </p>
           </div>
-          <div className="flex gap-4">
-            <IconMapPin />
-            <div>
-              <h6>Email</h6>
-              <Link
-                color="foreground"
-                href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
-                underline="hover"
-              >
-                lapalmeverte.association@gmail.com
-              </Link>
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4">
+              <IconMapPin />
+              <div>
+                <h6>Email</h6>
+                <Link
+                  color="foreground"
+                  href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
+                  underline="hover"
+                >
+                  lapalmeverte.association@gmail.com
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="flex gap-4">
-            <IconMail />
-            <div>
-              <h6>Localisation</h6>
-              <Link
-                href="https://www.google.com/maps?ll=47.645279,-2.746143&z=14&t=m&hl=fr&gl=FR&mapclient=embed&cid=15593355113507095576"
-                isExternal
-                showAnchorIcon
-              >
-                Université Bretagne Sud - Vannes 56000
-              </Link>
+            <div className="flex gap-4">
+              <IconMail />
+              <div>
+                <h6>Localisation</h6>
+                <Link
+                  href="https://www.google.com/maps?ll=47.645279,-2.746143&z=14&t=m&hl=fr&gl=FR&mapclient=embed&cid=15593355113507095576"
+                  isExternal
+                  showAnchorIcon
+                >
+                  Université Bretagne Sud - Vannes 56000
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-1/2">
+        <div className="w-full">
           <iframe
             className="rounded-medium"
             height="500"

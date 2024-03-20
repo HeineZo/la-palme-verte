@@ -1,8 +1,7 @@
-import React from 'react';
+import { getArticles, getCategories } from 'server/blog';
 import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
 import DiscoverPhotos from './components/DiscoverPhotos.component';
-import { getCategories, getArticles } from 'server/blog';
 
 /**
  * Page Blog
