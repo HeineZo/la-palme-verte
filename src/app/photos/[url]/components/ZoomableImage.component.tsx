@@ -1,6 +1,7 @@
 "use client"
 
 import Button from '@/shared/theme/Button';
+import { Image } from '@nextui-org/image';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useRef, useState } from 'react';
 
@@ -32,7 +33,7 @@ export default function ZoomableImage({ src, imageName }: ZoomableImageProps) {
 
     return (
         <div className={isZoomed ? 'image-container' : ''}>
-            <img
+            <Image
                 className={`rounded-medium ${isZoomed ? 'image-zoomed' : 'cursor-pointer'}`}
                 src={src}
                 alt={imageName}
