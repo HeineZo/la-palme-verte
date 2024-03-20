@@ -1,37 +1,107 @@
+'use server';
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API de Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-call -- API de Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-return -- API de Notion mal typé */
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
-import 'server-only';
-
 import { BlogPost } from '@/class/BlogPost.class';
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './database';
+import { clone } from '@/utils/utils';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
 
 /**
- * Récupère tous les articles de blog
+ * Récupère les articles de blog avec une pagination
+ * @param category Catégorie des articles à récupérer
+ * @param lastArticleId Indice du dernier article à partir duquel récupérer le reste
  * @returns Liste des articles
  */
-export const getPages = async () => {
+export const getArticles = async (
+  category?: string | null,
+  lastArticleId?: string,
+) => {
+  const maxArticles = Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE);
   const response = await notionClient.databases.query({
     filter: {
-      property: 'État',
-      status: {
-        equals: 'Publié',
-      },
+      and: [
+        {
+          property: 'État',
+          status: {
+            equals: 'Publié',
+          },
+        },
+        category
+          ? {
+              property: 'Catégories',
+              multi_select: {
+                contains: category,
+              },
+            }
+          : {
+              or: [],
+            },
+      ],
+    },
+    start_cursor: lastArticleId,
+    page_size: maxArticles,
+    database_id,
+  });
+
+  const blogPostsPromises = response.results.map((result) =>
+    BlogPost.fromNotion(result),
+  );
+  const articles = clone(await Promise.all(blogPostsPromises));
+  return {
+    articles,
+    hasMore: response.has_more,
+    nextArticle: response.next_cursor ?? undefined,
+  };
+};
+
+/**
+ * Retourne les articles de blog correspondant à un texte
+ * @param text Texte à rechercher
+ * @returns Articles correspondant
+ */
+export const getArticlesByText = async (text: string) => {
+  const response = await notionClient.databases.query({
+    filter: {
+      and: [
+        {
+          property: 'État',
+          status: {
+            equals: 'Publié',
+          },
+        },
+        {
+          or: [
+            {
+              property: 'Titre',
+              title: {
+                contains: text,
+              },
+            },
+            {
+              property: 'Description',
+              rich_text: {
+                contains: text,
+              },
+            },
+          ],
+        },
+      ],
     },
     database_id,
   });
 
-  const blogPostsPromises = response.results.map((result) => BlogPost.fromNotion(result));
-  const blogPosts = await Promise.all(blogPostsPromises);
-  
-  return blogPosts;
+  const blogPostsPromises = response.results.map((result) =>
+    BlogPost.fromNotion(result),
+  );
+  const articles = clone(await Promise.all(blogPostsPromises));
+  return articles;
 };
 
 /**
@@ -50,12 +120,15 @@ export const getCategories = async () => {
 
   const categories = (response.results as PageObjectResponse[]).map((result) =>
     (result.properties.Catégories as any).multi_select.map(
-      (category: { id : string, name: string, color: string}) => ({ name: category.name}),
+      (category: { id: string; name: string; color: string }) => ({
+        name: category.name,
+      }),
     ),
   );
 
-  return Array.from(new Set(categories.flat().map((category) => category.name))) as string[];
-
+  return Array.from(
+    new Set(categories.flat().map((category) => category.name)),
+  ) as string[];
 };
 
 /**
@@ -89,4 +162,3 @@ export const getPageByUrl = async (url: string) => {
 
   return BlogPost.fromNotion(response.results[0]);
 };
-

@@ -1,6 +1,5 @@
 import Button from '@/shared/theme/Button';
-import Reveal from '@/shared/utils/Reveal.component';
-import { getPages } from 'server/blog';
+import { getArticles } from 'server/blog';
 import Article from '../components/Article.component';
 
 
@@ -8,7 +7,7 @@ import Article from '../components/Article.component';
  * Affiche les derniers articles en ligne
  */
 export default async function LastArticles() {
-  const posts = await getPages();
+  const { articles } = await getArticles();
 
   return (
     <div className="section flex flex-col justify-center items-center gap-16">
@@ -20,7 +19,7 @@ export default async function LastArticles() {
         </p>
       </div>
       <div className="flex w-full flex-wrap gap-8">
-        {posts.map((article) => (
+        {articles.map((article) => (
             <Article article={article} key={article.id} />
         ))}
       </div>

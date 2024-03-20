@@ -75,6 +75,7 @@ export default async function Home() {
               className="w-fit"
               color="primary"
               endContent={<IconChevronRight size={16} />}
+              href='/association'
             >
               Découvrir l'association
             </Button>

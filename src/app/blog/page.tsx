@@ -2,16 +2,15 @@ import React from 'react';
 import Article from './components/Article.component';
 import ArticlesBrowser from './components/ArticlesBrowser.component';
 import DiscoverPhotos from './components/DiscoverPhotos.component';
-import { getCategories, getPages } from 'server/blog';
-import { clone } from '@/utils/utils';
+import { getCategories, getArticles } from 'server/blog';
 
 /**
  * Page Blog
  */
 export default async function page() {
-  const posts = await getPages();
+  const { articles, nextArticle } = await getArticles();
   const categories = await getCategories();
-  const mainPost = posts.shift();
+  const mainPost = articles.shift();
 
   return (
     <main>
@@ -25,7 +24,11 @@ export default async function page() {
       <section className="section">
         {mainPost && <Article article={mainPost} isMain />}
       </section>
-      <ArticlesBrowser articles={clone(posts)} categories={categories} />
+      <ArticlesBrowser
+        initialArticles={articles}
+        categories={categories}
+        nextArticle={nextArticle}
+      />
       <DiscoverPhotos />
     </main>
   );
