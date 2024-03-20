@@ -42,7 +42,7 @@ export default async function Home() {
       icon: <IconUsersGroup size={48} />,
       title: 'Une association étudiante',
       description:
-        'Aujourd’hui présente sur le campus de Tohannic à l’Université Bretagne Sud de Vannes, notre association est accessible pour tous les étudiants, peu importe leur formation',
+        'Présent sur le campus de Tohannic à l’Université Bretagne Sud de Vannes, notre association est accessible pour tous les étudiants, peu importe leur formation',
     },
   ];
 
