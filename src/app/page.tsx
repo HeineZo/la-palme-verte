@@ -115,7 +115,12 @@ export default async function Home() {
         nous aider à protéger la biodiversité marine."
         title="Devenez adhérent pour rejoindre une communauté grandissante"
       >
-        <Button className="w-fit text-accent" color="secondary">
+        <Button
+          className="w-fit text-accent"
+          color="secondary"
+          as={Link}
+          href="/association"
+        >
           En savoir plus
         </Button>
       </BecomeMember>

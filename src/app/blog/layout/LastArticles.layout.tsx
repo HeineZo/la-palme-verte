@@ -7,7 +7,7 @@ import Article from '../components/Article.component';
  * Affiche les derniers articles en ligne
  */
 export default async function LastArticles() {
-  const { articles } = await getArticles();
+  const { articles } = await getArticles(null, undefined, 4);
 
   return (
     <div className="section flex flex-col justify-center items-center gap-16">

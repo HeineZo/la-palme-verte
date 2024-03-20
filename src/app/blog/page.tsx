@@ -23,12 +23,14 @@ export default async function page() {
       <section className="section">
         {mainPost && <Article article={mainPost} isMain />}
       </section>
-      <ArticlesBrowser
-        initialArticles={articles}
-        categories={categories}
-        nextArticle={nextArticle}
-      />
-      <DiscoverPhotos />
+      <section className="section">
+        <ArticlesBrowser
+          initialArticles={articles}
+          categories={categories}
+          nextArticle={nextArticle}
+        />
+        <DiscoverPhotos />
+      </section>
     </main>
   );
 }
