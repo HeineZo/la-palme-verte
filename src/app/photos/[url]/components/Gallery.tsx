@@ -2,12 +2,12 @@
 
 import { File } from '@/class/Album.class';
 import {
+  Button,
+  Image,
   Modal,
   ModalContent,
-  Button,
-  useDisclosure,
-  Image,
   cn,
+  useDisclosure,
 } from '@nextui-org/react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
@@ -83,11 +83,11 @@ export default function Gallery({ images }: GalleryProps) {
   };
 
   const randomIndex = useMemo(() => {
-    return Math.floor(Math.random() * (3)) + 1;
-  }, [])
+    return Math.floor(Math.random() * 3) + 1;
+  }, []);
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 section">
       <div className="grid grid-flow-row auto-rows-max grid-cols-4 gap-4">
         {images.map((image, index) => (
           <div
@@ -145,6 +145,6 @@ export default function Gallery({ images }: GalleryProps) {
           </div>
         </ModalContent>
       </Modal>
-    </section >
+    </section>
   );
 }
