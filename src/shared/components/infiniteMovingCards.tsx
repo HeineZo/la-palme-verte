@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@nextui-org/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 interface InfiniteMovingCardsProps {
   row: JSX.Element[];
@@ -24,8 +24,8 @@ export default function InfiniteMovingCards({
   speed = 'fast',
   className,
 }: InfiniteMovingCardsProps) {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
 
   // procesus de démarrage de l'animation
   useEffect(() => {
