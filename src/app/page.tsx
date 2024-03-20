@@ -7,16 +7,16 @@ import Button from '@/shared/theme/Button';
 import Reveal from '@/shared/utils/Reveal.component';
 import { clone } from '@/utils/utils';
 import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/react';
 import {
   IconCalendarHeart,
   IconChevronRight,
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import Link from 'next/link';
 import { getLatestImages } from 'server/album';
-import LastArticles from './blog/layout/LastArticles.layout';
 import { getBySection } from 'server/faq';
+import LastArticles from './blog/layout/LastArticles.layout';
 
 /**
  * Page d'accueil
@@ -66,9 +66,10 @@ export default async function Home() {
               className="w-fit"
               color="primary"
               endContent={<IconChevronRight size={16} />}
-              href='/association'
+              as={Link}
+              href="/association"
             >
-              <Link href="/association">Découvrir l'association</Link>
+              Découvrir l'association
             </Button>
           </Reveal>
         </div>

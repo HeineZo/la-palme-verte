@@ -1,7 +1,7 @@
 'use client';
 
 import Reveal from '@/shared/utils/Reveal.component';
-import { Button } from '@nextui-org/react';
+import { Button, Link } from '@nextui-org/react';
 import { IconChevronRight } from '@tabler/icons-react';
 import Image from 'next/image';
 
@@ -17,6 +17,8 @@ export default function DiscoverPhotos() {
             color="primary"
             endContent={<IconChevronRight size={16} />}
             className="w-fit hidden lg:flex"
+            as={Link}
+            href="/photos"
           >
             Voir les photos
           </Button>
@@ -43,6 +45,8 @@ export default function DiscoverPhotos() {
           color="primary"
           endContent={<IconChevronRight size={16} />}
           className="w-fit lg:hidden"
+          as={Link}
+          href="/photos"
         >
           Voir les photos
         </Button>

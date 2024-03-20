@@ -1,4 +1,5 @@
 import Button from '@/shared/theme/Button';
+import { Link } from '@nextui-org/react';
 import { getArticles } from 'server/blog';
 import Article from '../components/Article.component';
 
@@ -22,7 +23,12 @@ export default async function LastArticles() {
           <Article article={article} key={article.id} />
         ))}
       </div>
-      <Button className="text-accent w-fit" color="secondary">
+      <Button
+        className="text-accent w-fit"
+        color="secondary"
+        as={Link}
+        href={`/blog`}
+      >
         Voir plus
       </Button>
     </div>

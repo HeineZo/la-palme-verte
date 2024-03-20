@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react';
-import { Accordion, AccordionItem, cn } from '@nextui-org/react';
-import Button from '@/shared/theme/Button';
 import { FAQ as FAQType } from '@/class/FAQ.class';
+import Button from '@/shared/theme/Button';
+import { Accordion, AccordionItem, Link, cn } from '@nextui-org/react';
+import React from 'react';
 
 interface FAQProps {
   faq: FAQType[];
@@ -19,12 +19,7 @@ interface FAQProps {
  * @param description Description de la section
  * @param className Classe tailwind à ajouter *(optionnel)*
  */
-export default function FAQ({
-  faq,
-  title,
-  description,
-  className,
-}: FAQProps) {
+export default function FAQ({ faq, title, description, className }: FAQProps) {
   return (
     <div
       className={cn(
@@ -53,12 +48,18 @@ export default function FAQ({
       <div className="flex flex-col gap-6 items-center">
         <div className="flex flex-col gap-4 text-center">
           <h4>Encore des questions ?</h4>
+
           <p>
             Envoyez-nous un message, nous vous répondrons dans les plus brefs
             délais
           </p>
         </div>
-        <Button className="text-accent w-fit" color="secondary">
+        <Button
+          className="text-accent w-fit"
+          color="secondary"
+          as={Link}
+          href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
+        >
           Contactez-nous
         </Button>
       </div>

@@ -1,9 +1,8 @@
-import { Image } from '@nextui-org/image';
-import React from 'react';
 import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
 import Button from '@/shared/theme/Button';
+import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/react';
 import Reveal from '../utils/Reveal.component';
-import Link from 'next/link';
 
 interface PhotoMosaicProps {
   photos: string[];
@@ -12,11 +11,10 @@ interface PhotoMosaicProps {
 /**
  * Mosaïque de photos
  * @param photos - Photos à afficher dans la mosaïque
- * 
+ *
  * TODO: Afficher les informations de la photo au hover (on pourrait limite en faire un composant)
  */
 export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
-
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="hidden md:block w-full max-w-7xl mx-auto gap-8 space-y-8 columns-3">
@@ -27,8 +25,13 @@ export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
         ))}
       </div>
       <PhotoCarrousel className="md:hidden" photos={photos} />
-      <Button className="text-accent w-fit" color="secondary">
-        <Link href="/photos">Voir plus</Link>
+      <Button
+        className="text-accent w-fit"
+        color="secondary"
+        as={Link}
+        href={`/photos`}
+      >
+        Voir plus
       </Button>
     </div>
   );
