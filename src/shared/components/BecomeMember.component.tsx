@@ -1,11 +1,11 @@
 import { User } from '@/class/User.class';
-import { InfiniteMovingCards } from '@/shared/components/InfiniteMovingCards';
 import Button from '@/shared/theme/Button';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { Avatar, Link } from '@nextui-org/react';
 import { cn } from '@nextui-org/system';
 import React from 'react';
 import { getUsers } from 'server/user';
+import InfiniteMovingCards from './InfiniteMovingCards';
 
 interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
