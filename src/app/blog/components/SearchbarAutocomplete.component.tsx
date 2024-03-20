@@ -7,11 +7,11 @@ import { useState } from 'react';
 
 interface SearchbarProps {
   onSearchChange: (searchValue: string) => void;
-  onClick: (url: string) => void;
+  onItemClick: (url: string) => void;
   searchList: BlogPost[];
 }
 
-export default function Searchbar({ onSearchChange, onClick, searchList }: SearchbarProps) {
+export default function Searchbar({ onSearchChange, onItemClick, searchList }: SearchbarProps) {
   const [searchValue] = useState<string>('');
   
   /**
@@ -32,7 +32,7 @@ export default function Searchbar({ onSearchChange, onClick, searchList }: Searc
       startContent={<IconSearch size={18} stroke={1.5} />}
     >
       {searchList.map((content) => (
-          <AutocompleteItem key={content.title} value={content.description} onClick={() => { onClick(content.url); }}>
+          <AutocompleteItem key={content.title} value={content.description} onClick={() => { onItemClick(content.url); }}>
             {content.title}
           </AutocompleteItem>
         ))}

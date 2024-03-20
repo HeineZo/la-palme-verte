@@ -3,10 +3,10 @@ import SearchbarAutocomplete from '@/app/blog/components/SearchbarAutocomplete.c
 import { BlogPost } from '@/class/BlogPost.class';
 import { Button, ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
-import { Key, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Key, useState } from 'react';
 import { getArticles, getArticlesByText } from 'server/blog';
 import Article from './Article.component';
-import { useRouter } from 'next/navigation';
 
 interface ArticleBrowerProps {
   initialArticles?: BlogPost[];
@@ -107,7 +107,7 @@ export default function ArticlesBrowser({
         <div className="max-w-[400px] w-full">
           <SearchbarAutocomplete
             onSearchChange={(text) => void handleSearchChange(text)}
-            onClick={(url) => {
+            onItemClick={(url) => {
               router.push(`/blog/${url}`);
             }}
             searchList={searchedArticles}
