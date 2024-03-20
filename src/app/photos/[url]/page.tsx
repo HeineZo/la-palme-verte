@@ -20,30 +20,28 @@ export default async function page({ params }: AlbumProps) {
                         <h1>{album.title}</h1>
                         <p className='xl:w-1/2'>{album.description}</p>
                     </section>
-                    <section className="section flex flex-col gap-5">
-                        <div className="relative mx-auto flex flex-col xl:flex-row xl:items-start gap-5">
-                            <div className="xl:w-1/2 relative">
-                                <ZoomableImage
-                                    src={album.images[0].file.url}
-                                    imageName={"Couverture de l'album"}
-                                />
+                    <section className="section flex flex-col gap-8">
+                        {album.images.map((image, index) => (
+                            <div key={index} className={`relative mx-auto flex gap-8 ${index % 2 === 0 ? 'xl:flex-row' : 'xl:flex-row-reverse'} flex-col`}>
+                                <div className="xl:w-1/2 relative">
+                                    <ZoomableImage
+                                        src={image.file.url}
+                                        imageName={index === 0 ? "Couverture de l'album" : image.name}
+                                    />
+                                </div>
+                                <div className="xl:w-1/2 mt-4 lg:mt-0 grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {album.images.slice(index + 1, index + 5).map((subImage, subIndex) => (
+                                        <ZoomableImage key={subIndex} src={subImage.file.url} imageName={subImage.name} />
+                                    ))}
+                                </div>
                             </div>
-                            <div className="xl:w-1/2 mt-4 lg:mt-0 grid md:grid-cols-1 lg:grid-cols-2 gap-5">
-                                {album.images.slice(1, 5).map((image: File) => (
-                                    <ZoomableImage src={image.file.url} imageName={image.name} />
-                                ))}
-                            </div>
-                        </div>
-                        <div className="mt-4 grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-                            {album.images.slice(5).map((image: File) => (
-                                <ZoomableImage src={image.file.url} imageName={image.name} />
-                            ))}
-                        </div>
+                        ))}
                     </section>
-                </main>
+                </main >
             ) : (
                 <div></div>
-            )}
+            )
+            }
         </>
     );
 }
