@@ -15,8 +15,8 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import { getLatestImages } from 'server/album';
-import { getBySection } from 'server/faq';
 import LastArticles from './blog/layout/LastArticles.layout';
+import { getBySection } from 'server/faq';
 
 /**
  * Page d'accueil
@@ -66,6 +66,7 @@ export default async function Home() {
               className="w-fit"
               color="primary"
               endContent={<IconChevronRight size={16} />}
+              href='/association'
             >
               <Link href="/association">Découvrir l'association</Link>
             </Button>

@@ -24,11 +24,18 @@ const config = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         'infinite-scroll-x': 'infinite-scroll-x 30s linear infinite',
         'infinite-scroll-x-reverse':
           'infinite-scroll-x 30s linear infinite reverse -3s',
+        scroll:
+          'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
       },
     },
   },

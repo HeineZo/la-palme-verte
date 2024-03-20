@@ -1,58 +1,91 @@
 'use client';
 import SearchbarAutocomplete from '@/app/blog/components/SearchbarAutocomplete.component';
 import { BlogPost } from '@/class/BlogPost.class';
-import Reveal from '@/shared/utils/Reveal.component';
-import { Pagination, ScrollShadow } from '@nextui-org/react';
+import { Button, ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
+import { useRouter } from 'next/navigation';
 import { Key, useState } from 'react';
+import { getArticles, getArticlesByText } from 'server/blog';
 import Article from './Article.component';
 
 interface ArticleBrowerProps {
-  articles: BlogPost[];
+  initialArticles?: BlogPost[];
   categories: string[];
+  nextArticle: string | undefined;
 }
 
-export default function ArticlesBrowser({ articles, categories }: ArticleBrowerProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const articlesPerPage = 3;
+export default function ArticlesBrowser({
+  initialArticles,
+  categories,
+  nextArticle,
+}: ArticleBrowerProps) {
+  const router = useRouter();
 
-  const handleSearchChange = (value: string) => {
-    setSearchQuery(value.toLowerCase());
+  const [articles, setArticles] = useState<BlogPost[]>(initialArticles ?? []);
+  const [currentCategory, setCurrentCategory] = useState<string | null>(null);
+  const [nextPost, setNextPost] = useState<string | undefined>();
+  const [searchedArticles, setSearchedArticles] = useState<BlogPost[]>(
+    initialArticles ?? [],
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  /**
+   * Recherche des articles correspondant à la valeur
+   * @param value Valeur à rechercher
+   */
+  const handleSearchChange = async (value: string) => {
+    const newArticles = await getArticlesByText(value);
+    setSearchedArticles(newArticles);
   };
 
-  const handleCategorySelection = (category: string | null) => {
-    setSelectedCategory(category === "Tout" ? null : category);
-  };
+  /**
+   * Change la catégorie courante et récupère les articles correspondants
+   * @param category Catégorie à afficher
+   */
+  const changeCategory = (category: string | null) => {
+    let cat = category;
+    if (category === 'Tout') {
+      cat = null;
+    }
+    setCurrentCategory(cat);
 
-  const paginate = (pageNumber: number) => { setCurrentPage(pageNumber); };
-
-  const filterAndPaginateArticles = () => {
-    const filteredArticles = articles.filter(article => {
-      const lowerCaseQuery = searchQuery.toLowerCase();
-      const inCategory = !selectedCategory || article.categories.includes(selectedCategory);
-      const matchesQuery =
-        !searchQuery ||
-        article.title.toLowerCase().includes(lowerCaseQuery) ||
-        article.description.toLowerCase().includes(lowerCaseQuery);
-      return inCategory && matchesQuery;
+    void fetchData(cat, nextPost).then((newArticles) => {
+      setArticles(newArticles);
     });
-
-    const indexOfLastArticle = currentPage * articlesPerPage;
-    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-    const currentArticles = filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle);
-
-    return currentArticles;
   };
 
-  const currentArticles = filterAndPaginateArticles();
+  /**
+   * Récupère les articles suivants
+   */
+  const loadMore = () => {
+    void fetchData(currentCategory, nextPost).then((newArticles) => {
+      setArticles((prev) => [...prev, ...newArticles]);
+    });
+  };
+
+  /**
+   * Récupère les articles
+   * @param category Catégorie à récupérer
+   * @param next Article suivant
+   */
+  const fetchData = async (category: string | null, next?: string) => {
+    setIsLoading(true);
+    const { articles: newArticles, nextArticle: newNextArticle } =
+      await getArticles(category, next);
+    setNextPost(newNextArticle);
+    setIsLoading(false);
+
+    return newArticles;
+  };
 
   return (
-    <section className="flex flex-col gap-10 section w-full">
+    <section className="flex flex-col gap-10 section w-full items-center">
       {/* <h3>Découvrir</h3> */}
-      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden ">
-        <ScrollShadow orientation='horizontal' className='flex items-center h-16'>
+      <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden">
+        <ScrollShadow
+          orientation="horizontal"
+          className="flex items-center h-16"
+        >
           <Tabs
             variant="light"
             color="secondary"
@@ -62,36 +95,41 @@ export default function ArticlesBrowser({ articles, categories }: ArticleBrowerP
               cursor: 'bg-accent',
             }}
             onSelectionChange={(key: Key) => {
-              handleCategorySelection(key as string);
+              changeCategory(key as string);
             }}
           >
-            <Tab key={"Tout"} title={"Tout"} />
+            <Tab key="Tout" title="Tout" />
             {categories.map((category) => (
-              <Tab
-                key={category}
-                title={category}
-              />
+              <Tab key={category} title={category} />
             ))}
           </Tabs>
         </ScrollShadow>
         <div className="max-w-[400px] w-full">
-          <SearchbarAutocomplete onSearchChange={handleSearchChange} searchList={currentArticles} />  
+          <SearchbarAutocomplete
+            onSearchChange={(text) => void handleSearchChange(text)}
+            onItemClick={(url) => {
+              router.push(`/blog/${url}`);
+            }}
+            searchList={searchedArticles}
+          />
         </div>
       </div>
-      <div className="flex w-full flex-wrap gap-8">
-        {articles.map((article) => (
-            <Article article={article} key={article.title} />
-        ))}
+      <div className="flex w-full flex-wrap gap-8 justify-center">
+        {!isLoading &&
+          articles.map((article) => (
+            <Article article={article} key={article.id} />
+          ))}
       </div>
-      <div className="flex justify-center">
-      { currentArticles.length > 0 ? (
-        <Pagination
-          initialPage={1}
-          total={Math.ceil(currentArticles.length / articlesPerPage)}
-          onChange={paginate}
-        />
-      ) : null}
-      </div>
+      {isLoading && <Spinner />}
+      {!isLoading && nextPost && (
+        <Button
+          className="text-accent w-fit"
+          color="secondary"
+          onClick={loadMore}
+        >
+          Charger plus
+        </Button>
+      )}
     </section>
   );
 }
