@@ -10,7 +10,7 @@ import {
   cn,
 } from '@nextui-org/react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 interface GalleryProps {
   images: File[];
@@ -82,6 +82,10 @@ export default function Gallery({ images }: GalleryProps) {
     }
   };
 
+  const randomIndex = useMemo(() => {
+    return Math.floor(Math.random() * (3)) + 1;
+  }, [])
+
   return (
     <section className="flex flex-col gap-4">
       <div className="grid grid-flow-row auto-rows-max grid-cols-4 gap-4">
@@ -89,7 +93,7 @@ export default function Gallery({ images }: GalleryProps) {
           <div
             key={image.name}
             className={cn(
-              index % 5 === 0
+              index % randomIndex === 1
                 ? 'row-span-2 col-span-2'
                 : 'col-span-1 row-span-1',
             )}
@@ -141,6 +145,6 @@ export default function Gallery({ images }: GalleryProps) {
           </div>
         </ModalContent>
       </Modal>
-    </section>
+    </section >
   );
 }
