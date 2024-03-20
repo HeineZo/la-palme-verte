@@ -7,16 +7,16 @@ import Button from '@/shared/theme/Button';
 import Reveal from '@/shared/utils/Reveal.component';
 import { clone } from '@/utils/utils';
 import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/react';
 import {
   IconCalendarHeart,
   IconChevronRight,
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import Link from 'next/link';
 import { getLatestImages } from 'server/album';
-import LastArticles from './blog/layout/LastArticles.layout';
 import { getBySection } from 'server/faq';
+import LastArticles from './blog/layout/LastArticles.layout';
 
 /**
  * Page d'accueil
@@ -28,29 +28,29 @@ export default async function Home() {
   const actionsRow: Row[] = [
     {
       icon: <IconScubaMask size={48} stroke={3} />,
-      title: 'Une multitude d’ateliers',
+      title: "Une multitude d'activités",
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Des activités éco-citoyennes et subaquatiques sont régulièrements mises en places pour permettre de dynamiser le campus',
     },
     {
       icon: <IconCalendarHeart size={48} />,
       title: 'Des événements caritatifs',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'De nombreux événements sont organisés chaque année pour récolter des fonds destinés à la protection de la faune marine',
     },
     {
       icon: <IconUsersGroup size={48} />,
-      title: 'Fédérer une communauté',
+      title: 'Une association étudiante',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare...',
+        'Présent sur le campus de Tohannic à l’Université Bretagne Sud de Vannes, notre association est accessible pour tous les étudiants, peu importe leur formation',
     },
   ];
 
   return (
     <main>
       {/* Hero section */}
-      <div className="flex gap-20 py-28 px-16 items-center justify-around bg-highlight rounded-medium w-screen">
-        <div className="flex flex-col gap-6 md:w-3/4 lg:w-1/3 h-fit">
+      <div className="flex gap-20 py-28 px-16 justify-center bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center w-screen bg-blend-screen">
+        <div className="flex flex-col gap-6 sm:w-3/4 h-fit items-center text-center">
           <Reveal>
             <h1>Plongez au coeur de l'action</h1>
           </Reveal>
@@ -66,43 +66,12 @@ export default async function Home() {
               className="w-fit"
               color="primary"
               endContent={<IconChevronRight size={16} />}
-              href='/association'
+              as={Link}
+              href="/association"
             >
-              <Link href="/association">Découvrir l'association</Link>
+              Découvrir l'association
             </Button>
           </Reveal>
-        </div>
-        <div className="hidden lg:flex gap-3">
-          <div className="flex flex-col gap-7">
-            <Image
-              alt="Image de fond marin"
-              height={270}
-              isZoomed
-              src="https://images.unsplash.com/photo-1559825481-12a05cc00344?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
-              width={200}
-            />
-            <Image
-              alt="Image de fond marin"
-              height={300}
-              isZoomed
-              src="https://images.unsplash.com/photo-1565214975484-3cfa9e56f914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80"
-              width={200}
-            />
-          </div>
-          <div className="flex flex-col gap-7">
-            <Image
-              alt="Image de fond marin"
-              isZoomed
-              src="https://images.unsplash.com/photo-1682687981603-ae874bf432f2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-              width={290}
-            />
-            <Image
-              alt="Image de fond marin"
-              isZoomed
-              src="https://images.unsplash.com/photo-1628630500614-1c8924c99c3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-              width={290}
-            />
-          </div>
         </div>
       </div>
 
@@ -114,7 +83,12 @@ export default async function Home() {
         nous aider à protéger la biodiversité marine."
         title="Devenez adhérent pour rejoindre une communauté grandissante"
       >
-        <Button className="w-fit text-accent" color="secondary">
+        <Button
+          className="w-fit text-accent"
+          color="secondary"
+          as={Link}
+          href="/association"
+        >
           En savoir plus
         </Button>
       </BecomeMember>

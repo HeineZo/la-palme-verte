@@ -1,7 +1,14 @@
 import { BlogPost } from '@/class/BlogPost.class';
 import Button from '@/shared/theme/Button';
 import { arrayToString } from '@/utils/utils';
-import { Avatar, AvatarGroup, Chip, cn, Image, ScrollShadow } from '@nextui-org/react';
+import {
+  Avatar,
+  AvatarGroup,
+  Chip,
+  cn,
+  Image,
+  ScrollShadow,
+} from '@nextui-org/react';
 import { format } from 'date-fns';
 import Link from 'next/link';
 
@@ -34,12 +41,17 @@ export default function Article({ article, isMain }: ArticleProps) {
           isMain && 'aspect-auto max-w-4xl',
         )}
       />
-      <div className={cn('flex flex-col justify-between gap-5 mt-5', isMain && 'lg:w-2/3')}>
-        <div className='flex flex-col gap-5'>
+      <div
+        className={cn(
+          'flex flex-col justify-between gap-5 mt-5',
+          isMain && 'lg:w-2/3',
+        )}
+      >
+        <div className="flex flex-col gap-5">
           <div className="flex gap-2 overflow-x-hidden">
             <ScrollShadow
               orientation="horizontal"
-              className="flex items-center gap-2 overflow-x-auto w-full"
+              className="flex items-center gap-2 overflow-x-auto"
             >
               {categories.map((categorie: string) => (
                 <Chip key={categorie} color="primary" variant="flat">

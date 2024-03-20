@@ -1,15 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import { Link } from '@nextui-org/react';
-import NextLink from 'next/link';
-import { usePathname } from 'next/navigation';
 import {
   IconBrandInstagram,
-  IconBrandX,
   IconBrandLinkedin,
+  IconMail,
 } from '@tabler/icons-react';
 import { getYear } from 'date-fns';
+import Image from 'next/image';
+import NextLink from 'next/link';
+import { usePathname } from 'next/navigation';
 import pages from 'structure.json';
 
 /**
@@ -55,9 +55,9 @@ export default function Footer() {
           <Link
             as={NextLink}
             className="text-white h-fit"
-            href={process.env.NEXT_PUBLIC_TWITTER_URL}
+            href={process.env.NEXT_PUBLIC_MAIL}
           >
-            <IconBrandX />
+            <IconMail />
           </Link>
           <Link
             as={NextLink}

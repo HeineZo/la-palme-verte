@@ -1,12 +1,11 @@
-
-import { User } from "@/class/User.class";
-import { InfiniteMovingCards } from "@/shared/components/InfiniteMovingCards";
+import { User } from '@/class/User.class';
 import Button from '@/shared/theme/Button';
-import { capitalizeFirstLetter } from "@/utils/utils";
-import { Avatar } from "@nextui-org/react";
+import { capitalizeFirstLetter } from '@/utils/utils';
+import { Avatar, Link } from '@nextui-org/react';
 import { cn } from '@nextui-org/system';
 import React from 'react';
 import { getUsers } from 'server/user';
+import InfiniteMovingCards from './InfiniteMovingCards';
 
 interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
@@ -38,56 +37,70 @@ export default async function BecomeMember({
   showInfiniteLoop = true,
   buttonTitle,
 }: BecomeMemberProps) {
-
   const users: User[] = await getUsers();
-  
+
   return (
-  <div
-  className={cn(
-			  'py-16 text-center justify-center flex flex-col gap-16 mx-auto w-full',
-			  className,
-			  !showInfiniteLoop && 'gap-6',
-			)}
-		>
-  <div className="px-10 md:px-16">
-  <h4 className="hidden md:block"> {title} </h4>
-  <h4 className="block md:hidden"> {shortTitle} </h4>
-  <p> {subtitle} </p>
-			</div>
+    <div
+      className={cn(
+        'py-16 text-center justify-center flex flex-col gap-16 mx-auto w-full',
+        className,
+        !showInfiniteLoop && 'gap-6',
+      )}
+    >
+      <div className="px-10 md:px-16">
+        <h4 className="hidden md:block"> {title} </h4>
+        <h4 className="block md:hidden"> {shortTitle} </h4>
+        <p> {subtitle} </p>
+      </div>
 
       {showInfiniteLoop ? (
         <div className="flex flex-col gap-4">
-        <InfiniteMovingCards
-          row={users.slice(0, users.length / 2).map((user: User, i: number) => (
-            <Avatar 
-              src={user.imageUrl} 
-              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)} 
-              className="w-20 h-20 text-white text-xl" 
-              key={i} 
-              imgProps={{ className: 'opacity-100' }}
-            /> 
-          ))}
-          speed="slow"
-          direction="left"
-        />
-        <InfiniteMovingCards
-          row={users.slice(users.length / 2, users.length).map((user: User, i: number) => (
-            <Avatar 
-              src={user.imageUrl} 
-              name={capitalizeFirstLetter(user.name) + capitalizeFirstLetter(user.surname)}
-              className="w-20 h-20 text-white text-xl"
-              key={i}
-              imgProps={{ className: 'opacity-100' }}
-            />
-          ))}
-          speed="slow"
-          direction="right"
-        />
+          <InfiniteMovingCards
+            row={users
+              .slice(0, users.length / 2)
+              .map((user: User, i: number) => (
+                <Avatar
+                  src={user.imageUrl}
+                  name={
+                    capitalizeFirstLetter(user.name) +
+                    capitalizeFirstLetter(user.surname)
+                  }
+                  className="w-20 h-20 text-white text-xl"
+                  key={i}
+                  imgProps={{ className: 'opacity-100' }}
+                />
+              ))}
+            speed="slow"
+            direction="left"
+          />
+          <InfiniteMovingCards
+            row={users
+              .slice(users.length / 2, users.length)
+              .map((user: User, i: number) => (
+                <Avatar
+                  src={user.imageUrl}
+                  name={
+                    capitalizeFirstLetter(user.name) +
+                    capitalizeFirstLetter(user.surname)
+                  }
+                  className="w-20 h-20 text-white text-xl"
+                  key={i}
+                  imgProps={{ className: 'opacity-100' }}
+                />
+              ))}
+            speed="slow"
+            direction="right"
+          />
         </div>
       ) : null}
       <div className="flex gap-6 justify-center">
         {buttonTitle ? (
-          <Button className="w-fit" color="primary">
+          <Button
+            className="w-fit"
+            color="primary"
+            as={Link}
+            href={process.env.NEXT_PUBLIC_STRIPE_LINK}
+          >
             {buttonTitle}
           </Button>
         ) : null}

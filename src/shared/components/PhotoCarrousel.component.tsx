@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { flushSync } from 'react-dom';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { cn } from '@nextui-org/react';
 import Button from '@/shared/theme/Button';
+import { cn } from '@nextui-org/react';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 const TWEEN_FACTOR = 1.2;
 
@@ -135,12 +135,12 @@ export default function PhotoCarrousel({
 }
 
 /**
- * Bouton gauche pour se direction dans le carrousel
+ * Bouton pour retourner à l'image précédente
  * @param onClick Fonction à appeler lors du clic sur le bouton
  * @param disabled Etat du bouton
  */
 export function LeftArrow({ onClick, disabled }: ArrowProps) {
-  if (!disabled) {
+  if (disabled) {
     return null;
   }
   return (
@@ -157,12 +157,12 @@ export function LeftArrow({ onClick, disabled }: ArrowProps) {
 }
 
 /**
- * Bouton gauche pour se direction dans le carrousel
+ * Bouton pour passer à l'image suivante
  * @param onClick Fonction à appeler lors du clic sur le bouton
  * @param disabled Etat du bouton
  */
 export function RightArrow({ onClick, disabled }: ArrowProps) {
-  if (!disabled) {
+  if (disabled) {
     return null;
   }
   return (

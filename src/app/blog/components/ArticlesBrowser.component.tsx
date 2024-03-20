@@ -79,7 +79,7 @@ export default function ArticlesBrowser({
   };
 
   return (
-    <section className="flex flex-col gap-10 section w-full items-center">
+    <section className="flex flex-col gap-10 section w-full">
       {/* <h3>Découvrir</h3> */}
       <div className="flex flex-wrap justify-between gap-5 overflow-x-hidden">
         <ScrollShadow

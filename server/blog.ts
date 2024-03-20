@@ -4,12 +4,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return -- API de Notion mal typé */
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import { BlogPost } from '@/class/BlogPost.class';
+import { clone } from '@/utils/utils';
 import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './database';
-import { clone } from '@/utils/utils';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
 
@@ -22,8 +22,10 @@ const database_id = process.env.BLOG_DATABASE ?? '';
 export const getArticles = async (
   category?: string | null,
   lastArticleId?: string,
+  maxArticlesProps?: number,
 ) => {
-  const maxArticles = Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE);
+  const maxArticles =
+    maxArticlesProps || Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE);
   const response = await notionClient.databases.query({
     filter: {
       and: [
