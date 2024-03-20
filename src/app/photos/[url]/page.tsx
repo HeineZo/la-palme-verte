@@ -1,6 +1,6 @@
-import { Image } from '@nextui-org/react';
 import { getAlbumByUrl } from 'server/album';
 import ZoomableImage from './components/ZoomableImage.component';
+import { File } from '@/class/Album.class';
 
 interface AlbumProps {
     params: {
@@ -16,28 +16,26 @@ export default async function page({ params }: AlbumProps) {
         <>
             {!onSlideshow ? (
                 <main>
-                    <section className="section flex flex-col gap-5 mt-12">
-                        <div className="relative mx-auto flex flex-col xl:flex-row xl:items-start xl:gap-5">
+                    <section className="section flex justify-between mt-28 flex-col">
+                        <h1>{album.title}</h1>
+                        <p className='xl:w-1/2'>{album.description}</p>
+                    </section>
+                    <section className="section flex flex-col gap-5">
+                        <div className="relative mx-auto flex flex-col xl:flex-row xl:items-start gap-5">
                             <div className="xl:w-1/2 relative">
-                                <Image
-                                    className="z-0 lg:w-full rounded-medium"
+                                <ZoomableImage
                                     src={album.images[0].file.url}
-                                    alt={"Couverture de l'album"}
+                                    imageName={"Couverture de l'album"}
                                 />
-                                <div className="absolute inset-0 rounded-medium bg-gradient-to-t from-black via-transparent"></div>
-                                <div className="absolute bottom-7 left-7 text-white w-3/4">
-                                    <h4>{album.title}</h4>
-                                    <p>{album.description}</p>
-                                </div>
                             </div>
-                            <div className="xl:w-1/2 mt-4 lg:mt-0 grid grid-cols-2 gap-4">
-                                {album.images.slice(1, 5).map((image) => (
+                            <div className="xl:w-1/2 mt-4 lg:mt-0 grid md:grid-cols-1 lg:grid-cols-2 gap-5">
+                                {album.images.slice(1, 5).map((image: File) => (
                                     <ZoomableImage src={image.file.url} imageName={image.name} />
                                 ))}
                             </div>
                         </div>
-                        <div className="mt-4 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {album.images.slice(5).map((image) => (
+                        <div className="mt-4 grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+                            {album.images.slice(5).map((image: File) => (
                                 <ZoomableImage src={image.file.url} imageName={image.name} />
                             ))}
                         </div>

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
 
-interface File {
+export interface File {
   name: string;
   type: string;
   file: { url: string };
