@@ -1,12 +1,10 @@
-import './globals.css';
+import Footer from '@/shared/layout/Footer.layout';
+import Navbar from '@/shared/layout/Navbar.layout';
 import type { Metadata } from 'next';
 import { Archivo } from 'next/font/google';
 import localFont from 'next/font/local';
-import Navbar from '@/shared/layout/Navbar.layout';
+import './globals.css';
 import Providers from './providers';
-import { Analytics } from '@vercel/analytics/react';
-import Breakpoint from '@/shared/utils/Breakpoint.component';
-import Footer from '@/shared/layout/Footer.layout';
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -30,13 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${archivo.variable} ${clashDisplay.variable}`}>
+    <html className={`${archivo.variable} ${clashDisplay.variable}`} lang="fr">
       <body className="font-body">
         <Providers>
           <Navbar />
           {children}
-          <Analytics />
-          <Breakpoint />
           <Footer />
         </Providers>
       </body>

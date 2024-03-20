@@ -1,12 +1,13 @@
-'use client';
-
-import { Avatar } from '@nextui-org/avatar';
-import React from 'react';
-import InfiniteLoop from '@/shared/components/InfiniteLoop.component';
-import { cn } from '@nextui-org/system';
+import { User } from '@/class/User.class';
 import Button from '@/shared/theme/Button';
+import { capitalizeFirstLetter } from '@/utils/utils';
+import { Avatar, Link } from '@nextui-org/react';
+import { cn } from '@nextui-org/system';
+import React from 'react';
+import { getUsers } from 'server/user';
+import InfiniteMovingCards from './InfiniteMovingCards';
 
-type BecomeMemberProps = {
+interface BecomeMemberProps {
   className?: React.ComponentProps<'div'>['className'];
   title?: string;
   shortTitle?: string;
@@ -14,7 +15,7 @@ type BecomeMemberProps = {
   children?: React.ReactNode;
   showInfiniteLoop?: boolean;
   buttonTitle?: string;
-};
+}
 
 /**
  * Affiche un bloc permettant d'inciter les utilisateurs à devenir adhérent
@@ -27,23 +28,21 @@ type BecomeMemberProps = {
  * @param buttonTitle Titre du bouton *(optionnel)*
  */
 
-export default function BecomeMember({
+export default async function BecomeMember({
   className,
   title,
-  shortTitle,
+  shortTitle = title,
   subtitle,
   children,
   showInfiniteLoop = true,
   buttonTitle,
 }: BecomeMemberProps) {
-  if (shortTitle === undefined) {
-    shortTitle = title;
-  }
+  const users: User[] = await getUsers();
 
   return (
     <div
       className={cn(
-        'py-16 text-center justify-center flex flex-col gap-16',
+        'py-16 text-center justify-center flex flex-col gap-16 mx-auto w-full',
         className,
         !showInfiniteLoop && 'gap-6',
       )}
@@ -54,22 +53,57 @@ export default function BecomeMember({
         <p> {subtitle} </p>
       </div>
 
-      {showInfiniteLoop && (
-        <InfiniteLoop
-          firstRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
-          ))}
-          secondRow={Array.from({ length: 20 }).map((_, i) => (
-            <Avatar key={i} className="w-20 h-20 text-white" />
-          ))}
-        />
-      )}
+      {showInfiniteLoop ? (
+        <div className="flex flex-col gap-4">
+          <InfiniteMovingCards
+            row={users
+              .slice(0, users.length / 2)
+              .map((user: User, i: number) => (
+                <Avatar
+                  src={user.imageUrl}
+                  name={
+                    capitalizeFirstLetter(user.name) +
+                    capitalizeFirstLetter(user.surname)
+                  }
+                  className="w-20 h-20 text-white text-xl"
+                  key={i}
+                  imgProps={{ className: 'opacity-100' }}
+                />
+              ))}
+            speed="slow"
+            direction="left"
+          />
+          <InfiniteMovingCards
+            row={users
+              .slice(users.length / 2, users.length)
+              .map((user: User, i: number) => (
+                <Avatar
+                  src={user.imageUrl}
+                  name={
+                    capitalizeFirstLetter(user.name) +
+                    capitalizeFirstLetter(user.surname)
+                  }
+                  className="w-20 h-20 text-white text-xl"
+                  key={i}
+                  imgProps={{ className: 'opacity-100' }}
+                />
+              ))}
+            speed="slow"
+            direction="right"
+          />
+        </div>
+      ) : null}
       <div className="flex gap-6 justify-center">
-        {buttonTitle && (
-          <Button color="primary" className="w-fit">
+        {buttonTitle ? (
+          <Button
+            className="w-fit"
+            color="primary"
+            as={Link}
+            href={process.env.NEXT_PUBLIC_STRIPE_LINK}
+          >
             {buttonTitle}
           </Button>
-        )}
+        ) : null}
         {children}
       </div>
     </div>

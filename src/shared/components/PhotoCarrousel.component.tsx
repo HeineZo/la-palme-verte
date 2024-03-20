@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { flushSync } from 'react-dom';
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import Button from '@/shared/theme/Button';
 import { cn } from '@nextui-org/react';
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 const TWEEN_FACTOR = 1.2;
 
@@ -39,8 +39,8 @@ export default function PhotoCarrousel({
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   /**
-   * A chaque changement d'image
-   */
+	 * A chaque changement d'image
+	 */
   const onScroll = useCallback(() => {
     if (!emblaApi) return;
 
@@ -60,8 +60,10 @@ export default function PhotoCarrousel({
           const target = loopItem.target();
           if (index === loopItem.index && target !== 0) {
             const sign = Math.sign(target);
-            if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
-            if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+            if (sign === -1)
+							diffToTarget = scrollSnap - (1 + scrollProgress);
+            if (sign === 1)
+							diffToTarget = scrollSnap + (1 - scrollProgress);
           }
         });
       }
@@ -73,23 +75,23 @@ export default function PhotoCarrousel({
   /**
    * Elément précédent
    */
-  const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi],
-  );
+  const scrollPrev = useCallback(() => {
+    emblaApi && emblaApi.scrollPrev();
+  }, [emblaApi]);
   /**
    * Elément suivant
    */
-  const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi],
-  );
+  const scrollNext = useCallback(() => {
+    emblaApi && emblaApi.scrollNext();
+  }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
     onScroll();
     emblaApi.on('scroll', () => {
-      flushSync(() => onScroll());
+      flushSync(() => {
+        onScroll();
+      });
     });
     emblaApi.on('reInit', onScroll);
   }, [emblaApi, onScroll]);
@@ -113,12 +115,12 @@ export default function PhotoCarrousel({
                   }}
                 >
                   <img
+                    alt="Photo de la gallerie photo"
                     className={cn(
                       'block object-cover max-w-none w-[calc(100%_+_(var(--slide-spacing)_*_2))] ml-[calc(var(--slide-spacing)_*_-1)]',
                       height,
                     )}
                     src={photo}
-                    alt="Photo de la gallerie photo"
                   />
                 </div>
               </div>
@@ -126,28 +128,28 @@ export default function PhotoCarrousel({
           ))}
         </div>
       </div>
-      <LeftArrow onClick={scrollPrev} disabled={prevBtnDisabled} />
-      <RightArrow onClick={scrollNext} disabled={nextBtnDisabled} />
+      <LeftArrow disabled={prevBtnDisabled} onClick={scrollPrev} />
+      <RightArrow disabled={nextBtnDisabled} onClick={scrollNext} />
     </div>
   );
 }
 
 /**
- * Bouton gauche pour se direction dans le carrousel
+ * Bouton pour retourner à l'image précédente
  * @param onClick Fonction à appeler lors du clic sur le bouton
  * @param disabled Etat du bouton
  */
 export function LeftArrow({ onClick, disabled }: ArrowProps) {
-  if (!disabled) {
+  if (disabled) {
     return null;
   }
   return (
     <Button
-      isIconOnly
       className="absolute top-1/2 left-2 z-10 transform -translate-y-1/2"
       color="primary"
-      onClick={onClick}
       disabled={disabled}
+      isIconOnly
+      onClick={onClick}
     >
       <IconChevronLeft size={24} />
     </Button>
@@ -155,21 +157,21 @@ export function LeftArrow({ onClick, disabled }: ArrowProps) {
 }
 
 /**
- * Bouton gauche pour se direction dans le carrousel
+ * Bouton pour passer à l'image suivante
  * @param onClick Fonction à appeler lors du clic sur le bouton
  * @param disabled Etat du bouton
  */
 export function RightArrow({ onClick, disabled }: ArrowProps) {
-  if (!disabled) {
+  if (disabled) {
     return null;
   }
   return (
     <Button
-      isIconOnly
       className="absolute top-1/2 right-2 z-10 transform -translate-y-1/2"
       color="primary"
-      onClick={onClick}
       disabled={disabled}
+      isIconOnly
+      onClick={onClick}
     >
       <IconChevronRight size={24} />
     </Button>

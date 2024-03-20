@@ -1,35 +1,28 @@
 'use client';
 
+import { User } from '@/class/User.class';
+import { IsocialMedia } from '@/shared/types/SocialMedia';
 import { Avatar, Link } from '@nextui-org/react';
-import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { MouseEvent } from 'react';
-import NextLink from 'next/link';
 import {
   IconBrandFacebook as Facebook,
-  IconBrandX as X,
+  IconBrandInstagram as Instagram,
   IconBrandLinkedin as Linkedin,
-  IconMail as Mail,
+  IconBrandX as X,
 } from '@tabler/icons-react';
-import { SocialMedia } from '@/utils/type';
-import { EsocialMedia } from '@/utils/enums';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import NextLink from 'next/link';
+import type { MouseEvent } from 'react';
 
-export type Member = {
-  name: string;
-  role: string;
-  avatar: string;
-  description?: string;
-  socials: SocialMedia;
-};
-
-type Props = {
-  member: Member;
-};
+interface MemberCardProps {
+  member: User;
+}
 
 /**
  * Affiche une carte du membre passé en paramètre
  * @param member Membre à afficher
  */
-export default function MemberCard({ member }: Props) {
+export default function MemberCard({ member }: MemberCardProps) {
+  const memberSocialsMedia = Object.entries(member).filter(([key, value]) => typeof value === 'string' && key === 'linkedin' || key === 'instagram' );
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -51,16 +44,16 @@ export default function MemberCard({ member }: Props) {
    * @param socialName Nom du réseau social
    * @returns Logo du réseau social
    */
-  const getSocialIcon = (socialName: keyof SocialMedia) => {
+  const getSocialIcon = (socialName: keyof IsocialMedia) => {
     switch (socialName) {
-      case EsocialMedia.FACEBOOK:
+      case 'facebook':
         return <Facebook />;
-      case EsocialMedia.X:
+      case 'x':
         return <X />;
-      case EsocialMedia.LINKEDIN:
+      case 'linkedin':
         return <Linkedin />;
-      case EsocialMedia.MAIL:
-        return <Mail />;
+      case 'instagram':
+        return <Instagram />;
       default:
         return null;
     }
@@ -68,10 +61,10 @@ export default function MemberCard({ member }: Props) {
 
   return (
     <div
-      className="group relative max-w-md w-full rounded-medium bg-highlight border border-white px-8 py-12"
+      className="group relative min-w-[200px]  max-w-md w-1/4 rounded-medium bg-highlight border border-white px-8 py-12"
       onMouseMove={handleMouseMove}
     >
-      <motion.div
+            <motion.div
         className="pointer-events-none absolute -inset-px rounded-medium opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
@@ -84,23 +77,32 @@ export default function MemberCard({ member }: Props) {
         }}
       />
       <div className="flex flex-col items-center gap-5">
-        <Avatar src={member.avatar} size="lg" className="w-20 h-20" />
+        <Avatar
+          className="w-20 h-20"
+          size="lg"
+          src={member.imageUrl}
+        />
         <div className="text-center">
           <p className="font-bold">{member.name}</p>
           <p>{member.role}</p>
         </div>
-        <div className="flex gap-4 flex-wrap justify-center">
-          {Object.keys(member.socials).map((social, index) => (
-            <Link
-              key={index}
-              href={member.socials[social as keyof SocialMedia]}
-              as={NextLink}
-              className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
-            >
-              {getSocialIcon(social as keyof SocialMedia)}
-            </Link>
-          ))}
-        </div>
+        {(member.instagram !== '' || member.linkedin !== '' )  && (
+          <div className="flex gap-4 flex-wrap justify-center">
+            {(memberSocialsMedia).map(
+              ([key, value]) =>
+                typeof value === 'string' && (
+                  <Link
+                    as={NextLink}
+                    className="text-black h-fit w-fit p-2 rounded-full bg-white transition duration-300 hover:bg-accent hover:text-white"
+                    href={value}
+                    key={key}
+                  >
+                    {getSocialIcon(key as keyof IsocialMedia)}
+                  </Link>
+                ),
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
