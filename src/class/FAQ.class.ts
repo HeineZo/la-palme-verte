@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-argument -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-call -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
 
-import { getUser } from "server/user";
 
 export class FAQ {
     id: string;

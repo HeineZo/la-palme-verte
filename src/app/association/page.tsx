@@ -18,8 +18,6 @@ import timelineEvents from './assets/timeline-events.json';
 export default async function Page() {
   const staffMembers: User[] = await getStaffMembers();
 
-  const staffMembersAsObjects = staffMembers.map((element) => element.toJSON());
-
   return (
     <main>
       <section className="section flex justify-between section gap-20 mt-28 flex-col lg:flex-row">
@@ -129,7 +127,7 @@ export default async function Page() {
           </p>
         </div>
         <div className="flex flex-wrap gap-12 justify-center">
-          {staffMembersAsObjects.map((member, index) => (
+          {staffMembers.map((member, index) => (
             <MemberCard key={index} member={member} />
           ))}
         </div>

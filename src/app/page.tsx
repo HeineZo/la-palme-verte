@@ -6,7 +6,6 @@ import PhotoMosaic from '@/shared/layout/PhotoMosaic.layout';
 import Button from '@/shared/theme/Button';
 import Reveal from '@/shared/utils/Reveal.component';
 import { clone } from '@/utils/utils';
-import { Image } from '@nextui-org/image';
 import { Link } from '@nextui-org/react';
 import {
   IconCalendarHeart,
