@@ -6,7 +6,8 @@ interface AlbumTileProps {
 }
 
 export default function AlbumTile({ album }: AlbumTileProps) {
-  const albumSrc = album.images[0].file.url;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- test
+  const albumSrc = album.images[0]?.file?.url ?? '';
   return (
     <a href={`/photos/${album.url}`}>
       <div className="relative max-w-7xl rounded-medium cursor-pointer hover:scale-105 transition-all">
