@@ -6,7 +6,7 @@
 export interface File {
   name: string;
   type: string;
-  file: { url: string };
+  file: { url: string; expiry_time: string };
 }
 
 export class Album {

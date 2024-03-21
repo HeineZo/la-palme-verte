@@ -11,15 +11,6 @@ const numberOfLatestImages: number = parseInt(
   10,
 );
 
-interface File {
-  name: string;
-  type: string;
-  file: {
-    url: string;
-    expiry_time: string;
-  };
-}
-
 /**
  * Récupérer tous les albums
  * @returns {Promise<ApiResponse<Album>>}
@@ -77,20 +68,19 @@ export const getLatestImages = async () => {
   });
 
   let index = 0;
-
   const images: string[] = [];
 
   while (
     images.length < numberOfLatestImages &&
     index < response.results.length
   ) {
-    const files: File[] = response.results[index].properties.Images.files;
+    const album = Album.fromNotion(response.results[index]);
 
-    if (files && files.length > 0) {
+    if (album.images.length > 0) {
       images.push(
-        ...files
+        ...album.images
           .slice(numberOfLatestImages * -1 - images.length)
-          .map((file: File) => file.file.url),
+          .map((image) => image.file.url),
       );
     }
 
