@@ -24,7 +24,7 @@ export default function DiscoverPhotos() {
           </Button>
         </Reveal>
       </div>
-      <div className="relative group cursor-pointer hover:scale-105 transition-all duration-300">
+      <div className="relative group hover:scale-105 transition-all duration-300">
         <Image
           width={550}
           height={300}

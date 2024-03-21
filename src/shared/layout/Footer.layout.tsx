@@ -18,7 +18,7 @@ import pages from 'structure.json';
 export default function Footer() {
   const pathname = usePathname();
   return (
-    <div className="px-16 py-10 bg-accent w-full flex flex-col gap-14 text-white">
+    <div className="px-16 py-10 bg-accent w-full flex flex-col gap-14 text-white mt-10">
       <div className="flex flex-wrap flex-col md:flex-row justify-between items-center gap-5">
         {/* Logo */}
         <Image

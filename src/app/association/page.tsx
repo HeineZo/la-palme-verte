@@ -109,14 +109,6 @@ export default async function Page() {
             </div>
           </div>
         </div>
-        <PhotoCarrousel
-          className="lg:w-1/2"
-          height="h-[500px]"
-          photos={[
-            'https://images.unsplash.com/photo-1574802406791-ef6898f311d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
-            'https://images.unsplash.com/photo-1574802406791-ef6898f311d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
-          ]}
-        />
       </section>
       <div className="section flex flex-col text-center items-center gap-20">
         <div className="flex flex-col gap-6">
