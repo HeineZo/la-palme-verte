@@ -99,7 +99,7 @@ export default async function BecomeMember({
             className="w-fit"
             color="primary"
             as={Link}
-            href={process.env.NEXT_PUBLIC_STRIPE_LINK}
+            href={process.env.NEXT_PUBLIC_HELLO_ASSO_LINK}
           >
             {buttonTitle}
           </Button>
