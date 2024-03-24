@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Accordion, AccordionItem, Divider, cn } from '@nextui-org/react';
-import { IconChevronDown, IconChevronUp, IconMinus, IconPlus } from '@tabler/icons-react';
+import { IconChevronUp } from '@tabler/icons-react';
 
 export interface TimelineEvent {
   date: string;
@@ -41,7 +41,7 @@ export default function Timeline({ events }: TimelineProps) {
           key={index}
           textValue={event.description}
           title={
-            <div className="flex gap-10 py-5 rounded-medium hover:bg-default-50 transition-all">
+            <div className="flex gap-10 p-5 rounded-medium hover:backdrop-blur-md transition-all">
               <div className="flex flex-col items-center">
                 <span className="relative flex min-w-[48px] min-h-[48px]">
                   <span
@@ -63,11 +63,15 @@ export default function Timeline({ events }: TimelineProps) {
               </div>
               <div className="flex flex-col gap-4">
                 <small className="font-body font-normal">{event.date}</small>
-                <h5 className='text-2xl lg:text-4xl'>{event.title}</h5>
-                {accordionOpen[index] ?
-                  <IconChevronUp className='transition duration-300' />
-                  : <IconChevronUp className='transition duration-300 rotate-180' />
-                }
+                <span className='flex gap-2 flex-col sm:flex-row'>
+                  <h5 className='text-2xl lg:text-4xl'>{event.title}</h5>
+                  {accordionOpen[index] ?
+                    <IconChevronUp className='transition duration-300 size-8' />
+                    : <IconChevronUp className='transition duration-300 rotate-180 size-8' />
+                  }
+                </span>
+                
+
               </div>
             </div>
           }
