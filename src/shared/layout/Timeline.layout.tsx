@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionItem, Divider, cn } from '@nextui-org/react';
-import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { IconChevronUp } from '@tabler/icons-react';
 
 export interface TimelineEvent {
   date: string;
@@ -20,6 +20,14 @@ interface TimelineProps {
  * @param events Liste des événements à ajouter
  */
 export default function Timeline({ events }: TimelineProps) {
+  const [accordionOpen, setAccordionOpen] = useState<boolean[]>(Array(events.length).fill(false));
+
+  const toggleAccordion = (index: number) => {
+    const newAccordionState = [...accordionOpen];
+    newAccordionState[index] = !newAccordionState[index];
+    setAccordionOpen(newAccordionState);
+  };
+
   return (
     <Accordion
       disableIndicatorAnimation
@@ -28,23 +36,24 @@ export default function Timeline({ events }: TimelineProps) {
     >
       {events.map((event, index) => (
         <AccordionItem
-          indicator={({ isOpen }) => (isOpen ? <IconMinus /> : <IconPlus />)}
+          onPress={() => { toggleAccordion(index); }}
+          hideIndicator
           key={index}
           textValue={event.description}
           title={
-            <div className="flex gap-10 p-5 rounded-medium hover:bg-default-50 transition-all">
+            <div className="flex gap-10 p-5 rounded-medium hover:backdrop-blur-md transition-all">
               <div className="flex flex-col items-center">
                 <span className="relative flex min-w-[48px] min-h-[48px]">
                   <span
                     className={cn(
                       event.active &&
-                        'animate-[ping_2s_infinite] absolute inline-flex h-full w-full rounded-full bg-primary-400',
+                      'animate-[ping_2s_infinite] absolute inline-flex h-full w-full rounded-full bg-primary-400',
                     )}
                   />
                   <span
                     className={cn(
-                      'relative inline-flex rounded-full min-w-[48px] min-h-[48px] bg-highlight ring-2 ring-secondary',
-                      event.active && 'bg-primary-500 ring-0',
+                      'relative inline-flex rounded-full min-w-[48px] min-h-[48px] bg-accent-400 ring-2 ring-secondary',
+                      event.active && 'bg-accent-700 ring-0',
                     )}
                   />
                 </span>
@@ -54,7 +63,15 @@ export default function Timeline({ events }: TimelineProps) {
               </div>
               <div className="flex flex-col gap-4">
                 <small className="font-body font-normal">{event.date}</small>
-                <h4>{event.title}</h4>
+                <span className='flex gap-2 flex-col sm:flex-row'>
+                  <h5 className='text-2xl lg:text-4xl'>{event.title}</h5>
+                  {accordionOpen[index] ?
+                    <IconChevronUp className='transition duration-300 size-8' />
+                    : <IconChevronUp className='transition duration-300 rotate-180 size-8' />
+                  }
+                </span>
+                
+
               </div>
             </div>
           }
