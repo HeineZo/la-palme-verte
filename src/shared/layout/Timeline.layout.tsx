@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Accordion, AccordionItem, Divider, cn } from '@nextui-org/react';
-import { IconChevronDown, IconMinus, IconPlus } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp, IconMinus, IconPlus } from '@tabler/icons-react';
 
 export interface TimelineEvent {
   date: string;
@@ -20,6 +20,14 @@ interface TimelineProps {
  * @param events Liste des événements à ajouter
  */
 export default function Timeline({ events }: TimelineProps) {
+  const [accordionOpen, setAccordionOpen] = useState<boolean[]>(Array(events.length).fill(false));
+
+  const toggleAccordion = (index: number) => {
+    const newAccordionState = [...accordionOpen];
+    newAccordionState[index] = !newAccordionState[index];
+    setAccordionOpen(newAccordionState);
+  };
+
   return (
     <Accordion
       disableIndicatorAnimation
@@ -28,6 +36,7 @@ export default function Timeline({ events }: TimelineProps) {
     >
       {events.map((event, index) => (
         <AccordionItem
+          onPress={() => { toggleAccordion(index); }}
           hideIndicator
           key={index}
           textValue={event.description}
@@ -43,8 +52,8 @@ export default function Timeline({ events }: TimelineProps) {
                   />
                   <span
                     className={cn(
-                      'relative inline-flex rounded-full min-w-[48px] min-h-[48px] bg-highlight ring-2 ring-secondary',
-                      event.active && 'bg-primary-500 ring-0',
+                      'relative inline-flex rounded-full min-w-[48px] min-h-[48px] bg-accent-400 ring-2 ring-secondary',
+                      event.active && 'bg-accent-700 ring-0',
                     )}
                   />
                 </span>
@@ -55,7 +64,10 @@ export default function Timeline({ events }: TimelineProps) {
               <div className="flex flex-col gap-4">
                 <small className="font-body font-normal">{event.date}</small>
                 <h5 className='text-2xl lg:text-4xl'>{event.title}</h5>
-                <IconChevronDown />
+                {accordionOpen[index] ?
+                  <IconChevronUp className='transition duration-300' />
+                  : <IconChevronUp className='transition duration-300 rotate-180' />
+                }
               </div>
             </div>
           }

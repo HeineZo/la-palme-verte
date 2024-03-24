@@ -46,10 +46,12 @@ export default async function Page() {
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="flex justify-between flex-col lg:flex-row section">
-        <h4 className='lg:text-5xl'>Une association qui traverse les générations</h4>
-        <div className="lg:w-1/2">
-          <Timeline events={timelineEvents} />
+      <section className="flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
+        <div className='flex w-3/4 justify-between flex-col lg:flex-row section'>
+          <h4 className='lg:text-5xl'>Une association qui traverse les générations</h4>
+          <div className="lg:w-1/2">
+            <Timeline events={timelineEvents} />
+          </div>
         </div>
       </section>
       <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100">
