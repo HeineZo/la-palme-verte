@@ -46,15 +46,15 @@ export default async function Page() {
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
-        <div className='flex w-3/4 justify-between flex-col lg:flex-row section'>
+      <section className="section flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
+        <div className='flex w-3/4 justify-between flex-col lg:flex-row'>
           <h4 className='lg:text-5xl'>Une association qui traverse les générations</h4>
           <div className="lg:w-1/2">
             <Timeline events={timelineEvents} />
           </div>
         </div>
       </section>
-      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100">
+      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100 mt-20">
         <div className="flex flex-col gap-10 lg:w-1/2 px-10">
           <div>
             <h2>Quelques chiffres</h2>
