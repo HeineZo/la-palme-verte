@@ -57,7 +57,7 @@ export default async function page() {
         <BecomeMember
           buttonTitle="Rejoindre la communauté"
           subtitle="Pourquoi pas vous ?"
-          title="84 personnes ont déjà rejoint l’association"
+          title="59 personnes ont déjà rejoint l’association"
         />
       </section>
       <FAQ

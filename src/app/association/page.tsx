@@ -46,16 +46,18 @@ export default async function Page() {
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="flex justify-between gap-20 flex-col lg:flex-row section">
-        <h1 className="">Une association qui traverse les générations</h1>
-        <div className="lg:w-1/2">
-          <Timeline events={timelineEvents} />
+      <section className="section flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
+        <div className='flex w-3/4 justify-between flex-col lg:flex-row'>
+          <h4 className='text-center lg:text-left lg:text-5xl'>Une association qui traverse les générations</h4>
+          <div className="lg:w-1/2">
+            <Timeline events={timelineEvents} />
+          </div>
         </div>
       </section>
-      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100">
-        <div className="flex flex-col gap-10 lg:w-1/2">
+      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100 mt-20">
+        <div className="flex flex-col gap-10 lg:w-1/2 px-10">
           <div>
-            <h1>Quelques chiffres</h1>
+            <h2>Quelques chiffres</h2>
             <p>
               Depuis la création de l’association, nous ne cessons de réaliser
               des événements et des ateliers pour permettre de sensibiliser à la
@@ -66,7 +68,7 @@ export default async function Page() {
             <div className="flex gap-6 w-full justify-between">
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
-                  fontStyle="text-5xl font-heading font-bold"
+                  fontStyle="text-4xl lg:text-5xl font-heading font-bold"
                   value={20}
                 />
                 <Reveal>
@@ -75,7 +77,7 @@ export default async function Page() {
               </span>
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
-                  fontStyle="text-5xl font-heading font-bold"
+                  fontStyle="text-4xl font-heading font-bold"
                   value={differenceInCalendarYears(
                     new Date(),
                     new Date(2005, 1, 1),
@@ -89,9 +91,10 @@ export default async function Page() {
             <div className="flex gap-6 w-full justify-between">
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
-                  fontStyle="text-5xl font-heading font-bold"
+                  fontStyle="text-4xl font-heading font-bold"
+                  className='*:text-black'
                   suffix="€"
-                  value={200}
+                  value={700}
                 />
                 <Reveal>
                   <p>Récoltés pour la protection de la faune maritime</p>
@@ -99,8 +102,8 @@ export default async function Page() {
               </span>
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
-                  fontStyle="text-5xl font-heading font-bold"
-                  value={59} //TODO: rempalcer par une méthode getAdherentCount()
+                  fontStyle="text-4xl font-heading font-bold"
+                  value={59} //TODO: remplacer par une méthode getAdherentCount()
                 />
                 <Reveal>
                   <p>Adhérents</p>
@@ -118,7 +121,7 @@ export default async function Page() {
             équipe talentueuse et motivée.
           </p>
         </div>
-        <div className="flex flex-wrap gap-12 justify-center">
+        <div className="flex flex-wrap gap-8 lg:gap-12 justify-center">
           {staffMembers.map((member, index) => (
             <MemberCard key={index} member={member} />
           ))}
@@ -131,7 +134,7 @@ export default async function Page() {
         />
       </div>
       <div className="flex justify-between flex-col section gap-5">
-        <div className="flex justify-between flex-row gap-10 mb-10">
+        <div className="flex justify-between flex-col lg:flex-row gap-10 mb-10">
           <div>
             <h1>Contactez-nous</h1>
             <p className="break-word">

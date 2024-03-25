@@ -1,15 +1,20 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
-import 'server-only';
-
 import { Album } from '@/class/Album.class';
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './database';
+import { clone } from '@/utils/utils';
 
 const database_id = process.env.GALLERY_DATABASE ?? '';
 const numberOfLatestImages: number = parseInt(
   process.env.NUMBER_OF_LATEST_IMAGES || '-6',
   10,
 );
+
+export const getAlbum = async (id: string) => {
+  const response = await notionClient.pages.retrieve({ page_id: id });
+
+  return Album.fromNotion(response);
+}
 
 /**
  * Récupérer tous les albums
@@ -20,7 +25,7 @@ export const getAlbums = async () => {
   const albumsPromises = response.results.map((result) =>
     Album.fromNotion(result),
   );
-  const albums = await Promise.all(albumsPromises);
+  const albums = clone(await Promise.all(albumsPromises));
 
   return albums.reverse();
 };

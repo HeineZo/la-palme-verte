@@ -55,7 +55,7 @@ export default function Footer() {
           <Link
             as={NextLink}
             className="text-white h-fit"
-            href={process.env.NEXT_PUBLIC_MAIL}
+            href={`mailto:${process.env.NEXT_PUBLIC_MAIL}`}
           >
             <IconMail />
           </Link>
@@ -75,15 +75,12 @@ export default function Footer() {
           {getYear(new Date())} {process.env.NEXT_PUBLIC_SITE_NAME}. Tout droit
           réservé.
         </p>
-        <Link as={NextLink} className="text-white" href="/" underline="always">
+        {/* <Link as={NextLink} className="text-white" href="/" underline="always">
           Politique de confidentialité
         </Link>
         <Link as={NextLink} className="text-white" href="/" underline="always">
           Conditions d'utilisation
-        </Link>
-        <Link as={NextLink} className="text-white" href="/" underline="always">
-          Paramètre des cookies
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

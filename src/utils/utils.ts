@@ -23,3 +23,4 @@ export function capitalizeFirstLetter(name: string): string {
 export function clone<T>(object: T[]): T[] {
     return JSON.parse(JSON.stringify(object)) as T[];
 }
+
