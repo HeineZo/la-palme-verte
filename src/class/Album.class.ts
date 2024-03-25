@@ -12,6 +12,7 @@ export interface File {
 export class Album {
   id: string;
   title: string;
+  cover: string;
   description: string;
   images: File[];
   url: string;
@@ -19,12 +20,14 @@ export class Album {
   constructor(
     id: string,
     title: string,
+    cover: string,
     description: string,
     images: File[],
     url: string,
   ) {
     this.id = id;
     this.title = title;
+    this.cover = cover;
     this.description = description;
     this.images = images;
     this.url = url;
@@ -38,10 +41,11 @@ export class Album {
   static fromNotion(album: any) {
     const id = album.id;
     const title = album.properties.Titre.title[0]?.plain_text;
+    const cover = album.cover?.external?.url ?? album.cover.file?.url ?? '';
     const description = album.properties.Description.rich_text[0]?.text.content;
     const images = album.properties.Images.files;
     const url = album.properties.URL.rich_text[0]?.text.content;
 
-    return new Album(id, title, description, images, url);
+    return new Album(id, title, cover, description, images, url);
   }
 }
