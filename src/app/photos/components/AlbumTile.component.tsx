@@ -18,8 +18,8 @@ export default function AlbumTile({ album }: AlbumTileProps) {
         />
         <div className="absolute inset-0 rounded-medium bg-gradient-to-t from-black via-transparent" />
         <div className="absolute bottom-7 left-7 text-white w-3/4">
-          <h5 className="truncate lg:text-3xl">{album.title}</h5>
-          <p className="truncate">{album.description}</p>
+          <h5 className="text-left truncate lg:text-3xl">{album.title}</h5>
+          <p className="text-left truncate">{album.description}</p>
         </div>
       </div>
     </a>

@@ -11,7 +11,7 @@ export default async function LastArticles() {
 
   return (
     <div className="section flex flex-col justify-center items-center gap-16">
-      <div className="flex flex-col justify-center items-center gap-6 text-center">
+      <div className="flex flex-col justify-center items-center gap-2 text-center">
         <h2>Nos derniers articles</h2>
         <p>
           En tant qu’adhérant vous avez la possibilité de rédiger des articles

@@ -27,7 +27,7 @@ export default function FAQ({ faq, title, description, className }: FAQProps) {
         className,
       )}
     >
-      <div className="flex flex-col gap-4 items-center text-center">
+      <div className="flex flex-col gap-2 items-center text-center">
         <h2>{title}</h2>
         <p>{description}</p>
       </div>
@@ -46,7 +46,7 @@ export default function FAQ({ faq, title, description, className }: FAQProps) {
       </Accordion>
 
       <div className="flex flex-col gap-6 items-center">
-        <div className="flex flex-col gap-4 text-center">
+        <div className="flex flex-col gap-2 text-center">
           <h4>Encore des questions ?</h4>
 
           <p>
