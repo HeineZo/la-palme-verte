@@ -13,7 +13,7 @@ interface PhotoMosaicProps {
  * @param photos - Photos à afficher dans la mosaïque
  */
 export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
-  console.log(photos.length)
+
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="hidden md:block w-full max-w-7xl mx-auto gap-8 space-y-8 columns-3">
