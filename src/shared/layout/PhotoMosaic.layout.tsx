@@ -11,10 +11,9 @@ interface PhotoMosaicProps {
 /**
  * Mosaïque de photos
  * @param photos - Photos à afficher dans la mosaïque
- *
- * TODO: Afficher les informations de la photo au hover (on pourrait limite en faire un composant)
  */
 export default function PhotoMosaic({ photos }: PhotoMosaicProps) {
+  console.log(photos.length)
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="hidden md:block w-full max-w-7xl mx-auto gap-8 space-y-8 columns-3">
