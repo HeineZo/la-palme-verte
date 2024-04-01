@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-    <a href="https://la-palme-verte.vercel.app/">
+    <a href="https://lapalmeverte.vercel.app/">
         <img src="/public/logo-white.svg" alt="Logo de l'association" width="200">
     </a>
     <br>
