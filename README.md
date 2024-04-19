@@ -1,17 +1,17 @@
 <h1 align="center">
     <br>
-    <a href="https://la-palme-verte.vercel.app/">
+    <a href="https://lapalmeverte.vercel.app/">
         <img src="/public/logo-white.svg" alt="Logo de l'association" width="200">
     </a>
     <br>
     La Palme Verte
 </h1>
 
-<h4 align="center">Site vitrine, blog et gallerie photo pour une association de l'UBS fondée en 2005</h4>
+<h4 align="center">Site vitrine, blog et galerie photo pour une association de l'UBS fondée en 2005</h4>
 
 <p align="center">
-    <a href="https://la-palme-verte.vercel.app/">
-        <img src="https://img.shields.io/website-up-down-green-red/https/la-palme-verte.vercel.app.svg" alt="Maintenance du site">
+    <a href="https://lapalmeverte.vercel.app/">
+        <img src="https://img.shields.io/website-up-down-green-red/https/lapalmeverte.vercel.app.svg" alt="Maintenance du site">
     </a>
 </p>
 

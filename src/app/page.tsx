@@ -13,16 +13,17 @@ import {
   IconScubaMask,
   IconUsersGroup,
 } from '@tabler/icons-react';
-import { getLatestImages } from 'server/album';
+import { getAlbums } from 'server/album';
 import { getBySection } from 'server/faq';
 import LastArticles from './blog/layout/LastArticles.layout';
+import AlbumBrowser from './photos/components/AlbumBrowser.component';
 
 /**
  * Page d'accueil
  */
 export default async function Home() {
   const faq = await getBySection('Général');
-  const photos = await getLatestImages();
+  const albums = await getAlbums(4);
 
   const actionsRow: Row[] = [
     {
@@ -99,10 +100,12 @@ export default async function Home() {
       </div>
 
       {/* Les photos */}
-      <div className="flex flex-col gap-6 items-center section text-center">
-        <h2>Une image vaut mieux que mille mots</h2>
-        <p>Les dernières photos publiées par nos adhérents</p>
-        <PhotoMosaic photos={photos} />
+      <div className="flex flex-col gap-10 items-center section text-center">
+        <span className='space-y-2'>
+          <h2>Une image vaut mieux que mille mots</h2>
+          <p>Découvrez les derniers albums publiés</p>
+        </span>
+        <AlbumBrowser albums={albums} />
       </div>
 
       {/* Blog */}

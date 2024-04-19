@@ -14,20 +14,30 @@ export const getAlbum = async (id: string) => {
   const response = await notionClient.pages.retrieve({ page_id: id });
 
   return Album.fromNotion(response);
-}
+};
 
 /**
  * Récupérer tous les albums
+ * @param max Nombre maximum d'albums à récupérer (optionnel)
  * @returns {Promise<ApiResponse<Album>>}
  */
-export const getAlbums = async () => {
-  const response = await notionClient.databases.query({ database_id });
+export const getAlbums = async (max?: number) => {
+  const response = await notionClient.databases.query({
+    filter: {
+      property: 'État',
+      status: {
+        equals: 'Publié',
+      },
+    },
+    page_size: max,
+    database_id,
+  });
   const albumsPromises = response.results.map((result) =>
     Album.fromNotion(result),
   );
   const albums = clone(await Promise.all(albumsPromises));
 
-  return albums.reverse();
+  return albums;
 };
 
 /**
@@ -61,6 +71,10 @@ export const getAlbumByUrl = async (url: string) => {
   return Album.fromNotion(response.results[0]);
 };
 
+/**
+ * Retourne les dernières photos publiées
+ * @returns Les dernières photos publiées
+ */
 export const getLatestImages = async () => {
   const response = await notionClient.databases.query({
     sorts: [
