@@ -1,7 +1,12 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import { Album } from '@/class/Album.class';
-import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import { notionClient } from './database';
+import {
+  GetPageResponse,
+  ImageBlockObjectResponse,
+  PageObjectResponse,
+  PartialPageObjectResponse,
+} from '@notionhq/client/build/src/api-endpoints';
+import { notionClient } from './notionClient';
 import { clone } from '@/utils/utils';
 
 const database_id = process.env.GALLERY_DATABASE ?? '';
@@ -11,9 +16,70 @@ const numberOfLatestImages: number = parseInt(
 );
 
 export const getAlbum = async (id: string) => {
-  const response = await notionClient.pages.retrieve({ page_id: id });
+  const response: GetPageResponse = await notionClient.pages.retrieve({
+    page_id: id,
+  });
 
-  return Album.fromNotion(response);
+  if ('properties' in response && 'title' in response.properties) {
+    return Album.fromNotion(response);
+  }
+  const defaultAlbum: PageObjectResponse = {
+    id: '',
+    properties: {
+      title: {
+        type: 'title',
+        title: [
+          {
+            type: 'text',
+            text: { content: '', link: null },
+            annotations: {
+              bold: false,
+              code: false,
+              italic: false,
+              color: 'default',
+              underline: false,
+              strikethrough: false,
+            },
+            href: null,
+            plain_text: '',
+          },
+        ],
+        id: '',
+      },
+      files: {
+        type: 'files',
+        files: [{ file: { url: '', expiry_time: '' }, name: '' }],
+        id: '',
+      },
+    },
+    url: '',
+    parent: {
+      type: 'database_id',
+      database_id: '',
+    },
+    icon: null,
+    cover: null,
+    created_by: {
+      id: '',
+      object: 'user',
+    },
+    last_edited_by: {
+      id: '',
+      object: 'user',
+    },
+    object: 'page',
+    created_time: '',
+    last_edited_time: '',
+    archived: false,
+    in_trash: false,
+    public_url: null,
+  };
+  const partialResponse: PartialPageObjectResponse = response;
+  const fullResponse: PageObjectResponse = {
+    ...defaultAlbum,
+    ...partialResponse,
+  };
+  return Album.fromNotion(fullResponse);
 };
 
 /**
@@ -32,9 +98,12 @@ export const getAlbums = async (max?: number) => {
     page_size: max,
     database_id,
   });
-  const albumsPromises = response.results.map((result) =>
-    Album.fromNotion(result),
-  );
+  const albumsPromises = response.results
+    .filter(
+      (result): result is PageObjectResponse =>
+        'parent' in result && 'properties' in result,
+    )
+    .map((result) => Album.fromNotion(result));
   const albums = clone(await Promise.all(albumsPromises));
 
   return albums;
@@ -68,43 +137,54 @@ export const getAlbumByUrl = async (url: string) => {
     database_id,
   });
 
-  return Album.fromNotion(response.results[0]);
+  const firstResult = response.results[0];
+  if ('parent' in firstResult && 'properties' in firstResult) {
+    return Album.fromNotion(firstResult as PageObjectResponse);
+  }
 };
 
 /**
  * Retourne les dernières photos publiées
  * @returns Les dernières photos publiées
  */
-export const getLatestImages = async () => {
-  const response = await notionClient.databases.query({
-    sorts: [
-      {
-        timestamp: 'created_time',
-        direction: 'descending',
-      },
-    ],
-    database_id,
-  });
+// export const getLatestImages = async () => {
+//   const response = await notionClient.databases.query({
+//     sorts: [
+//       {
+//         timestamp: 'created_time',
+//         direction: 'descending',
+//       },
+//     ],
+//     database_id,
+//   });
 
-  let index = 0;
-  const images: string[] = [];
+//   let index = 0;
+//   const images: string[] = [];
 
-  while (
-    images.length < numberOfLatestImages &&
-    index < response.results.length
-  ) {
-    const album = Album.fromNotion(response.results[index]);
+//   while (
+//     images.length < numberOfLatestImages &&
+//     index < response.results.length
+//   ) {
+//     const result = response.results[index];
 
-    if (album.images.length > 0) {
-      images.push(
-        ...album.images
-          .slice(numberOfLatestImages * -1 - images.length)
-          .map((image) => image.file.url),
-      );
-    }
+//     if ('parent' in result && 'properties' in result) {
+//       const album = Album.fromNotion(result as PageObjectResponse);
 
-    index++;
-  }
 
-  return images;
-};
+//       if (album.images.length > 0) {
+//         const numberOfImagesToAdd = numberOfLatestImages - images.length;
+//         const urlImages = album.images.filter(image => image.type === 'url');
+      
+//         const imagesToAdd = urlImages
+//           .slice(0, numberOfImagesToAdd)
+//           .map((image: { url: string }) => image.url);
+      
+//         images.push(...imagesToAdd);
+//       }
+      
+
+//     index++;
+//   }
+
+//   return images;
+// };

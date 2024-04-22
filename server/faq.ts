@@ -1,6 +1,6 @@
 /* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
-import { notionClient } from './database';
+import { notionClient } from './notionClient';
 import { FAQ } from '@/class/FAQ.class';
 
 const database_id = process.env.FAQ_DATABASE ?? '';

@@ -1,29 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-argument -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
-
-export interface File {
-  name: string;
-  type: string;
-  file: { url: string; expiry_time: string };
-}
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 export class Album {
-  id: string;
-  title: string;
-  cover: string;
-  description: string;
-  images: File[];
-  url: string;
+  id: PageObjectResponse['id'];
+  title: PageObjectResponse['properties']['title'];
+  cover: PageObjectResponse['cover'];
+  description:  PageObjectResponse['properties']['description'];
+  images: PageObjectResponse['properties']['files'];
+  url: PageObjectResponse['url'];
 
   constructor(
-    id: string,
-    title: string,
-    cover: string,
-    description: string,
-    images: File[],
-    url: string,
+    id: PageObjectResponse['id'],
+    title: PageObjectResponse['properties']['title'],
+    cover: PageObjectResponse['cover'],
+    description:  PageObjectResponse['properties']['description'],
+    images: PageObjectResponse['properties']['files'],
+    url: PageObjectResponse['url'],
   ) {
     this.id = id;
     this.title = title;
@@ -35,16 +26,16 @@ export class Album {
 
   /**
    * Transforme un album en type `Album`
-   * @param album Album que l'on souhaite transformer en `Album`
+   * @param response Album que l'on souhaite transformer en `Album`
    * @returns l'objet `Album` correspondant
    */
-  static fromNotion(album: any) {
-    const id = album.id;
-    const title = album.properties.Titre.title[0]?.plain_text;
-    const cover = album.cover?.external?.url ?? album.cover.file?.url ?? '';
-    const description = album.properties.Description.rich_text[0]?.text.content;
-    const images = album.properties.Images.files;
-    const url = album.properties.URL.rich_text[0]?.text.content;
+  static fromNotion(response: PageObjectResponse) {
+    const id = response.id;
+    const title = response.properties.title;
+    const cover = response.cover;
+    const description = response.properties.description;
+    const images = response.properties.files;
+    const url = response.url
 
     return new Album(id, title, cover, description, images, url);
   }

@@ -2,7 +2,7 @@
 import 'server-only';
 
 import { User } from '@/class/User.class';
-import { notionClient } from './database';
+import { notionClient } from './notionClient';
 import { clone } from '@/utils/utils';
 
 const database_id = process.env.USER_DATABASE ?? '';

@@ -9,7 +9,7 @@ import {
   BlockObjectResponse,
   PageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints';
-import { notionClient } from './database';
+import { notionClient } from './notionClient';
 
 const database_id = process.env.BLOG_DATABASE ?? '';
 
