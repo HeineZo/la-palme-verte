@@ -25,8 +25,8 @@ export class User {
 
   static fromNotion(user: any) {
     const id = user.id;
-    const name = user.properties.Prénom.title[0].plain_text;
-    const surname = user.properties.Nom.rich_text[0].text.content;
+    const name = user.properties.Prénom.title[0]?.plain_text ?? '';
+    const surname = user.properties.Nom.rich_text[0]?.text.content ?? '';
     const role = user.properties.Rôle.select?.name;
     const imageUrl = user.properties['Photo de profil'].files[0]?.file?.url || user.properties['Photo de profil'].files[0]?.external?.url;
     const instagram = user.properties.Instagram.url;
