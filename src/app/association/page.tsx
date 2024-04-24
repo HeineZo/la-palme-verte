@@ -1,7 +1,6 @@
 import { User } from '@/class/User.class';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
-import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
 import Timeline from '@/shared/layout/Timeline.layout';
 import Counter from '@/shared/utils/Counter.component';
 import Reveal from '@/shared/utils/Reveal.component';
@@ -11,12 +10,14 @@ import { IconMail, IconMapPin } from '@tabler/icons-react';
 import { differenceInCalendarYears } from 'date-fns';
 import { getStaffMembers } from 'server/user';
 import timelineEvents from './assets/timeline-events.json';
+import { Roles } from '@/shared/types/Roles';
 
 /**
  * Page de présentation de l'association
  */
 export default async function Page() {
   const staffMembers: User[] = await getStaffMembers();
+  staffMembers.sort((member, otherMember) => Roles[member.role].rate - Roles[otherMember.role].rate);
 
   return (
     <main>
