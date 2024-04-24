@@ -3,7 +3,7 @@ export interface Role {
 }
 
 // TODO: Use fetched roles list from Users db instead of hard-coded strings
-export const Roles: Record<string, Role> = {
+export const Roles: Record<string, Role | undefined> = {
     "Président": {
         rate : 1,
     },
