@@ -1,7 +1,6 @@
 import { User } from '@/class/User.class';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
-import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
 import Timeline from '@/shared/layout/Timeline.layout';
 import Counter from '@/shared/utils/Counter.component';
 import Reveal from '@/shared/utils/Reveal.component';
@@ -11,12 +10,27 @@ import { IconMail, IconMapPin } from '@tabler/icons-react';
 import { differenceInCalendarYears } from 'date-fns';
 import { getStaffMembers } from 'server/user';
 import timelineEvents from './assets/timeline-events.json';
+import { Roles } from '@/shared/types/Roles';
 
 /**
  * Page de présentation de l'association
  */
 export default async function Page() {
   const staffMembers: User[] = await getStaffMembers();
+
+  /**
+   * Trie la liste des membres par ordre d'importance hierarchique
+   */
+  const sortMembersByRole = (): User[] => {
+    const sortedStaffMembersByRole = staffMembers.sort((member, otherMember) => {
+      const roleA = Roles[member.role];
+      const roleB = Roles[otherMember.role];
+      const rateA = roleA ? roleA.rate : Number.MAX_SAFE_INTEGER;
+      const rateB = roleB ? roleB.rate : Number.MAX_SAFE_INTEGER;
+      return rateA - rateB;
+    });
+    return sortedStaffMembersByRole;
+  };
 
   return (
     <main>
@@ -122,7 +136,7 @@ export default async function Page() {
           </p>
         </div>
         <div className="flex flex-wrap gap-8 lg:gap-12 justify-center">
-          {staffMembers.map((member, index) => (
+          {sortMembersByRole().map((member, index) => (
             <MemberCard key={index} member={member} />
           ))}
         </div>
