@@ -2,7 +2,7 @@ export interface Role {
     rate: number
 }
 
-// TODO: Use fetched roles list from Users db instead of hard-coded strings
+// TODO: Récupérer les rôles et leur niveau d'importance depuis une table notion dédiée
 export const Roles: Record<string, Role | undefined> = {
     "Président": {
         rate : 1,
