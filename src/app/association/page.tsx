@@ -18,6 +18,9 @@ import { Roles } from '@/shared/types/Roles';
 export default async function Page() {
   const staffMembers: User[] = await getStaffMembers();
 
+  /**
+   * Trie la liste des membres par ordre d'importance hierarchique
+   */
   const sortMembersByRole = (): User[] => {
     const sortedStaffMembersByRole = staffMembers.sort((member, otherMember) => {
       const roleA = Roles[member.role];
