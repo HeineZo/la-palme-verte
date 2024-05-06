@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
 
-import { Role } from "./Role.class";
+import { Role } from './Role.class';
 
 export class User {
   id: string;
@@ -36,11 +36,13 @@ export class User {
     this.genre = genre;
   }
 
-  static fromNotion(user: any) {
+  static async fromNotion(user: any) {
     const id = user.id;
     const name = user.properties.Prénom.title[0]?.plain_text ?? '';
     const surname = user.properties.Nom.rich_text[0]?.text.content ?? '';
-    const role = user.properties.Rôle.relation?.getRole(id) ?? '';
+    // relation vide !
+    console.log(user.properties.Rôle);
+    const role = await Role.getRole(user.properties.Rôle.relation?.id ?? '');
     const imageUrl =
       user.properties['Photo de profil'].files[0]?.file?.url ||
       user.properties['Photo de profil'].files[0]?.external?.url;
@@ -48,6 +50,15 @@ export class User {
     const linkedin = user.properties.Linkedin.url;
     const genre = user.properties.Sexe.select?.name;
 
-    return new User(id, name, surname, role, imageUrl, instagram, linkedin, genre);
+    return new User(
+      id,
+      name,
+      surname,
+      role,
+      imageUrl,
+      instagram,
+      linkedin,
+      genre,
+    );
   }
 }

@@ -3,6 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
 
+import { notionClient } from 'server/database';
+
 export class Role {
   priority: string;
   nameMale: string;
@@ -21,4 +23,10 @@ export class Role {
 
     return new Role(priority, nameMale, nameFemale);
   }
+
+  static getRole = async (id: string) => {
+    const response = await notionClient.pages.retrieve({ page_id: id });
+
+    return Role.fromNotion(response);
+  };
 }
