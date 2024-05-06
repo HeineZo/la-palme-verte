@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: 'La Palme Verte',
   description:
     "Association étudiante de plongée sous-marine fondée en 2005 à l'UBS",
+  keywords: ['plongée', 'écologie', 'étudiant', 'Vannes', 'UBS', 'blog', 'photos', 'association', 'adhérent', 'La Palme Verte'],
 };
 
 export default function RootLayout({

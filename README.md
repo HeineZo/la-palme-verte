@@ -25,7 +25,7 @@
   <a href="#©-licence">Licence</a> •
 </p>
 
-![Screenshot du site](/public/README/exemple.png)
+![Screenshot du site](/src/app/opengraph-image.jpg)
 
 > **NOTE:** La Palme Verte est une association créée par des étudiants de l'UBS mais n'est pas affilié à l'université
 
