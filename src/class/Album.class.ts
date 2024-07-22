@@ -1,20 +1,22 @@
-import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 export class Album {
-  id: PageObjectResponse['id'];
-  title: PageObjectResponse['properties']['title'];
-  cover: PageObjectResponse['cover'];
-  description:  PageObjectResponse['properties']['description'];
-  images: PageObjectResponse['properties']['files'];
-  url: PageObjectResponse['url'];
+  readonly id: string;
+  readonly title: string;
+  readonly cover: PageObjectResponse['cover'];
+  readonly description: string;
+  readonly images: {
+    type: string; name: string; url: string 
+}[];
+  readonly url: string;
 
   constructor(
-    id: PageObjectResponse['id'],
-    title: PageObjectResponse['properties']['title'],
+    id: string,
+    title: string,
     cover: PageObjectResponse['cover'],
-    description:  PageObjectResponse['properties']['description'],
-    images: PageObjectResponse['properties']['files'],
-    url: PageObjectResponse['url'],
+    description: string,
+    images: { name: string; url: string }[],
+    url: string,
   ) {
     this.id = id;
     this.title = title;
@@ -29,13 +31,25 @@ export class Album {
    * @param response Album que l'on souhaite transformer en `Album`
    * @returns l'objet `Album` correspondant
    */
-  static fromNotion(response: PageObjectResponse) {
+  static fromNotion(response: PageObjectResponse): Album {
     const id = response.id;
-    const title = response.properties.title;
+    const title =
+      response.properties.title.type === 'title'
+        ? response.properties.title.title[0]?.plain_text ?? ''
+        : '';
     const cover = response.cover;
-    const description = response.properties.description;
-    const images = response.properties.files;
-    const url = response.url
+    const description =
+      response.properties.description.type === 'rich_text'
+        ? response.properties.description.rich_text[0]?.plain_text ?? ''
+        : '';
+    const images =
+      response.properties.files.type === 'files'
+        ? response.properties.files.files.map((file) => ({
+            name: file.name,
+            url: file.type === 'file' ? file.file.url : file.external.url,
+          }))
+        : [];
+    const url = response.url;
 
     return new Album(id, title, cover, description, images, url);
   }

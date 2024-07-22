@@ -49,7 +49,7 @@ export const getArticles = async (
     },
     start_cursor: lastArticleId,
     page_size: maxArticles,
-    database_id,
+    databaseId: database_id,
   });
 
   const blogPostsPromises = response.results.map((result) =>
@@ -96,7 +96,7 @@ export const getArticlesByText = async (text: string) => {
         },
       ],
     },
-    database_id,
+    databaseId: database_id,
   });
 
   const blogPostsPromises = response.results.map((result) =>
@@ -117,7 +117,7 @@ export const getCategories = async () => {
         equals: 'Publié',
       },
     },
-    database_id,
+    databaseId: database_id,
   });
 
   const categories = (response.results as PageObjectResponse[]).map((result) =>
@@ -159,7 +159,7 @@ export const getPageByUrl = async (url: string) => {
         equals: url,
       },
     },
-    database_id,
+    databaseId: database_id,
   });
 
   return BlogPost.fromNotion(response.results[0]);
