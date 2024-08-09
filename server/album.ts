@@ -1,5 +1,6 @@
-import { Album } from '@/class/Album.class';
+import { Album, AlbumImage } from '@/class/Album.class';
 import {
+  BlockObjectResponse,
   GetPageResponse,
   ImageBlockObjectResponse,
   ListBlockChildrenResponse,
@@ -123,10 +124,16 @@ export const getAlbumImages = async (
       await notionClient.blocks.children.list({
         block_id: albumId,
       });
+
     return response.results.filter(
-      (block): block is ImageBlockObjectResponse => block.type === 'image',
+      (block): block is ImageBlockObjectResponse =>
+        (block as BlockObjectResponse).type === 'image',
     );
   } catch (error) {
+    console.error(
+      `Erreur lors de la récupération des images de l'album ${albumId}:`,
+      error,
+    );
     return [];
   }
 };
@@ -180,11 +187,7 @@ export const getLatestImages = async (): Promise<string[]> => {
       if ('properties' in result) {
         try {
           const album = Album.fromNotion(result as PageObjectResponse);
-          const urlImages = album.images.filter(
-            (image: any) => image.type === 'url',
-          );
-
-          for (const image of urlImages) {
+          for (const image of album.images) {
             if (images.length < numberOfLatestImages) {
               images.push(image.url);
             } else {

@@ -1,13 +1,16 @@
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
+export interface AlbumImage {
+  name: string;
+  url: string;
+}
+
 export class Album {
   readonly id: string;
   readonly title: string;
   readonly cover: PageObjectResponse['cover'];
   readonly description: string;
-  readonly images: {
-    type: string; name: string; url: string 
-}[];
+  readonly images: AlbumImage[];
   readonly url: string;
 
   constructor(
