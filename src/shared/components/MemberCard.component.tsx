@@ -61,7 +61,7 @@ export default function MemberCard({ member }: MemberCardProps) {
 
   return (
     <div
-      className="group relative min-w-[200px]  max-w-md w-1/4 rounded-medium bg-highlight border border-white px-8 py-12"
+      className="group relative max-w-[400px] min-w-[300px] rounded-medium bg-highlight px-8 py-12"
       onMouseMove={handleMouseMove}
     >
             <motion.div

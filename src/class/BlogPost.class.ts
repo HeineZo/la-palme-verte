@@ -40,13 +40,13 @@ export class BlogPost {
    * @param page Objet Notion que l'on veut transformer en BlogPost
    * @returns L'objet BlogPost correspondant
    */
-  async fromNotion(page: PageObjectResponse): Promise<BlogPost> {
+  static async fromNotion(page: PageObjectResponse): Promise<BlogPost> {
     const id = page.id;
     const title =
       page.properties.Titre.type === 'title'
         ? page.properties.Titre.title[0]?.plain_text ?? 'Titre non disponible'
         : 'Titre non disponible';
-    const cover = this.getCoverUrl(page.cover);
+    const cover = BlogPost.getCoverUrl(page.cover);
     const description =
       page.properties.Description.type === 'rich_text'
         ? page.properties.Description.rich_text[0]?.plain_text ?? ''
@@ -81,7 +81,7 @@ export class BlogPost {
     );
   }
 
-  getCoverUrl(cover: PageObjectResponse['cover']): string {
+  static getCoverUrl(cover: PageObjectResponse['cover']): string {
     if (!cover) return '';
 
     switch (cover.type) {

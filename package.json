@@ -13,8 +13,10 @@
   "prettier": "@vercel/style-guide/prettier",
   "dependencies": {
     "@next/eslint-plugin-next": "^14.0.4",
-    "@nextui-org/image": "^2.0.24",
-    "@nextui-org/react": "^2.2.9",
+    "@nextui-org/image": "^2.0.31",
+    "@nextui-org/react": "^2.4.6",
+    "@nextui-org/system": "^2.2.5",
+    "@nextui-org/theme": "^2.2.9",
     "@notion-render/bookmark-plugin": "^0.0.2",
     "@notion-render/client": "^0.0.2",
     "@notion-render/hljs-plugin": "^0.0.2",

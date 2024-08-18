@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- API de Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-call -- API de Notion mal typé */
 /* eslint-disable @typescript-eslint/no-unsafe-return -- API de Notion mal typé */
-/* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import { BlogPost } from '@/class/BlogPost.class';
 import { clone } from '@/utils/utils';
 import {
@@ -11,7 +10,7 @@ import {
 } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './notionClient';
 
-const database_id = process.env.BLOG_DATABASE ?? '';
+const databaseId = process.env.BLOG_DATABASE ?? '';
 
 /**
  * Récupère les articles de blog avec une pagination
@@ -49,7 +48,7 @@ export const getArticles = async (
     },
     start_cursor: lastArticleId,
     page_size: maxArticles,
-    databaseId: database_id,
+    database_id: databaseId,
   });
 
   const blogPostsPromises = response.results.map((result) =>
@@ -96,7 +95,7 @@ export const getArticlesByText = async (text: string) => {
         },
       ],
     },
-    databaseId: database_id,
+    database_id: databaseId,
   });
 
   const blogPostsPromises = response.results.map((result) =>
@@ -117,7 +116,7 @@ export const getCategories = async () => {
         equals: 'Publié',
       },
     },
-    databaseId: database_id,
+    database_id: databaseId,
   });
 
   const categories = (response.results as PageObjectResponse[]).map((result) =>
@@ -159,7 +158,7 @@ export const getPageByUrl = async (url: string) => {
         equals: url,
       },
     },
-    databaseId: database_id,
+    database_id: databaseId,
   });
 
   return BlogPost.fromNotion(response.results[0]);
