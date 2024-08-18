@@ -49,7 +49,7 @@ export class Album {
       response.properties.files.type === 'files'
         ? response.properties.files.files.map((file) => ({
             name: file.name,
-            url: file.type === 'file' ? file.file.url : file.external.url,
+            url: file.type === 'file' ? file.file.url : '',
           }))
         : [];
     const url = response.url;

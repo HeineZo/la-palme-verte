@@ -18,7 +18,7 @@ export const getBySection = async (section: string) => {
         equals: section,
       },
     },
-    databaseId: database_id,
+    database_id,
   });
 
   return response.results.map((result) => FAQ.fromNotion(result));

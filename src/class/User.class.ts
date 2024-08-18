@@ -62,7 +62,7 @@ export class User {
     }
 
     const file = property.files[0];
-    return file.type === 'file' ? file.file.url : file.external.url;
+    return file.type === 'file' ? file.file.url : '';
   }
 
   public toJSON(): Record<string, string> {
