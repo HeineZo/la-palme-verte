@@ -2,8 +2,9 @@
 import 'server-only';
 
 import { User } from '@/class/User.class';
-import { notionClient } from './database';
 import { clone } from '@/utils/utils';
+import { notionClient } from './database';
+import { getRoles } from './role';
 
 const database_id = process.env.USER_DATABASE ?? '';
 
@@ -39,28 +40,19 @@ export const getUsers = async () => {
  */
 export const getStaffMembers = async () => {
   const response = await notionClient.databases.query({
-    filter: {
-      and: [
-        {
-          property: 'Rôle',
-          select: {
-            does_not_equal: 'Membre',
-          },
-        },
-        {
-          property: 'Rôle',
-          select: {
-            is_not_empty: true,
-          },
-        },
-      ],
-    },
     database_id,
   });
 
   const userPromises = response.results.map((result) =>
     User.fromNotion(result),
   );
-  const users = clone(await Promise.all(userPromises));
+
+  const roles = await getRoles();
+
+  const usersSorted = User.sortByRole(userPromises, roles);
+  const usersSortedByName = User.setRoleName(usersSorted, roles);
+
+  const users = clone(await Promise.all(usersSortedByName));
+
   return users;
 };

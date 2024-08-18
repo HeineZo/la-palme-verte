@@ -1,7 +1,6 @@
 import { User } from '@/class/User.class';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
-import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
 import Timeline from '@/shared/layout/Timeline.layout';
 import Counter from '@/shared/utils/Counter.component';
 import Reveal from '@/shared/utils/Reveal.component';
@@ -47,8 +46,10 @@ export default async function Page() {
         />
       </section>
       <section className="section flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
-        <div className='flex w-3/4 justify-between flex-col lg:flex-row'>
-          <h4 className='text-center lg:text-left lg:text-5xl'>Une association qui traverse les générations</h4>
+        <div className="flex w-3/4 justify-between flex-col lg:flex-row">
+          <h4 className="text-center lg:text-left lg:text-5xl">
+            Une association qui traverse les générations
+          </h4>
           <div className="lg:w-1/2">
             <Timeline events={timelineEvents} />
           </div>
@@ -92,7 +93,7 @@ export default async function Page() {
               <span className="flex flex-col gap-2 w-1/2">
                 <Counter
                   fontStyle="text-4xl font-heading font-bold"
-                  className='*:text-black'
+                  className="*:text-black"
                   suffix="€"
                   value={700}
                 />
