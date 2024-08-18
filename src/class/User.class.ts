@@ -8,6 +8,7 @@ export class User {
   readonly imageUrl: string;
   readonly instagram: string;
   readonly linkedin: string;
+  readonly promotion: string[];
 
   constructor(
     id: string,
@@ -17,6 +18,7 @@ export class User {
     imageUrl: string,
     instagram: string,
     linkedin: string,
+    promotion: string[],
   ) {
     this.id = id;
     this.name = name;
@@ -25,6 +27,7 @@ export class User {
     this.imageUrl = imageUrl;
     this.instagram = instagram;
     this.linkedin = linkedin;
+    this.promotion = promotion;
   }
 
   static fromNotion(user: PageObjectResponse): User {
@@ -51,7 +54,12 @@ export class User {
         ? user.properties.Linkedin.url ?? ''
         : '';
 
-    return new User(id, name, surname, role, imageUrl, instagram, linkedin);
+    const promotion =
+      user.properties.Promotion.type === 'multi_select'
+        ? user.properties.Promotion.multi_select.map((promo) => promo.name)
+        : [];
+
+    return new User(id, name, surname, role, imageUrl, instagram, linkedin, promotion);
   }
 
   private static getImageUrl(
@@ -65,7 +73,7 @@ export class User {
     return file.type === 'file' ? file.file.url : '';
   }
 
-  public toJSON(): Record<string, string> {
+  public toJSON(): Record<string, string | string[]> {
     return {
       id: this.id,
       name: this.name,
@@ -74,6 +82,7 @@ export class User {
       imageUrl: this.imageUrl,
       instagram: this.instagram,
       linkedin: this.linkedin,
+      promotion: this.promotion,
     };
   }
 }

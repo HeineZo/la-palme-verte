@@ -1,4 +1,4 @@
-import { Album, AlbumImage } from '@/class/Album.class';
+import { Album } from '@/class/Album.class';
 import {
   BlockObjectResponse,
   GetPageResponse,
@@ -9,7 +9,6 @@ import {
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './notionClient';
-import { clone } from '@/utils/utils';
 
 const databaseId = process.env.GALLERY_DATABASE ?? '';
 const numberOfLatestImages: number = parseInt(

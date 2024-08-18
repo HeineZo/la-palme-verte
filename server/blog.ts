@@ -52,7 +52,7 @@ export const getArticles = async (
   });
 
   const blogPostsPromises = response.results.map((result) =>
-    BlogPost.fromNotion(result),
+    BlogPost.fromNotion(result as PageObjectResponse),
   );
   const articles = clone(await Promise.all(blogPostsPromises));
   return {
@@ -99,7 +99,7 @@ export const getArticlesByText = async (text: string) => {
   });
 
   const blogPostsPromises = response.results.map((result) =>
-    BlogPost.fromNotion(result),
+    BlogPost.fromNotion(result as PageObjectResponse),
   );
   const articles = clone(await Promise.all(blogPostsPromises));
   return articles;
@@ -161,5 +161,5 @@ export const getPageByUrl = async (url: string) => {
     database_id: databaseId,
   });
 
-  return BlogPost.fromNotion(response.results[0]);
+  return BlogPost.fromNotion(response.results[0] as PageObjectResponse);
 };
