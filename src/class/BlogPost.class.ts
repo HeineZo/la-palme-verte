@@ -45,14 +45,14 @@ export class BlogPost {
     const title =
       page.properties.Titre.type === 'title'
         ? page.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
-        : 'Aucun titre';
+        : 'Type de la colonne Titre invalide';
     const cover =
       BlogPost.getCoverUrl(page.cover) ?? 'https://placehold.co/600x400?text=?';
     const description =
       page.properties.Description.type === 'rich_text'
         ? page.properties.Description.rich_text[0]?.plain_text ??
           'Aucune description'
-        : 'Aucune description';
+        : 'Type de la colonne Description invalide';
     const categories =
       page.properties.Catégories.type === 'multi_select'
         ? page.properties.Catégories.multi_select.map(
@@ -66,9 +66,9 @@ export class BlogPost {
     const authors = await Promise.all(authorsPromises);
     const publicationDate = new Date(page.created_time);
     const url =
-      page.properties.URL.type === 'rich_text'
-        ? page.properties.URL.rich_text[0]?.plain_text ?? ''
-        : '';
+      page.properties.URL.type === 'url'
+        ? page.properties.URL.url ?? ''
+        : 'Type de la colonne URL invalide';
 
     return new BlogPost(
       id,

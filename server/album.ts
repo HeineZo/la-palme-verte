@@ -27,7 +27,6 @@ export const getAlbum = async (id: string): Promise<Album> => {
       return Album.fromNotion(response);
     }
 
-    // Si la réponse est partielle ou non conforme, on fusionne avec un objet par défaut
     const defaultAlbum: Partial<PageObjectResponse> = {
       id: '',
       properties: {
@@ -60,12 +59,12 @@ export const getAlbum = async (id: string): Promise<Album> => {
       url: '',
     };
 
-    const fullResponse: PageObjectResponse = {
+    const fullResponse = {
       ...defaultAlbum,
-      ...(response as PartialPageObjectResponse),
-    } as PageObjectResponse;
+      ...response,
+    };
 
-    return Album.fromNotion(fullResponse);
+    return Album.fromNotion(fullResponse as PageObjectResponse);
   } catch (error) {
     throw new Error(
       `Impossible de récupérer l'album: ${(error as Error).message}`,
@@ -103,7 +102,7 @@ export const getAlbums = async (max?: number): Promise<Album[]> => {
           }
         }),
     );
-    return clone(albums.filter((album): album is Album => album !== null));
+    return clone(albums.filter((album) => album !== null));
   } catch (error) {
     return [];
   }
@@ -152,7 +151,7 @@ export const getAlbumByUrl = async (url: string): Promise<Album | null> => {
       },
       database_id: databaseId,
     });
-    
+
     const firstResult = response.results[0];
     if ('parent' in firstResult && 'properties' in firstResult) {
       return Album.fromNotion(firstResult as PageObjectResponse);

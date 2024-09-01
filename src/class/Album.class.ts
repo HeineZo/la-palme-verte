@@ -39,7 +39,7 @@ export class Album {
     const title =
       response.properties.Titre.type === 'title'
         ? response.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
-        : 'Aucun titre';
+        : 'Type de la colonne Titre invalide';
     const images =
       response.properties.Images.type === 'files'
         ? response.properties.Images.files.map((file) => ({
@@ -52,11 +52,11 @@ export class Album {
       response.properties.Description.type === 'rich_text'
         ? response.properties.Description.rich_text[0]?.plain_text ??
           'Aucune description'
-        : 'Aucune description';
+        : 'Type de la colonne Description invalide';
     const url =
       response.properties.URL.type === 'url'
         ? response.properties.URL.url ?? ''
-        : '';
+        : 'Type de la colonne URL invalide';
     return new Album(id, title, cover, description, images, url);
   }
 
