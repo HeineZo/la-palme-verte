@@ -1,16 +1,16 @@
 import { User } from '@/class/User.class';
 import BecomeMember from '@/shared/components/BecomeMember.component';
 import MemberCard from '@/shared/components/MemberCard.component';
-import PhotoCarrousel from '@/shared/components/PhotoCarrousel.component';
 import Timeline from '@/shared/layout/Timeline.layout';
 import Counter from '@/shared/utils/Counter.component';
 import Reveal from '@/shared/utils/Reveal.component';
 import { Image } from '@nextui-org/image';
 import { Link } from '@nextui-org/link';
-import { IconMail, IconMapPin } from '@tabler/icons-react';
+import { IconArrowRight, IconMail, IconMapPin } from '@tabler/icons-react';
 import { differenceInCalendarYears } from 'date-fns';
 import { getStaffMembers } from 'server/user';
 import timelineEvents from './assets/timeline-events.json';
+import { ScrollShadow } from '@nextui-org/react';
 
 /**
  * Page de présentation de l'association
@@ -46,85 +46,97 @@ export default async function Page() {
           src="/assets/association/photo_groupe.png"
         />
       </section>
-      <section className="section flex justify-center w-screen bg-highlight bg-[url('/logo-white.svg')] bg-cover bg-center bg-blend-screen">
-        <div className='flex w-3/4 justify-between flex-col lg:flex-row'>
-          <h4 className='text-center lg:text-left lg:text-5xl'>Une association qui traverse les générations</h4>
+      <section className="section flex justify-center bg-highlight bg-[url('/logo-white.svg')] rounded-3xl bg-cover bg-center bg-blend-screen">
+        <div className="flex w-3/4 justify-between flex-col lg:flex-row">
+          <h4 className="text-center lg:text-left lg:text-5xl">
+            Une association qui traverse les générations
+          </h4>
           <div className="lg:w-1/2">
             <Timeline events={timelineEvents} />
           </div>
         </div>
       </section>
-      <section className="flex justify-between lg:mx-10 section gap-20 flex-col lg:flex-row rounded-medium bg-primary-100 mt-20">
-        <div className="flex flex-col gap-10 lg:w-1/2 px-10">
-          <div>
-            <h2>Quelques chiffres</h2>
-            <p>
-              Depuis la création de l’association, nous ne cessons de réaliser
-              des événements et des ateliers pour permettre de sensibiliser à la
-              protection de l’environnement marin.
-            </p>
+      <section className="flex justify-between section gap-20 flex-row rounded-3xl bg-primary-600 mt-20 flex-wrap px-16 text-white">
+        <div className="xl:w-1/2">
+          <h2>Quelques chiffres</h2>
+          <p>
+            Depuis la création de l’association, nous ne cessons de réaliser des
+            événements et des ateliers pour permettre de sensibiliser à la
+            protection de l’environnement marin.
+          </p>
+        </div>
+        <div className="flex flex-col gap-10">
+          <div className="flex gap-6 w-full justify-between">
+            <span className="flex flex-col gap-2 w-1/2">
+              <Counter
+                fontStyle="text-4xl lg:text-5xl font-heading font-bold"
+                value={20}
+              />
+              <Reveal>
+                <p>Ateliers réalisés</p>
+              </Reveal>
+            </span>
+            <span className="flex flex-col gap-2 w-1/2">
+              <Counter
+                fontStyle="text-4xl font-heading font-bold"
+                value={differenceInCalendarYears(
+                  new Date(),
+                  new Date(2005, 1, 1),
+                )}
+              />
+              <Reveal>
+                <p>Années d'expérience</p>
+              </Reveal>
+            </span>
           </div>
-          <div className="flex flex-col gap-10">
-            <div className="flex gap-6 w-full justify-between">
-              <span className="flex flex-col gap-2 w-1/2">
-                <Counter
-                  fontStyle="text-4xl lg:text-5xl font-heading font-bold"
-                  value={20}
-                />
-                <Reveal>
-                  <p>Ateliers réalisés</p>
-                </Reveal>
-              </span>
-              <span className="flex flex-col gap-2 w-1/2">
-                <Counter
-                  fontStyle="text-4xl font-heading font-bold"
-                  value={differenceInCalendarYears(
-                    new Date(),
-                    new Date(2005, 1, 1),
-                  )}
-                />
-                <Reveal>
-                  <p>Années d'expérience</p>
-                </Reveal>
-              </span>
-            </div>
-            <div className="flex gap-6 w-full justify-between">
-              <span className="flex flex-col gap-2 w-1/2">
-                <Counter
-                  fontStyle="text-4xl font-heading font-bold"
-                  className='*:text-black'
-                  suffix="€"
-                  value={700}
-                />
-                <Reveal>
-                  <p>Récoltés pour la protection de la faune maritime</p>
-                </Reveal>
-              </span>
-              <span className="flex flex-col gap-2 w-1/2">
-                <Counter
-                  fontStyle="text-4xl font-heading font-bold"
-                  value={59} //TODO: remplacer par une méthode getAdherentCount()
-                />
-                <Reveal>
-                  <p>Adhérents</p>
-                </Reveal>
-              </span>
-            </div>
+          <div className="flex gap-6 w-full justify-between">
+            <span className="flex flex-col gap-2 w-1/2">
+              <Counter
+                fontStyle="text-4xl font-heading font-bold"
+                className="*:text-white"
+                suffix="€"
+                value={700}
+              />
+              <Reveal>
+                <p>Récoltés pour la protection de la faune maritime</p>
+              </Reveal>
+            </span>
+            <span className="flex flex-col gap-2 w-1/2">
+              <Counter
+                fontStyle="text-4xl font-heading font-bold"
+                value={59} //TODO: remplacer par une méthode getAdherentCount()
+              />
+              <Reveal>
+                <p>Adhérents</p>
+              </Reveal>
+            </span>
           </div>
         </div>
       </section>
-      <div className="section flex flex-col text-center items-center gap-20">
-        <div className="flex flex-col gap-6">
+      <section className="section flex flex-col text-center items-center gap-20">
+        <div className="flex flex-col gap-4">
           <h1>L'équipe</h1>
           <p>
             Le coeur de l'association bat au rythme des membres d'une jeune
             équipe talentueuse et motivée.
           </p>
         </div>
-        <div className="flex flex-wrap gap-8 lg:gap-12 justify-center">
-          {staffMembers.map((member, index) => (
-            <MemberCard key={index} member={member} />
-          ))}
+        <div className="flex flex-col gap-8 w-full">
+          <div className="flex justify-between gap-2 flex-wrap">
+            <p className="text-primary-500 font-bold">Promotion actuelle</p>
+            <Link href="/association/promotions">
+              Voir les autres promotions
+              <IconArrowRight />
+            </Link>
+          </div>
+          <ScrollShadow
+            orientation="horizontal"
+            className="flex overflow-x-auto overflow-y-hidden w-full lg:flex-wrap gap-4 lg:justify-center"
+          >
+            {staffMembers.map((member, index) => (
+              <MemberCard key={index} member={member} />
+            ))}
+          </ScrollShadow>
         </div>
         <BecomeMember
           buttonTitle="Candidater"
@@ -132,7 +144,7 @@ export default async function Page() {
           subtitle="Faites nous part de votre candidature et participez à une association dynamique"
           title="Vous souhaitez nous rejoindre ?"
         />
-      </div>
+      </section>
       <div className="flex justify-between flex-col section gap-5">
         <div className="flex justify-between flex-col lg:flex-row gap-10 mb-10">
           <div>

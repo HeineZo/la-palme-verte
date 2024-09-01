@@ -43,7 +43,7 @@ export default function Timeline({ events }: TimelineProps) {
           title={
             <div className="flex gap-10 p-5 rounded-medium hover:backdrop-blur-md transition-all">
               <div className="flex flex-col items-center">
-                <span className="relative flex min-w-[48px] min-h-[48px]">
+                <span className="relative flex min-w-[32px] min-h-[32px]">
                   <span
                     className={cn(
                       event.active &&
@@ -52,8 +52,8 @@ export default function Timeline({ events }: TimelineProps) {
                   />
                   <span
                     className={cn(
-                      'relative inline-flex rounded-full min-w-[48px] min-h-[48px] bg-accent-400 ring-2 ring-secondary',
-                      event.active && 'bg-accent-700 ring-0',
+                      'relative inline-flex rounded-full min-w-[32px] min-h-[32px] bg-accent-400 ring-2 ring-secondary',
+                      event.active && 'bg-primary ring-0',
                     )}
                   />
                 </span>
