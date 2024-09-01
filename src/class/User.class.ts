@@ -34,32 +34,40 @@ export class User {
     const id = user.id;
     const name =
       user.properties.Prénom.type === 'title'
-        ? user.properties.Prénom.title[0]?.plain_text ?? ''
-        : 'Inconnu';
+        ? user.properties.Prénom.title[0]?.plain_text ?? 'Aucun prénom'
+        : 'Type de la colonne Prénom';
     const surname =
       user.properties.Nom.type === 'rich_text'
-        ? user.properties.Nom.rich_text[0]?.plain_text ?? ''
-        : '';
+        ? user.properties.Nom.rich_text[0]?.plain_text ?? 'Aucun nom'
+        : 'Type de la colonne Nom invalide';
     const role =
       user.properties.Rôle.type === 'select'
-        ? user.properties.Rôle.select?.name ?? ''
-        : 'Membre';
+        ? user.properties.Rôle.select?.name ?? 'Aucun rôle'
+        : 'Type de la colonne Rôle invalide';
     const imageUrl = User.getImageUrl(user.properties['Photo de profil']);
     const instagram =
       user.properties.Instagram.type === 'url'
-        ? user.properties.Instagram.url ?? ''
-        : '';
+        ? user.properties.Instagram.url ?? 'Aucun compte Instagram'
+        : 'Type de la colonne Instagram invalide';
     const linkedin =
       user.properties.Linkedin.type === 'url'
-        ? user.properties.Linkedin.url ?? ''
-        : '';
-
+        ? user.properties.Linkedin.url ?? 'Aucun compte LinkedIn'
+        : 'Type de la colonne LinkedIn invalide';
     const promotion =
       user.properties.Promotion.type === 'multi_select'
         ? user.properties.Promotion.multi_select.map((promo) => promo.name)
         : [];
 
-    return new User(id, name, surname, role, imageUrl, instagram, linkedin, promotion);
+    return new User(
+      id,
+      name,
+      surname,
+      role,
+      imageUrl,
+      instagram,
+      linkedin,
+      promotion,
+    );
   }
 
   private static getImageUrl(

@@ -47,7 +47,7 @@ export class BlogPost {
         ? page.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
         : 'Type de la colonne Titre invalide';
     const cover =
-      BlogPost.getCoverUrl(page.cover) ?? 'https://placehold.co/600x400?text=?';
+      BlogPost.getCoverUrl(page.cover) ?? 'https://placehold.co/600x400?text=Aucune+miniature';
     const description =
       page.properties.Description.type === 'rich_text'
         ? page.properties.Description.rich_text[0]?.plain_text ??

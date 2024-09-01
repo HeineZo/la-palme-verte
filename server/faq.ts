@@ -15,31 +15,21 @@ const databaseId = process.env.FAQ_DATABASE ?? '';
  * @returns FAQ de la section
  */
 export const getBySection = async (section: string): Promise<FAQ[]> => {
-  try {
-    const response: QueryDatabaseResponse = await notionClient.databases.query({
-      filter: {
-        property: 'Section',
-        select: {
-          equals: section,
-        },
+  const response: QueryDatabaseResponse = await notionClient.databases.query({
+    filter: {
+      property: 'Section',
+      select: {
+        equals: section,
       },
-      database_id: databaseId,
+    },
+    database_id: databaseId,
+  });
+
+  const faqObjects = response.results
+    .filter((result): result is PageObjectResponse => 'properties' in result)
+    .map((result) => {
+      return FAQ.fromNotion(result);
     });
 
-    const faqObjects = response.results
-      .filter((result): result is PageObjectResponse => 'properties' in result)
-      .map((result) => {
-        try {
-          return FAQ.fromNotion(result);
-        } catch (error) {
-          return null;
-        }
-      });
-
-    return clone(
-      faqObjects.filter((faqObject) => faqObject !== null),
-    );
-  } catch (error) {
-    return [];
-  }
+  return clone(faqObjects);
 };
