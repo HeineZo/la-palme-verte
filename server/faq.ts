@@ -22,7 +22,7 @@ export const getBySection = async (section: string): Promise<FAQ[]> => {
         equals: section,
       },
     },
-    database_id: databaseId,
+    databaseId
   });
 
   const faqObjects = response.results

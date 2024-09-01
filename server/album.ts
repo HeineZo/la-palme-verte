@@ -52,7 +52,7 @@ export const getAlbums = async (max?: number): Promise<Album[]> => {
       },
     },
     page_size: max,
-    database_id: databaseId,
+    databaseId
   });
 
   const albums = await Promise.all(
@@ -115,7 +115,7 @@ export const getAlbumByUrl = async (url: string): Promise<Album | null> => {
         equals: url,
       },
     },
-    database_id: databaseId,
+    databaseId
   });
 
   const firstResult = response.results[0];
@@ -145,7 +145,7 @@ export const getLatestImages = async (): Promise<string[]> => {
         direction: 'descending',
       },
     ],
-    database_id: databaseId,
+    databaseId
   });
 
   const latestImages: string[] = [];

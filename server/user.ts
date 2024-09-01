@@ -59,7 +59,7 @@ export const getUser = async (id: string) => {
  */
 export const getUsers = async () => {
   const response: QueryDatabaseResponse = await notionClient.databases.query({
-    database_id: databaseId,
+    databaseId
   });
 
   return mapResponse(response);
@@ -81,7 +81,7 @@ export const getStaffMembers = async (): Promise<User[]> => {
         },
       ],
     },
-    database_id: databaseId,
+    databaseId
   });
   return mapResponse(response);
 };
@@ -102,7 +102,7 @@ export const getAllStaffMembers = async () => {
         },
       ],
     },
-    database_id: databaseId,
+    databaseId
   });
   return mapResponse(response);
 };

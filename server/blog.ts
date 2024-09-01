@@ -75,7 +75,7 @@ export const getArticles = async (
     },
     start_cursor: lastArticleId,
     page_size: maxArticles,
-    database_id: databaseId,
+    databaseId
   });
 
   const blogPosts = await Promise.all(
@@ -136,7 +136,7 @@ export const getArticlesByText = async (text: string) => {
         },
       ],
     },
-    database_id: databaseId,
+    databaseId
   });
 
   const articles = await Promise.all(
@@ -170,7 +170,7 @@ export const getCategories = async () => {
         equals: 'Publié',
       },
     },
-    database_id: databaseId,
+    databaseId
   });
 
   const filteredResults = await Promise.all(
@@ -231,7 +231,7 @@ export const getPageByUrl = async (url: string): Promise<BlogPost> => {
         equals: url,
       },
     },
-    database_id: databaseId,
+    databaseId
   });
 
   const firstResult = response.results[0];
