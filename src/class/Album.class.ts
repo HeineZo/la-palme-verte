@@ -43,7 +43,8 @@ export class Album {
     const cover = Album.getCoverUrl(response.cover);
     const description =
       response.properties.Description.type === 'rich_text'
-        ? response.properties.Description.rich_text[0]?.plain_text ?? 'Aucune description'
+        ? response.properties.Description.rich_text[0]?.plain_text ??
+          'Aucune description'
         : 'Aucune description';
     const images =
       response.properties.Images.type === 'files'
@@ -52,7 +53,10 @@ export class Album {
             url: file.type === 'file' ? file.file.url : '',
           }))
         : [];
-    const url = response.url;
+    const url =
+      response.properties.URL.type === 'url'
+        ? response.properties.URL.url ?? ''
+        : '';
     return new Album(id, title, cover, description, images, url);
   }
 

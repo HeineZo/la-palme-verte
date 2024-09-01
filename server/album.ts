@@ -152,7 +152,7 @@ export const getAlbumByUrl = async (url: string): Promise<Album | null> => {
       },
       database_id: databaseId,
     });
-
+    
     const firstResult = response.results[0];
     if ('parent' in firstResult && 'properties' in firstResult) {
       return Album.fromNotion(firstResult as PageObjectResponse);
