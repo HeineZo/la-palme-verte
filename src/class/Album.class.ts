@@ -40,12 +40,6 @@ export class Album {
       response.properties.Titre.type === 'title'
         ? response.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
         : 'Aucun titre';
-    const cover = Album.getCoverUrl(response.cover);
-    const description =
-      response.properties.Description.type === 'rich_text'
-        ? response.properties.Description.rich_text[0]?.plain_text ??
-          'Aucune description'
-        : 'Aucune description';
     const images =
       response.properties.Images.type === 'files'
         ? response.properties.Images.files.map((file) => ({
@@ -53,6 +47,12 @@ export class Album {
             url: file.type === 'file' ? file.file.url : '',
           }))
         : [];
+    const cover = Album.getCoverUrl(response.cover) ?? images[0].url;
+    const description =
+      response.properties.Description.type === 'rich_text'
+        ? response.properties.Description.rich_text[0]?.plain_text ??
+          'Aucune description'
+        : 'Aucune description';
     const url =
       response.properties.URL.type === 'url'
         ? response.properties.URL.url ?? ''
@@ -60,8 +60,8 @@ export class Album {
     return new Album(id, title, cover, description, images, url);
   }
 
-  static getCoverUrl(cover: PageObjectResponse['cover']): string {
-    if (!cover) return '';
+  static getCoverUrl(cover: PageObjectResponse['cover']): string | undefined {
+    if (!cover) return undefined;
 
     switch (cover.type) {
       case 'external':
@@ -69,7 +69,7 @@ export class Album {
       case 'file':
         return cover.file.url;
       default:
-        return '';
+        return undefined;
     }
   }
 }
