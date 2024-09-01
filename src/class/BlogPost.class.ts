@@ -44,13 +44,13 @@ export class BlogPost {
     const id = page.id;
     const title =
       page.properties.Titre.type === 'title'
-        ? page.properties.Titre.title[0]?.plain_text ?? 'Titre non disponible'
-        : 'Titre non disponible';
+        ? page.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
+        : 'Aucun titre';
     const cover = BlogPost.getCoverUrl(page.cover);
     const description =
       page.properties.Description.type === 'rich_text'
-        ? page.properties.Description.rich_text[0]?.plain_text ?? ''
-        : '';
+        ? page.properties.Description.rich_text[0]?.plain_text ?? 'Aucune description'
+        : 'Aucune description';
     const categories =
       page.properties.Catégories.type === 'multi_select'
         ? page.properties.Catégories.multi_select.map(

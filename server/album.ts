@@ -9,6 +9,7 @@ import {
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { notionClient } from './notionClient';
+import { clone } from '@/utils/utils';
 
 const databaseId = process.env.GALLERY_DATABASE ?? '';
 const numberOfLatestImages: number = parseInt(
@@ -89,7 +90,6 @@ export const getAlbums = async (max?: number): Promise<Album[]> => {
       page_size: max,
       database_id: databaseId,
     });
-
     const albums = await Promise.all(
       response.results
         .filter(
@@ -103,8 +103,7 @@ export const getAlbums = async (max?: number): Promise<Album[]> => {
           }
         }),
     );
-
-    return albums.filter((album): album is Album => album !== null);
+    return clone(albums.filter((album): album is Album => album !== null));
   } catch (error) {
     return [];
   }
