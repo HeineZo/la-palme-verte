@@ -22,7 +22,7 @@ interface MemberCardProps {
  * @param member Membre à afficher
  */
 export default function MemberCard({ member }: MemberCardProps) {
-  const memberSocialsMedia = Object.entries(member).filter(([key, value]) => typeof value === 'string' && key === 'linkedin' || key === 'instagram');
+  const memberSocialsMedia = Object.entries(member).filter(([key, value]) => typeof value === 'string' && key === 'linkedin' || key === 'instagram' );
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -64,7 +64,7 @@ export default function MemberCard({ member }: MemberCardProps) {
       className="group relative max-w-[400px] min-w-[300px] rounded-medium bg-highlight px-8 py-12"
       onMouseMove={handleMouseMove}
     >
-      <motion.div
+            <motion.div
         className="pointer-events-none absolute -inset-px rounded-medium opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
@@ -86,7 +86,7 @@ export default function MemberCard({ member }: MemberCardProps) {
           <p className="font-bold">{member.name}</p>
           <p>{member.role}</p>
         </div>
-        {(member.instagram || member.linkedin) && (
+        {(member.instagram !== '' || member.linkedin !== '' )  && (
           <div className="flex gap-4 flex-wrap justify-center">
             {(memberSocialsMedia).map(
               ([key, value]) =>

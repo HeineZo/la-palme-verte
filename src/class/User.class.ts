@@ -6,8 +6,8 @@ export class User {
   readonly surname: string;
   readonly role: string;
   readonly imageUrl: string;
-  readonly instagram?: string;
-  readonly linkedin?: string;
+  readonly instagram: string;
+  readonly linkedin: string;
   readonly promotion: string[];
 
   constructor(
@@ -16,8 +16,8 @@ export class User {
     surname: string,
     role: string,
     imageUrl: string,
-    instagram: string | undefined,
-    linkedin: string | undefined,
+    instagram: string,
+    linkedin: string,
     promotion: string[],
   ) {
     this.id = id;
@@ -47,11 +47,11 @@ export class User {
     const imageUrl = User.getImageUrl(user.properties['Photo de profil']);
     const instagram =
       user.properties.Instagram.type === 'url'
-        ? user.properties.Instagram.url ?? undefined
+        ? user.properties.Instagram.url ?? 'Aucun compte Instagram'
         : 'Type de la colonne Instagram invalide';
     const linkedin =
       user.properties.Linkedin.type === 'url'
-        ? user.properties.Linkedin.url ?? undefined
+        ? user.properties.Linkedin.url ?? 'Aucun compte LinkedIn'
         : 'Type de la colonne LinkedIn invalide';
     const promotion =
       user.properties.Promotion.type === 'multi_select'
@@ -81,7 +81,7 @@ export class User {
     return file.type === 'file' ? file.file.url : '';
   }
 
-  public toJSON(): Record<string, string | string[] | undefined> {
+  public toJSON(): Record<string, string | string[]> {
     return {
       id: this.id,
       name: this.name,
