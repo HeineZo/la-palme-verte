@@ -46,10 +46,12 @@ export class BlogPost {
       page.properties.Titre.type === 'title'
         ? page.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
         : 'Aucun titre';
-    const cover = BlogPost.getCoverUrl(page.cover);
+    const cover =
+      BlogPost.getCoverUrl(page.cover) ?? 'https://placehold.co/600x400?text=?';
     const description =
       page.properties.Description.type === 'rich_text'
-        ? page.properties.Description.rich_text[0]?.plain_text ?? 'Aucune description'
+        ? page.properties.Description.rich_text[0]?.plain_text ??
+          'Aucune description'
         : 'Aucune description';
     const categories =
       page.properties.Catégories.type === 'multi_select'
@@ -81,8 +83,8 @@ export class BlogPost {
     );
   }
 
-  static getCoverUrl(cover: PageObjectResponse['cover']): string {
-    if (!cover) return '';
+  static getCoverUrl(cover: PageObjectResponse['cover']): string | undefined {
+    if (!cover) return undefined;
 
     switch (cover.type) {
       case 'external':
@@ -90,7 +92,7 @@ export class BlogPost {
       case 'file':
         return cover.file.url;
       default:
-        return '';
+        return undefined;
     }
   }
 }

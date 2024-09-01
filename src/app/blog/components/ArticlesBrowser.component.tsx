@@ -5,7 +5,7 @@ import { Button, ScrollShadow, Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { useRouter } from 'next/navigation';
 import { Key, useState } from 'react';
-import { getArticles, getArticlesByText } from 'server/blog';
+import { getArticles, getArticlesByText, GetArticlesResponse } from 'server/blog';
 import Article from './Article.component';
 
 interface ArticleBrowerProps {
@@ -49,7 +49,7 @@ export default function ArticlesBrowser({
     }
     setCurrentCategory(cat);
 
-    void fetchData(cat, nextPost).then((newArticles) => {
+    void fetchData(cat, nextPost).then((newArticles: BlogPost[]) => {
       setArticles(newArticles);
     });
   };
@@ -58,8 +58,8 @@ export default function ArticlesBrowser({
    * Récupère les articles suivants
    */
   const loadMore = () => {
-    void fetchData(currentCategory, nextPost).then((newArticles) => {
-      setArticles((prev) => [...prev, ...newArticles]);
+    void fetchData(currentCategory, nextPost).then((newArticles: BlogPost[]) => {
+      setArticles((prev: BlogPost[]) => [...prev, ...newArticles]);
     });
   };
 
@@ -70,7 +70,7 @@ export default function ArticlesBrowser({
    */
   const fetchData = async (category: string | null, next?: string) => {
     setIsLoading(true);
-    const { articles: newArticles, nextArticle: newNextArticle } =
+    const { articles: newArticles, nextArticle: newNextArticle }: GetArticlesResponse =
       await getArticles(category, next);
     setNextPost(newNextArticle);
     setIsLoading(false);

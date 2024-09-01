@@ -12,6 +12,12 @@ import { notionClient } from './notionClient';
 
 const databaseId = process.env.BLOG_DATABASE ?? '';
 
+export interface GetArticlesResponse {
+  articles: BlogPost[];
+  hasMore: boolean;
+  nextArticle: string | undefined;
+}
+
 /**
  * Récupère les articles de blog avec une pagination
  * @param category Catégorie des articles à récupérer
@@ -22,44 +28,61 @@ export const getArticles = async (
   category?: string | null,
   lastArticleId?: string,
   maxArticlesProps?: number,
-) => {
+): Promise<GetArticlesResponse> => {
   const maxArticles =
     maxArticlesProps || Number(process.env.NEXT_PUBLIC_ARTICLES_PER_PAGE);
-  const response = await notionClient.databases.query({
-    filter: {
-      and: [
-        {
-          property: 'État',
-          status: {
-            equals: 'Publié',
-          },
-        },
-        category
-          ? {
-              property: 'Catégories',
-              multi_select: {
-                contains: category,
-              },
-            }
-          : {
-              or: [],
+  try {
+    const response = await notionClient.databases.query({
+      filter: {
+        and: [
+          {
+            property: 'État',
+            status: {
+              equals: 'Publié',
             },
-      ],
-    },
-    start_cursor: lastArticleId,
-    page_size: maxArticles,
-    database_id: databaseId,
-  });
+          },
+          category
+            ? {
+                property: 'Catégories',
+                multi_select: {
+                  contains: category,
+                },
+              }
+            : {
+                or: [],
+              },
+        ],
+      },
+      start_cursor: lastArticleId,
+      page_size: maxArticles,
+      database_id: databaseId,
+    });
 
-  const blogPostsPromises = response.results.map((result) =>
-    BlogPost.fromNotion(result as PageObjectResponse),
-  );
-  const articles = clone(await Promise.all(blogPostsPromises));
-  return {
-    articles,
-    hasMore: response.has_more,
-    nextArticle: response.next_cursor ?? undefined,
-  };
+    const blogPostsPromises = await Promise.all(
+      response.results
+        .filter(
+          (result): result is PageObjectResponse => 'properties' in result,
+        )
+        .map(async (result) => {
+          try {
+            return Promise.resolve(BlogPost.fromNotion(result));
+          } catch (error) {
+            return null;
+          }
+        }),
+    );
+    return {
+      articles: clone(
+        blogPostsPromises.filter(
+          (blogPost): blogPost is BlogPost => blogPost !== null,
+        ),
+      ),
+      hasMore: response.has_more,
+      nextArticle: response.next_cursor ?? undefined,
+    };
+  } catch (error) {
+    return { articles: [], hasMore: false, nextArticle: undefined };
+  }
 };
 
 /**
