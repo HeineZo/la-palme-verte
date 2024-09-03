@@ -9,6 +9,7 @@ import {
   PartialPageObjectResponse,
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
+import { getRoles } from './role';
 
 const databaseId = process.env.USER_DATABASE ?? '';
 const defaultUser: PageObjectResponse = {
@@ -65,10 +66,6 @@ export const getUsers = async () => {
   return mapResponse(response);
 };
 
-/**
- * Récupère tous les utilisateurs
- * @returns Liste des utilisateurs
- */
 export const getStaffMembers = async (): Promise<User[]> => {
   const response: QueryDatabaseResponse = await notionClient.databases.query({
     filter: {
@@ -83,7 +80,14 @@ export const getStaffMembers = async (): Promise<User[]> => {
     },
     database_id: databaseId,
   });
-  return mapResponse(response);
+
+  const roles = await getRoles();
+
+  const userPromises = await Promise.all(await mapResponse(response));
+  const usersSorted = User.sortByRole(userPromises, roles);
+  const usersSortedByName = User.setRoleName(usersSorted, roles);
+
+  return usersSortedByName;
 };
 
 /**

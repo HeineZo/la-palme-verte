@@ -89,27 +89,52 @@ export default async function Page() {
               </Reveal>
             </span>
           </div>
-          <div className="flex gap-6 w-full justify-between">
-            <span className="flex flex-col gap-2 w-1/2">
-              <Counter
-                fontStyle="text-4xl font-heading font-bold"
-                className="*:text-white"
-                suffix="€"
-                value={700}
-              />
-              <Reveal>
-                <p>Récoltés pour la protection de la faune maritime</p>
-              </Reveal>
-            </span>
-            <span className="flex flex-col gap-2 w-1/2">
-              <Counter
-                fontStyle="text-4xl font-heading font-bold"
-                value={59} //TODO: remplacer par une méthode getAdherentCount()
-              />
-              <Reveal>
-                <p>Adhérents</p>
-              </Reveal>
-            </span>
+          <div className="flex flex-col gap-10">
+            <div className="flex gap-6 w-full justify-between">
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  fontStyle="text-4xl lg:text-5xl font-heading font-bold"
+                  value={20}
+                />
+                <Reveal>
+                  <p>Ateliers réalisés</p>
+                </Reveal>
+              </span>
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  fontStyle="text-4xl font-heading font-bold"
+                  value={differenceInCalendarYears(
+                    new Date(),
+                    new Date(2005, 1, 1),
+                  )}
+                />
+                <Reveal>
+                  <p>Années d'expérience</p>
+                </Reveal>
+              </span>
+            </div>
+            <div className="flex gap-6 w-full justify-between">
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  fontStyle="text-4xl font-heading font-bold"
+                  className="*:text-white"
+                  suffix="€"
+                  value={700}
+                />
+                <Reveal>
+                  <p>Récoltés pour la protection de la faune maritime</p>
+                </Reveal>
+              </span>
+              <span className="flex flex-col gap-2 w-1/2">
+                <Counter
+                  fontStyle="text-4xl font-heading font-bold"
+                  value={59} //TODO: remplacer par une méthode getAdherentCount()
+                />
+                <Reveal>
+                  <p>Adhérents</p>
+                </Reveal>
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -131,7 +156,7 @@ export default async function Page() {
           </div>
           <ScrollShadow
             orientation="horizontal"
-            className="flex overflow-x-auto overflow-y-hidden w-full lg:flex-wrap gap-4 lg:justify-center"
+            className="flex overflow-x-auto overflow-y-hidden w-full gap-4 lg:justify-center flex-wrap"
           >
             {staffMembers.map((member, index) => (
               <MemberCard key={index} member={member} />
