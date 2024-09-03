@@ -47,7 +47,7 @@ export class Album {
             url: file.type === 'file' ? file.file.url : '',
           }))
         : [];
-    const cover = Album.getCoverUrl(response.cover) ?? 'https://placehold.co/600x400?text=Aucune+miniature';
+    const cover = Album.getCoverUrl(response.cover) ?? 'https://placehold.co/960x720?text=Aucune+miniature';
     const description =
       response.properties.Description.type === 'rich_text'
         ? response.properties.Description.rich_text[0]?.plain_text ??

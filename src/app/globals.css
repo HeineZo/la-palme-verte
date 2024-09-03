@@ -41,7 +41,7 @@
   }
 
   main {
-    @apply flex flex-col min-h-screen 2xl:mx-32 mx-10;
+    @apply flex flex-col items-center justify-center min-h-screen 2xl:mx-32 mx-10;
   }
 
   .section {
