@@ -4,12 +4,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
 
 export class Role {
-  id: number;
+  id: string;
   priority: number;
   nomH: string;
   nomF: string;
 
-  constructor(id: number, priority: number, nomH: string, nomF: string) {
+  constructor(id: string, priority: number, nomH: string, nomF: string) {
     this.id = id;
     this.priority = priority;
     this.nomH = nomH;

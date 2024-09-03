@@ -56,7 +56,7 @@ export class User {
         : 'Type de la colonne Rôle invalide';
     const roleId =
       user.properties.Rôle.type === 'relation'
-        ? user.properties.Rôle.relation[0].id
+        ? user.properties.Rôle.relation[0]?.id ?? ''
         : 'Type de la colonne Rôle invalide';
     const imageUrl = User.getImageUrl(user.properties['Photo de profil']);
     const instagram =

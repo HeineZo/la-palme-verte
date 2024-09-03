@@ -3,7 +3,8 @@ import 'server-only';
 
 import { Role } from '@/class/Role.class';
 import { clone } from '@/utils/utils';
-import { notionClient } from './database';
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { notionClient } from './notionClient';
 
 const database_id = process.env.ROLE_DATABASE ?? '';
 
@@ -11,8 +12,8 @@ const database_id = process.env.ROLE_DATABASE ?? '';
  * Récupère tous les rôles
  * @returns Liste des rôles
  */
-export const getRoles = async () => {
-  const response = await notionClient.databases.query({
+export const getRoles = async (): Promise<Role[]> => {
+  const response: QueryDatabaseResponse = await notionClient.databases.query({
     database_id,
   });
 
