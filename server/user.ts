@@ -82,6 +82,7 @@ export const getStaffMembers = async (): Promise<User[]> => {
   });
 
   const roles = await getRoles();
+
   const userPromises = await Promise.all(await mapResponse(response));
   const usersSorted = User.sortByRole(userPromises, roles);
   const usersSortedByName = User.setRoleName(usersSorted, roles);

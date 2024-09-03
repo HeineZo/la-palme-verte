@@ -156,7 +156,7 @@ export default async function Page() {
           </div>
           <ScrollShadow
             orientation="horizontal"
-            className="flex overflow-x-auto overflow-y-hidden w-full lg:flex-wrap gap-4 lg:justify-center"
+            className="flex overflow-x-auto overflow-y-hidden w-full gap-4 lg:justify-center flex-wrap"
           >
             {staffMembers.map((member, index) => (
               <MemberCard key={index} member={member} />

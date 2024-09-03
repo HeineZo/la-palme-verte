@@ -50,10 +50,7 @@ export class User {
       user.properties.Nom.type === 'rich_text'
         ? user.properties.Nom.rich_text[0]?.plain_text ?? 'Aucun nom'
         : 'Type de la colonne Nom invalide';
-    const role =
-      user.properties.Rôle.type === 'select'
-        ? user.properties.Rôle.select?.name ?? 'Aucun rôle'
-        : 'Type de la colonne Rôle invalide';
+    const role = '';
     const roleId =
       user.properties.Rôle.type === 'relation'
         ? user.properties.Rôle.relation[0]?.id ?? ''
@@ -100,20 +97,13 @@ export class User {
     }
 
     const file = property.files[0];
-    return file.type === 'file' ? file.file.url : '';
-  }
 
-  public toJSON(): Record<string, string | string[] | undefined> {
-    return {
-      id: this.id,
-      name: this.name,
-      surname: this.surname,
-      role: this.role,
-      imageUrl: this.imageUrl,
-      instagram: this.instagram,
-      linkedin: this.linkedin,
-      promotion: this.promotion,
-    };
+    if (file.type === 'file') {
+      return file.file.url;
+    } else if (file.type === 'external') {
+      return file.external.url;
+    }
+    return '';
   }
 
   static setRoleName(users: User[], roles: Role[]) {
