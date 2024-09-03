@@ -1,5 +1,3 @@
-'use client';
-
 import { NextUIProvider } from '@nextui-org/react';
 import { Analytics } from '@vercel/analytics/react';
 
