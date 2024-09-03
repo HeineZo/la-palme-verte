@@ -1,28 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-argument -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access -- API Notion mal typé */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- API Notion mal typé */
+import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
-export interface File {
+export interface AlbumImage {
   name: string;
-  type: string;
-  file: { url: string; expiry_time: string };
+  url: string;
 }
 
 export class Album {
-  id: string;
-  title: string;
-  cover: string;
-  description: string;
-  images: File[];
-  url: string;
+  readonly id: string;
+  readonly title: string;
+  readonly cover: string;
+  readonly description: string;
+  readonly images: AlbumImage[];
+  readonly url: string;
 
   constructor(
     id: string,
     title: string,
     cover: string,
     description: string,
-    images: File[],
+    images: { name: string; url: string }[],
     url: string,
   ) {
     this.id = id;
@@ -35,17 +31,45 @@ export class Album {
 
   /**
    * Transforme un album en type `Album`
-   * @param album Album que l'on souhaite transformer en `Album`
+   * @param response Album que l'on souhaite transformer en `Album`
    * @returns l'objet `Album` correspondant
    */
-  static fromNotion(album: any) {
-    const id = album.id;
-    const title = album.properties.Titre.title[0]?.plain_text;
-    const cover = album.cover?.external?.url ?? album.cover.file?.url ?? '';
-    const description = album.properties.Description.rich_text[0]?.text.content;
-    const images = album.properties.Images.files;
-    const url = album.properties.URL.rich_text[0]?.text.content;
-
+  static fromNotion(response: PageObjectResponse): Album {
+    const id = response.id;
+    const title =
+      response.properties.Titre.type === 'title'
+        ? response.properties.Titre.title[0]?.plain_text ?? 'Aucun titre'
+        : 'Type de la colonne Titre invalide';
+    const images =
+      response.properties.Images.type === 'files'
+        ? response.properties.Images.files.map((file) => ({
+            name: file.name,
+            url: file.type === 'file' ? file.file.url : '',
+          }))
+        : [];
+    const cover = Album.getCoverUrl(response.cover) ?? 'https://placehold.co/960x720?text=Aucune+miniature';
+    const description =
+      response.properties.Description.type === 'rich_text'
+        ? response.properties.Description.rich_text[0]?.plain_text ??
+          'Aucune description'
+        : 'Type de la colonne Description invalide';
+    const url =
+      response.properties.URL.type === 'url'
+        ? response.properties.URL.url ?? ''
+        : 'Type de la colonne URL invalide';
     return new Album(id, title, cover, description, images, url);
+  }
+
+  static getCoverUrl(cover: PageObjectResponse['cover']): string | undefined {
+    if (!cover) return undefined;
+
+    switch (cover.type) {
+      case 'external':
+        return cover.external.url;
+      case 'file':
+        return cover.file.url;
+      default:
+        return undefined;
+    }
   }
 }

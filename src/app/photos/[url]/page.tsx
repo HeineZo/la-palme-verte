@@ -14,10 +14,10 @@ export default async function page({ params }: AlbumProps) {
     <div className="flex justify-center w-full">
       <main className="max-w-7xl w-full mb-10">
         <section className="flex justify-between py-8 flex-col">
-          <h1>{album.title}</h1>
-          <p className="xl:w-1/2">{album.description}</p>
+          <h1>{album?.title ?? "Aucun titre"}</h1>
+          <p className="xl:w-1/2">{album?.description ?? "Aucune description"}</p>
         </section>
-        <Gallery images={album.images} />
+        <Gallery images={album?.images ?? []} />
       </main>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { File } from '@/class/Album.class';
+import { AlbumImage } from '@/class/Album.class';
 import {
   Button,
   Image,
@@ -13,7 +13,7 @@ import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { useMemo, useState } from 'react';
 
 interface GalleryProps {
-  images: File[];
+  images: AlbumImage[];
 }
 
 /**
@@ -23,7 +23,7 @@ interface GalleryProps {
 export default function Gallery({ images }: GalleryProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [fullscreenImage, setFullscreenImage] = useState<File>();
+  const [fullscreenImage, setFullscreenImage] = useState<AlbumImage>();
 
   /**
    * Détermine s'il y a une image suivante après l'image courante
@@ -31,7 +31,7 @@ export default function Gallery({ images }: GalleryProps) {
    */
   const hasNext = () => {
     const currentIndex = images.findIndex(
-      (image) => image.file.url === fullscreenImage?.file.url,
+      (image) => image.url === fullscreenImage?.url,
     );
     return currentIndex < images.length - 1;
   };
@@ -42,7 +42,7 @@ export default function Gallery({ images }: GalleryProps) {
    */
   const hasPrevious = () => {
     const currentIndex = images.findIndex(
-      (image) => image.file.url === fullscreenImage?.file.url,
+      (image) => image.url === fullscreenImage?.url,
     );
     return currentIndex > 0;
   };
@@ -51,7 +51,7 @@ export default function Gallery({ images }: GalleryProps) {
    * Affiche l'image en mode plein écran
    * @param image
    */
-  const handleFullScreen = (image: File) => {
+  const handleFullScreen = (image: AlbumImage) => {
     setFullscreenImage(image);
     onOpen();
   };
@@ -61,7 +61,7 @@ export default function Gallery({ images }: GalleryProps) {
    */
   const nextImage = () => {
     const currentIndex = images.findIndex(
-      (image) => image.file.url === fullscreenImage?.file.url,
+      (image) => image.url === fullscreenImage?.url,
     );
     const nextIndex = currentIndex + 1;
     if (nextIndex < images.length) {
@@ -74,7 +74,7 @@ export default function Gallery({ images }: GalleryProps) {
    */
   const previousImage = () => {
     const currentIndex = images.findIndex(
-      (image) => image.file.url === fullscreenImage?.file.url,
+      (image) => image.url === fullscreenImage?.url,
     );
     const previousIndex = currentIndex - 1;
     if (previousIndex >= 0) {
@@ -100,7 +100,7 @@ export default function Gallery({ images }: GalleryProps) {
           >
             <Image
               className="rounded-medium cursor-zoom-in"
-              src={image.file.url}
+              src={image.url}
               alt={index === 0 ? "Couverture de l'album" : image.name}
               onClick={() => {
                 handleFullScreen(image);
@@ -131,7 +131,7 @@ export default function Gallery({ images }: GalleryProps) {
             </Button>
             <Image
               className="rounded-medium"
-              src={fullscreenImage?.file.url}
+              src={fullscreenImage?.url}
               alt={fullscreenImage?.name}
             />
             <Button

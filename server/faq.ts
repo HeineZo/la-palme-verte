@@ -1,25 +1,35 @@
-/* eslint-disable camelcase -- Utilisation des attributs de Notion */
 import 'server-only';
-import { notionClient } from './database';
+import { notionClient } from './notionClient';
 import { FAQ } from '@/class/FAQ.class';
+import {
+  PageObjectResponse,
+  QueryDatabaseResponse,
+} from '@notionhq/client/build/src/api-endpoints';
+import { clone } from '@/utils/utils';
 
-const database_id = process.env.FAQ_DATABASE ?? '';
+const databaseId = process.env.FAQ_DATABASE ?? '';
 
 /**
  * Récupère les Questions/Réponses en fonction de la section
  * @param section Section de la FAQ
  * @returns FAQ de la section
  */
-export const getBySection = async (section: string) => {
-  const response = await notionClient.databases.query({
+export const getBySection = async (section: string): Promise<FAQ[]> => {
+  const response: QueryDatabaseResponse = await notionClient.databases.query({
     filter: {
       property: 'Section',
       select: {
         equals: section,
       },
     },
-    database_id,
+    database_id: databaseId,
   });
 
-  return response.results.map((result) => FAQ.fromNotion(result));
+  const faqObjects = response.results
+    .filter((result): result is PageObjectResponse => 'properties' in result)
+    .map((result) => {
+      return FAQ.fromNotion(result);
+    });
+
+  return clone(faqObjects);
 };

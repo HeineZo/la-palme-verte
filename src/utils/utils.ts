@@ -24,3 +24,13 @@ export function clone<T>(object: T[]): T[] {
     return JSON.parse(JSON.stringify(object)) as T[];
 }
 
+/**
+ * Renvoi l'année scolaire actuelle
+ * @returns L'année scolaire actuelle  
+ */
+export function getAcademicYear(): string {
+    const currentYear = new Date().getFullYear();
+    const previousYear = currentYear - 1;
+    return `${previousYear}-${currentYear}`;
+}
+
