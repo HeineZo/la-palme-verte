@@ -17,8 +17,8 @@ export default async function Page() {
     });
   });
 
-    // Trier les promotions par date décroissante
-    const sortedPromotions = Object.keys(promotions).sort((a, b) => b.localeCompare(a));
+  // Trier les promotions par date décroissante
+  const sortedPromotions = Object.keys(promotions).sort((a, b) => b.localeCompare(a));
 
   return (
     <main>
@@ -27,7 +27,7 @@ export default async function Page() {
         <p>Découvrez les membres des promotions précédentes de l'association</p>
       </section>
       {sortedPromotions.map((promo) => (
-        <section key={promo} className="section flex flex-col gap-8 py-a">
+        <section key={promo} className="section flex flex-col gap-8 py-a max-w-fit w-full">
           <h5 className='flex gap-2'>Promotion <span className='text-primary'>{promo}</span></h5>
           <ScrollShadow orientation='horizontal' className='flex overflow-x-auto overflow-y-hidden lg:flex-wrap gap-4'>
             {promotions[promo].map((member, index) => (
