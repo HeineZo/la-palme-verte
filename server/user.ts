@@ -10,6 +10,7 @@ import {
   QueryDatabaseResponse,
 } from '@notionhq/client/build/src/api-endpoints';
 import { getRoles } from './role';
+import { Role } from '@/class/Role.class';
 
 const databaseId = process.env.USER_DATABASE ?? '';
 const defaultUser: PageObjectResponse = {
@@ -63,10 +64,11 @@ export const getUsers = async () => {
     database_id: databaseId,
   });
 
-  return mapResponse(response);
+  const roles = await getRoles();
+  return mapResponse(response, roles);
 };
 
-export const getStaffMembers = async (): Promise<User[]> => {
+export const getCurrentYearStaffMembers = async (): Promise<User[]> => {
   const response: QueryDatabaseResponse = await notionClient.databases.query({
     filter: {
       and: [
@@ -83,11 +85,10 @@ export const getStaffMembers = async (): Promise<User[]> => {
 
   const roles = await getRoles();
 
-  const userPromises = await Promise.all(await mapResponse(response));
+  const userPromises = await Promise.all(await mapResponse(response, roles));
   const usersSorted = User.sortByRole(userPromises, roles);
-  const usersSortedByName = User.setRoleName(usersSorted, roles);
 
-  return usersSortedByName;
+  return usersSorted;
 };
 
 /**
@@ -108,11 +109,17 @@ export const getAllStaffMembers = async () => {
     },
     database_id: databaseId,
   });
-  return mapResponse(response);
+
+  const roles = await getRoles();
+  const userPromises = await Promise.all(await mapResponse(response, roles));
+  const usersSorted = User.sortByRole(userPromises, roles);
+
+  return usersSorted;
 };
 
 const mapResponse = async (
   dataBaseResponse: QueryDatabaseResponse,
+  roles: Role[],
 ): Promise<User[]> => {
   const userPromises = await Promise.all(
     dataBaseResponse.results
@@ -131,5 +138,8 @@ const mapResponse = async (
         return User.fromNotion(fullResult);
       }),
   );
-  return clone(userPromises);
+
+  const mappedUserRoles = User.setRoleName(userPromises, roles);
+
+  return clone(mappedUserRoles);
 };
