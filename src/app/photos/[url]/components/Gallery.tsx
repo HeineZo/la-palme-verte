@@ -87,7 +87,7 @@ export default function Gallery({ images }: GalleryProps) {
   }, []);
 
   return (
-    <section className="flex flex-col gap-4 section">
+    <section className="flex flex-col gap-4 section w-full">
       <div className="grid grid-flow-row auto-rows-max grid-cols-4 gap-4">
         {images.map((image, index) => (
           <div
