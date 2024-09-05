@@ -8,7 +8,7 @@ import { Image } from '@nextui-org/image';
 import { Link } from '@nextui-org/link';
 import { IconArrowRight, IconMail, IconMapPin } from '@tabler/icons-react';
 import { differenceInCalendarYears } from 'date-fns';
-import { getStaffMembers } from 'server/user';
+import { getCurrentYearStaffMembers } from 'server/user';
 import timelineEvents from './assets/timeline-events.json';
 import { ScrollShadow } from '@nextui-org/react';
 
@@ -16,7 +16,7 @@ import { ScrollShadow } from '@nextui-org/react';
  * Page de présentation de l'association
  */
 export default async function Page() {
-  const staffMembers: User[] = await getStaffMembers();
+  const staffMembers: User[] = await getCurrentYearStaffMembers();
 
   return (
     <main>
@@ -156,7 +156,7 @@ export default async function Page() {
           </div>
           <ScrollShadow
             orientation="horizontal"
-            className="flex overflow-x-auto overflow-y-hidden w-full gap-4 lg:justify-center flex-wrap"
+            className="flex overflow-x-auto overflow-y-hidden w-full gap-4 justify-center flex-wrap"
           >
             {staffMembers.map((member, index) => (
               <MemberCard key={index} member={member} />
