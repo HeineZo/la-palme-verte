@@ -44,10 +44,12 @@ export class Album {
       response.properties.Images.type === 'files'
         ? response.properties.Images.files.map((file) => ({
             name: file.name,
-            url: file.type === 'file' ? file.file.url : '',
+            url: Album.getImageUrl(file),
           }))
         : [];
-    const cover = Album.getCoverUrl(response.cover) ?? 'https://placehold.co/960x720?text=Aucune+miniature';
+    const cover =
+      Album.getCoverUrl(response.cover) ??
+      'https://placehold.co/960x720?text=Aucune+miniature';
     const description =
       response.properties.Description.type === 'rich_text'
         ? response.properties.Description.rich_text[0]?.plain_text ??
@@ -60,7 +62,26 @@ export class Album {
     return new Album(id, title, cover, description, images, url);
   }
 
-  static getCoverUrl(cover: PageObjectResponse['cover']): string | undefined {
+  private static getImageUrl(
+    file:
+      | {
+          file: { url: string; expiry_time: string };
+          name: string;
+          type?: 'file';
+        }
+      | { external: { url: string }; name: string; type?: 'external' },
+  ): string {
+    if (file.type === 'file') {
+      return file.file.url;
+    } else if (file.type === 'external') {
+      return file.external.url;
+    }
+    return 'https://placehold.co/960x720?text=Erreur';
+  }
+
+  private static getCoverUrl(
+    cover: PageObjectResponse['cover'],
+  ): string | undefined {
     if (!cover) return undefined;
 
     switch (cover.type) {

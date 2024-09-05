@@ -1,4 +1,5 @@
 import { BlogPost } from '@/class/BlogPost.class';
+import Reveal from '@/shared/utils/Reveal.component';
 import { Avatar, AvatarGroup, Chip } from '@nextui-org/react';
 import { format, isDate } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -13,13 +14,13 @@ interface ArticleContentProps {
 export default function ArticleContent({
   article,
   htmlContent
-}: ArticleContentProps) { 
+}: ArticleContentProps) {
   return (
     <article className='w-full mb-10 flex flex-col items-center justify-between'>
       <div className='overflow-hidden relative w-full min-h-[520px] h-auto text-white'>
         <Image className='absolute inset-0 left-0 top-0 w-full h-full object-cover' src={article.cover} alt="Image de couverture" width={1920} height={1080} />
         <div className='absolute inset-0 bg-black opacity-40 left-0 top-0 w-full h-full' />
-        <div className='relative flex flex-col items-center justify-center gap-8 py-28 px-16 text-center'>
+        <div className='relative flex flex-col items-center justify-center gap-8 py-28 px-8 text-center'>
           <div className='flex gap-4'>
             {article.categories.map((category, index) => (
               <Chip key={index} classNames={{ base: "bg-white" }} variant="flat">
@@ -27,7 +28,7 @@ export default function ArticleContent({
               </Chip>
             ))}
           </div>
-          <h1>{article.title}</h1>
+          <h2 className='w-full'>{article.title}</h2>
           <div>
             <AvatarGroup total={article.authors.length - 2}>
               {article.authors.map((author) => (

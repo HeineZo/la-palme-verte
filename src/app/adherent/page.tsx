@@ -53,7 +53,7 @@ export default async function page() {
       </section>
 
       {/* Carrousel des membres */}
-      <section className="bg-highlight">
+      <section className="bg-highlight w-screen">
         <BecomeMember
           buttonTitle="Rejoindre la communauté"
           subtitle="Pourquoi pas vous ?"
